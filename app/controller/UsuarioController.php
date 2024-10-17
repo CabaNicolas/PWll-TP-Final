@@ -10,15 +10,16 @@ class UsuarioController
     {
         $this->model = $model;
         $this->presenter = $presenter;
-
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
     }
 
     //Acción para mostrar la vista de login
     public function showLogin() {
         $data = [];
+
+        if(isset($_SESSION['registro_exitoso'])){
+            $data['registro_exitoso'] = $_SESSION['registro_exitoso'];
+            unset($_SESSION['registro_exitoso']);
+        }
 
         //Pasar el mensaje de error si está en la sesión
         if (isset($_SESSION['error_message'])) {
@@ -35,11 +36,10 @@ class UsuarioController
     {
 
         $data = array(
-            'error_message' => isset($_SESSION['error_message']) ? $_SESSION['error_message'] : null
+            'error_message' => isset($_SESSION['registro_fallido']) ? $_SESSION['registro_fallido'] : null
         );
 
-
-        unset($_SESSION['error_message']);
+        unset($_SESSION['registro_fallido']);
 
         $this->presenter->show('registro', $data);
     }
@@ -52,29 +52,32 @@ class UsuarioController
 
     }
     public function registrarUsuario() {
-        session_start();
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $username = $_POST['username'];
+            $mail = $_POST['mail'];
             $password = $_POST['password'];
+            $username = $_POST['username'];
+            $name = $_POST['name'];
+            $date = $_POST['date'];
+            $sex = $_POST['sex'];
+            $foto = $_FILES['foto'];
 
-            // Intentar registrar el usuario
-            $resultado = $this->model->guardarUsuario($username, $password);
 
-            if ($resultado === "error") {
-                // Guardar el mensaje de error en la sesión
-                $_SESSION['error_message'] = "El usuario ya está registrado.";
-                header('Location: /usuario/registro');
+            $resultado = $this->model->guardarUsuario($username, $mail, $password, $name, $date, $sex, $foto);
+
+            if ($resultado['exito']) {
+                $_SESSION['registro_exitoso'] = $resultado['mensaje'];
+                header('Location: /usuario/showLogin');
                 exit();
-            } elseif ($resultado) {
-                // Si el registro es exitoso, redirigir al login sin mensaje de error
-
-                header('Location: /usuario/login');
+            } else {
+                $_SESSION['registro_fallido'] = $resultado['mensaje'];
+                header('Location: /usuario/showRegistro');
                 exit();
             }
 
 
         }
-        }
+    }
     public function login()
     {
         $user = $_POST['username'];

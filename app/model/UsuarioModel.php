@@ -9,31 +9,56 @@ class UsuarioModel
         $this->database = $database;
     }
 
-    public function guardarUsuario($username, $password)
+    public function guardarUsuario($username, $mail, $password, $name, $date, $sex, $foto)
     {
-        // Verificar si el usuario ya existe
-        $sql = "SELECT * FROM usuario WHERE username = ?";
-        $result = $this->database->prepareAndExecute($sql, 's', [$username]);
+        $nombreFoto = "";
+        if(isset($foto)){
+            //TODO: Agregar mas validaciones de imagenes.
+            $nombreFoto = $foto['name'];
+            $archivoTemporal = $foto['tmp_name'];
 
-        if ($result && $result->num_rows > 0) {
-            return "error"; // Usuario ya registrado
-        } else {
-            // Si no se encontró el usuario, proceder a registrarlo
-
-            $sql = "INSERT INTO usuario (username, password) VALUES (?, ?)";
-            $insertResult = $this->database->prepareAndExecute($sql, 'ss', [$username, $password]);
-
-            if ($insertResult) {
-                return true;
-            } else {
-                return "error";
-            }
+            $dirDestino = $_SERVER['DOCUMENT_ROOT'] . '/public/Imagenes/';
+            $dirFoto = $dirDestino . $nombreFoto;
+            move_uploaded_file($archivoTemporal, $dirFoto);
         }
+
+        //TODO:Agregar validaciones de campos.
+
+        $existe = $this->verificarExistenciaDeUsuario($username, $mail);
+
+        if(!$existe) {
+            $idSexo = "(SELECT id FROM sexo WHERE nombre LIKE '%" . $sex . "%')";
+            $sql = "INSERT INTO usuario (mail, nombreUsuario, password, fechaNacimiento, nombreCompleto, foto, idSexo) VALUES ('" . $mail . "','" . $username . "','" . $password . "','" . $date . "','" . $name . "','" . $nombreFoto . "'," . $idSexo . ");";
+            $this->database->add($sql);
+            $resultado =[
+                "exito" => true,
+                "mensaje" => "Usuario registrado correctamente"
+            ];
+        } else{
+          $resultado = [
+              "exito" => false,
+              "mensaje" => "El usuario ya existe"
+          ];
         }
-    public function validarUsuario($username, $password) {
+
+        return $resultado;
+    }
+
+    private function verificarExistenciaDeUsuario($username, $mail) {
+        $sql = "SELECT 1
+                FROM usuario
+                WHERE mail = '" . $mail . "'
+                OR nombreUsuario = '" . $username . "'";
+
+        $usuario = $this->database->query($sql);
+
+        return sizeof($usuario) > 0;
+    }
+
+    public function validarUsuario($mail, $password) {
         $sql = "SELECT 1 
                 FROM usuario 
-                WHERE username = '" . $username. "' 
+                WHERE mail = '" . $mail. "' 
                 AND password = '" . $password . "'";
 
         $usuario = $this->database->query($sql);

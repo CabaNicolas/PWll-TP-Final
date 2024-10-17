@@ -1,0 +1,19 @@
+*{
+    box-sizing: border-box;
+    margin: auto;
+    padding: 0;
+}
+
+#form-registro{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.error{
+    color: red;
+}
+
+.exito{
+    color: green;
+}

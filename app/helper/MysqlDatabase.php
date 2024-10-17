@@ -2,6 +2,7 @@
 class MysqlDatabase
 {
     private $conn;
+
     public function __construct($host, $port, $username, $password, $database)
     {
         $this->conn = mysqli_connect($host, $username, $password, $database, $port);
@@ -14,6 +15,11 @@ class MysqlDatabase
     public function query($sql){
         $result = mysqli_query($this->conn, $sql);
         return  mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
+
+    public function add($sql){
+        $result = mysqli_query($this->conn, $sql);
+        return mysqli_affected_rows($this->conn);
     }
 
     public function __destruct()
