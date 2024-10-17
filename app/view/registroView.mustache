@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro</title>
+</head>
+<body>
+<h2>Crear Cuenta</h2>
+
+<!-- Mostrar el mensaje de error si existe -->
+{{#error_message}}
+    <p style="color:red;">{{error_message}}</p>
+{{/error_message}}
+
+
+<form action="/usuario/registrarUsuario" method="post">
+    <label for="name">Nombre completo:</label>
+    <input type="text" name="name" id="name" required>
+    <br>
+    <label for="year">Año Nacimiento:</label>
+    <input type="text" name="year" id="year" required>
+    <br>
+    <label for="sex">Sexo:</label>
+    <input type="text" name="sex" id="sex" required>
+    <br>
+    <label for="country">Pais:</label>
+    <input type="text" name="country" id="country" required>
+    <br>
+    <label for="ciudad">Ciudad:</label>
+    <input type="text" name="ciudad" id="ciudad" required>
+    <br>
+    <label for="mail">Email:</label>
+    <input type="email" name="mail" id="mail" required>
+    <br>
+    <label for="password">Contraseña:</label>
+    <input type="password" name="password" id="password" required>
+    <br>
+    <label for="username">Nombre de Usuario:</label>
+    <input type="text" name="username" id="username" required>
+    <br>
+    <label for="foto">Foto:</label>
+    <input type="file" name="foto" id="foto">
+    <br><br>
+    <input type="submit" value="Crear cuenta">
+    <br><br>
+
+</form>
+
+</body>
+</html>
