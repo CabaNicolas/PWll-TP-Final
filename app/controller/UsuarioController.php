@@ -45,8 +45,8 @@ class UsuarioController
     }
     public function showLobby()
     {
-        if (isset($_SESSION['user'])) {
-            $data['user'] = $_SESSION['user'];
+        if (isset($_SESSION['mail'])) {
+            $data['mail'] = $_SESSION['mail'];
         }
         $this->presenter->show('lobby', $data);
 
@@ -80,13 +80,13 @@ class UsuarioController
     }
     public function login()
     {
-        $user = $_POST['username'];
+        $mail = $_POST['mail'];
         $pass = $_POST['password'];
 
-        $validation = $this->model->validarUsuario($user, $pass);
+        $validation = $this->model->validarUsuario($mail, $pass);
 
         if ($validation) {
-            $_SESSION['user'] = $user;
+            $_SESSION['mail'] = $mail;
 
             $this->showLobby();
 
@@ -111,4 +111,11 @@ class UsuarioController
         header('Location: /usuario/login');
         exit();
     }
+
+    public function showPerfil()
+    {
+        $data = [];
+        $this->presenter->show('perfil', $data);
+    }
+
 }
