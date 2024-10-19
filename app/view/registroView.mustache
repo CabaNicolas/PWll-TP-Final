@@ -1,21 +1,19 @@
+<link rel="stylesheet" href="/public/estilosCrearCuenta.css"
 
 
-<h2>Crear Cuenta</h2>
 
-<!-- Mostrar el mensaje de error si existe -->
-{{#error_message}}
-    <p class="error">{{error_message}}</p>
-{{/error_message}}
+<div class="contenedor-crear-cuenta">
 
+<h2 class="titulo-crear-cuenta">Crear Cuenta</h2>
 
 <form id="form-registro" action="/usuario/registrarUsuario" enctype="multipart/form-data" method="post">
-    <label for="name">Nombre completo:</label>
+    <label for="name" class="label-nombre">Nombre completo:</label>
     <input type="text" name="name" id="name" >
 
-    <label for="year">Fecha de Nacimiento:</label>
+    <label for="year" class="label-fecha">Fecha de Nacimiento:</label>
     <input type="date" name="date" id="date" >
 
-    <label for="sex">Sexo:</label>
+    <label for="sex" class="label-sexo">Sexo:</label>
     <select name="sex" id="sex" >
     <option value="" disabled selected>Selecciona una opción</option>
     <option value="masculino">Masculino</option>
@@ -23,24 +21,29 @@
     <option value="decirlo">Prefiero no decirlo</option>
     </select>
 
-    <div id="map" style="width: 500px; height: 300px;"></div>
+ <!-- style="width: 500px; height: 300px;" ESTILO DEL MAPA-->
+    <div id="map" class="mapa"></div>
     <input type="hidden" name="pais" id="pais">
     <input type="hidden" name="ciudad" id="ciudad">
 
-    <label for="mail">Email:</label>
+    <label for="mail" class="label-email">Email:</label>
     <input type="email" name="mail" id="mail" >
 
-    <label for="password">Contraseña:</label>
+    <label for="password" class="label-password">Contraseña:</label>
     <input type="password" name="password" id="password" >
 
-    <label for="username">Nombre de Usuario:</label>
+    <label for="username" class="label-usuario">Nombre de Usuario:</label>
     <input type="text" name="username" id="username" >
 
-    <label for="foto">Foto:</label>
+    <label for="foto" class="label-foto"> Foto:</label>
     <input type="file" name="foto" id="foto">
 
-    <input type="submit" value="Crear cuenta">
+    <input type="submit" value="Crear cuenta" class="boton-crear">
 
+{{#error_message}}
+    <p class="error">{{error_message}}</p>
+{{/error_message}}
 
+</div>
 </form>
 

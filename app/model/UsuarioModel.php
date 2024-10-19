@@ -66,5 +66,14 @@ class UsuarioModel
         return sizeof($usuario) == 1;
     }
 
+    public function validarUsuarioPorCorreo($mail) {
+        $sql = "SELECT 1 
+            FROM usuario 
+            WHERE mail = '" . $mail . "'";
+
+        $usuario = $this->database->query($sql);
+
+        return sizeof($usuario) == 1;
+    }
 
 }
