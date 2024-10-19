@@ -3,23 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <link rel="stylesheet" href="/public/estilosLogin.css">
 </head>
 <body>
-<h2>Iniciar sesión</h2>
+
+<div class="contenedor-login">
+<h2 class="titulo-login">Iniciar sesión</h2>
 {{#registro_exitoso}}
     <p class="exito">{{registro_exitoso}}</p>
 {{/registro_exitoso}}
 
-    <form action="/usuario/login" method="POST">
-        <label for="mail">Mail:</label>
-        <input type="text" name="mail" id="mail">
+
+    <form action="/usuario/login" method="POST" class="login-form">
+        <label for="mail" class="form-label">Mail:</label>
+        <input type="text" name="mail" id="mail" class="form-input">
         <br>
-        <label for="password">Contraseña:</label>
-        <input type="password" name="password" id="password">
+        <label for="password" class="form-label">Contraseña:</label>
+        <input type="password" name="password" id="password" class="form-input">
         <br>
-        <input type="submit" value="Iniciar sesión">
+        <input type="submit" value="Iniciar sesión" class="submit-button">
         <br><br>
-        <a href="/usuario/showRegistro">Crear cuenta</a>
+        <a href="/usuario/showRegistro" class="register-link">Crear cuenta</a>
     </form>
+
+        {{#error_message}}
+          <p class="error">{{error_message}}</p>
+        {{/error_message}}
+</div>
 </body>
 </html>
