@@ -9,6 +9,54 @@ class UsuarioModel
         $this->database = $database;
     }
 
+    public function validarDatosRegistro($username, $mail, $password, $name, $date, $sex, $foto)
+    {
+        $errores = [];
+
+        if (empty($mail) || empty($username) || empty($password) || empty($name) || empty($date) || empty($sex)) {
+            $errores[] = "Completa todos los campos";
+            return $errores;
+        }
+
+        if(empty($mail) || !filter_var($mail, FILTER_VALIDATE_EMAIL)){
+            $errores[] = "Debes ingresar un mail valido";
+        }
+        if(empty($username) || strlen($username) < 4){
+            $errores[] = "Debes ingresar un nombre de usuario mayor a 4 caracteres";
+        }
+
+        if(empty($password) || strlen($password) < 6){
+            $errores[] = "La contraseña debe tener al menos 6 caracteres";
+        }
+
+        if(empty($name)){
+            $errores[] = "Debes ingresar tu nombre";
+        }
+
+        if (empty($date)) {
+            $errores[] = "La fecha de nacimiento es obligatoria.";
+        } else {
+            $fechaNacimiento = new DateTime($date);
+            $hoy = new DateTime();
+            $edad = $hoy->diff($fechaNacimiento)->y;
+
+            if ($edad < 12) {
+                $errores[] = "Debes tener al menos 12 años para registrarte";
+            }
+        }
+
+        if(empty($sex)){
+            $errores[] = "Debes seleccionar tu sexo";
+        }
+
+        if(isset($foto) && $foto['error'] !== UPLOAD_ERR_OK){
+            $errores[] = "Error al subir la imagen";
+        }
+
+        return $errores;
+
+    }
+
     public function guardarUsuario($username, $mail, $password, $name, $date, $sex, $foto)
     {
         $nombreFoto = "";
@@ -42,6 +90,35 @@ class UsuarioModel
         }
 
         return $resultado;
+    }
+
+    public function validarLogin($mail, $password)
+    {
+        if(empty($mail) && empty($password)){
+            return ["exito"=>false, "mensaje"=>"Debes ingresar tu mail y contraseña"];
+            $mail;
+        }
+
+        if (empty($mail)) {
+            return ["exito" => false, "mensaje" => "Por favor, ingresa tu correo."];
+        }
+
+        if (empty($password)) {
+            return ["exito" => false, "mensaje" => "Por favor, ingresa tu contraseña."];
+        }
+
+        if(!$this->validarUsuarioPorCorreo($mail)){
+            return ["exito"=>false, "mensaje"=>"Correo incorrecto"];
+        }
+
+        if(!$this->validarUsuario($mail, $password)){
+            return ["exito"=>false, "mensaje"=>"Contraseña incorrecta"];
+        }
+
+
+
+
+        return ["exito"=>true, "mensaje"=>"Inicio de sesion exitoso"];
     }
 
     private function verificarExistenciaDeUsuario($username, $mail) {
