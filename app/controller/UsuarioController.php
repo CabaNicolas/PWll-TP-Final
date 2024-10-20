@@ -13,10 +13,11 @@ class UsuarioController
     }
 
     //Acción para mostrar la vista de login
-    public function showLogin() {
+    public function showLogin()
+    {
         $data = [];
 
-        if(isset($_SESSION['registro_exitoso'])){
+        if (isset($_SESSION['registro_exitoso'])) {
             $data['registro_exitoso'] = $_SESSION['registro_exitoso'];
             unset($_SESSION['registro_exitoso']);
         }
@@ -43,6 +44,7 @@ class UsuarioController
 
         $this->presenter->show('registro', $data);
     }
+
     public function showLobby()
     {
         if (isset($_SESSION['mail'])) {
@@ -51,7 +53,9 @@ class UsuarioController
         $this->presenter->show('lobby', $data);
 
     }
-    public function registrarUsuario() {
+
+    public function registrarUsuario()
+    {
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $mail = $_POST['mail'];
@@ -78,6 +82,7 @@ class UsuarioController
 
         }
     }
+
     public function login()
     {
         $mail = $_POST['mail'];
@@ -91,7 +96,7 @@ class UsuarioController
             $this->showLobby();
 
             exit();
-        }else{
+        } else {
 
             header('location: /login');
             exit();
@@ -114,8 +119,40 @@ class UsuarioController
 
     public function showPerfil()
     {
-        $data = [];
+        $data['usuario'] = $this->model->mostrarDatosUsuario($_SESSION['mail']);
+
+        if(isset($_SESSION['cambios'])){
+            $data['cambios'] = $_SESSION['cambios'];
+            unset($_SESSION['cambios']);
+        }
+
         $this->presenter->show('perfil', $data);
+
     }
+
+    public function actualizar()
+    {
+        $nombre = $_POST['nombre'];
+        $mail = $_POST['mail'];
+        $fechaNacimiento = $_POST['fechaNacimiento'];
+        $sexo = $_POST['sex'];
+        $foto = $_FILES['foto'];
+        $password = $_POST['password'];
+        $resultado=$this->model->actualizarDatosPerfil($mail, $nombre, $fechaNacimiento, $sexo, $foto, $password);
+        if ($resultado['exito']) {
+            $_SESSION['cambios'] = $resultado['mensaje'];
+            header('Location: /usuario/showPerfil');
+            exit();
+        } else {
+            $_SESSION['cambios'] = $resultado['mensaje'];
+            header('Location: /usuario/showPerfil');
+            exit();
+        }
+
+
+    }
+
+
+
 
 }
