@@ -134,13 +134,14 @@ class UsuarioController
 
     public function actualizar()
     {
-        $nombre = $_POST['nombre'];
+        $nombreUsuario = $_POST['nombreUsuario'];
         $mail = $_POST['mail'];
+        $nombreCompleto = $_POST ['nombreCompleto'];
         $fechaNacimiento = $_POST['fechaNacimiento'];
         $sexo = $_POST['sex'];
         $foto = $_FILES['foto'];
         $password = $_POST['password'];
-        $resultado=$this->model->actualizarDatosPerfil($mail, $nombre, $fechaNacimiento, $sexo, $foto, $password);
+        $resultado=$this->model->actualizarDatosPerfil($nombreUsuario, $mail, $nombreCompleto, $fechaNacimiento, $sexo, $foto, $password);
         if ($resultado['exito']) {
             $_SESSION['cambios'] = $resultado['mensaje'];
             header('Location: /usuario/showPerfil');

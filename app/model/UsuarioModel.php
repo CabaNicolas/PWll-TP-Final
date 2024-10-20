@@ -157,15 +157,17 @@ class UsuarioModel
         FROM usuario
         where mail = '" . $mail . "'";
         $usuario = $this->database->query($sql);
+        var_dump($usuario);
         return $usuario;
     }
 
-    public function actualizarDatosPerfil($mail, $nombre, $fechaNacimiento, $sexo, $foto, $password) {
+    public function actualizarDatosPerfil($nombreUsuario, $mail, $nombreCompleto, $fechaNacimiento, $sexo, $foto, $password) {
 
 
         $sql = "UPDATE usuario 
-                SET nombreUsuario = '" . $nombre . "', 
-                mail = '" . $mail . "',
+                SET nombreUsuario = '" . $nombreUsuario . "',
+                mail = '" . $mail . "', 
+                nombreCompleto = '". $nombreCompleto ."',
                 fechaNacimiento = '" . $fechaNacimiento . "', 
                 idSexo = (SELECT id FROM sexo WHERE nombre LIKE '%" . $sexo . "%')";
 
