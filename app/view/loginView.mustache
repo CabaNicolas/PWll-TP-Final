@@ -17,18 +17,24 @@
     <form action="/usuario/login" method="POST" class="login-form">
         <label for="mail" class="form-label">Mail:</label>
         <input type="text" name="mail" id="mail" class="form-input">
+        {{#errores.mail}}
+           <p class="error">{{errores.mail}}</p>
+        {{/errores.mail}}
         <br>
         <label for="password" class="form-label">Contraseña:</label>
         <input type="password" name="password" id="password" class="form-input">
+        {{#errores.password}}
+           <p class="error">{{errores.password}}</p>
+        {{/errores.password}}
         <br>
         <input type="submit" value="Iniciar sesión" class="submit-button">
         <br><br>
+        {{#errores.mensaje}}
+           <p class="error">{{errores.mensaje}}</p>
+        {{/errores.mensaje}}
         <a href="/usuario/showRegistro" class="register-link">Crear cuenta</a>
     </form>
 
-        {{#error_message}}
-          <p class="error">{{error_message}}</p>
-        {{/error_message}}
 </div>
 </body>
 </html>

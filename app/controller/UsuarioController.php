@@ -13,32 +13,36 @@ class UsuarioController
     }
 
     //Acción para mostrar la vista de login
-    public function showLogin() {
+    public function showLogin()
+    {
         $data = [];
+        if (isset($_SESSION['errores'])) {
+            $data['errores'] = $_SESSION['errores'];
+            unset($_SESSION['errores']);
+        }
 
-        if(isset($_SESSION['registro_exitoso'])){
+        if (isset($_SESSION['registro_exitoso'])) {
             $data['registro_exitoso'] = $_SESSION['registro_exitoso'];
             unset($_SESSION['registro_exitoso']);
         }
 
-        //Pasar el mensaje de error si está en la sesión
-        if (isset($_SESSION['error_message'])) {
-            $data['error_message'] = $_SESSION['error_message'];
-            // Eliminar el mensaje de la sesión para futuras visitas
-            unset($_SESSION['error_message']);
+        if (isset($_SESSION['mail'])) {
+            $data['mail'] = $_SESSION['mail'];
+            unset($_SESSION['mail']);
         }
 
-        // Mostrar la vista de login con los datos
         $this->presenter->show('login', $data);
     }
 
     public function showRegistro()
     {
-        $data = array(
-            'error_message' => isset($_SESSION['error_message']) ? $_SESSION['error_message'] : null
-        );
+        $data = [
+            'errores' => isset($_SESSION['errores']) ? $_SESSION['errores'] : [],
+            'form_data' => isset($_SESSION['form_data']) ? $_SESSION['form_data'] : []
+        ];
 
-        unset($_SESSION['error_message']);
+        unset($_SESSION['errores']);
+        unset($_SESSION['form_data']);
 
         $this->presenter->show('registro', $data);
     }
@@ -65,8 +69,17 @@ class UsuarioController
 
             $errores = $this->model->validarDatosRegistro($username, $mail, $password, $name, $date, $sex, $foto);
 
-            if(!empty($errores)){
-                $_SESSION['error_message'] = implode(", ", $errores);
+            $hayErrores = false;
+            foreach ($errores as $error) {
+                if (!empty($error)) {
+                    $hayErrores = true;
+                    break;
+                }
+            }
+
+            if ($hayErrores) {
+                $_SESSION['errores'] = $errores;
+                $_SESSION['form_data'] = $_POST;
                 header('location: /usuario/showRegistro');
                 exit();
             }
@@ -93,16 +106,17 @@ class UsuarioController
         $resultado = $this->model->validarLogin($mail, $pass);
 
         if (!$resultado['exito']) {
-            $_SESSION['error_message'] = $resultado['mensaje'];
+            $_SESSION['errores'] = $resultado['errores'];
+
+            $_SESSION['mail'] = $mail;
+
             header('Location: /usuario/showLogin');
             exit();
         }
 
         $_SESSION['mail'] = $mail;
-
         $this->showLobby();
         exit();
-
     }
 
     //Método para cerrar sesión

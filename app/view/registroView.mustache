@@ -9,9 +9,17 @@
 <form id="form-registro" action="/usuario/registrarUsuario" enctype="multipart/form-data" method="post">
     <label for="name" class="label-nombre">Nombre completo:</label>
     <input type="text" name="name" id="name" >
+    {{#errores.name}}
+      <p class="error">{{errores.name}}</p>
+    {{/errores.name}}
+    <br>
 
     <label for="year" class="label-fecha">Fecha de Nacimiento:</label>
     <input type="date" name="date" id="date" >
+    {{#errores.date}}
+          <p class="error">{{errores.date}}</p>
+        {{/errores.date}}
+        <br>
 
     <label for="sex" class="label-sexo">Sexo:</label>
     <select name="sex" id="sex" >
@@ -20,6 +28,10 @@
     <option value="femenino">Femenino</option>
     <option value="decirlo">Prefiero no decirlo</option>
     </select>
+    {{#errores.sex}}
+          <p class="error">{{errores.sex}}</p>
+        {{/errores.sex}}
+        <br>
 
  <!-- style="width: 500px; height: 300px;" ESTILO DEL MAPA-->
     <div id="map" class="mapa"></div>
@@ -28,15 +40,31 @@
 
     <label for="mail" class="label-email">Email:</label>
     <input type="email" name="mail" id="mail" >
+    {{#errores.mail}}
+          <p class="error">{{errores.mail}}</p>
+        {{/errores.mail}}
+        <br>
 
     <label for="password" class="label-password">Contraseña:</label>
     <input type="password" name="password" id="password" >
+    {{#errores.password}}
+          <p class="error">{{errores.password}}</p>
+        {{/errores.password}}
+        <br>
 
     <label for="username" class="label-usuario">Nombre de Usuario:</label>
     <input type="text" name="username" id="username" >
+    {{#errores.username}}
+          <p class="error">{{errores.username}}</p>
+        {{/errores.username}}
+        <br>
 
     <label for="foto" class="label-foto"> Foto:</label>
     <input type="file" name="foto" id="foto">
+    {{#errores.foto}}
+          <p class="error">{{errores.foto}}</p>
+        {{/errores.foto}}
+        <br>
 
 {{#error_message}}
     <p class="error">{{error_message}}</p>
