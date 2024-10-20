@@ -157,12 +157,15 @@ class UsuarioModel
         FROM usuario
         where mail = '" . $mail . "'";
         $usuario = $this->database->query($sql);
-        var_dump($usuario);
+
+        //var_dump($usuario);
+        
         return $usuario;
     }
 
     public function actualizarDatosPerfil($nombreUsuario, $mail, $nombreCompleto, $fechaNacimiento, $sexo, $foto, $password) {
 
+        $mailActual = $_SESSION['mail'];
 
         $sql = "UPDATE usuario 
                 SET nombreUsuario = '" . $nombreUsuario . "',
@@ -177,7 +180,7 @@ class UsuarioModel
             $sql .= ", password = '" . $password . "'";
         }
 
-        $sql .= " WHERE mail = '" . $mail . "'";
+        $sql .= " WHERE mail = '" . $mailActual . "'";
 
         $cambio=$this->database->add($sql);
 

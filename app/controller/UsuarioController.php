@@ -121,6 +121,7 @@ class UsuarioController
 
     public function showPerfil()
     {
+
         $data['usuario'] = $this->model->mostrarDatosUsuario($_SESSION['mail']);
 
         if(isset($_SESSION['cambios'])){
@@ -143,6 +144,7 @@ class UsuarioController
         $password = $_POST['password'];
         $resultado=$this->model->actualizarDatosPerfil($nombreUsuario, $mail, $nombreCompleto, $fechaNacimiento, $sexo, $foto, $password);
         if ($resultado['exito']) {
+            $_SESSION['mail'] = $mail;
             $_SESSION['cambios'] = $resultado['mensaje'];
             header('Location: /usuario/showPerfil');
             exit();
