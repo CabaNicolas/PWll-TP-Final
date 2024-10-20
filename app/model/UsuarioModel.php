@@ -65,7 +65,7 @@ class UsuarioModel
             $nombreFoto = $foto['name'];
             $archivoTemporal = $foto['tmp_name'];
 
-            $dirDestino = $_SERVER['DOCUMENT_ROOT'] . '/public/Imagenes/';
+            $dirDestino = $_SERVER['DOCUMENT_ROOT'] . '/images/';
             $dirFoto = $dirDestino . $nombreFoto;
             move_uploaded_file($archivoTemporal, $dirFoto);
         }
@@ -220,7 +220,7 @@ class UsuarioModel
 
     private function deleteImagen($nombreImagen) {
 
-        $rutaImagenCompleta = $_SERVER['DOCUMENT_ROOT'] . '/images/' . $nombreImagen; 
+        $rutaImagenCompleta = $_SERVER['DOCUMENT_ROOT'] . '/images/' . $nombreImagen;
 
         if (file_exists($rutaImagenCompleta)) {
             unlink($rutaImagenCompleta);
