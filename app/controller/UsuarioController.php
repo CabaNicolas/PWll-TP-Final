@@ -102,6 +102,7 @@ class UsuarioController
         $_SESSION['mail'] = $mail;
 
         $this->showLobby();
+        header ('Location: /usuario/showLobby');
         exit();
 
     }
