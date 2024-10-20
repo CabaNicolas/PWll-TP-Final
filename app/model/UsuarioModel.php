@@ -158,9 +158,7 @@ class UsuarioModel
         where mail = '" . $mail . "'";
         $usuario = $this->database->query($sql);
 
-        //
-        var_dump($usuario);
-        //
+       
 
         return $usuario;
     }
