@@ -152,5 +152,45 @@ class UsuarioModel
 
         return sizeof($usuario) == 1;
     }
+    public function mostrarDatosUsuario($mail) {
+        $sql = "SELECT *
+        FROM usuario
+        where mail = '" . $mail . "'";
+        $usuario = $this->database->query($sql);
+        return $usuario;
+    }
+
+    public function actualizarDatosPerfil($mail, $nombre, $fechaNacimiento, $sexo, $foto, $password) {
+
+
+        $sql = "UPDATE usuario 
+                SET nombreUsuario = '" . $nombre . "', 
+                mail = '" . $mail . "',
+                fechaNacimiento = '" . $fechaNacimiento . "', 
+                idSexo = (SELECT id FROM sexo WHERE nombre LIKE '%" . $sexo . "%')";
+
+
+
+        if (!empty($password)) {
+            $sql .= ", password = '" . $password . "'";
+        }
+
+        $sql .= " WHERE mail = '" . $mail . "'";
+
+        $cambio=$this->database->add($sql);
+
+        if ($cambio == 1) {
+            $cambio =[
+                "exito" => true,
+                "mensaje" => "Cambios realizados correctamente"
+            ];
+        } else{
+            $cambio = [
+                "exito" => false,
+                "mensaje" => "Los cambios no se pudieron realizar"
+            ];
+        }
+        return $cambio;
+    }
 
 }

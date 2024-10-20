@@ -42,7 +42,6 @@ class UsuarioController
 
         $this->presenter->show('registro', $data);
     }
-
     public function showLobby()
     {
         if (isset($_SESSION['mail'])) {
@@ -83,6 +82,8 @@ class UsuarioController
                 header('Location: /usuario/showRegistro');
                 exit();
             }
+
+
         }
     }
     public function login()
@@ -119,8 +120,40 @@ class UsuarioController
 
     public function showPerfil()
     {
-        $data = [];
+        $data['usuario'] = $this->model->mostrarDatosUsuario($_SESSION['mail']);
+
+        if(isset($_SESSION['cambios'])){
+            $data['cambios'] = $_SESSION['cambios'];
+            unset($_SESSION['cambios']);
+        }
+
         $this->presenter->show('perfil', $data);
+
     }
+
+    public function actualizar()
+    {
+        $nombre = $_POST['nombre'];
+        $mail = $_POST['mail'];
+        $fechaNacimiento = $_POST['fechaNacimiento'];
+        $sexo = $_POST['sex'];
+        $foto = $_FILES['foto'];
+        $password = $_POST['password'];
+        $resultado=$this->model->actualizarDatosPerfil($mail, $nombre, $fechaNacimiento, $sexo, $foto, $password);
+        if ($resultado['exito']) {
+            $_SESSION['cambios'] = $resultado['mensaje'];
+            header('Location: /usuario/showPerfil');
+            exit();
+        } else {
+            $_SESSION['cambios'] = $resultado['mensaje'];
+            header('Location: /usuario/showPerfil');
+            exit();
+        }
+
+
+    }
+
+
+
 
 }
