@@ -5,8 +5,10 @@ include_once("helper/Router.php");
 include_once("helper/MustachePresenter.php");
 
 include_once('controller/UsuarioController.php');
-
 include_once('model/UsuarioModel.php');
+
+include_once('controller/PartidaController.php');
+include_once('model/PartidaModel.php');
 
 include_once('vendor/mustache/src/Mustache/Autoloader.php');
 
@@ -20,9 +22,17 @@ class Configuration
         return new UsuarioController($this->getUsuarioModel(), $this->getPresenter());
     }
 
+    public function getPartidaController(){
+        return new PartidaController($this->getPartidaModel(), $this->getPresenter());
+    }
+
     private function getUsuarioModel()
     {
         return new UsuarioModel($this->getDatabase());
+    }
+    private function getPartidaModel()
+    {
+        return new PartidaModel($this->getDatabase());
     }
 
     private function getPresenter()

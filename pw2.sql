@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-10-2024 a las 00:12:10
+-- Tiempo de generación: 22-10-2024 a las 18:19:32
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -20,6 +20,67 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `pw2`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `partida`
+--
+
+CREATE TABLE `partida` (
+  `idPartida` int(11) NOT NULL,
+  `idUsuario` int(11) DEFAULT NULL,
+  `fecha` datetime DEFAULT NULL,
+  `estado` varchar(20) DEFAULT NULL,
+  `puntaje` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pregunta`
+--
+
+CREATE TABLE `pregunta` (
+  `idPregunta` int(11) NOT NULL,
+  `descripcion` varchar(255) DEFAULT NULL,
+  `categoria` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `pregunta`
+--
+
+INSERT INTO `pregunta` (`idPregunta`, `descripcion`, `categoria`) VALUES
+(1, '¿Cuál es el planeta más grande del sistema solar?', 'Ciencia'),
+(2, '¿Cuál es el río más largo del mundo?', 'Geografía');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `respuesta`
+--
+
+CREATE TABLE `respuesta` (
+  `idRespuesta` int(11) NOT NULL,
+  `idPregunta` int(11) DEFAULT NULL,
+  `textoRespuesta` varchar(255) DEFAULT NULL,
+  `esCorrecta` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `respuesta`
+--
+
+INSERT INTO `respuesta` (`idRespuesta`, `idPregunta`, `textoRespuesta`, `esCorrecta`) VALUES
+(1, 1, 'Marte', 0),
+(2, 1, 'Tierra', 0),
+(3, 1, 'Júpiter', 1),
+(4, 1, 'Venus', 0),
+(5, 2, 'Amazonas', 0),
+(6, 2, 'Nilo', 1),
+(7, 2, 'Yangtsé', 0),
+(8, 2, 'Misisipi', 0);
 
 -- --------------------------------------------------------
 
@@ -59,8 +120,33 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`id`, `mail`, `password`, `nombreUsuario`, `fechaNacimiento`, `nombreCompleto`, `foto`, `idSexo`) VALUES
+(22, 'nadia.belen98@gmail.com', 'hola123', 'Nadi', '1998-08-09', 'Nadia Spinelli', 'avatar.jpg', 2);
+
+--
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `partida`
+--
+ALTER TABLE `partida`
+  ADD PRIMARY KEY (`idPartida`);
+
+--
+-- Indices de la tabla `pregunta`
+--
+ALTER TABLE `pregunta`
+  ADD PRIMARY KEY (`idPregunta`);
+
+--
+-- Indices de la tabla `respuesta`
+--
+ALTER TABLE `respuesta`
+  ADD PRIMARY KEY (`idRespuesta`);
 
 --
 -- Indices de la tabla `sexo`
@@ -80,6 +166,24 @@ ALTER TABLE `usuario`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `partida`
+--
+ALTER TABLE `partida`
+  MODIFY `idPartida` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `pregunta`
+--
+ALTER TABLE `pregunta`
+  MODIFY `idPregunta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `respuesta`
+--
+ALTER TABLE `respuesta`
+  MODIFY `idRespuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT de la tabla `sexo`
 --
 ALTER TABLE `sexo`
@@ -89,7 +193,7 @@ ALTER TABLE `sexo`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Restricciones para tablas volcadas

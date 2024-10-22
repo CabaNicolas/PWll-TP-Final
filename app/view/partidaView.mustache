@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Nueva Partida</title>
+    <link rel="stylesheet" href="/public/estilosLogin.css">
+</head>
+<body>
+<div>
+    <form>
+        {{#preguntasYRespuestas}}
+            <h3>{{descripcion}} | Categoría: {{categoria}}</h3>
+        <br>
+            <ol style="list-style-type: upper-alpha;">
+                {{#respuestas}}
+                    <li>{{.}}</li>
+                {{/respuestas}}
+            </ol>
+        {{/preguntasYRespuestas}}
+
+        {{^preguntasYRespuestas}}
+            <p>No hay preguntas disponibles.</p>
+        {{/preguntasYRespuestas}}
+        <br>
+        <button type="submit">Enviar</button>
+    </form>
+</div>
+</body>
+</html>
