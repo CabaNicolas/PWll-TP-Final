@@ -5,18 +5,24 @@ class Router
     private $defaultController;
     private $defaultMethod;
     private $configuration;
+    private $middleware;
 
-    public function __construct($configuration, $defaultController, $defaultMethod)
+    public function __construct($configuration, $defaultController, $defaultMethod, $middleware)
     {
         $this->defaultController = $defaultController;
         $this->defaultMethod = $defaultMethod;
         $this->configuration = $configuration;
+        $this->middleware = $middleware;
     }
 
     public function route($controllerName, $methodName)
     {
         $controller = $this->getControllerFrom($controllerName);
-        $this->executeMethodFromController($controller, $methodName);
+        if ($this->middleware) {
+            $this->middleware->procesarSolicitud($controller, $methodName, $controllerName);
+        } else {
+            $this->executeMethodFromController($controller, $methodName);
+        }
     }
 
     private function getControllerFrom($module)

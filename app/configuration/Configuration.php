@@ -3,6 +3,8 @@ include_once("helper/MysqlDatabase.php");
 include_once("helper/IncludeFilePresenter.php");
 include_once("helper/Router.php");
 include_once("helper/MustachePresenter.php");
+include_once('helper/FileEmailSender.php');
+include_once('helper/AutenticacionMiddleware.php');
 
 include_once('controller/UsuarioController.php');
 include_once('model/UsuarioModel.php');
@@ -12,7 +14,6 @@ include_once('model/PartidaModel.php');
 
 include_once('vendor/mustache/src/Mustache/Autoloader.php');
 
-include_once('helper/FileEmailSender.php');
 
 class Configuration
 {
@@ -37,6 +38,11 @@ class Configuration
         return new PartidaModel($this->getDatabase());
     }
 
+    private function getMiddleware()
+    {
+        return new AutenticacionMiddleware();
+    }
+
     private function getPresenter()
     {
         return new MustachePresenter("./view");
@@ -56,7 +62,7 @@ class Configuration
 
     public function getRouter()
     {
-        return new Router($this, "getUsuarioController", "showLogin");
+        return new Router($this, "getUsuarioController", "showLogin", $this->getMiddleware());
     }
 
 }

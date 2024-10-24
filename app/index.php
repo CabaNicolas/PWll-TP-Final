@@ -4,6 +4,4 @@ $configuration = new Configuration();
 $router = $configuration->getRouter();
 session_start();
 
-//$router->route($_GET['page'], $_GET['action']);
-
 $router->route($_GET['page'], $_GET['action'] ?? '');
