@@ -12,7 +12,7 @@ class UsuarioController
         $this->presenter = $presenter;
     }
 
-    //Acción para mostrar la vista de login
+
     public function showLogin() {
         $data = [];
 
@@ -70,11 +70,22 @@ class UsuarioController
                 exit();
             }
 
-            //registrar usuario
             $resultado = $this->model->guardarUsuario($username, $mail, $password, $name, $date, $sex, $foto);
 
             if ($resultado['exito']) {
-                $_SESSION['registro_exitoso'] = $resultado['mensaje'];
+                $token = substr(bin2hex(random_bytes(5)), 0, 10);
+                $this->model->guardarTokenDeVerificacion($mail, $token);
+
+
+                $idUsuario = $this->model->obtenerIdUsuarioConEmail($mail);
+                $enlaceValidacion = "http://localhost/usuario/validarCuenta?id=$idUsuario&token=$token";
+
+
+                $emailSender = new FileEmailSender();
+                $mensaje = "Hola! Hacé click en el siguiente enlace para validar tu cuenta: <a href='$enlaceValidacion'>Click aquí</a>";
+                $emailSender->sendEmail($mail, "Validación de cuenta", $mensaje);
+
+                $_SESSION['registro_exitoso'] = $resultado['mensaje'] . ". Revisa tu email para validar tu cuenta."."--Andá a PWll-TP-Final/app/emails.txt--";
                 header('Location: /usuario/showLogin');
                 exit();
             } else {
@@ -82,15 +93,20 @@ class UsuarioController
                 header('Location: /usuario/showRegistro');
                 exit();
             }
-
-
         }
-    }
+        }
+
     public function login()
     {
         $mail = $_POST['mail'];
         $pass = $_POST['password'];
+        $id = $this->model->obtenerIdUsuarioConEmail($mail);
 
+        if ($id === null) {
+            $_SESSION['error_message'] = 'No se encontró el usuario.';
+            header('Location: /usuario/showLogin');
+            exit();
+        }
         $resultado = $this->model->validarLogin($mail, $pass);
 
         if (!$resultado['exito']) {
@@ -99,15 +115,17 @@ class UsuarioController
             exit();
         }
 
-        $_SESSION['mail'] = $mail;
-
-        $this->showLobby();
-        header ('Location: /usuario/showLobby');
+        if($resultado['exito'] && $this->model->estadoDeCuenta($id) == 'A'){
+            $_SESSION['mail'] = $mail;
+            header ('Location: /usuario/showLobby');
+        }
+        else{
+            $_SESSION['error_message'] = 'Valide su cuenta para poder iniciar sesión';
+            header('Location: /usuario/showLogin');
+        }
         exit();
-
     }
 
-    //Método para cerrar sesión
     public function logout()
     {
 
@@ -164,6 +182,24 @@ class UsuarioController
 
     }
 
+    public function validarCuenta() {
+        if (isset($_GET['id']) && isset($_GET['token'])) {
+            $id = $_GET['id'];
+            $token = $_GET['token'];
+
+            $resultado = $this->model->verificarToken($id, $token);
+            $_SESSION['exito'];
+
+            if ($resultado['exito']) {
+                $this->model->activarCuenta($id);
+                $_SESSION['mensaje_verificacion'] = "Cuenta activada con éxito. Por favor, inicie sesión.";
+            } else {
+                $_SESSION['mensaje_verificacion'] = "La verificación falló. Intente nuevamente.";
+            }
+            header('Location: /usuario/showLogin');
+            exit();
+        }
+    }
 
 
 
