@@ -7,40 +7,62 @@
 <h2 class="titulo-crear-cuenta">Crear Cuenta</h2>
 
 <form id="form-registro" action="/usuario/registrarUsuario" enctype="multipart/form-data" method="post">
-    <label for="name" class="label-nombre">Nombre completo:</label>
-    <input type="text" name="name" id="name" >
+    <label for="name" class="label-nombre"><span>*</span>Nombre completo:</label>
+    <input type="text" name="name" id="name" {{#datosTemporalesDeRegistro}}value="{{name}}"{{/datosTemporalesDeRegistro}}>
+    {{#error_messages}}
+    <p class="error">{{nameInvalido}}</p>
+    {{/error_messages}}
 
-    <label for="year" class="label-fecha">Fecha de Nacimiento:</label>
-    <input type="date" name="date" id="date" >
+    <label for="year" class="label-fecha"><span>*</span>Fecha de Nacimiento:</label>
+    <input type="date" name="date" id="date" {{#datosTemporalesDeRegistro}}value="{{date}}"{{/datosTemporalesDeRegistro}}>
+    {{#error_messages}}
+    <p class="error">{{dateInvalido}}</p>
+    {{/error_messages}}
 
-    <label for="sex" class="label-sexo">Sexo:</label>
+    <label for="sex" class="label-sexo"><span>*</span>Sexo:</label>
     <select name="sex" id="sex" >
     <option value="" disabled selected>Selecciona una opción</option>
     <option value="masculino">Masculino</option>
     <option value="femenino">Femenino</option>
     <option value="decirlo">Prefiero no decirlo</option>
     </select>
+    {{#error_messages}}
+    <p class="error">{{sexInvalido}}</p>
+    {{/error_messages}}
 
  <!-- style="width: 500px; height: 300px;" ESTILO DEL MAPA-->
+    <label for="map" class="label-map"><span>*</span>Ubicación:</label>
     <div id="map" class="mapa"></div>
     <input type="hidden" name="pais" id="pais">
     <input type="hidden" name="ciudad" id="ciudad">
 
-    <label for="mail" class="label-email">Email:</label>
-    <input type="email" name="mail" id="mail" >
+    <label for="mail" class="label-email"><span>*</span>Email:</label>
+    <input type="email" name="mail" id="mail" {{#datosTemporalesDeRegistro}}value="{{mail}}"{{/datosTemporalesDeRegistro}}>
+    {{#error_messages}}
+    <p class="error">{{mailInvalido}}</p>
+    {{/error_messages}}
 
-    <label for="password" class="label-password">Contraseña:</label>
-    <input type="password" name="password" id="password" >
+    <label for="password" class="label-password"><span>*</span>Contraseña:</label>
+    <input type="password" name="password" id="password" {{#datosTemporalesDeRegistro}}value="{{password}}"{{/datosTemporalesDeRegistro}}>
+    {{#error_messages}}
+    <p class="error">{{passwordInvalido}}</p>
+    {{/error_messages}}
 
-    <label for="username" class="label-usuario">Nombre de Usuario:</label>
-    <input type="text" name="username" id="username" >
+    <label for="username" class="label-usuario"><span>*</span>Nombre de Usuario:</label>
+    <input type="text" name="username" id="username" {{#datosTemporalesDeRegistro}}value="{{username}}"{{/datosTemporalesDeRegistro}}>
+    {{#error_messages}}
+    <p class="error">{{usernameInvalido}}</p>
+    {{/error_messages}}
 
     <label for="foto" class="label-foto"> Foto:</label>
     <input type="file" name="foto" id="foto">
+    {{#error_messages}}
+    <p class="error">{{imagenInvalida}}</p>
+    {{/error_messages}}
 
-{{#error_message}}
-    <p class="error">{{error_message}}</p>
-{{/error_message}}
+{{#error_messages}}
+    <p class="error">{{camposVacios}}</p>
+{{/error_messages}}
     <input type="submit" value="Crear cuenta" class="boton-crear">
 
 

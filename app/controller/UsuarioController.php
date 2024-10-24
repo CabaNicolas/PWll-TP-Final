@@ -35,10 +35,14 @@ class UsuarioController
     public function showRegistro()
     {
         $data = array(
-            'error_message' => isset($_SESSION['error_message']) ? $_SESSION['error_message'] : null
+            'error_messages' => isset($_SESSION['error_messages']) ? $_SESSION['error_messages'] : null
         );
+        unset($_SESSION['error_messages']);
 
-        unset($_SESSION['error_message']);
+        if(isset($_SESSION['datosTemporalesDeRegistro'])){
+            $data['datosTemporalesDeRegistro'] = $_SESSION['datosTemporalesDeRegistro'];
+            unset($_SESSION['datosTemporalesDeRegistro']);
+        }
 
         $this->presenter->show('registro', $data);
     }
@@ -61,11 +65,12 @@ class UsuarioController
             $sex = $_POST['sex'];
             $foto = $_FILES['foto'];
 
+            $_SESSION['datosTemporalesDeRegistro'] = $this->guardarDatosTemporales($mail, $password, $username, $name, $date, $sex);
 
             $errores = $this->model->validarDatosRegistro($username, $mail, $password, $name, $date, $sex, $foto);
 
             if(!empty($errores)){
-                $_SESSION['error_message'] = implode(", ", $errores);
+                $_SESSION['error_messages'] = $errores;
                 header('location: /usuario/showRegistro');
                 exit();
             }
@@ -157,7 +162,36 @@ class UsuarioController
 
     }
 
+    private function guardarDatosTemporales($mail, $password, $username, $name, $date, $sex)
+    {
+        $datosTemporales = [];
 
+        if(isset($mail)){
+            $datosTemporales['mail'] = $mail;
+        }
+
+        if(isset($password)){
+            $datosTemporales['password'] = $password;
+        }
+
+        if(isset($username)){
+            $datosTemporales['username'] = $username;
+        }
+
+        if(isset($name)){
+            $datosTemporales['name'] = $name;
+        }
+
+        if(isset($date)){
+            $datosTemporales['date'] = $date;
+        }
+
+        if(isset($sex)){
+            $datosTemporales['sex'] = $sex;
+        }
+
+        return $datosTemporales;
+    }
 
 
 }
