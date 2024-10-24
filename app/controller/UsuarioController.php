@@ -59,15 +59,16 @@ class UsuarioController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $mail = $_POST['mail'];
             $password = $_POST['password'];
+            $password2 = $_POST['password2'];
             $username = $_POST['username'];
             $name = $_POST['name'];
             $date = $_POST['date'];
             $sex = $_POST['sex'];
             $foto = $_FILES['foto'];
 
-            $_SESSION['datosTemporalesDeRegistro'] = $this->guardarDatosTemporales($mail, $password, $username, $name, $date, $sex);
+            $_SESSION['datosTemporalesDeRegistro'] = $this->guardarDatosTemporales($mail, $password, $password2, $username, $name, $date, $sex);
 
-            $errores = $this->model->validarDatosRegistro($username, $mail, $password, $name, $date, $sex, $foto);
+            $errores = $this->model->validarDatosRegistro($username, $mail, $password, $password2, $name, $date, $sex, $foto);
 
             if(!empty($errores)){
                 $_SESSION['error_messages'] = $errores;
@@ -138,7 +139,7 @@ class UsuarioController
         session_destroy();
 
         //Redirigir al login después de cerrar la sesión
-        header('Location: /usuario/login');
+        header('Location: /usuario/showLogin');
         exit();
     }
 
@@ -206,7 +207,7 @@ class UsuarioController
         }
     }
 
-    private function guardarDatosTemporales($mail, $password, $username, $name, $date, $sex)
+    private function guardarDatosTemporales($mail, $password, $password2, $username, $name, $date, $sex)
     {
         $datosTemporales = [];
 
@@ -216,6 +217,10 @@ class UsuarioController
 
         if(isset($password)){
             $datosTemporales['password'] = $password;
+        }
+
+        if(isset($password2)){
+            $datosTemporales['password2'] = $password2;
         }
 
         if(isset($username)){

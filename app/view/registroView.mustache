@@ -48,6 +48,12 @@
     <p class="error">{{passwordInvalido}}</p>
     {{/error_messages}}
 
+    <label for="password2" class="label-password2"><span>*</span>Repetir contraseña:</label>
+    <input type="password" name="password2" id="password2" {{#datosTemporalesDeRegistro}}value="{{password2}}"{{/datosTemporalesDeRegistro}}>
+    {{#error_messages}}
+    <p class="error">{{password2Invalido}}</p>
+    {{/error_messages}}
+
     <label for="username" class="label-usuario"><span>*</span>Nombre de Usuario:</label>
     <input type="text" name="username" id="username" {{#datosTemporalesDeRegistro}}value="{{username}}"{{/datosTemporalesDeRegistro}}>
     {{#error_messages}}

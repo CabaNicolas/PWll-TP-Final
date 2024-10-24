@@ -9,7 +9,7 @@ class UsuarioModel
         $this->database = $database;
     }
 
-    public function validarDatosRegistro($username, $mail, $password, $name, $date, $sex, $foto)
+    public function validarDatosRegistro($username, $mail, $password, $password2, $name, $date, $sex, $foto)
     {
         $errores = [];
 
@@ -22,6 +22,10 @@ class UsuarioModel
 
         if(empty($password) || strlen($password) < 6){
             $errores['passwordInvalido'] = "La contraseña debe tener al menos 6 caracteres";
+        }
+
+        if($password != $password2){
+            $errores['password2Invalido'] = "Las contraseñas no coinciden";
         }
 
         if(empty($name)){
