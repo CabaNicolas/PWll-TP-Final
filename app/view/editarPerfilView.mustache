@@ -1,0 +1,40 @@
+
+<link rel="stylesheet" href="/public/estilosEditarPerfil.css">
+
+<a href="/usuario/showPerfil"><input class="volver" type="button" value="Volver"></a>
+
+{{#cambios}}
+     <p> {{cambios}} </p>
+{{/cambios}}
+
+{{#usuario}}
+    <form class="datos-contenedor" action="/usuario/actualizar" method="post" enctype="multipart/form-data">
+        <label for="nombreCompleto">Nombre Completo:</label>
+        <input type="text" id="nombreCompleto" name="nombreCompleto" value="{{nombreCompleto}}" required>
+
+        <label for="nombreUsuario">Nombre usuario:</label>
+        <input type="text" id="nombreUsuario" name="nombreUsuario" value="{{nombreUsuario}}" required>
+
+        <label for="mail">Mail:</label>
+        <input type="email" id="mail" name="mail" value="{{mail}}" required>
+
+        <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+        <input type="date" id="fechaNacimiento" name="fechaNacimiento" value="{{fechaNacimiento}}" required>
+
+        <label for="sex">Sexo:</label>
+           <select name="sex" id="sex" >
+           <option value="masculino">Masculino</option>
+           <option value="femenino">Femenino</option>
+           <option value="decirlo">Prefiero no decirlo</option>
+
+               <label for="foto">Foto de Perfil:</label>
+               <img src="{{foto}}" alt="Foto de Perfil" style="max-width: 100px; max-height: 100px;"/> <!-- Mostrar la foto actual -->
+               <input type="file" id="foto" name="foto"> <!-- Campo para subir una nueva foto -->
+
+        <label for="password">Contraseña:</label>
+        <input type="password" id="contraseña" name="password">
+
+        <button class= "guardarCambios" type="submit">Guardar Cambios</button>
+    </form>
+
+{{/usuario}}

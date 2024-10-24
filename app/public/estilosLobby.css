@@ -1,0 +1,50 @@
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(270deg, #6a0dad, #8a2be2, #4b0082, #00bfff, #1e90ff, #ff00ff);
+    background-size: 1500% 1500%;
+    animation: animateBackground 20s ease infinite;
+}
+
+@keyframes animateBackground {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+h1{
+    font-size: 32px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.botones{
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    background-color:black;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 7%;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: calc(110%);
+   height: calc(100%);
+}
+
+button:hover{
+    background-color: #666666;
+    text-decoration: none;
+}

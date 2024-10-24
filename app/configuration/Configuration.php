@@ -12,6 +12,8 @@ include_once('model/PartidaModel.php');
 
 include_once('vendor/mustache/src/Mustache/Autoloader.php');
 
+include_once('helper/FileEmailSender.php');
+
 class Configuration
 {
     public function __construct()

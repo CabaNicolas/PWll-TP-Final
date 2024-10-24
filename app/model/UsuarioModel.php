@@ -13,44 +13,43 @@ class UsuarioModel
     {
         $errores = [];
 
-        if (empty($mail) || empty($username) || empty($password) || empty($name) || empty($date) || empty($sex)) {
-            $errores[] = "Completa todos los campos";
-            return $errores;
-        }
-
         if(empty($mail) || !filter_var($mail, FILTER_VALIDATE_EMAIL)){
-            $errores[] = "Debes ingresar un mail valido";
+            $errores['mailInvalido'] = "Debes ingresar un mail valido";
         }
         if(empty($username) || strlen($username) < 4){
-            $errores[] = "Debes ingresar un nombre de usuario mayor a 4 caracteres";
+            $errores['usernameInvalido'] = "Debes ingresar un nombre de usuario mayor a 4 caracteres";
         }
 
         if(empty($password) || strlen($password) < 6){
-            $errores[] = "La contraseña debe tener al menos 6 caracteres";
+            $errores['passwordInvalido'] = "La contraseña debe tener al menos 6 caracteres";
         }
 
         if(empty($name)){
-            $errores[] = "Debes ingresar tu nombre";
+            $errores['nameInvalido'] = "Debes ingresar tu nombre";
         }
 
         if (empty($date)) {
-            $errores[] = "La fecha de nacimiento es obligatoria.";
+            $errores['dateInvalido'] = "La fecha de nacimiento es obligatoria.";
         } else {
             $fechaNacimiento = new DateTime($date);
             $hoy = new DateTime();
             $edad = $hoy->diff($fechaNacimiento)->y;
 
             if ($edad < 12) {
-                $errores[] = "Debes tener al menos 12 años para registrarte";
+                $errores['dateInvalido'] = "Debes tener al menos 12 años para registrarte";
             }
         }
 
         if(empty($sex)){
-            $errores[] = "Debes seleccionar tu sexo";
+            $errores['sexInvalido'] = "Debes seleccionar tu sexo";
         }
 
-        if(isset($foto) && $foto['error'] !== UPLOAD_ERR_OK){
-            $errores[] = "Error al subir la imagen";
+        if(isset($foto) && $foto['error'] !== UPLOAD_ERR_OK && $foto['size'] > 0){
+            $errores['imagenInvalida'] = "Error al subir la imagen";
+        }
+
+        if (empty($mail) || empty($username) || empty($password) || empty($name) || empty($date) || empty($sex)) {
+            $errores['camposVacios'] = "Completa todos los campos que se indican con (*)";
         }
 
         return $errores;
@@ -114,10 +113,6 @@ class UsuarioModel
         if(!$this->validarUsuario($mail, $password)){
             return ["exito"=>false, "mensaje"=>"Contraseña incorrecta"];
         }
-
-
-
-
         return ["exito"=>true, "mensaje"=>"Inicio de sesion exitoso"];
     }
 
@@ -180,7 +175,7 @@ class UsuarioModel
         idSexo = (SELECT id FROM sexo WHERE nombre LIKE '%" . $sexo . "%')";
 
 
-        $nuevoNombreImagen = $this->manejarFoto($foto, $nombreImagenActual);
+        $nuevoNombreImagen = $this->manejarImagen($foto, $nombreImagenActual);
         if ($nuevoNombreImagen) {
             $sql .= ", foto = '" . $nuevoNombreImagen . "'";
         }
@@ -199,7 +194,7 @@ class UsuarioModel
         ];
     }
 
-    private function manejarFoto($foto, $nombreImagenActual) {
+    private function manejarImagen($foto, $nombreImagenActual) {
         if (!empty($foto['name'])) {
             $targetDir = "public/images/";
             $targetFile = basename($foto["name"]);
@@ -225,6 +220,46 @@ class UsuarioModel
         }
     }
 
+
+    public function guardarTokenDeVerificacion($mail, $token) {
+        $sql = "UPDATE usuario SET token_verificacion = '" . $token . "' WHERE mail = '" . $mail . "'";
+        $this->database->add($sql);
+    }
+
+
+    public function obtenerIdUsuarioConEmail($mail) {
+        $sql = "SELECT id FROM usuario WHERE mail = '$mail' LIMIT 1";
+        $resultado = $this->database->query($sql);
+        return $resultado[0]['id'];
+    }
+
+    public function verificarToken($id, $token) {
+        $sql = "SELECT token_verificacion FROM usuario WHERE id = $id AND cuenta_verificada = 'I'";
+        $resultado = $this->database->query($sql);
+
+        if (!empty($resultado) && $resultado[0]['token_verificacion'] === $token) {
+            return ["exito" => true];
+        } else {
+            return ["exito" => false, "mensaje" => "Token inválido o cuenta ya verificada."];
+        }
+    }
+
+    public function activarCuenta($id) {
+        $sql = "UPDATE usuario SET cuenta_verificada = 'A', token_verificacion = NULL WHERE id = $id";
+        $this->database->add($sql);
+        return ['exito' => true];
+    }
+
+    public function estadoDeCuenta($id){
+        $sql = "SELECT cuenta_verificada FROM usuario WHERE id = '$id'";
+        $resultado = $this->database->query($sql);
+
+        if (!empty($resultado) && isset($resultado[0]['cuenta_verificada'])) {
+            return $resultado[0]['cuenta_verificada'];
+        } else {
+            return null;
+        }
+    }
 
 
 }
