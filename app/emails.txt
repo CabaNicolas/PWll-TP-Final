@@ -1,0 +1,6 @@
+**Indicaciones de uso**
+Copiar el enlase desde "localhost (...) hasta el ultimo digito del token"
+y pegue en el navegador.--->>
+
+
+
