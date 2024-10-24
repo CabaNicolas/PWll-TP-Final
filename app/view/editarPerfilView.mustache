@@ -1,12 +1,14 @@
 
-<a href="/usuario/showPerfil"><input type="button" value="Volver"></a>
+<link rel="stylesheet" href="/public/estilosEditarPerfil.css">
+
+<a href="/usuario/showPerfil"><input class="volver" type="button" value="Volver"></a>
 
 {{#cambios}}
      <p> {{cambios}} </p>
 {{/cambios}}
 
 {{#usuario}}
-    <form action="/usuario/actualizar" method="post" enctype="multipart/form-data">
+    <form class="datos-contenedor" action="/usuario/actualizar" method="post" enctype="multipart/form-data">
         <label for="nombreCompleto">Nombre Completo:</label>
         <input type="text" id="nombreCompleto" name="nombreCompleto" value="{{nombreCompleto}}" required>
 
@@ -32,7 +34,7 @@
         <label for="password">Contraseña:</label>
         <input type="password" id="contraseña" name="password">
 
-        <button type="submit">Guardar Cambios</button>
+        <button class= "guardarCambios" type="submit">Guardar Cambios</button>
     </form>
 
 {{/usuario}}
