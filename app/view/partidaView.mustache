@@ -14,8 +14,9 @@
             <ol style="list-style-type: upper-alpha;">
                 {{#respuestas}}
                     <li class="form-lista">
-                        <label >{{textoRespuesta}}</label>
-                        <input type="radio" name="respuesta" value="{{idRespuesta}}">
+                        <input type="radio" name="respuesta" value="{{idRespuesta}}" id="respuesta_{{idRespuesta}}">
+                        <label for="respuesta_{{idRespuesta}}" >{{textoRespuesta}}</label>
+
                     </li>
                 {{/respuestas}}
             </ol>

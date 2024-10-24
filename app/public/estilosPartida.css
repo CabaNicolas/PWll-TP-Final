@@ -22,19 +22,6 @@ body {
 
 
 
-.form-lista {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0.1);
-    background-color: #f9f9f9;
-}
-.form-lista:hover {
-    background-color: lightgray;
-}
-
 .submit-button {
     background-color: #6a43a3;
     color: white;
@@ -51,3 +38,28 @@ body {
     background-color: #503b75;
 }
 
+.form-lista label{
+    display: block;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0.1);
+
+}
+
+.form-lista input{
+    display: none;
+}
+
+
+.form-lista label:hover {
+    background-color: lightgray;
+}
+.form-lista input:checked + label {
+    background-color: lightgray;
+}
