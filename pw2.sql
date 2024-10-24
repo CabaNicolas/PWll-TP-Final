@@ -3,11 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
-<<<<<<< Updated upstream
--- Tiempo de generación: 22-10-2024 a las 18:19:32
-=======
--- Tiempo de generación: 24-10-2024 a las 04:29:42
->>>>>>> Stashed changes
+-- Tiempo de generación: 24-10-2024 a las 16:34:10
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -126,13 +122,6 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `usuario`
---
-
-INSERT INTO `usuario` (`id`, `mail`, `password`, `nombreUsuario`, `fechaNacimiento`, `nombreCompleto`, `foto`, `idSexo`) VALUES
-(22, 'nadia.belen98@gmail.com', 'hola123', 'Nadi', '1998-08-09', 'Nadia Spinelli', 'avatar.jpg', 2);
-
---
 -- Índices para tablas volcadas
 --
 
@@ -199,11 +188,7 @@ ALTER TABLE `sexo`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-<<<<<<< Updated upstream
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
-=======
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
->>>>>>> Stashed changes
 
 --
 -- Restricciones para tablas volcadas
