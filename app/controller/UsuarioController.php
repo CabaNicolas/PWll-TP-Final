@@ -28,6 +28,11 @@ class UsuarioController
             unset($_SESSION['error_message']);
         }
 
+        if(isset($_SESSION['mensaje_verificacion'])){
+            $data['mensaje_verificacion'] = $_SESSION['mensaje_verificacion'];
+            unset($_SESSION['mensaje_verificacion']);
+        }
+
         // Mostrar la vista de login con los datos
         $this->presenter->show('login', $data);
     }
@@ -194,7 +199,6 @@ class UsuarioController
             $token = $_GET['token'];
 
             $resultado = $this->model->verificarToken($id, $token);
-            $_SESSION['exito'];
 
             if ($resultado['exito']) {
                 $this->model->activarCuenta($id);
