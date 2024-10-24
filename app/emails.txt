@@ -4,3 +4,8 @@ y pegue en el navegador.--->>
 
 
 
+To: nadia.belen98@gmail.com
+Subject: Validación de cuenta
+Message:
+Hola! Hacé click en el siguiente enlace para validar tu cuenta: <a href='http://localhost/usuario/validarCuenta?id=23&token=b78ca8da5f'>Click aquí</a>
+
