@@ -2,31 +2,35 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="/public/styles.css">
+    <link rel="stylesheet" type="text/css" href="/public/estilosLobby.css">
     <title>Lobby</title>
 
 </head>
 
 <body>
-    <nav>
-        <h1>Preguntones</h1>
-        <form action="/usuario/logout" method="POST">
-            <input type="submit" value="Cerrar sesión">
-        </form>
 
-        <a href="/usuario/showPerfil"> <input type="button" value= "Perfil"> </a>
+    <nav>
+       <form action="/usuario/logout" method="POST">
+                <input type="submit" value="Cerrar sesión">
+            </form>
+
+            <a href="/usuario/showPerfil"> <input type="button" value= "Perfil"> </a>
+
+        <h1>Preguntones</h1>
     </nav>
 
-    <div>
-        <h2>Bienvenido/a {{mail}}!</h2>
-        <br>
+
+     <h2>Bienvenido/a {{mail}}!</h2>
+
+
+    <div class="botones">
 
         <p>Puntaje Total</p>
         <br>
         <form action="/partida/showPartida" method="POST">
             <button type="submit">Nueva partida</button>
         </form><br>
-        <button>Ranking y partidas</button>
+        <button>Ranking y partidas</button> <br>
         <button>Crear pregunta</button>
     </div>
 </body>

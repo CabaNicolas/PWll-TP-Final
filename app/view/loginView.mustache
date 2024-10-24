@@ -9,9 +9,10 @@
 
 <div class="contenedor-login">
 <h2 class="titulo-login">Iniciar sesión</h2>
-{{#registro_exitoso}}
-    <p class="exito">{{registro_exitoso}}</p>
-{{/registro_exitoso}}
+
+    {{#registro_exitoso}}
+        <p class="exito">{{registro_exitoso}}</p>
+    {{/registro_exitoso}}
 
 
     <form action="/usuario/login" method="POST" class="login-form">
@@ -29,6 +30,12 @@
         {{#error_message}}
           <p class="error">{{error_message}}</p>
         {{/error_message}}
+
+        {{#mensaje_verificacion}}
+            <p class="error">{{mensaje_verificacion}}</p>
+        {{/mensaje_verificacion}}
+
+
 </div>
 </body>
 </html>

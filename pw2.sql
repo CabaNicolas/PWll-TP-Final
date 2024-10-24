@@ -3,7 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
+<<<<<<< Updated upstream
 -- Tiempo de generación: 22-10-2024 a las 18:19:32
+=======
+-- Tiempo de generación: 24-10-2024 a las 04:29:42
+>>>>>>> Stashed changes
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -116,7 +120,9 @@ CREATE TABLE `usuario` (
   `fechaNacimiento` date NOT NULL,
   `nombreCompleto` varchar(30) NOT NULL,
   `foto` varchar(50) NOT NULL,
-  `idSexo` int(11) NOT NULL
+  `idSexo` int(11) NOT NULL,
+  `token_verificacion` varchar(100) DEFAULT NULL,
+  `cuenta_verificada` char(1) NOT NULL DEFAULT 'I'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -193,7 +199,11 @@ ALTER TABLE `sexo`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
+<<<<<<< Updated upstream
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+=======
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+>>>>>>> Stashed changes
 
 --
 -- Restricciones para tablas volcadas
