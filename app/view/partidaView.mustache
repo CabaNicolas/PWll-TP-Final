@@ -3,17 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Nueva Partida</title>
-    <link rel="stylesheet" href="/public/estilosLogin.css">
+    <link rel="stylesheet" href="/public/estilosPartida.css">
 </head>
 <body>
-<div>
-    <form>
+<div class="contenedor-partida">
+    <form method="post" action="/partida/validarRespuesta" class="partida-form">
         {{#preguntasYRespuestas}}
             <h3>{{descripcion}} | Categoría: {{categoria}}</h3>
-        <br>
+            <br>
             <ol style="list-style-type: upper-alpha;">
                 {{#respuestas}}
-                    <li>{{.}}</li>
+                    <li class="form-lista">
+                        <label >{{textoRespuesta}}</label>
+                        <input type="radio" name="respuesta" value="{{idRespuesta}}">
+                    </li>
                 {{/respuestas}}
             </ol>
         {{/preguntasYRespuestas}}
@@ -22,8 +25,9 @@
             <p>No hay preguntas disponibles.</p>
         {{/preguntasYRespuestas}}
         <br>
-        <button type="submit">Enviar</button>
+        <button type="submit" class="submit-button">Enviar</button>
     </form>
+
 </div>
 </body>
 </html>

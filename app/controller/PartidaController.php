@@ -30,4 +30,18 @@ class PartidaController
         $this->presenter->show('partida', $data);
     }
 
+    public function validarRespuesta() {
+        $idRespuestaSeleccionada = $_POST['respuesta'];
+
+
+        $esCorrecta = $this->model->validarRespuesta($idRespuestaSeleccionada);
+
+        if ($esCorrecta) {
+            echo "¡Correcto!";
+        } else {
+            echo "Incorrecto. Inténtalo de nuevo.";
+        }
+
+    }
+
 }
