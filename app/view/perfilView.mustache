@@ -1,19 +1,27 @@
 
-<form action="/usuario/logout" method="POST">
-    <input type="submit" value="Cerrar sesión">
+<link rel="stylesheet" href="/public/estilosPerfil.css">
+
+<div class="botonesPerfil">
+<a href="/usuario/showLobby"><input class="volver" type="button" value="Volver"></a>
+<form  action="/usuario/logout" method="POST">
+    <input class= "cerrarSesionBoton" type="submit" value="Cerrar sesión">
 </form>
 
-<a href="/usuario/showLobby"><input type="button" value="Volver"></a>
+</div>
 
 {{#usuario}}
 
+<h2>{{nombreUsuario}}</h2>
+
+<div class="datosPerfil">
 <p> Nombre Completo: {{nombreCompleto}} </p>
 <p> Nombre de Usuario: {{nombreUsuario}} </p>
 <p> Mail: {{mail}} </p>
 <p> Fecha de Nacimiento: {{fechaNacimiento}} </p>
+</div>
 
 {{/usuario}}
 
-<a href="/usuario/showEditarPerfil"><input type="button" value="Editar Perfil"></a>
+<a href="/usuario/showEditarPerfil"><input class="editarperfilboton" type="button" value="Editar Perfil"></a>
 
 
