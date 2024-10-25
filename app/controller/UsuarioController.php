@@ -128,6 +128,7 @@ class UsuarioController
 
         if($resultado['exito'] && $this->model->estadoDeCuenta($id) == 'A'){
             $_SESSION['mail'] = $mail;
+            $_SESSION['id'] = $id;
             header ('Location: /usuario/showLobby');
         }
         else{
