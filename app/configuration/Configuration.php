@@ -5,11 +5,12 @@ include_once("helper/Router.php");
 include_once("helper/MustachePresenter.php");
 include_once('helper/FileEmailSender.php');
 include_once('helper/AutenticacionMiddleware.php');
+include_once('helper/Redirecter.php');
 
 include_once('controller/UsuarioController.php');
-include_once('model/UsuarioModel.php');
-
 include_once('controller/PartidaController.php');
+
+include_once('model/UsuarioModel.php');
 include_once('model/PartidaModel.php');
 
 include_once('vendor/mustache/src/Mustache/Autoloader.php');
