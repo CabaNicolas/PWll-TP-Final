@@ -19,7 +19,10 @@ class Router
     {
         $controller = $this->getControllerFrom($controllerName);
         if ($this->middleware) {
-            $this->middleware->procesarSolicitud($controller, $methodName, $controllerName);
+            $array = $this->middleware->procesarSolicitud($controller, $methodName, $controllerName);
+            $controller = $array[0];
+            $methodName = $array[1];
+            $this->executeMethodFromController($controller, $methodName);
         } else {
             $this->executeMethodFromController($controller, $methodName);
         }

@@ -18,6 +18,6 @@ class AutenticacionMiddleware{
                 exit;
             }
         }
-        return call_user_func(array($controller, $methodName));
+        return array($controller, $methodName);
     }
 }
