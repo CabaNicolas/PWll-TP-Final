@@ -15,10 +15,6 @@ class PartidaModel
         $sqlPregunta = "SELECT idPregunta, descripcion, " . $categoria . " FROM Pregunta p ORDER BY RAND() LIMIT 1";
         $resultPregunta = $this->database->query($sqlPregunta);
 
-        //if (empty($resultPregunta)) {
-        //    return [];
-        //}
-
         $pregunta = $resultPregunta[0];
 
 
@@ -39,6 +35,13 @@ class PartidaModel
 
     public function crearPartida($idUsuario) {
         $sql = "INSERT INTO partida (idUsuario, fecha) VALUES (" . $idUsuario . " , NOW())";
+        $this->database->add($sql);
+        $idPartida = $this->database->lastInsertId();
+        return $idPartida;
+    }
+
+    public function cerrarPartida($idPartida, $puntaje) {
+        $sql = "UPDATE partida SET puntaje = " . $puntaje . " WHERE idPartida = " . $idPartida;
         $this->database->add($sql);
     }
 

@@ -13,9 +13,8 @@ class PartidaController
     }
 
 
-    public function showPartida() {
+    public function showPregunta() {
         $data['preguntasYRespuestas'] = $this->model->showPreguntaRandom();
-
         $this->presenter->show('partida', $data);
     }
 
@@ -26,18 +25,28 @@ class PartidaController
         $esCorrecta = $this->model->validarRespuesta($idRespuestaSeleccionada);
 
         if($esCorrecta) {
-            //sleep(2);
-            $this->showPartida();
+            $_SESSION['puntaje'] += 1;
+            $this->showPregunta();
         }else{
-            Redirecter::redirect('/usuario/showLobby');
+            $this->cerrarPartida();
         }
 
     }
 
     public function crearPartida(){
         $idUsuario = $_SESSION['id'];
-        $this->model->crearPartida($idUsuario);
-        Redirecter::redirect('/partida/showPartida');
+        $_SESSION['idPartida'] = $this->model->crearPartida($idUsuario);
+        $_SESSION['puntaje'] = 0;
+        Redirecter::redirect('/partida/showPregunta');
+    }
+
+    private function cerrarPartida(){
+        $idPartida = $_SESSION['idPartida'];
+        $puntaje = $_SESSION['puntaje'];
+        $this->model->cerrarPartida($idPartida, $puntaje);
+        unset($_SESSION['idPartida']);
+        unset($_SESSION['puntaje']);
+        Redirecter::redirect('/usuario/showLogin');
     }
 
 }
