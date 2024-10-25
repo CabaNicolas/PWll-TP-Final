@@ -77,8 +77,7 @@ class UsuarioController
 
             if(!empty($errores)){
                 $_SESSION['error_messages'] = $errores;
-                header('location: /usuario/showRegistro');
-                exit();
+                Redirecter::redirect('/usuario/showRegistro');
             }
 
             $resultado = $this->model->guardarUsuario($username, $mail, $password, $name, $date, $sex, $foto);
@@ -97,12 +96,10 @@ class UsuarioController
                 $emailSender->sendEmail($mail, "Validación de cuenta", $mensaje);
 
                 $_SESSION['registro_exitoso'] = $resultado['mensaje'] . ". Revisa tu email para validar tu cuenta."."--Andá a PWll-TP-Final/app/emails.txt--";
-                header('Location: /usuario/showLogin');
-                exit();
+                Redirecter::redirect('/usuario/showLogin');
             } else {
                 $_SESSION['registro_fallido'] = $resultado['mensaje'];
-                header('Location: /usuario/showRegistro');
-                exit();
+                Redirecter::redirect('/usuario/showRegistro');
             }
         }
         }
@@ -115,38 +112,34 @@ class UsuarioController
 
         if ($id === null) {
             $_SESSION['error_message'] = 'No se encontró el usuario.';
-            header('Location: /usuario/showLogin');
-            exit();
+            Redirecter::redirect('/usuario/showLogin');
         }
         $resultado = $this->model->validarLogin($mail, $pass);
 
         if (!$resultado['exito']) {
             $_SESSION['error_message'] = $resultado['mensaje'];
-            header('Location: /usuario/showLogin');
-            exit();
+            Redirecter::redirect('/usuario/showLogin');
         }
 
         if($resultado['exito'] && $this->model->estadoDeCuenta($id) == 'A'){
             $_SESSION['mail'] = $mail;
             $_SESSION['id'] = $id;
-            header ('Location: /usuario/showLobby');
+            Redirecter::redirect('/usuario/showLobby');
         }
         else{
             $_SESSION['error_message'] = 'Valide su cuenta para poder iniciar sesión';
-            header('Location: /usuario/showLogin');
+            Redirecter::redirect('/usuario/showLogin');
         }
         exit();
     }
 
     public function logout()
     {
-
         //Destruir la sesión
         session_destroy();
 
         //Redirigir al login después de cerrar la sesión
-        header('Location: /usuario/showLogin');
-        exit();
+        Redirecter::redirect('/usuario/showLogin');
     }
 
     public function showPerfil()
@@ -183,12 +176,10 @@ class UsuarioController
         if ($resultado['exito']) {
             $_SESSION['mail'] = $mail;
             $_SESSION['cambios'] = $resultado['mensaje'];
-            header('Location: /usuario/showPerfil');
-            exit();
+            Redirecter::redirect('/usuario/showPerfil');
         } else {
             $_SESSION['cambios'] = $resultado['mensaje'];
-            header('Location: /usuario/showPerfil');
-            exit();
+            Redirecter::redirect('/usuario/showPerfil');
         }
 
 
@@ -207,8 +198,7 @@ class UsuarioController
             } else {
                 $_SESSION['mensaje_verificacion'] = "La verificación falló. Intente nuevamente.";
             }
-            header('Location: /usuario/showLogin');
-            exit();
+            Redirecter::redirect('/usuario/showLogin');
         }
     }
 
