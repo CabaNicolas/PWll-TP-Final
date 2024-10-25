@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-10-2024 a las 16:34:10
+-- Tiempo de generación: 25-10-2024 a las 21:16:43
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -24,14 +24,32 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `categoria`
+--
+
+CREATE TABLE `categoria` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `categoria`
+--
+
+INSERT INTO `categoria` (`id`, `nombre`) VALUES
+(1, 'Ciencia'),
+(2, 'Geografia');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `partida`
 --
 
 CREATE TABLE `partida` (
   `idPartida` int(11) NOT NULL,
   `idUsuario` int(11) DEFAULT NULL,
-  `fecha` datetime DEFAULT NULL,
-  `estado` varchar(20) DEFAULT NULL,
+  `fecha` date DEFAULT NULL,
   `puntaje` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -44,7 +62,7 @@ CREATE TABLE `partida` (
 CREATE TABLE `pregunta` (
   `idPregunta` int(11) NOT NULL,
   `descripcion` varchar(255) DEFAULT NULL,
-  `categoria` varchar(50) DEFAULT NULL
+  `categoria` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -52,8 +70,19 @@ CREATE TABLE `pregunta` (
 --
 
 INSERT INTO `pregunta` (`idPregunta`, `descripcion`, `categoria`) VALUES
-(1, '¿Cuál es el planeta más grande del sistema solar?', 'Ciencia'),
-(2, '¿Cuál es el río más largo del mundo?', 'Geografía');
+(1, '¿Cuál es el planeta más grande del sistema solar?', 1),
+(2, '¿Cuál es el río más largo del mundo?', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `responde`
+--
+
+CREATE TABLE `responde` (
+  `idUsuario` int(11) NOT NULL,
+  `idPregunta` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -126,6 +155,12 @@ CREATE TABLE `usuario` (
 --
 
 --
+-- Indices de la tabla `categoria`
+--
+ALTER TABLE `categoria`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `partida`
 --
 ALTER TABLE `partida`
@@ -161,10 +196,16 @@ ALTER TABLE `usuario`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `categoria`
+--
+ALTER TABLE `categoria`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de la tabla `partida`
 --
 ALTER TABLE `partida`
-  MODIFY `idPartida` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idPartida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT de la tabla `pregunta`
