@@ -11,12 +11,13 @@ class PartidaModel
 
     public function showPreguntaRandom() {
         //Seleccionar una pregunta aleatoria
-        $sqlPregunta = "SELECT idPregunta, descripcion, categoria FROM Pregunta ORDER BY RAND() LIMIT 1";
+        $categoria = "(SELECT c.nombre FROM categoria c WHERE c.id = p.categoria) AS categoria";
+        $sqlPregunta = "SELECT idPregunta, descripcion, " . $categoria . " FROM Pregunta p ORDER BY RAND() LIMIT 1";
         $resultPregunta = $this->database->query($sqlPregunta);
 
-        if (empty($resultPregunta)) {
-            return [];
-        }
+        //if (empty($resultPregunta)) {
+        //    return [];
+        //}
 
         $pregunta = $resultPregunta[0];
 
@@ -34,6 +35,11 @@ class PartidaModel
         }
 
         return $pregunta;
+    }
+
+    public function crearPartida($idUsuario) {
+        $sql = "INSERT INTO partida (idUsuario, fecha) VALUES (" . $idUsuario . " , NOW())";
+        $this->database->add($sql);
     }
 
 

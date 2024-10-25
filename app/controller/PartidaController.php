@@ -14,18 +14,7 @@ class PartidaController
 
 
     public function showPartida() {
-        $preguntaYRespuestas = $this->model->showPreguntaRandom();
-
-
-        if (!empty($preguntaYRespuestas)) {
-            $data['preguntasYRespuestas'] = [
-                'descripcion' => $preguntaYRespuestas['descripcion'],
-                'categoria' => $preguntaYRespuestas['categoria'],
-                'respuestas' => $preguntaYRespuestas['respuestas']
-            ];
-        } else {
-            $data['preguntasYRespuestas'] = [];
-        }
+        $data['preguntasYRespuestas'] = $this->model->showPreguntaRandom();
 
         $this->presenter->show('partida', $data);
     }
@@ -36,12 +25,19 @@ class PartidaController
 
         $esCorrecta = $this->model->validarRespuesta($idRespuestaSeleccionada);
 
-        if ($esCorrecta) {
-            echo "¡Correcto!";
-        } else {
-            echo "Incorrecto. Inténtalo de nuevo.";
+        if($esCorrecta) {
+            //sleep(2);
+            $this->showPartida();
+        }else{
+            Redirecter::redirect('/usuario/showLobby');
         }
 
+    }
+
+    public function crearPartida(){
+        $idUsuario = $_SESSION['id'];
+        $this->model->crearPartida($idUsuario);
+        Redirecter::redirect('/partida/showPartida');
     }
 
 }
