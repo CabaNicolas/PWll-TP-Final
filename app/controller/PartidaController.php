@@ -46,7 +46,7 @@ class PartidaController
         $this->model->cerrarPartida($idPartida, $puntaje);
         unset($_SESSION['idPartida']);
         unset($_SESSION['puntaje']);
-        Redirecter::redirect('/usuario/showLogin');
+        Redirecter::redirect('/usuario/showLobby');
     }
 
 }
