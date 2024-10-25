@@ -21,6 +21,10 @@ class MysqlDatabase
         $result = mysqli_query($this->conn, $sql);
         return mysqli_affected_rows($this->conn);
     }
+    public function lastInsertId()
+    {
+        return mysqli_insert_id($this->conn);
+    }
 
     public function __destruct()
     {
