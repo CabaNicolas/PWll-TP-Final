@@ -224,7 +224,10 @@ class UsuarioModel
         }
     }
 
-
+    public function crearToken(){
+        $token = substr(bin2hex(random_bytes(5)), 0, 10);
+        return $token;
+    }
     public function guardarTokenDeVerificacion($mail, $token) {
         $sql = "UPDATE usuario SET token_verificacion = '" . $token . "' WHERE mail = '" . $mail . "'";
         $this->database->add($sql);

@@ -83,7 +83,7 @@ class UsuarioController
             $resultado = $this->model->guardarUsuario($username, $mail, $password, $name, $date, $sex, $foto);
 
             if ($resultado['exito']) {
-                $token = substr(bin2hex(random_bytes(5)), 0, 10);
+                $token = $this->model->crearToken();
                 $this->model->guardarTokenDeVerificacion($mail, $token);
 
 
