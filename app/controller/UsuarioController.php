@@ -57,9 +57,10 @@ class UsuarioController
     {
         if (isset($_SESSION['mail'])) {
             $data['mail'] = $_SESSION['mail'];
+            $idUsuario = $_SESSION['id'];
+            $data['puntajeTotal'] = $this->model->totalPuntajeDeUsuario($idUsuario);
         }
         $this->presenter->show('lobby', $data);
-
     }
     public function registrarUsuario() {
 

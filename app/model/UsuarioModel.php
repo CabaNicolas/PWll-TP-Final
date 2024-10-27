@@ -273,6 +273,10 @@ class UsuarioModel
             return null;
         }
     }
-
+    public function totalPuntajeDeUsuario($idUsuario){
+        $sql = "SELECT sum(puntaje) as puntajeTotal FROM partida WHERE idUsuario = '$idUsuario'";
+        $resultado = $this->database->query($sql);
+        return $resultado[0]['puntajeTotal'] ?? 0;
+    }
 
 }
