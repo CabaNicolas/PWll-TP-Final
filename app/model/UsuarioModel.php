@@ -232,7 +232,13 @@ class UsuarioModel
         $sql = "UPDATE usuario SET token_verificacion = '" . $token . "' WHERE mail = '" . $mail . "'";
         $this->database->add($sql);
     }
-
+    public function crearEnlaceValidacion($idUsuario, $token){
+        $enlaceValidacion = "http://localhost/usuario/validarCuenta?id=$idUsuario&token=$token";
+        return $enlaceValidacion;
+    }
+    public function crearMensajeEmail($enlaceValidacion){
+        return "Hola! Hacé click en el siguiente enlace para validar tu cuenta: <a href='$enlaceValidacion'>Click aquí</a>";
+    }
 
     public function obtenerIdUsuarioConEmail($mail) {
         $sql = "SELECT id FROM usuario WHERE mail = '$mail' LIMIT 1";

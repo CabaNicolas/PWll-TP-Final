@@ -22,10 +22,13 @@ class Configuration
     {
     }
 
-    public function getUsuarioController(){
-        return new UsuarioController($this->getUsuarioModel(), $this->getPresenter());
-    }
 
+    public function getUsuarioController(){
+        return new UsuarioController($this->getUsuarioModel(), $this->getPresenter(), $this->getFileEmailSender());
+    }
+    public function getFileEmailSender(){
+        return new FileEmailSender();
+    }
     public function getPartidaController(){
         return new PartidaController($this->getPartidaModel(), $this->getPresenter());
     }

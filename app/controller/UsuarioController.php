@@ -5,11 +5,13 @@ class UsuarioController
 
     private $model;
     private $presenter;
+    private $fileEmailSender;
 
-    public function __construct($model, $presenter)
+    public function __construct($model, $presenter, $fileEmailSender)
     {
         $this->model = $model;
         $this->presenter = $presenter;
+        $this->fileEmailSender = $fileEmailSender;
     }
 
 
@@ -88,11 +90,11 @@ class UsuarioController
 
 
                 $idUsuario = $this->model->obtenerIdUsuarioConEmail($mail);
-                $enlaceValidacion = "http://localhost/usuario/validarCuenta?id=$idUsuario&token=$token";
+                $enlaceValidacion = $this->model->crearEnlaceValidacion($idUsuario, $token);
 
 
-                $emailSender = new FileEmailSender();
-                $mensaje = "Hola! Hacé click en el siguiente enlace para validar tu cuenta: <a href='$enlaceValidacion'>Click aquí</a>";
+                $emailSender = $this->fileEmailSender;
+                $mensaje = $this->model->crearMensajeEmail($enlaceValidacion);
                 $emailSender->sendEmail($mail, "Validación de cuenta", $mensaje);
 
                 $_SESSION['registro_exitoso'] = $resultado['mensaje'] . ". Revisa tu email para validar tu cuenta."."--Andá a PWll-TP-Final/app/emails.txt--";
