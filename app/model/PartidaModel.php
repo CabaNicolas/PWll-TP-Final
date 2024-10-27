@@ -10,9 +10,11 @@ class PartidaModel
     }
 
     public function showPreguntaRandom() {
-        //Seleccionar una pregunta aleatoria
-        $categoria = "(SELECT c.nombre FROM categoria c WHERE c.id = p.categoria) AS categoria";
-        $sqlPregunta = "SELECT idPregunta, descripcion, " . $categoria . " FROM Pregunta p ORDER BY RAND() LIMIT 1";
+        $sqlPregunta = "SELECT p.idPregunta, p.descripcion, c.nombre AS categoria, c.color
+        FROM Pregunta p
+        JOIN categoria c ON p.categoria = c.id
+        ORDER BY RAND()
+        LIMIT 1";
         $resultPregunta = $this->database->query($sqlPregunta);
 
         $pregunta = $resultPregunta[0];

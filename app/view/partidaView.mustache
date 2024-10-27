@@ -9,7 +9,7 @@
 <div class="contenedor-partida">
     <form method="post" action="/partida/validarRespuesta" class="partida-form">
         {{#preguntasYRespuestas}}
-            <h3>{{descripcion}} | Categoría: {{categoria}}</h3>
+            <h3 style="background-color: {{color}};">{{descripcion}} | Categoría: {{categoria}}</h3>
             <br>
             <ol style="list-style-type: upper-alpha;">
                 {{#respuestas}}
