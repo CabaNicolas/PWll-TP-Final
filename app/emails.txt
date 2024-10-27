@@ -2,3 +2,8 @@
 Copiar el enlase desde "localhost (...) hasta el ultimo digito del token"
 y pegue en el navegador.--->>
 
+To: nadia.belen98@gmail.com
+Subject: Validación de cuenta
+Message:
+Hola! Hacé click en el siguiente enlace para validar tu cuenta: <a href='http://localhost/usuario/validarCuenta?id=2&token=2360705f61'>Click aquí</a>
+

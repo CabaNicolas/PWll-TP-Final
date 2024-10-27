@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Nueva Partida</title>
-    <link rel="stylesheet" href="/public/estilosPartida.css">
+    <link rel="stylesheet" href="/public/styles.css">
 </head>
+
 <body>
-<div class="contenedor-partida">
-    <form method="post" action="/partida/validarRespuesta" class="partida-form">
-        {{#preguntasYRespuestas}}
+{{#preguntasYRespuestas}}
+<div class="contenedor-partida"  style="background-color: {{color}};">
+    <form method="post" action="/partida/validarRespuesta" class="partida-form" >
+
             <h3 style="background-color: {{color}};">{{descripcion}} | Categoría: {{categoria}}</h3>
             <br>
-            <ol style="list-style-type: upper-alpha;">
+            <ol style="list-style-type: upper-alpha; ">
                 {{#respuestas}}
                     <li class="form-lista">
                         <input type="radio" name="respuesta" value="{{idRespuesta}}" id="respuesta_{{idRespuesta}}">

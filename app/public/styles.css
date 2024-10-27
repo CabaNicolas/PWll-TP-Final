@@ -4,25 +4,395 @@
     padding: 0;
 }
 
+body {
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+}
+
+
+/*ESTILOS REGISTRO*/
 #form-registro{
     display: flex;
     flex-direction: column;
     width: 50%;
 }
 
-.error{
+.contenedor-crear-cuenta {
+    font-family: 'Arial', sans-serif;
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 450px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 20px;
+
+}
+
+.contenedor-crear-cuenta h2{
+    font-family: 'Arial', sans-serif;
+    margin-top: 30px;
+    font-size: 30px;
+}
+
+.titulo-crear-cuenta {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#form-registro label {
+    font-size: 14px;
+    color: #666666;
+    margin-bottom: 8px;
+    margin-top: 5px;
+    display: block;
+}
+
+#form-registro input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+select {
+    width: 200px;
+    padding: 12px;
+    margin-bottom: 5px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 14px;
+    background-color: #f9f9f9;
+    box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0.1);
+}
+#form-registro input:focus,
+select:focus {
+    border-color: #6a43a3;
+    outline: none;
+}
+#form-registro .boton-crear {
+    background-color: #6a43a3;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 80%;
+    transition: background-color 0.3s ease;
+}
+#form-registro .boton-crear:hover {
+    background-color: #503b75;
+}
+
+#form-registro .mapa {
+    width: 110%;
+    height: 170px;
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+#form-registro .error {
     color: red;
+    font-size: 16px;
+    /*margin-top: 10px;*/
+    margin-bottom: 5px;
+    text-align: center;
+}
+#form-registro input[type="file"] {
+    margin-top: 10px;
+    margin-bottom: 20px;
+
 }
 
-.exito{
+
+/*ESTILOS LOGIN*/
+.contenedor-login{
+    font-family: 'Arial', sans-serif;
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.titulo-login {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-form .form-label {
+    font-size: 14px;
+    color: #666;
+    text-align: left;
+}
+
+.login-form .form-input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+}
+
+.login-form .submit-button {
+    background-color: #6a43a3;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+
+}
+
+.login-form .submit-button:hover {
+    background-color: #503b75;
+}
+
+.login-form .register-link {
+    font-size: 16px;
+    color: #6a43a3;
+    text-decoration: none;
+
+}
+
+.login-form .register-link:hover {
+    text-decoration: underline;
+}
+
+.contenedor-login .exito {
     color: green;
+    font-size: 14px;
+    margin-bottom: 10px;
+    font-weight: bold;
 }
 
-body {
+.contenedor-login .error {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+
+/*ESTILOS LOBBY*/
+.lobby{
     display: flex;
     flex-direction: column;
     height: 100vh;
     margin: 0;
+    background: linear-gradient(270deg, #6a0dad, #8a2be2, #4b0082, #00bfff, #1e90ff, #ff00ff);
+    background-size: 1500% 1500%;
+    animation: animateBackground 20s ease infinite;
+}
+
+@keyframes animateBackground {
+           0% {
+               background-position: 0% 50%;
+           }
+           50% {
+               background-position: 100% 50%;
+           }
+           100% {
+               background-position: 0% 50%;
+           }
+       }
+
+
+.lobby h1{
+    font-size: 32px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 20px;
+}
+.lobby .botones{
+    display: flex;
+    flex-direction: column;
+}
+
+.lobby button {
+    background-color:black;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 7%;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: calc(110%);
+    height: calc(100%);
+}
+
+.lobby button:hover{
+    background-color: #666666;
+    text-decoration: none;
+}
+
+/*ESTILOS PERFIL*/
+.datosPerfil{
+    font-family: 'Arial', sans-serif;
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.botonesPerfil{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.botonesPerfil .volver, .cerrarSesionBoton, .editarperfilboton{
+    background-color: #6a43a3;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.botonesPerfil .volver:hover, .cerrarSesionBoton:hover, .editarperfilboton:hover{
+    background-color: #503b75;
+    text-decoration: none;
+}
+
+.h2-perfil h2{
+    font-size: 40px;
+    font-weight: bold;
+    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    background-size: 500%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: background-position 0.5s ease;
+    padding: 1%;
+}
+
+.h2-perfil h2:hover{
+    background-position: 100%;
+}
+
+/*ESTILOS EDITAR PERFIL*/
+.datos-contenedor{
+    display: flex;
+    flex-direction: column;
+    font-family: 'Arial', sans-serif;
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    text-align: center;
+    justify-content: center;
+}
+.datos-contenedor .guardarCambios, .volver{
+    background-color: #6a43a3;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.datos-contenedor .guardarCambios:hover, .volver:hover {
+    background-color: #503b75;
+    text-decoration: none;
+}
+
+.datos-contenedor .guardarCambios{
+    width: fit-content;
+}
+
+.volver{
+    display: flex;
+    flex-direction: row;
+}
+
+.datos-contenedor label, img {
+    padding: 2%;
+}
+
+.datos-contenedor
+input{
+    width: 100%;
+    padding: 2%;
+    margin-bottom: 2%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    height: 40px;
+}
+
+
+/*ESTILOS PARTIDA*/
+.contenedor-partida{
+    font-family: 'Arial', sans-serif;
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.form-lista label{
+    display: block;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0.1);
 
 }
 
+.form-lista input{
+    display: none;
+}
+
+.form-lista label:hover {
+    background-color: lightgray;
+}
+.form-lista input:checked + label {
+    background-color: lightgray;
+}
