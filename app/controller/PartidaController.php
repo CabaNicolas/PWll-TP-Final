@@ -14,18 +14,20 @@ class PartidaController
 
 
     public function showPregunta() {
-        $data['preguntasYRespuestas'] = $this->model->showPreguntaRandom();
+        $data['preguntasYRespuestas'] = $this->model->showPreguntaRandom($_SESSION['id']);
+        $_SESSION['idPregunta'] = $data['preguntasYRespuestas']['idPregunta'];
         $this->presenter->show('partida', $data);
     }
 
     public function validarRespuesta() {
         $idRespuestaSeleccionada = $_POST['respuesta'];
+        $idPartida = $_SESSION['idPartida'];
+        $idPregunta = $_SESSION['idPregunta'];
+        $idUsuario = $_SESSION['id'];
 
-
-        $esCorrecta = $this->model->validarRespuesta($idRespuestaSeleccionada);
+        $esCorrecta = $this->model->validarRespuesta($idRespuestaSeleccionada, $idPartida, $idPregunta, $idUsuario);
 
         if($esCorrecta) {
-            $_SESSION['puntaje'] += 1;
             $this->showPregunta();
         }else{
             $this->cerrarPartida();
@@ -36,16 +38,10 @@ class PartidaController
     public function crearPartida(){
         $idUsuario = $_SESSION['id'];
         $_SESSION['idPartida'] = $this->model->crearPartida($idUsuario);
-        $_SESSION['puntaje'] = 0;
         Redirecter::redirect('/partida/showPregunta');
     }
 
     private function cerrarPartida(){
-        $idPartida = $_SESSION['idPartida'];
-        $puntaje = $_SESSION['puntaje'];
-        $this->model->cerrarPartida($idPartida, $puntaje);
-        unset($_SESSION['idPartida']);
-        unset($_SESSION['puntaje']);
         Redirecter::redirect('/usuario/showLobby');
     }
 
