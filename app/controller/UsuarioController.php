@@ -150,6 +150,11 @@ class UsuarioController
 
         $data['usuario'] = $this->model->mostrarDatosUsuario($_SESSION['mail']);
 
+        if(isset($_SESSION['cambios'])){
+            $data['cambios'] = $_SESSION['cambios'];
+            unset($_SESSION['cambios']);
+        }
+
         $this->presenter->show('perfil', $data);
 
     }
@@ -161,32 +166,47 @@ class UsuarioController
         if(isset($_SESSION['cambios'])){
             $data['cambios'] = $_SESSION['cambios'];
             unset($_SESSION['cambios']);
+
         }
+
+        if (isset($_SESSION['error_messages'])) {
+            $data['error_messages'] = $_SESSION['error_messages'];
+            unset($_SESSION['error_messages']);
+        }
+
 
         $this->presenter->show('editarPerfil', $data);
     }
 
-    public function actualizar()
+    public function actualizarPerfil()
     {
-        $nombreUsuario = $_POST['nombreUsuario'];
+        $username = $_POST['nombreUsuario'];
         $mail = $_POST['mail'];
-        $nombreCompleto = $_POST ['nombreCompleto'];
-        $fechaNacimiento = $_POST['fechaNacimiento'];
-        $sexo = $_POST['sex'];
-        $foto = $_FILES['foto'];
         $password = $_POST['password'];
-        $resultado=$this->model->actualizarDatosPerfil($nombreUsuario, $mail, $nombreCompleto, $fechaNacimiento, $sexo, $foto, $password);
-        if ($resultado['exito']) {
-            $_SESSION['mail'] = $mail;
-            $_SESSION['cambios'] = $resultado['mensaje'];
-            Redirecter::redirect('/usuario/showPerfil');
+        $password2 = $_POST['password2'];
+        $name = $_POST['nombreCompleto'];
+        $date = $_POST['fechaNacimiento'];
+        $sex = $_POST['sex'];
+        $foto = $_FILES['foto'];
+        $mailActual = $_SESSION['mail'];
+
+        $errores = $this->model->validarEditarPerfil($username, $mail, $password, $password2, $name, $date, $sex, $foto);
+
+
+        if(!empty($errores)){
+            $_SESSION['error_messages'] = $errores;
+           // $_SESSION['cambios'] = $resultado['mensaje'];
+            Redirecter::redirect('/usuario/showEditarPerfil');
         } else {
-            $_SESSION['cambios'] = $resultado['mensaje'];
-            Redirecter::redirect('/usuario/showPerfil');
+            $resultado = $this->model->actualizarDatosPerfil($username, $mail, $name, $date, $sex, $foto, $password,$mailActual);
+            if ($resultado['exito']) {
+                $_SESSION['mail'] = $mail;
+                $_SESSION['cambios'] = $resultado['mensaje'];
+                Redirecter::redirect('/usuario/showPerfil');
+            }
         }
-
-
     }
+
 
     public function validarCuenta() {
         if (isset($_GET['id']) && isset($_GET['token'])) {
@@ -238,6 +258,12 @@ class UsuarioController
         }
 
         return $datosTemporales;
+    }
+
+
+    public function showRankingUsuarios() {
+        $data['ranking'] = $this->model->obtenerRankingUsuarios();
+        $this->presenter->show('rankingUsuarios', $data);
     }
 
 

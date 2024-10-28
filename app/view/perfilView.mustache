@@ -1,6 +1,11 @@
 
 <link rel="stylesheet" href="/public/styles.css">
 
+{{#cambios}}
+     <p> {{cambios}} </p>
+{{/cambios}}
+
+
 <div class="botonesPerfil">
 <a href="/usuario/showLobby"><input class="volver" type="button" value="Volver"></a>
 <form  action="/usuario/logout" method="POST">
@@ -17,6 +22,7 @@
 <div class="datosPerfil">
 <p> Nombre Completo: {{nombreCompleto}} </p>
 <p> Nombre de Usuario: {{nombreUsuario}} </p>
+<img src="/public/images/{{foto}}" />
 <p> Mail: {{mail}} </p>
 <p> Fecha de Nacimiento: {{fechaNacimiento}} </p>
 </div>

@@ -162,9 +162,8 @@ class UsuarioModel
         return $usuario;
     }
 
-    public function actualizarDatosPerfil($nombreUsuario, $mail, $nombreCompleto, $fechaNacimiento, $sexo, $foto, $password) {
+    public function actualizarDatosPerfil($nombreUsuario, $mail, $nombreCompleto, $fechaNacimiento, $sexo, $foto, $password, $mailActual) {
 
-        $mailActual = $_SESSION['mail'];
         $sqlImagenActual = "SELECT foto FROM USUARIO WHERE mail = '" . $mailActual . "'";
         $imagenActual = $this->database->query($sqlImagenActual);
 
@@ -277,6 +276,78 @@ class UsuarioModel
         $sql = "SELECT sum(puntaje) as puntajeTotal FROM partida WHERE idUsuario = '$idUsuario'";
         $resultado = $this->database->query($sql);
         return $resultado[0]['puntajeTotal'] ?? 0;
+    }
+
+    public function validarEditarPerfil($username, $mail, $password, $password2, $name, $date, $sex, $foto)
+    {
+        $errores = [];
+
+        if (empty($mail) || !filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+            $errores['mailInvalido'] = "Debes ingresar un mail válido";
+        }
+
+        if($this->verificarExistenciaDeUsuarioPorMail($mail)){
+            $errores['mailExistente'] = "El mail ya existe";
+        }
+
+        if (empty($username) || strlen($username) < 4) {
+            $errores['usernameInvalido'] = "Debes ingresar un nombre de usuario mayor a 4 caracteres";
+        }
+
+        if ($this->verificarExistenciaDeUsuarioPorUsuario($username)){
+            $errores['usernameExistente'] = "El nombre de usuario ya existe";
+        }
+
+        if (!empty($password) && strlen($password) < 6) {
+            $errores['passwordInvalido'] = "La contraseña debe tener al menos 6 caracteres";
+        }
+
+        if ($password !== $password2) {
+            $errores['password2Invalido'] = "Las contraseñas no coinciden";
+        }
+
+        if (empty($name)) {
+            $errores['nameInvalido'] = "Debes ingresar tu nombre";
+        }
+
+        if (empty($date) || (new DateTime())->diff(new DateTime($date))->y < 12) {
+            $errores['dateInvalido'] = "Debes tener al menos 12 años para registrarte";
+        }
+
+        if (empty($sex)) {
+            $errores['sexInvalido'] = "Debes seleccionar tu sexo";
+        }
+
+        if (isset($foto) && $foto['error'] !== UPLOAD_ERR_OK && $foto['size'] > 0) {
+            $errores['fimagenInvalida'] = "Error al subir la imagen";
+        }
+
+        return $errores;
+    }
+
+
+    public function verificarExistenciaDeUsuarioPorMail($mail)
+    {
+        $sql = "SELECT 1 FROM usuario WHERE mail = '$mail'";
+        $resultado = $this->database->query($sql);
+        return sizeof($resultado) > 0;
+    }
+
+    public function verificarExistenciaDeUsuarioPorUsuario($username)
+    {
+        $sql = "SELECT 1 FROM usuario WHERE nombreUsuario = '$username'";
+        $resultado = $this->database->query($sql);
+        return sizeof($resultado) > 0;
+    }
+
+    public function obtenerRankingUsuarios() {
+        $sql = "SELECT nombreUsuario, SUM(puntaje) as puntajeTotal 
+            FROM usuario 
+            JOIN partida ON usuario.id = partida.idUsuario 
+            GROUP BY usuario.id
+            ORDER BY puntajeTotal DESC";
+        $ranking = $this->database->query($sql);
+        return $ranking;
     }
 
 }
