@@ -3,9 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="/public/styles.css">
-    <title>Registro</title>
+    <title>Preguntones</title>
+    <link rel="icon" href="/public/images/logo2.png">
     <script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
     <script src="/public/js/mapa.js"></script>
 
 </head>
-<body>
+<body class="body-login body-registro body-lobby body-perfil body-partida">
+<header>
+    {{^mail}}
+    <div class="header-externo">
+        <img class="logo-header" src="/public/images/logo2.png" alt="Logo_Preguntones">
+        <h1 class="title-header">Preguntones</h1>
+    </div>
+    {{/mail}}
+
+    {{#mail}}
+        <div class="header-interno">
+        <div class="child1-header-interno">
+            <img class="logo-header" src="/public/images/logo2.png" alt="Logo_Preguntones">
+            <h1 class="title-header">Preguntones</h1>
+        </div>
+        <div class="child2-header-interno">
+            <form action="/usuario/logout" method="POST">
+                <input class="boton-cerrar-sesion" type="submit" value="Cerrar sesión">
+            </form>
+        </div>
+        </div>
+    {{/mail}}
+</header>
