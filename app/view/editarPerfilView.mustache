@@ -64,7 +64,7 @@
         {{/error_messages}}
 
         <label for="foto">Foto de Perfil:</label>
-        <img src="{{foto}}" alt="Foto de Perfil" style="max-width: 100px; max-height: 100px;"/> <!-- Mostrar la foto actual -->
+        <img src="/public/images/{{foto}}" alt="Foto de Perfil" style="max-width: 100px; max-height: 100px;"/> <!-- Mostrar la foto actual -->
         <input type="file" id="foto" name="foto">
         {{#error_messages}}
             {{#imagenInvalida}}

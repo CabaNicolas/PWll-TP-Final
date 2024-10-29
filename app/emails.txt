@@ -7,3 +7,8 @@ Subject: Validación de cuenta
 Message:
 Hola! Hacé click en el siguiente enlace para validar tu cuenta: <a href='http://localhost/usuario/validarCuenta?id=2&token=2360705f61'>Click aquí</a>
 
+To: nadia.belen98@gmail.com
+Subject: Validación de cuenta
+Message:
+Hola! Hacé click en el siguiente enlace para validar tu cuenta: <a href='http://localhost/usuario/validarCuenta?id=2&token=4b12877829'>Click aquí</a>
+

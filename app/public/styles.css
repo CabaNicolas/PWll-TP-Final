@@ -302,6 +302,11 @@ select:focus {
 .h2-perfil h2:hover{
     background-position: 100%;
 }
+.datosPerfil img{
+    width: 90px;
+}
+
+
 
 /*ESTILOS EDITAR PERFIL*/
 .datos-contenedor{
