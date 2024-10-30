@@ -267,5 +267,13 @@ class UsuarioController
         $this->presenter->show('rankingUsuarios', $data);
     }
 
+    public function showPerfilUsuario() {
+
+        $nombreUsuario = isset($_POST['nombreUsuario']) ? $_POST['nombreUsuario'] : null;
+
+
+        $data['perfil'] = $this->model->verPerfilUsuario($nombreUsuario);
+        $this->presenter->show('usuarioPerfil', $data);
+    }
 
 }

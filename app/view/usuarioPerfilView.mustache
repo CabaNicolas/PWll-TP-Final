@@ -1,0 +1,17 @@
+<a href="/usuario/showRankingUsuarios"><input class="volver" type="button" value="Volver"></a>
+<link rel="stylesheet" href="/public/styles.css">
+
+
+<div class="usuario-perfil">
+{{#perfil}}
+
+    <h2>Perfil de: {{nombreUsuario}}</h2>
+    <br>
+    <img src="/public/images/{{foto}}" > </img>
+    <br><br>
+    <p>Mail: {{mail}}</p>
+    <br>
+    <p>Puntaje Total: {{puntajeTotal}}</p>
+
+{{/perfil}}
+</div>

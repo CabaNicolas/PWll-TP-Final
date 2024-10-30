@@ -356,4 +356,16 @@ class UsuarioModel
         return $ranking;
     }
 
+    public function verPerfilUsuario($nombreUsuario) {
+        $sql = "SELECT nombreUsuario, mail, foto, SUM(puntaje) as puntajeTotal 
+            FROM usuario 
+            JOIN partida ON usuario.id = partida.idUsuario 
+            WHERE nombreUsuario = '$nombreUsuario'";
+
+        $perfil = $this->database->query($sql);
+        return $perfil;
+
+
+    }
+
 }
