@@ -76,11 +76,10 @@ class UsuarioController
             $sex = $_POST['sex'];
             $foto = $_FILES['foto'];
 
-            $_SESSION['datosTemporalesDeRegistro'] = $this->guardarDatosTemporales($mail, $password, $password2, $username, $name, $date, $sex);
-
             $errores = $this->model->validarDatosRegistro($username, $mail, $password, $password2, $name, $date, $sex, $foto);
 
             if(!empty($errores)){
+                $_SESSION['datosTemporalesDeRegistro'] = $this->guardarDatosTemporales($mail, $password, $password2, $username, $name, $date, $sex);
                 $_SESSION['error_messages'] = $errores;
                 Redirecter::redirect('/usuario/showRegistro');
             }
