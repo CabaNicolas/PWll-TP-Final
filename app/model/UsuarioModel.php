@@ -339,6 +339,11 @@ class UsuarioModel
         $resultado = $this->database->query($sql);
         return sizeof($resultado) > 0;
     }
+    public function obtenerNombreUsuario($mail) {
+        $sql = "SELECT nombreUsuario FROM usuario WHERE mail = '$mail' LIMIT 1";
+        $resultado = $this->database->query($sql);
+        return $resultado[0]['nombreUsuario'];
+    }
 
     public function obtenerRankingUsuarios() {
         $sql = "SELECT nombreUsuario, SUM(puntaje) as puntajeTotal 

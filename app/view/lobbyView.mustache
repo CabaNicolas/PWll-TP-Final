@@ -1,41 +1,29 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="/public/styles.css">
-    <title>Lobby</title>
-
-</head>
-
-<body class="lobby">
-
-    <nav>
-       <form action="/usuario/logout" method="POST">
-                <input type="submit" value="Cerrar sesión">
-       </form>
-
-            <a href="/usuario/showPerfil"> <input type="button" value= "Perfil"> </a>
-
-        <h1>Preguntones</h1>
-    </nav>
 
 
-     <h2>Bienvenido/a {{mail}}!</h2>
+{{#nombreUsuario}}
+     <h2 class="bienvenida-lobby">Bienvenido/a {{nombreUsuario}}!</h2>
+{{/nombreUsuario}}
 
+    <div class="botones-lobby">
+        <div class="botones-lobby-child1">
+            <p class="boton-puntaje">Puntaje Total: {{puntajeTotal}}</p>
+        </div>
 
-    <div class="botones">
+        <div class="botones-lobby-child2">
+            <form action="/usuario/showPerfil" method="POST" class="boton-perfil">
+                <button class="boton-lobby" type="submit">Perfil</button>
+            </form>
+            <form action="/partida/crearPartida" method="POST" class="boton-nueva-partida">
+                <button class="boton-lobby boton-nueva-partida" type="submit">Nueva partida</button>
+            </form>
+            <form  action="/usuario/showRankingUsuarios" method="post" enctype="multipart/form-data" >
+                <button class="boton-lobby">Ranking y partidas</button> <br>
+            </form>
+        </div>
 
-        <p>Puntaje Total: {{puntajeTotal}}</p>
-        <br>
-        <form action="/partida/crearPartida" method="POST">
-            <button type="submit">Nueva partida</button>
-        </form><br>
-
-        <form  action="/usuario/showRankingUsuarios" method="post" enctype="multipart/form-data">
-        <button>Ranking y partidas</button> <br>
-        </form>
-
-        <button>Crear pregunta</button>
+        <div class="botones-lobby-child3">
+        <button class="boton-lobby">Crear pregunta</button>
+        </div>
     </div>
 </body>
 </html>
