@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-10-2024 a las 22:22:16
+-- Tiempo de generación: 30-10-2024 a las 23:50:02
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -87,7 +87,6 @@ CREATE TABLE `responde` (
   `idPregunta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-
 -- --------------------------------------------------------
 
 --
@@ -144,7 +143,7 @@ INSERT INTO `sexo` (`id`, `nombre`) VALUES
 CREATE TABLE `usuario` (
   `id` int(11) NOT NULL,
   `mail` varchar(40) NOT NULL,
-  `password` varchar(20) NOT NULL,
+  `password` varchar(65) NOT NULL,
   `nombreUsuario` varchar(20) NOT NULL,
   `fechaNacimiento` date NOT NULL,
   `nombreCompleto` varchar(30) NOT NULL,
@@ -153,14 +152,6 @@ CREATE TABLE `usuario` (
   `token_verificacion` varchar(100) DEFAULT NULL,
   `cuenta_verificada` char(1) NOT NULL DEFAULT 'I'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `usuario`
---
-
-INSERT INTO `usuario` (`id`, `mail`, `password`, `nombreUsuario`, `fechaNacimiento`, `nombreCompleto`, `foto`, `idSexo`, `token_verificacion`, `cuenta_verificada`) VALUES
-(1, 'leverattomariag@gmail.com', '123123', 'usuario2', '2000-02-20', 'Nombre Apellido', 'WhatsApp Image 2023-04-15 at 07.54.21.jpeg', 2, NULL, 'A'),
-(2, 'nico@caba.com', '123456', 'BigPaik', '1997-11-27', 'Nicolas Caba', '', 1, NULL, 'A');
 
 --
 -- Índices para tablas volcadas
@@ -241,7 +232,7 @@ ALTER TABLE `sexo`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- Restricciones para tablas volcadas
