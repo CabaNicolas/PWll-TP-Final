@@ -467,3 +467,20 @@ input{
 .form-lista input:checked + label {
     background-color: lightgray;
 }
+
+/*ESTILOS PERFIL USUARIOS*/
+
+.usuario-perfil img{
+    width: 150px;
+}
+
+/*ESTILOS RANKING*/
+.form-ranking button{
+    background: none;
+    border: none;
+    color: white;
+    text-decoration: underline;
+    cursor: pointer;
+    font: inherit;
+    padding: 0;
+}
