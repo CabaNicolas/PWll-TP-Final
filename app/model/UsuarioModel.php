@@ -64,7 +64,6 @@ class UsuarioModel
     {
         $nombreFoto = "";
         if(isset($foto)){
-            //TODO: Agregar mas validaciones de imagenes.
             $nombreFoto = $foto['name'];
             $archivoTemporal = $foto['tmp_name'];
 
@@ -73,9 +72,8 @@ class UsuarioModel
             move_uploaded_file($archivoTemporal, $dirFoto);
         }
 
-        //TODO:Agregar validaciones de campos.
-
         $existe = $this->verificarExistenciaDeUsuario($username, $mail);
+        $password = password_hash($password, PASSWORD_BCRYPT);
 
         if(!$existe) {
             $idSexo = "(SELECT id FROM sexo WHERE nombre LIKE '%" . $sex . "%')";
@@ -99,7 +97,6 @@ class UsuarioModel
     {
         if(empty($mail) && empty($password)){
             return ["exito"=>false, "mensaje"=>"Debes ingresar tu mail y contraseña"];
-            $mail;
         }
 
         if (empty($mail)) {
@@ -132,14 +129,18 @@ class UsuarioModel
     }
 
     public function validarUsuario($mail, $password) {
-        $sql = "SELECT 1 
-                FROM usuario 
-                WHERE mail = '" . $mail. "' 
-                AND password = '" . $password . "'";
+        $sql = "SELECT password 
+            FROM usuario 
+            WHERE mail = '" . $mail . "'";
 
         $usuario = $this->database->query($sql);
 
-        return sizeof($usuario) == 1;
+        if (sizeof($usuario) == 1) {
+            $hashedPassword = $usuario[0]['password'];
+            return password_verify($password, $hashedPassword);
+        } else {
+            return false;
+        }
     }
 
     public function validarUsuarioPorCorreo($mail) {
