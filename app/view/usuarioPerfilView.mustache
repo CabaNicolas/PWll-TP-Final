@@ -1,17 +1,29 @@
 <a href="/usuario/showRankingUsuarios"><input class="volver" type="button" value="Volver"></a>
 <link rel="stylesheet" href="/public/styles.css">
 
+<div class="perfil-usuario">
+    <div class="datos-usuario">
+        {{#perfil}}
 
-<div class="usuario-perfil">
-{{#perfil}}
+            <h2>{{nombreUsuario}}</h2>
+            <br>
+            <img src="/public/images/{{foto}}" > </img>
+            <br><br>
+            <p>Mail: {{mail}}</p>
+            <br>
+            <p>Puntaje maximo alcanzado: {{puntajeMaximo}}</p>
 
-    <h2>Perfil de: {{nombreUsuario}}</h2>
-    <br>
-    <img src="/public/images/{{foto}}" > </img>
-    <br><br>
-    <p>Mail: {{mail}}</p>
-    <br>
-    <p>Puntaje Total: {{puntajeTotal}}</p>
+        {{/perfil}}
+    </div>
 
-{{/perfil}}
+
+    <div class="resumen-partidas">
+        <h3>Partidas jugadas</h3><br>
+
+            <ul>
+            {{#partidas}}
+                <li>Partida {{indice}} - Puntaje {{puntaje}}</li><br>
+            {{/partidas}}
+            </ul>
+    </div>
 </div>

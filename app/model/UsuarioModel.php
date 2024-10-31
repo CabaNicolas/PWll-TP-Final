@@ -396,13 +396,32 @@ class UsuarioModel
 
 
     public function verPerfilUsuario($nombreUsuario) {
-        $sql = "SELECT nombreUsuario, mail, foto, SUM(puntaje) as puntajeTotal 
+        $sql = "SELECT nombreUsuario, mail, foto, MAX(puntaje) as puntajeMaximo
             FROM usuario 
             JOIN partida ON usuario.id = partida.idUsuario 
             WHERE nombreUsuario = '$nombreUsuario'";
 
         $perfil = $this->database->query($sql);
         return $perfil;
+
+
+    }
+
+    public function verPartidasPorUsuario($nombreUsuario) {
+        $sql = "SELECT partida.idPartida, partida.puntaje
+            FROM usuario
+            JOIN partida ON usuario.id = partida.idUsuario 
+            WHERE usuario.nombreUsuario = '$nombreUsuario'";
+
+        $partidas = $this->database->query($sql);
+
+        //Agrego un indice a cada partida
+        $index = 1;
+        foreach ($partidas as &$partida) {
+            $partida['indice'] = $index++;
+        }
+
+        return $partidas;
 
 
     }

@@ -593,3 +593,60 @@ footer {
     display: flex;
     text-align: center;
 }
+
+/*****************/
+/*ESTILOS PERFIL USUARIOS*/
+/*****************/
+
+.perfil-usuario{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 350px;
+}
+.datos-usuario{
+    padding: 10px;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.37);
+    border-radius: 8px;
+    width: 180%;
+    height: 100%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-left: -65%;
+
+}
+.resumen-partidas{
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    background-color: rgba(255, 255, 255, 0.37);
+    border-radius: 8px;
+    width: 180%;
+    height: 100%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+}
+
+.perfil-usuario h2{
+    font-size: 35px;
+    font-weight: bold;
+    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    background-size: 500%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: background-position 0.5s ease;
+    padding: 1%;
+}
+.perfil-usuario h3{
+    text-align: center;
+    font-size: 20px;
+    color: white;
+}
+
+.perfil-usuario h2:hover{
+    background-position: 100%;
+}
+.perfil-usuario img{
+    width: 200px;
+}

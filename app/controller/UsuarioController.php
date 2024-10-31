@@ -279,6 +279,8 @@ class UsuarioController
 
 
         $data['perfil'] = $this->model->verPerfilUsuario($nombreUsuario);
+        $data['partidas'] = $this->model->verPartidasPorUsuario($nombreUsuario);
+
         $this->presenter->show('usuarioPerfil', $data);
     }
 
