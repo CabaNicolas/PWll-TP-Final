@@ -14,8 +14,10 @@ class PartidaController
 
 
     public function showPregunta() {
+
         $data['preguntasYRespuestas'] = $this->model->showPreguntaRandom($_SESSION['id']);
         $_SESSION['idPregunta'] = $data['preguntasYRespuestas']['idPregunta'];
+        $data['mail'] = $_SESSION['mail'];
         $this->presenter->show('partida', $data);
     }
 
