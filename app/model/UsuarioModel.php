@@ -347,14 +347,39 @@ class UsuarioModel
     }
 
     public function obtenerRankingUsuarios() {
-        $sql = "SELECT nombreUsuario, SUM(puntaje) as puntajeTotal 
-            FROM usuario 
-            JOIN partida ON usuario.id = partida.idUsuario 
-            GROUP BY usuario.id
-            ORDER BY puntajeTotal DESC";
+        $sql = "SELECT nombreUsuario, MAX(puntaje) as puntajeMaximo 
+        FROM usuario 
+        JOIN partida ON usuario.id = partida.idUsuario 
+        GROUP BY usuario.id
+        ORDER BY puntajeMaximo DESC, usuario.id ASC
+        LIMIT 50";
+
         $ranking = $this->database->query($sql);
-        return $ranking;
+
+        $posicion = 1;
+
+        $rankingConPosiciones = [];
+        $puntaje = null;
+
+        foreach ($ranking as $usuario) {
+
+            if($puntaje == null){
+                $puntaje = $usuario['puntajeMaximo'];
+            }
+
+            if($puntaje != $usuario['puntajeMaximo']){
+                $usuario['posicion'] = "#" . ++$posicion;
+                $puntaje = $usuario['puntajeMaximo'];
+            }else{
+                $usuario['posicion'] = "#" . $posicion;
+            }
+
+           $rankingConPosiciones[] = $usuario;
+        }
+
+        return $rankingConPosiciones;
     }
+
 
     public function verPerfilUsuario($nombreUsuario) {
         $sql = "SELECT nombreUsuario, mail, foto, SUM(puntaje) as puntajeTotal 
