@@ -56,7 +56,7 @@ class UsuarioController
     public function showLobby()
     {
         if (isset($_SESSION['mail'])) {
-            $data['nombreUsuario'] = $this->model->obtenerNombreUsuario($_SESSION['mail']);
+            $data['nombreUsuario'] = $_SESSION['username'];
 
             $idUsuario = $_SESSION['id'];
             $data['puntajeMaximo'] = $this->model->puntajeMaximoDeUsuario($idUsuario);
@@ -128,6 +128,7 @@ class UsuarioController
         if($resultado['exito'] && $this->model->estadoDeCuenta($id) == 'A'){
             $_SESSION['mail'] = $mail;
             $_SESSION['id'] = $id;
+            $_SESSION['username'] = $this->model->obtenerNombreUsuario($mail);
             Redirecter::redirect('/usuario/showLobby');
         }
         else{
@@ -190,9 +191,9 @@ class UsuarioController
         $sex = $_POST['sex'];
         $foto = $_FILES['foto'];
         $mailActual = $_SESSION['mail'];
+        $usernameActual = $_SESSION['username'];
 
-        $errores = $this->model->validarEditarPerfil($username, $mail, $password, $password2, $name, $date, $sex, $foto);
-
+        $errores = $this->model->validarEditarPerfil($username, $mail, $password, $password2, $name, $date, $sex, $foto, $usernameActual, $mailActual);
 
         if(!empty($errores)){
             $_SESSION['error_messages'] = $errores;
@@ -202,9 +203,10 @@ class UsuarioController
             $resultado = $this->model->actualizarDatosPerfil($username, $mail, $name, $date, $sex, $foto, $password,$mailActual);
             if ($resultado['exito']) {
                 $_SESSION['mail'] = $mail;
+                $_SESSION['username'] = $username;
                 $_SESSION['cambios'] = $resultado['mensaje'];
-                Redirecter::redirect('/usuario/showPerfil');
             }
+            Redirecter::redirect('/usuario/showPerfil');
         }
     }
 

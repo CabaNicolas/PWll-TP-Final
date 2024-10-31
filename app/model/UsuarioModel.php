@@ -279,7 +279,7 @@ class UsuarioModel
         return $resultado[0]['puntajeMaximo'] ?? 0;
     }
 
-    public function validarEditarPerfil($username, $mail, $password, $password2, $name, $date, $sex, $foto)
+    public function validarEditarPerfil($username, $mail, $password, $password2, $name, $date, $sex, $foto, $usernameActual, $mailActual)
     {
         $errores = [];
 
@@ -287,7 +287,7 @@ class UsuarioModel
             $errores['mailInvalido'] = "Debes ingresar un mail válido";
         }
 
-        if($this->verificarExistenciaDeUsuarioPorMail($mail)){
+        if($this->verificarExistenciaDeUsuarioPorMail($mail, $mailActual)){
             $errores['mailExistente'] = "El mail ya existe";
         }
 
@@ -295,7 +295,7 @@ class UsuarioModel
             $errores['usernameInvalido'] = "Debes ingresar un nombre de usuario mayor a 4 caracteres";
         }
 
-        if ($this->verificarExistenciaDeUsuarioPorUsuario($username)){
+        if ($this->verificarExistenciaDeUsuarioPorUsuario($username, $usernameActual)) {
             $errores['usernameExistente'] = "El nombre de usuario ya existe";
         }
 
@@ -327,18 +327,32 @@ class UsuarioModel
     }
 
 
-    public function verificarExistenciaDeUsuarioPorMail($mail)
+    public function verificarExistenciaDeUsuarioPorMail($mail, $mailActual)
     {
         $sql = "SELECT 1 FROM usuario WHERE mail = '$mail'";
         $resultado = $this->database->query($sql);
-        return sizeof($resultado) > 0;
+
+        if(sizeof($resultado) > 0 && $mailActual != $mail){
+            $resultado = true;
+        } else {
+            $resultado = false;
+        }
+
+        return $resultado;
     }
 
-    public function verificarExistenciaDeUsuarioPorUsuario($username)
+    public function verificarExistenciaDeUsuarioPorUsuario($username, $usernameActual)
     {
         $sql = "SELECT 1 FROM usuario WHERE nombreUsuario = '$username'";
         $resultado = $this->database->query($sql);
-        return sizeof($resultado) > 0;
+
+        if(sizeof($resultado) > 0 && $usernameActual != $username){
+            $resultado = true;
+        } else {
+            $resultado = false;
+        }
+
+        return $resultado;
     }
     public function obtenerNombreUsuario($mail) {
         $sql = "SELECT nombreUsuario FROM usuario WHERE mail = '$mail' LIMIT 1";
