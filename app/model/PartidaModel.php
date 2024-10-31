@@ -23,6 +23,7 @@ class PartidaModel
         $resultPregunta = $this->database->query($sqlPregunta);
 
         $pregunta = $resultPregunta[0];
+        $this->registrarPreguntaActual($pregunta['idPregunta'], $idUsuario);
 
         $sqlRespuestas = "SELECT idRespuesta, textoRespuesta FROM Respuesta WHERE idPregunta = " . $pregunta['idPregunta'];
         $resultRespuestas = $this->database->query($sqlRespuestas);
@@ -101,6 +102,50 @@ class PartidaModel
         }
     }
 
+    //public function elUsuarioRespondio($idPregunta, $idUsuario) {
+    //    // Consulta para verificar si el usuario tiene esa pregunta como la actual
+    //    $sql = "SELECT idPregunta
+    //            FROM responde
+    //            WHERE idUsuario = " . $idUsuario . "
+    //            ORDER BY idPregunta DESC LIMIT 1";
+    //    $resultado = $this->database->query($sql);
+    //
+    //
+    //    return $resultado && $resultado[0]['idPregunta'] == $idPregunta;
+    //}
+
+
+
+    public function getPreguntaPorId($idPregunta) {
+        $sqlPregunta = "SELECT p.idPregunta, p.descripcion, c.nombre AS categoria, c.color
+        FROM Pregunta p
+        JOIN categoria c ON p.categoria = c.id
+        WHERE p.idPregunta = " . $idPregunta;
+        $resultPregunta = $this->database->query($sqlPregunta);
+
+        //if (empty($resultPregunta)) {
+        //    return null;
+        //}
+
+        $pregunta = $resultPregunta[0];
+
+        $sqlRespuestas = "SELECT idRespuesta, textoRespuesta FROM Respuesta WHERE idPregunta = " . $pregunta['idPregunta'];
+        $resultRespuestas = $this->database->query($sqlRespuestas);
+
+        $pregunta['respuestas'] = [];
+        foreach ($resultRespuestas as $row) {
+            $pregunta['respuestas'][] = [
+                'idRespuesta' => $row['idRespuesta'],
+                'textoRespuesta' => $row['textoRespuesta']
+            ];
+        }
+
+        return $pregunta;
+    }
+
+    private function registrarPreguntaActual($idPregunta, $idUsuario) {
+
+    }
 
 }
 

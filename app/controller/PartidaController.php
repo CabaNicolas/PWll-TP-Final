@@ -14,10 +14,15 @@ class PartidaController
 
 
     public function showPregunta() {
-        $data['preguntasYRespuestas'] = $this->model->showPreguntaRandom($_SESSION['id']);
-        $_SESSION['idPregunta'] = $data['preguntasYRespuestas']['idPregunta'];
+        if (isset($_SESSION['idPregunta'])) {
+            $data['preguntasYRespuestas'] = $this->model->getPreguntaPorId($_SESSION['idPregunta']);
+        } else {
+            $data['preguntasYRespuestas'] = $this->model->showPreguntaRandom($_SESSION['id'], $_SESSION['idPartida']);
+            $_SESSION['idPregunta'] = $data['preguntasYRespuestas']['idPregunta'];
+        }
         $this->presenter->show('partida', $data);
     }
+
 
     public function validarRespuesta() {
         $idRespuestaSeleccionada = $_POST['respuesta'];
@@ -27,13 +32,19 @@ class PartidaController
 
         $esCorrecta = $this->model->validarRespuesta($idRespuestaSeleccionada, $idPartida, $idPregunta, $idUsuario);
 
+        // Verificar que el usuario está respondiendo la pregunta correcta
+        //if (!$this->model->elUsuarioRespondio($idPregunta, $idUsuario)) {
+        //    // Si no es la pregunta correcta, redirige o muestra un mensaje de error
+        //    Redirecter::redirect('/partida/showPregunta');
+        //    return;
+        //}
         if($esCorrecta) {
             $this->showPregunta();
-        }else{
+        } else {
             $this->cerrarPartida();
         }
-
     }
+
 
     public function crearPartida(){
         $idUsuario = $_SESSION['id'];
