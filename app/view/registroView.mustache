@@ -7,6 +7,7 @@
 <h2 class="titulo-crear-cuenta">Crear Cuenta</h2>
 
 <form id="form-registro" action="/usuario/registrarUsuario" enctype="multipart/form-data" method="post">
+
     <label for="name" class="label-nombre"><span>*</span>Nombre completo:</label>
     <input type="text" name="name" id="name" {{#datosTemporalesDeRegistro}}value="{{name}}"{{/datosTemporalesDeRegistro}}>
     {{#error_messages}}
@@ -35,6 +36,8 @@
     <div id="map" class="mapa"></div>
     <input type="hidden" name="pais" id="pais">
     <input type="hidden" name="ciudad" id="ciudad">
+
+
 
     <label for="mail" class="label-email"><span>*</span>Email:</label>
     <input type="email" name="mail" id="mail" {{#datosTemporalesDeRegistro}}value="{{mail}}"{{/datosTemporalesDeRegistro}}>
@@ -70,7 +73,6 @@
     <p class="error">{{camposVacios}}</p>
 {{/error_messages}}
     <input type="submit" value="Crear cuenta" class="boton-crear">
-
 
 
 </form>

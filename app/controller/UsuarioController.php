@@ -41,6 +41,7 @@ class UsuarioController
 
     public function showRegistro()
     {
+
         $data = array(
             'error_messages' => isset($_SESSION['error_messages']) ? $_SESSION['error_messages'] : null
         );
@@ -50,7 +51,6 @@ class UsuarioController
             $data['datosTemporalesDeRegistro'] = $_SESSION['datosTemporalesDeRegistro'];
             unset($_SESSION['datosTemporalesDeRegistro']);
         }
-
         $this->presenter->show('registro', $data);
     }
     public function showLobby()
@@ -65,6 +65,7 @@ class UsuarioController
         $this->presenter->show('lobby', $data);
     }
     public function registrarUsuario() {
+
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $mail = $_POST['mail'];

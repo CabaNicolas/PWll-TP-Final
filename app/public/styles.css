@@ -24,6 +24,8 @@
     font-weight: bold;
     color: white;
     gap: 2vh;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
 }
 
 .header-interno{
@@ -32,6 +34,8 @@
     width: 100vh;
     margin-left: 60vh;
     gap: 60vh;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
 }
 
 .child1-header-interno{
@@ -83,13 +87,14 @@
 #form-registro{
     display: flex;
     flex-direction: column;
-    width: 50%;
+    margin-left: 30px;
+
 }
 
 .contenedor-crear-cuenta {
     font-family: 'Arial', sans-serif;
     background-color: #ffffff;
-    padding: 40px;
+    padding: 20px;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     width: 450px;
@@ -101,7 +106,7 @@
 
 }
 
-.contenedor-crear-cuenta h2{
+.contenedor-crear-cuenta{
     font-family: 'Arial', sans-serif;
     margin-top: 30px;
     font-size: 30px;
@@ -143,7 +148,7 @@ select:focus {
     border-color: #6a43a3;
     outline: none;
 }
-#form-registro .boton-crear {
+ .boton-crear {
     background-color: #6a43a3;
     color: #ffffff;
     border: none;
@@ -153,8 +158,9 @@ select:focus {
     cursor: pointer;
     width: 80%;
     transition: background-color 0.3s ease;
+     margin-top: 3vh;
 }
-#form-registro .boton-crear:hover {
+.boton-crear:hover {
     background-color: #503b75;
 }
 
@@ -166,9 +172,9 @@ select:focus {
     margin-bottom: 20px;
 }
 
-#form-registro .error {
+.error {
     color: red;
-    font-size: 16px;
+    font-size: 12px;
     /*margin-top: 10px;*/
     margin-bottom: 5px;
     text-align: center;
@@ -504,6 +510,7 @@ input{
     background-color: lightgray;
 }
 
+
 /*****************/
 /*ESTILOS RANKING*/
 /*****************/
@@ -586,15 +593,6 @@ input{
 }
 
 /*****************/
-/*ESTILOS RANKING*/
-/*****************/
-
-footer {
-    display: flex;
-    text-align: center;
-}
-
-/*****************/
 /*ESTILOS PERFIL USUARIOS*/
 /*****************/
 
@@ -649,4 +647,15 @@ footer {
 }
 .perfil-usuario img{
     width: 200px;
+}
+
+/*****************/
+/*ESTILOS FOOTER*/
+/*****************/
+
+.footer {
+    display: flex;
+    text-align: center;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
 }
