@@ -57,7 +57,7 @@ class UsuarioController
     {
         if (isset($_SESSION['mail'])) {
             $data['nombreUsuario'] = $_SESSION['username'];
-
+            $data['mail'] = $_SESSION['mail'];
             $idUsuario = $_SESSION['id'];
             $data['puntajeMaximo'] = $this->model->puntajeMaximoDeUsuario($idUsuario);
 
