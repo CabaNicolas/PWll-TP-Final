@@ -2,15 +2,3 @@
 Copiar el enlase desde "localhost (...) hasta el ultimo digito del token"
 y pegue en el navegador.--->>
 
-
-
-To: nadia@gmail.com
-Subject: Validación de cuenta
-Message:
-Hola! Hacé click en el siguiente enlace para validar tu cuenta: <a href='http://localhost/usuario/validarCuenta?id=3&token=64f9f2a7d3'>Click aquí</a>
-
-To: ailen@gmail.com
-Subject: Validación de cuenta
-Message:
-Hola! Hacé click en el siguiente enlace para validar tu cuenta: <a href='http://localhost/usuario/validarCuenta?id=4&token=2ea52b7b81'>Click aquí</a>
-

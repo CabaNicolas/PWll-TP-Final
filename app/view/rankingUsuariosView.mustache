@@ -1,15 +1,9 @@
-<a href="/usuario/showLobby"><input class="volver" type="button" value="Volver"></a>
-<link rel="stylesheet" href="/public/styles.css">
-
+<main class="contenido-main-ranking">
+    <div class="contenido-ranking">
 {{#ranking}}
 
-    <form action="/usuario/showPerfilUsuario" method="POST" class="form-ranking">
-        <input type="hidden" name="nombreUsuario" value="{{nombreUsuario}}">
-        <button type="submit" >{{nombreUsuario}}</button>
-
-    </form>
-    <p> {{puntajeTotal}} </p>
+<p> {{nombreUsuario}} </p> <p> {{puntajeTotal}} </p>
 
 {{/ranking}}
-
-
+    </div>
+</main>

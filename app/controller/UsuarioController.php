@@ -263,6 +263,10 @@ class UsuarioController
 
 
     public function showRankingUsuarios() {
+        if($_SESSION['mail']){
+            $data['mail'] = $_SESSION['mail'];
+        }
+        $data['mail'] = $_SESSION['mail'];
         $data['ranking'] = $this->model->obtenerRankingUsuarios();
         $this->presenter->show('rankingUsuarios', $data);
     }

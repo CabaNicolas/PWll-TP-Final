@@ -3,14 +3,20 @@
     margin: auto;
     padding: 0;
 }
-
+.html{
+    height: 100%;
+    margin: 0;
+}
 .body-login, .body-registro, .body-lobby, .body-perfil, .body-partida{
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
 }
+/****************/
 /*ESTILOS HEADER*/
+/****************/
+
 .header-externo{
     display: flex;
     flex-direction: row;
@@ -61,8 +67,19 @@
     font-weight: bold;
     color: white;
 }
+/******************/
+/*ESTILOS MAIN*/
+/******************/
+/*para el footer abajo*/
+.contenido-main-login .contenido-main-lobby .contenido-main-ranking{
+    flex: 1;
+}
 
+
+/******************/
 /*ESTILOS REGISTRO*/
+/******************/
+
 #form-registro{
     display: flex;
     flex-direction: column;
@@ -162,8 +179,10 @@ select:focus {
 
 }
 
-
+/***************/
 /*ESTILOS LOGIN*/
+/***************/
+
 .contenedor-login{
     font-family: 'Arial', sans-serif;
     background-color: #ffffff;
@@ -237,6 +256,7 @@ select:focus {
     font-size: 14px;
     margin-bottom: 10px;
     font-weight: bold;
+    margin-top: 3%;
 }
 
 .contenedor-login .error {
@@ -246,8 +266,10 @@ select:focus {
     text-align: center;
 }
 
-
+/***************/
 /*ESTILOS LOBBY*/
+/***************/
+
 .body-lobby{
     display: flex;
     flex-direction: column;
@@ -317,7 +339,10 @@ select:focus {
     margin-right: 5.5%;
 }
 
+/****************/
 /*ESTILOS PERFIL*/
+/****************/
+
 .datosPerfil{
     font-family: 'Arial', sans-serif;
     background-color: #ffffff;
@@ -373,8 +398,10 @@ select:focus {
 }
 
 
-
+/***********************/
 /*ESTILOS EDITAR PERFIL*/
+/***********************/
+
 .datos-contenedor{
     display: flex;
     flex-direction: column;
@@ -429,8 +456,10 @@ input{
     height: 40px;
 }
 
-
+/*****************/
 /*ESTILOS PARTIDA*/
+/*****************/
+
 .contenedor-partida{
     font-family: 'Arial', sans-serif;
     background-color: #ffffff;
@@ -468,19 +497,19 @@ input{
     background-color: lightgray;
 }
 
-/*ESTILOS PERFIL USUARIOS*/
+/*****************/
+/*ESTILOS RANKING*/
+/*****************/
 
-.usuario-perfil img{
-    width: 150px;
+.contenido-ranking{
+    height:70%;
 }
 
+/*****************/
 /*ESTILOS RANKING*/
-.form-ranking button{
-    background: none;
-    border: none;
-    color: white;
-    text-decoration: underline;
-    cursor: pointer;
-    font: inherit;
-    padding: 0;
+/*****************/
+
+footer {
+    display: flex;
+    text-align: center;
 }
