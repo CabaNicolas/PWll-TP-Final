@@ -292,6 +292,13 @@ select:focus {
            }
        }
 
+.contenido-main-lobby{
+    display: flex;
+    flex-direction:column;
+}
+.bienvenida-lobby{
+    margin-bottom: 10vh;
+}
 .boton-lobby{
     padding: 2vh;
     color: white;
