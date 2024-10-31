@@ -1,18 +1,17 @@
 <a href="/usuario/showLobby"><input class="volver" type="button" value="Volver"></a>
 <link rel="stylesheet" href="/public/styles.css">
 
-{{#ranking}}
+<div class="contenido-ranking">
+    <h2 class="ranking-titulo">Ranking de Jugadores</h2>
 
-    <form action="/usuario/showPerfilUsuario" method="POST" class="form-ranking">
-        <input type="hidden" name="nombreUsuario" value="{{nombreUsuario}}">
-        <button type="submit" >{{nombreUsuario}}</button>
-        <p>{{posicion}}</p>
-
-
-
-    </form>
-    <p> {{puntajeMaximo}} </p>
-
-{{/ranking}}
-
-
+    <div class="ranking-contenedor">
+        {{#ranking}}
+            <form action="/usuario/showPerfilUsuario" method="POST" class="ranking-form">
+                <p class="ranking-posicion">{{posicion}}</p>
+                <input type="hidden" name="nombreUsuario" value="{{nombreUsuario}}">
+                <button type="submit" class="ranking-nombre-usuario">{{nombreUsuario}}</button>
+            </form>
+            <p class="ranking-puntaje">{{puntajeMaximo}} puntos</p>
+        {{/ranking}}
+    </div>
+</div>
