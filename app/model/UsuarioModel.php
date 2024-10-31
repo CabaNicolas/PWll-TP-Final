@@ -273,10 +273,10 @@ class UsuarioModel
             return null;
         }
     }
-    public function totalPuntajeDeUsuario($idUsuario){
-        $sql = "SELECT sum(puntaje) as puntajeTotal FROM partida WHERE idUsuario = '$idUsuario'";
+    public function puntajeMaximoDeUsuario($idUsuario){
+        $sql = "SELECT MAX(puntaje) as puntajeMaximo FROM partida WHERE idUsuario = '$idUsuario'";
         $resultado = $this->database->query($sql);
-        return $resultado[0]['puntajeTotal'] ?? 0;
+        return $resultado[0]['puntajeMaximo'] ?? 0;
     }
 
     public function validarEditarPerfil($username, $mail, $password, $password2, $name, $date, $sex, $foto)

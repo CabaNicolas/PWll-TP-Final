@@ -57,9 +57,9 @@ class UsuarioController
     {
         if (isset($_SESSION['mail'])) {
             $data['nombreUsuario'] = $this->model->obtenerNombreUsuario($_SESSION['mail']);
-            $data['mail'] = $_SESSION['mail'];
+
             $idUsuario = $_SESSION['id'];
-            $data['puntajeTotal'] = $this->model->totalPuntajeDeUsuario($idUsuario);
+            $data['puntajeMaximo'] = $this->model->puntajeMaximoDeUsuario($idUsuario);
 
         }
         $this->presenter->show('lobby', $data);
