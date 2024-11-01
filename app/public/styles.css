@@ -322,9 +322,7 @@ select:focus {
 
 }
 
-.botones-lobby-child1 {
-    margin: 0 42%;
- }
+
 .botones-lobby-child3 {
     margin-left: 43.5%
 }
@@ -337,15 +335,23 @@ select:focus {
 
 }
 .boton-puntaje{
-    font-family: 'Arial', sans-serif;
-    padding: 2vh 2vh 2vh 3vh;
+    font-family: 'Rubik', sans-serif;
+    text-align: center;
     background-color: rgba(255, 255, 255, 0.37);
-    border-radius: 8px;
+    border-radius: 50px;
     font-size: 16px;
+    width: 220px;
+    height: 50px;
     cursor: pointer;
-    border: none;
+    border: solid 5px hotpink;
     font-weight: bold;
     color: #f8f0d2;
+}
+.boton-puntaje img {
+    width: 40px;
+    vertical-align: -10px;
+    margin-right: 5px;
+    margin-left: -10px;
 }
 .boton-puntaje:hover {
     color:  #503b75;
@@ -409,7 +415,6 @@ select:focus {
     background-color: rgba(255, 255, 255, 0.37);
     font-weight: bold;
     color: #f8f0d2;
-
     margin-bottom: 5vh;
 }
 .volver:hover {
@@ -421,6 +426,11 @@ select:focus {
     display: flex;
     flex-direction: row;
 }
+
+a {
+    text-decoration: none;
+}
+
 .editarperfilboton:hover{
     color:  #503b75;
     background-color: white

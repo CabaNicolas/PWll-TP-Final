@@ -1,12 +1,14 @@
 <a href="/usuario/showLobby"><input class="volver" type="button" value="Volver"></a>
+
 <link rel="stylesheet" href="/public/styles.css">
 
 <div class="contenido-ranking">
     <h2 class="ranking-titulo">Ranking de Jugadores</h2>
-
     <div class="ranking-contenedor">
+        <img src="/public/images/estrellas.png" style="width: 160px">
         {{#ranking}}
             <form action="/usuario/showPerfilUsuario" method="POST" class="ranking-form">
+
                 <p class="ranking-posicion">{{posicion}}</p>
                 <input type="hidden" name="nombreUsuario" value="{{nombreUsuario}}">
                 <button type="submit" class="ranking-nombre-usuario">{{nombreUsuario}}</button>
