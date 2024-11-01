@@ -307,16 +307,18 @@ select:focus {
 }
 .boton-lobby{
     padding: 2vh;
-    color: white;
-    background-color:black;
+    background-color: rgba(255, 255, 255, 0.37);
     border-radius: 8px;
     font-size: 16px;
     cursor: pointer;
     border: none;
+    font-weight: bold;
+    color: #f8f0d2;
 }
 .boton-lobby:hover{
-    color: white;
-    background-color: #434343;
+    font-weight: bold;
+    color:  #503b75;
+    background-color: white;
 
 }
 
@@ -337,16 +339,17 @@ select:focus {
 .boton-puntaje{
     font-family: 'Arial', sans-serif;
     padding: 2vh 2vh 2vh 3vh;
-    color: white;
-    background-color:black;
+    background-color: rgba(255, 255, 255, 0.37);
     border-radius: 8px;
     font-size: 16px;
     cursor: pointer;
     border: none;
+    font-weight: bold;
+    color: #f8f0d2;
 }
 .boton-puntaje:hover {
-    color: white;
-    background-color: #434343;
+    color:  #503b75;
+    background-color: white;
 }
 .boton-perfil{
     margin-right: 5.5%;
@@ -375,9 +378,7 @@ select:focus {
     margin-top: 10px;
 }
 
-.botonesPerfil .volver, .cerrarSesionBoton, .editarperfilboton{
-    background-color: #6a43a3;
-    color: white;
+.botonesPerfil .cerrarSesionBoton, .editarperfilboton{
     border: none;
     border-radius: 8px;
     padding: 12px;
@@ -385,11 +386,40 @@ select:focus {
     cursor: pointer;
     width: 100%;
     margin-top: 10px;
+    background-color: rgba(255, 255, 255, 0.37);
+    font-weight: bold;
+    color: #f8f0d2;
 }
 
-.botonesPerfil .volver:hover, .cerrarSesionBoton:hover, .editarperfilboton:hover{
+.botonesPerfil .cerrarSesionBoton:hover {
     background-color: #503b75;
     text-decoration: none;
+}
+.volver {
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    text-decoration:none;
+    background-color: rgba(255, 255, 255, 0.37);
+    font-weight: bold;
+    color: #f8f0d2;
+}
+.volver:hover {
+    color:  #503b75;
+    background-color: white;
+}
+
+.volver{
+    display: flex;
+    flex-direction: row;
+}
+.editarperfilboton:hover{
+    color:  #503b75;
+    background-color: white
 }
 
 .h2-perfil h2{
@@ -427,7 +457,7 @@ select:focus {
     text-align: center;
     justify-content: center;
 }
-.datos-contenedor .guardarCambios, .volver{
+.datos-contenedor .guardarCambios{
     background-color: #6a43a3;
     color: white;
     border: none;
@@ -439,7 +469,8 @@ select:focus {
     margin-top: 10px;
 }
 
-.datos-contenedor .guardarCambios:hover, .volver:hover {
+
+.datos-contenedor .guardarCambios:hover {
     background-color: #503b75;
     text-decoration: none;
 }
@@ -448,10 +479,7 @@ select:focus {
     width: fit-content;
 }
 
-.volver{
-    display: flex;
-    flex-direction: row;
-}
+
 
 .datos-contenedor label, img {
     padding: 2%;
