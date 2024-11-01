@@ -362,7 +362,7 @@ select:focus {
 .datosPerfil{
     font-family: 'Arial', sans-serif;
     background-color: #ffffff;
-    padding: 40px;
+    padding: 40px 30px;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     width: 400px;
@@ -370,6 +370,8 @@ select:focus {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    color:#6a43a3;
+    font-weight: bold;
 }
 .botonesPerfil{
     display: flex;
