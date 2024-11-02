@@ -165,7 +165,8 @@ class UsuarioController
     public function showEditarPerfil()
     {
         $data['usuario'] = $this->model->mostrarDatosUsuario($_SESSION['mail']);
-
+        $data['mail'] = $_SESSION['mail'];
+        
         if(isset($_SESSION['cambios'])){
             $data['cambios'] = $_SESSION['cambios'];
             unset($_SESSION['cambios']);
