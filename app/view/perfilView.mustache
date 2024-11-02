@@ -1,9 +1,7 @@
 
 <link rel="stylesheet" href="/public/styles.css">
 
-{{#cambios}}
-     <p> {{cambios}} </p>
-{{/cambios}}
+
 
 
 <div class="botonesPerfil">
@@ -17,6 +15,9 @@
 </div>
 
 <div class="datosPerfil">
+    {{#cambios}}
+        <p class="txt-cambio-perfil"> {{cambios}} </p>
+    {{/cambios}}
     <img src="/public/images/{{foto}}" /><br>
     <p> Nombre Completo: {{nombreCompleto}} </p>
     <p> Nombre de Usuario: {{nombreUsuario}} </p>
