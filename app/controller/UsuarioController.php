@@ -278,7 +278,7 @@ class UsuarioController
     public function showPerfilUsuario() {
 
         $nombreUsuario = isset($_POST['nombreUsuario']) ? $_POST['nombreUsuario'] : null;
-
+        $data['mail'] = $_SESSION['mail'];
 
         $data['perfil'] = $this->model->verPerfilUsuario($nombreUsuario);
         $data['partidas'] = $this->model->verPartidasPorUsuario($nombreUsuario);
