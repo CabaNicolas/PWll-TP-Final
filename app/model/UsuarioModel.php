@@ -185,6 +185,7 @@ class UsuarioModel
         }
 
         if (!empty($password)) {
+            $password = password_hash($password, PASSWORD_BCRYPT);
             $sql .= ", password = '" . $password . "'";
         }
 
