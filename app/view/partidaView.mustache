@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Nueva Partida</title>
-    <link rel="stylesheet" href="/public/styles.css">
-</head>
 
-<body>
 {{#preguntasYRespuestas}}
 <div class="contenedor-partida"  style="background-color: {{color}};">
     <form method="post" action="/partida/validarRespuesta" class="partida-form" >
@@ -15,7 +7,7 @@
             <br>
             <ol style="list-style-type: upper-alpha; ">
                 {{#respuestas}}
-                    <li class="form-lista">
+                    <li class="form-lista ">
                         <input type="radio" name="respuesta" value="{{idRespuesta}}" id="respuesta_{{idRespuesta}}">
                         <label for="respuesta_{{idRespuesta}}" >{{textoRespuesta}}</label>
 
@@ -31,5 +23,3 @@
     </form>
 
 </div>
-</body>
-</html>
