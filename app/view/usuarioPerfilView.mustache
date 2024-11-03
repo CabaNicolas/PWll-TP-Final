@@ -1,29 +1,45 @@
+<main class="contenido-main-usuarioPerfil">
 <a href="/usuario/showRankingUsuarios"><input class="volver" type="button" value="Volver"></a>
 <link rel="stylesheet" href="/public/styles.css">
 
 <div class="perfil-usuario">
-    <div class="datos-usuario">
+    <div class="datos-usuario1">
         {{#perfil}}
 
             <h2 class="nombre-usuarioPerfil-h2">{{nombreUsuario}}</h2>
             <br>
             <img class="img-foto-usuarioPerfil" alt="Imagen perfil" src="/public/images/{{foto}}">
-            <br><br>
-            <p>Mail: {{mail}}</p>
-            <br>
-            <p>Puntaje maximo alcanzado: {{puntajeMaximo}}</p>
+            <p class="puntaje-perfil">Puntaje maximo alcanzado: {{puntajeMaximo}}</p>
 
         {{/perfil}}
     </div>
 
+    <div class="datos-usuario2">
+        <div class="QR-usuarioPerfil">
+            <div class="QR-perfil"><p>QR</p></div>
+        </div>
 
-    <div class="resumen-partidas">
-        <h3 class="h3-titulo-patidasJugadas">Partidas jugadas</h3><br>
+        <div class="mapa-usuarioPerfil">
+            <div class="mapa-perfil"><p>MAPA</p></div>
+        </div>
+    </div>
 
-            <ul>
-            {{#partidas}}
-                <li>Partida {{indice}} - Puntaje {{puntaje}}</li><br>
-            {{/partidas}}
-            </ul>
+    <div class="datos-usuario3">
+        <div class="du-contenedor">
+            {{#perfil}}
+                <p class="texto-dato-perfil"> Nombre Completo: {{nombreCompleto}} </p>
+                <p class="texto-dato-perfil">Mail: {{mail}}</p>
+                <p class="texto-dato-perfil"> Fecha de Nacimiento: {{fechaNacimiento}} </p>
+            {{/perfil}}
+        </div>
+        <div class="resumen-partidas">
+            <h3 class="h3-titulo-patidasJugadas">Partidas jugadas</h3><br>
+                <ul>
+                {{#partidas}}
+                    <li>Partida {{indice}} - Puntaje {{puntaje}}</li><br>
+                {{/partidas}}
+                </ul>
+        </div>
     </div>
 </div>
+</main>

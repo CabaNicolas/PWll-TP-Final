@@ -397,7 +397,7 @@ class UsuarioModel
 
 
     public function verPerfilUsuario($nombreUsuario) {
-        $sql = "SELECT nombreUsuario, mail, foto, MAX(puntaje) as puntajeMaximo
+        $sql = "SELECT nombreUsuario, mail, foto, nombreCompleto, fechaNacimiento, MAX(puntaje) as puntajeMaximo
             FROM usuario 
             JOIN partida ON usuario.id = partida.idUsuario 
             WHERE nombreUsuario = '$nombreUsuario'";
