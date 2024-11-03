@@ -88,7 +88,6 @@
     display: flex;
     flex-direction: column;
     margin-left: 30px;
-
 }
 
 .contenedor-crear-cuenta {
@@ -103,7 +102,6 @@
     flex-direction: column;
     justify-content: center;
     margin-top: 20px;
-
 }
 
 .contenedor-crear-cuenta{
@@ -120,7 +118,7 @@
     margin-bottom: 20px;
 }
 
-#form-registro label {
+#form-registro .etiqueta-label {
     font-size: 14px;
     color: #666666;
     margin-bottom: 8px;
@@ -128,11 +126,11 @@
     display: block;
 }
 
-#form-registro input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="date"],
-select {
+#form-registro .input-text-registro,
+.input-email-registro,
+.input-password-registro,
+.input-date-registro,
+.select-registro {
     width: 200px;
     padding: 12px;
     margin-bottom: 5px;
@@ -143,8 +141,8 @@ select {
     background-color: #f9f9f9;
     box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0.1);
 }
-#form-registro input:focus,
-select:focus {
+#form-registro .input-registro:focus,
+.select-registro:focus {
     border-color: #6a43a3;
     outline: none;
 }
@@ -179,7 +177,7 @@ select:focus {
     margin-bottom: 5px;
     text-align: center;
 }
-#form-registro input[type="file"] {
+#form-registro .input-file-registro {
     margin-top: 10px;
     margin-bottom: 20px;
 
@@ -437,7 +435,7 @@ a {
     background-color: white
 }
 
-.h2-perfil h2{
+.h2-perfil .nombreUsuario-perfil{
     font-size: 40px;
     font-weight: bold;
     background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
