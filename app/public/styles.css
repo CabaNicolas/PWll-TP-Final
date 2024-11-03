@@ -131,7 +131,7 @@
 .input-password-registro,
 .input-date-registro,
 .select-registro {
-    width: 200px;
+    width: 60%;
     padding: 12px;
     margin-bottom: 5px;
     border: 1px solid #cccccc;
@@ -446,7 +446,7 @@ a {
     padding: 1%;
 }
 
-.h2-perfil h2:hover{
+.h2-perfil .nombreUsuario-perfil:hover{
     background-position: 100%;
 }
 
@@ -490,7 +490,6 @@ a {
     padding: 12px;
     font-size: 16px;
     cursor: pointer;
-    width: 100%;
     margin-top: 10px;
 }
 
@@ -499,16 +498,20 @@ a {
     text-decoration: none;
 }
 
-.datos-contenedor .guardarCambios{
+.datos-contenedor{
     width: fit-content;
 }
 
-.datos-contenedor label, img {
+.guardarCambios{
+    width: 80%;
+}
+
+.datos-contenedor .label-editar-perfil, .img-editar-perfil {
     padding: 2%;
 }
 
-.datos-contenedor input{
-    width: 100%;
+.datos-contenedor .input-editar-perfil{
+    width: 60%;
     padding: 2%;
     margin-bottom: 2%;
     border: 1px solid #ccc;
@@ -516,6 +519,23 @@ a {
     box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0.1);
     background-color: #f9f9f9;
     height: 40px;
+}
+
+.select-editar-perfil{
+    width: 60%;
+    padding: 2%;
+    margin-bottom: 2%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    height: 40px;
+}
+
+.input-editar-perfil:focus,
+.select-editar-perfil:focus {
+    border-color: #6a43a3;
+    outline: none;
 }
 
 /*****************/
