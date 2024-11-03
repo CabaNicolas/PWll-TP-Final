@@ -9,16 +9,16 @@
 {{#usuario}}
     <form class="datos-contenedor" action="/usuario/actualizarPerfil" method="post" enctype="multipart/form-data">
 
-        <label for="nombreCompleto">Nombre Completo:</label>
-        <input type="text" id="nombreCompleto" name="nombreCompleto" value="{{nombreCompleto}}" required>
+        <label class="label-editar-perfil" for="nombreCompleto">Nombre Completo:</label>
+        <input class="input-editar-perfil" type="text" id="nombreCompleto" name="nombreCompleto" value="{{nombreCompleto}}" required>
         {{#error_messages}}
             {{#nameInvalido}}
                 <p class="error">{{.}}</p>
             {{/nameInvalido}}
         {{/error_messages}}
 
-        <label for="nombreUsuario">Nombre usuario:</label>
-        <input type="text" id="nombreUsuario" name="nombreUsuario" value="{{nombreUsuario}}" required>
+        <label class="label-editar-perfil" for="nombreUsuario">Nombre usuario:</label>
+        <input class="input-editar-perfil" type="text" id="nombreUsuario" name="nombreUsuario" value="{{nombreUsuario}}" required>
         {{#error_messages}}
             {{#usernameInvalido}}
                 <p class="error">{{.}}</p>
@@ -30,8 +30,8 @@
 
         {{/error_messages}}
 
-        <label for="mail">Mail:</label>
-        <input type="email" id="mail" name="mail" value="{{mail}}" required>
+        <label class="label-editar-perfil" for="mail">Mail:</label>
+        <input class="input-editar-perfil" type="email" id="mail" name="mail" value="{{mail}}" required>
         {{#error_messages}}
             {{#mailInvalido}}
                 <p class="error">{{.}}</p>
@@ -43,16 +43,16 @@
 
         {{/error_messages}}
 
-        <label for="fechaNacimiento">Fecha de Nacimiento:</label>
-        <input type="date" id="fechaNacimiento" name="fechaNacimiento" value="{{fechaNacimiento}}" required>
+        <label class="label-editar-perfil" for="fechaNacimiento">Fecha de Nacimiento:</label>
+        <input class="input-editar-perfil" type="date" id="fechaNacimiento" name="fechaNacimiento" value="{{fechaNacimiento}}" required>
         {{#error_messages}}
             {{#dateInvalido}}
                 <p class="error">{{.}}</p>
             {{/dateInvalido}}
         {{/error_messages}}
 
-        <label for="sex">Sexo:</label>
-                   <select name="sex" id="sex" >
+        <label class="label-editar-perfil" for="sex">Sexo:</label>
+                   <select class="select-editar-perfil" name="sex" id="sex" >
                    <option value="masculino">Masculino</option>
                    <option value="femenino">Femenino</option>
                    <option value="decirlo">Prefiero no decirlo</option>
@@ -63,25 +63,25 @@
             {{/sexInvalido}}
         {{/error_messages}}
 
-        <label for="foto">Foto de Perfil:</label>
-        <img src="/public/images/{{foto}}" alt="Foto de Perfil" style="max-width: 100px; max-height: 100px;"/> <!-- Mostrar la foto actual -->
-        <input type="file" id="foto" name="foto">
+        <label class="label-editar-perfil" for="foto">Foto de Perfil:</label>
+        <img class="img-editar-perfil" src="/public/images/{{foto}}" alt="Foto de Perfil" style="max-width: 100px; max-height: 100px;"/> <!-- Mostrar la foto actual -->
+        <input class="input-editar-perfil" type="file" id="foto" name="foto">
         {{#error_messages}}
             {{#imagenInvalida}}
                 <p class="error">{{.}}</p>
             {{/imagenInvalida}}
         {{/error_messages}}
 
-        <label for="password">Contraseña:</label>
-        <input type="password" id="password" name="password">
+        <label class="label-editar-perfil" for="password">Contraseña:</label>
+        <input class="input-editar-perfil" type="password" id="password" name="password">
         {{#error_messages}}
             {{#passwordInvalido}}
                 <p class="error">{{.}}</p>
             {{/passwordInvalido}}
         {{/error_messages}}
 
-        <label for="password2">Confirmar Contraseña:</label>
-        <input type="password" id="password2" name="password2">
+        <label class="label-editar-perfil" for="password2">Confirmar Contraseña:</label>
+        <input class="input-editar-perfil" type="password" id="password2" name="password2">
         {{#error_messages}}
             {{#password2Invalido}}
                 <p class="error">{{.}}</p>
