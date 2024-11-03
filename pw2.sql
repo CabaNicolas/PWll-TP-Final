@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-10-2024 a las 23:50:02
+-- Tiempo de generación: 03-11-2024 a las 02:11:19
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Versión de PHP: 8.1.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -51,8 +51,32 @@ CREATE TABLE `partida` (
   `idPartida` int(11) NOT NULL,
   `idUsuario` int(11) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
-  `puntaje` int(11) DEFAULT 0
+  `puntaje` int(11) DEFAULT 0,
+  `preguntaActual` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `partida`
+--
+
+INSERT INTO `partida` (`idPartida`, `idUsuario`, `fecha`, `puntaje`, `preguntaActual`) VALUES
+(1, 1, '2024-10-31', 14, 0),
+(2, 1, '2024-10-31', 30, 0),
+(3, 1, '2024-10-31', 16, 0),
+(4, 1, '2024-10-31', 0, 0),
+(5, 1, '2024-10-31', 7, 0),
+(6, 1, '2024-10-31', 0, 0),
+(7, 1, '2024-10-31', 4, 0),
+(8, 1, '2024-10-31', 5, 0),
+(9, 1, '2024-10-31', 8, 0),
+(10, 1, '2024-10-31', 4, 0),
+(11, 1, '2024-10-31', 3, 0),
+(12, 1, '2024-10-31', 0, 0),
+(13, 1, '2024-10-31', 17, 0),
+(14, 1, '2024-10-31', 5, 0),
+(15, 1, '2024-11-02', 0, 0),
+(16, 1, '2024-11-02', 1, 1),
+(17, 1, '2024-11-02', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -73,8 +97,8 @@ CREATE TABLE `pregunta` (
 --
 
 INSERT INTO `pregunta` (`idPregunta`, `descripcion`, `categoria`, `correcto`, `incorrecto`) VALUES
-(1, '¿Cuál es el planeta más grande del sistema solar?', 1, 0, 0),
-(2, '¿Cuál es el río más largo del mundo?', 2, 0, 0);
+(1, '¿Cuál es el planeta más grande del sistema solar?', 1, 135, 12),
+(2, '¿Cuál es el río más largo del mundo?', 2, 13, 1);
 
 -- --------------------------------------------------------
 
@@ -86,6 +110,15 @@ CREATE TABLE `responde` (
   `idUsuario` int(11) NOT NULL,
   `idPregunta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `responde`
+--
+
+INSERT INTO `responde` (`idUsuario`, `idPregunta`) VALUES
+(1, 2),
+(1, 1),
+(1, 1);
 
 -- --------------------------------------------------------
 
@@ -154,6 +187,13 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`id`, `mail`, `password`, `nombreUsuario`, `fechaNacimiento`, `nombreCompleto`, `foto`, `idSexo`, `token_verificacion`, `cuenta_verificada`) VALUES
+(1, 'nicole@gmail.com', '$2y$10$jnbrS4Q2.ujK6a1VfSxrhujJfIzJfCYSiG1y.b6mpbtHfkdh8XMqW', 'Nicki', '2000-01-17', 'Nicole ', 'BCDJ2546.MOV', 1, NULL, 'A');
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -208,7 +248,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `partida`
 --
 ALTER TABLE `partida`
-  MODIFY `idPartida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `idPartida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `pregunta`
@@ -232,7 +272,7 @@ ALTER TABLE `sexo`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
