@@ -14,15 +14,19 @@ class PartidaController
 
 
     public function showPregunta() {
-        if (isset($_SESSION['idPregunta'])) {
-            $data['preguntasYRespuestas'] = $this->model->getPreguntaPorId($_SESSION['idPregunta']);
-        } else {
+        $preguntaActualRespondida = $this->model->verificarQueElUsuarioContestoLaUltimaPreguntaAsignada($_SESSION['idPartida'], $_SESSION['id']);
+        if ($preguntaActualRespondida) {
+            $data['preguntasYRespuestas'] = $this->model->showPreguntaRandom($_SESSION['id'], $_SESSION['idPartida']);
+            $_SESSION['idPregunta'] = $data['preguntasYRespuestas']['idPregunta'];
+        } else if(isset($_SESSION['idPregunta'])) {
+            $data['preguntasYRespuestas'] = $this->model->getPreguntaPorId($_SESSION['idPregunta'], $_SESSION['idPartida']);
+        }else{
             $data['preguntasYRespuestas'] = $this->model->showPreguntaRandom($_SESSION['id'], $_SESSION['idPartida']);
             $_SESSION['idPregunta'] = $data['preguntasYRespuestas']['idPregunta'];
         }
+
         $this->presenter->show('partida', $data);
     }
-
 
     public function validarRespuesta() {
         $idRespuestaSeleccionada = $_POST['respuesta'];
@@ -32,17 +36,12 @@ class PartidaController
 
         $esCorrecta = $this->model->validarRespuesta($idRespuestaSeleccionada, $idPartida, $idPregunta, $idUsuario);
 
-        // Verificar que el usuario está respondiendo la pregunta correcta
-        //if (!$this->model->elUsuarioRespondio($idPregunta, $idUsuario)) {
-        //    // Si no es la pregunta correcta, redirige o muestra un mensaje de error
-        //    Redirecter::redirect('/partida/showPregunta');
-        //    return;
-        //}
         if($esCorrecta) {
-            $this->showPregunta();
-        } else {
+            Redirecter::redirect('/partida/showPregunta');
+        }else{
             $this->cerrarPartida();
         }
+
     }
 
 
