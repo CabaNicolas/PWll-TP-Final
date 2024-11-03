@@ -559,6 +559,23 @@ input{
     background-color: lightgray;
 }
 
+.form-lista input[type="radio"]:checked + label.respuesta-correcta {
+    border: #3cb13c solid 1px;
+    background-color: #a9e6a9;
+    background-image: url('images/correcto.png');
+    background-repeat: no-repeat;
+    background-position: calc(100% - 5px);
+}
+
+.form-lista input[type="radio"]:checked + label.respuesta-incorrecta {
+    border: #f44336 solid 1px;
+    background-color: #f49691;
+    background-image: url('images/incorrecto.png');
+    background-repeat: no-repeat;
+    background-position: calc(100% - 5px);
+}
+
+
 
 /*****************/
 /*ESTILOS RANKING*/

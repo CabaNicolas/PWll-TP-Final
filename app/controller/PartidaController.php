@@ -37,12 +37,8 @@ class PartidaController
 
         $esCorrecta = $this->model->validarRespuesta($idRespuestaSeleccionada, $idPartida, $idPregunta, $idUsuario);
 
-        if($esCorrecta) {
-            Redirecter::redirect('/partida/showPregunta');
-        }else{
-            $this->cerrarPartida();
-        }
-
+        echo json_encode(['correcta' => $esCorrecta, 'idRespuesta' => $idRespuestaSeleccionada]);
+        exit;
     }
 
 
@@ -52,8 +48,15 @@ class PartidaController
         Redirecter::redirect('/partida/showPregunta');
     }
 
-    private function cerrarPartida(){
+    public function cerrarPartida(){
         Redirecter::redirect('/usuario/showLobby');
+    }
+
+    private function mostrarResultado($esCorrecta){
+        $data['preguntasYRespuestas'] = $this->model->getPreguntaPorId($_SESSION['idPregunta'], $_SESSION['idPartida']);
+        $data['mail'] = $_SESSION['mail'];
+
+        $this->presenter->show('partida', $data);
     }
 
 }
