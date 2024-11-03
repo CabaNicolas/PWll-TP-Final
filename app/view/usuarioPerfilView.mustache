@@ -5,9 +5,9 @@
     <div class="datos-usuario">
         {{#perfil}}
 
-            <h2>{{nombreUsuario}}</h2>
+            <h2 class="nombre-usuarioPerfil-h2">{{nombreUsuario}}</h2>
             <br>
-            <img src="/public/images/{{foto}}" > </img>
+            <img class="img-foto-usuarioPerfil" src="/public/images/{{foto}}" > </img>
             <br><br>
             <p>Mail: {{mail}}</p>
             <br>
@@ -18,7 +18,7 @@
 
 
     <div class="resumen-partidas">
-        <h3>Partidas jugadas</h3><br>
+        <h3 class="h3-titulo-patidasJugadas">Partidas jugadas</h3><br>
 
             <ul>
             {{#partidas}}
