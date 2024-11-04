@@ -270,7 +270,9 @@ class UsuarioController
 
         $data['mail'] = $_SESSION['mail'];
 
-        $nombreUsuario = isset($_POST['nombreUsuario']) ? $_POST['nombreUsuario'] : null;
+       //$nombreUsuario = isset($_POST['nombreUsuario']) ? $_POST['nombreUsuario'] : null;
+
+        $nombreUsuario = $_SESSION['username'];
 
         $data['ranking'] = $this->model->obtenerRankingUsuarios();
         $data['partidas'] = $this->model->verPartidasPorUsuario($nombreUsuario);
