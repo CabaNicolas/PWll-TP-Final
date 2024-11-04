@@ -1,7 +1,7 @@
+<main>
 <a href="/usuario/showLobby"><input class="volver" type="button" value="Volver"></a>
 
-<link rel="stylesheet" href="/public/styles.css">
-
+<div class="contenido-ranking-resumenPartidas">
 <div class="contenido-ranking">
     <h2 class="ranking-titulo">Ranking de Jugadores</h2>
     <div class="ranking-contenedor">
@@ -17,3 +17,17 @@
         {{/ranking}}
     </div>
 </div>
+
+    <div class="partidas-ranking">
+    <h3 class="h3-titulo-patidasJugadas-ranking">Partidas jugadas</h3><br>
+    <div class="resumen-partidas">
+
+        <ul>
+            {{#partidas}}
+                <li>Partida {{indice}} - Puntaje {{puntaje}}</li><br>
+            {{/partidas}}
+        </ul>
+    </div>
+    </div>
+    </div>
+</main>

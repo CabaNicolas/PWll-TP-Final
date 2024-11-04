@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-11-2024 a las 02:11:19
+-- Tiempo de generación: 04-11-2024 a las 15:37:18
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.1.25
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,9 +28,9 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `categoria` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(20) NOT NULL,
-  `color` varchar(15) DEFAULT NULL
+                             `id` int(11) NOT NULL,
+                             `nombre` varchar(20) NOT NULL,
+                             `color` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -38,8 +38,8 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`id`, `nombre`, `color`) VALUES
-(1, 'Ciencia', '#1E86ACFF'),
-(2, 'Geografia', '#8FBF8FFF');
+                                                      (1, 'Ciencia', '#1E86ACFF'),
+                                                      (2, 'Geografia', '#8FBF8FFF');
 
 -- --------------------------------------------------------
 
@@ -48,11 +48,11 @@ INSERT INTO `categoria` (`id`, `nombre`, `color`) VALUES
 --
 
 CREATE TABLE `partida` (
-  `idPartida` int(11) NOT NULL,
-  `idUsuario` int(11) DEFAULT NULL,
-  `fecha` date DEFAULT NULL,
-  `puntaje` int(11) DEFAULT 0,
-  `preguntaActual` int(11) NOT NULL
+                           `idPartida` int(11) NOT NULL,
+                           `idUsuario` int(11) DEFAULT NULL,
+                           `fecha` date DEFAULT NULL,
+                           `puntaje` int(11) DEFAULT 0,
+                           `preguntaActual` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -60,23 +60,41 @@ CREATE TABLE `partida` (
 --
 
 INSERT INTO `partida` (`idPartida`, `idUsuario`, `fecha`, `puntaje`, `preguntaActual`) VALUES
-(1, 1, '2024-10-31', 14, 0),
-(2, 1, '2024-10-31', 30, 0),
-(3, 1, '2024-10-31', 16, 0),
-(4, 1, '2024-10-31', 0, 0),
-(5, 1, '2024-10-31', 7, 0),
-(6, 1, '2024-10-31', 0, 0),
-(7, 1, '2024-10-31', 4, 0),
-(8, 1, '2024-10-31', 5, 0),
-(9, 1, '2024-10-31', 8, 0),
-(10, 1, '2024-10-31', 4, 0),
-(11, 1, '2024-10-31', 3, 0),
-(12, 1, '2024-10-31', 0, 0),
-(13, 1, '2024-10-31', 17, 0),
-(14, 1, '2024-10-31', 5, 0),
-(15, 1, '2024-11-02', 0, 0),
-(16, 1, '2024-11-02', 1, 1),
-(17, 1, '2024-11-02', 0, 1);
+                                                                                           (1, 1, '2024-10-31', 14, 0),
+                                                                                           (2, 1, '2024-10-31', 30, 0),
+                                                                                           (3, 1, '2024-10-31', 16, 0),
+                                                                                           (4, 1, '2024-10-31', 0, 0),
+                                                                                           (5, 1, '2024-10-31', 7, 0),
+                                                                                           (6, 1, '2024-10-31', 0, 0),
+                                                                                           (7, 1, '2024-10-31', 4, 0),
+                                                                                           (8, 1, '2024-10-31', 5, 0),
+                                                                                           (9, 1, '2024-10-31', 8, 0),
+                                                                                           (10, 1, '2024-10-31', 4, 0),
+                                                                                           (11, 1, '2024-10-31', 3, 0),
+                                                                                           (12, 1, '2024-10-31', 0, 0),
+                                                                                           (13, 1, '2024-10-31', 17, 0),
+                                                                                           (14, 1, '2024-10-31', 5, 0),
+                                                                                           (15, 1, '2024-11-02', 0, 0),
+                                                                                           (16, 1, '2024-11-02', 1, 1),
+                                                                                           (17, 1, '2024-11-02', 0, 1),
+                                                                                           (18, 2, '2024-11-03', 3, 1),
+                                                                                           (19, 2, '2024-11-03', 4, 2),
+                                                                                           (20, 2, '2024-11-04', 2, 1),
+                                                                                           (21, 2, '2024-11-04', 5, 1),
+                                                                                           (22, 2, '2024-11-04', 1, 2),
+                                                                                           (23, 2, '2024-11-04', 1, 1),
+                                                                                           (24, 2, '2024-11-04', 1, 2),
+                                                                                           (25, 2, '2024-11-04', 0, 2),
+                                                                                           (26, 2, '2024-11-04', 0, 2),
+                                                                                           (27, 2, '2024-11-04', 0, 2),
+                                                                                           (28, 2, '2024-11-04', 0, 2),
+                                                                                           (29, 2, '2024-11-04', 0, 2),
+                                                                                           (30, 3, '2024-11-04', 0, 2),
+                                                                                           (31, 3, '2024-11-04', 0, 2),
+                                                                                           (32, 3, '2024-11-04', 0, 2),
+                                                                                           (33, 3, '2024-11-04', 0, 2),
+                                                                                           (34, 3, '2024-11-04', 2, 1),
+                                                                                           (35, 3, '2024-11-04', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -85,11 +103,11 @@ INSERT INTO `partida` (`idPartida`, `idUsuario`, `fecha`, `puntaje`, `preguntaAc
 --
 
 CREATE TABLE `pregunta` (
-  `idPregunta` int(11) NOT NULL,
-  `descripcion` varchar(255) DEFAULT NULL,
-  `categoria` int(11) NOT NULL,
-  `correcto` int(11) NOT NULL DEFAULT 0,
-  `incorrecto` int(11) NOT NULL DEFAULT 0
+                            `idPregunta` int(11) NOT NULL,
+                            `descripcion` varchar(255) DEFAULT NULL,
+                            `categoria` int(11) NOT NULL,
+                            `correcto` int(11) NOT NULL DEFAULT 0,
+                            `incorrecto` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -97,8 +115,8 @@ CREATE TABLE `pregunta` (
 --
 
 INSERT INTO `pregunta` (`idPregunta`, `descripcion`, `categoria`, `correcto`, `incorrecto`) VALUES
-(1, '¿Cuál es el planeta más grande del sistema solar?', 1, 135, 12),
-(2, '¿Cuál es el río más largo del mundo?', 2, 13, 1);
+                                                                                                (1, '¿Cuál es el planeta más grande del sistema solar?', 1, 145, 15),
+                                                                                                (2, '¿Cuál es el río más largo del mundo?', 2, 22, 11);
 
 -- --------------------------------------------------------
 
@@ -107,8 +125,8 @@ INSERT INTO `pregunta` (`idPregunta`, `descripcion`, `categoria`, `correcto`, `i
 --
 
 CREATE TABLE `responde` (
-  `idUsuario` int(11) NOT NULL,
-  `idPregunta` int(11) NOT NULL
+                            `idUsuario` int(11) NOT NULL,
+                            `idPregunta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -116,9 +134,16 @@ CREATE TABLE `responde` (
 --
 
 INSERT INTO `responde` (`idUsuario`, `idPregunta`) VALUES
-(1, 2),
-(1, 1),
-(1, 1);
+                                                       (1, 2),
+                                                       (1, 1),
+                                                       (1, 1),
+                                                       (2, 2),
+                                                       (2, 2),
+                                                       (2, 2),
+                                                       (2, 2),
+                                                       (2, 2),
+                                                       (3, 1),
+                                                       (3, 1);
 
 -- --------------------------------------------------------
 
@@ -127,10 +152,10 @@ INSERT INTO `responde` (`idUsuario`, `idPregunta`) VALUES
 --
 
 CREATE TABLE `respuesta` (
-  `idRespuesta` int(11) NOT NULL,
-  `idPregunta` int(11) DEFAULT NULL,
-  `textoRespuesta` varchar(255) DEFAULT NULL,
-  `esCorrecta` tinyint(1) DEFAULT NULL
+                             `idRespuesta` int(11) NOT NULL,
+                             `idPregunta` int(11) DEFAULT NULL,
+                             `textoRespuesta` varchar(255) DEFAULT NULL,
+                             `esCorrecta` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -138,14 +163,14 @@ CREATE TABLE `respuesta` (
 --
 
 INSERT INTO `respuesta` (`idRespuesta`, `idPregunta`, `textoRespuesta`, `esCorrecta`) VALUES
-(1, 1, 'Marte', 0),
-(2, 1, 'Tierra', 0),
-(3, 1, 'Júpiter', 1),
-(4, 1, 'Venus', 0),
-(5, 2, 'Amazonas', 0),
-(6, 2, 'Nilo', 1),
-(7, 2, 'Yangtsé', 0),
-(8, 2, 'Misisipi', 0);
+                                                                                          (1, 1, 'Marte', 0),
+                                                                                          (2, 1, 'Tierra', 0),
+                                                                                          (3, 1, 'Júpiter', 1),
+                                                                                          (4, 1, 'Venus', 0),
+                                                                                          (5, 2, 'Amazonas', 0),
+                                                                                          (6, 2, 'Nilo', 1),
+                                                                                          (7, 2, 'Yangtsé', 0),
+                                                                                          (8, 2, 'Misisipi', 0);
 
 -- --------------------------------------------------------
 
@@ -154,8 +179,8 @@ INSERT INTO `respuesta` (`idRespuesta`, `idPregunta`, `textoRespuesta`, `esCorre
 --
 
 CREATE TABLE `sexo` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(20) NOT NULL
+                        `id` int(11) NOT NULL,
+                        `nombre` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -163,9 +188,9 @@ CREATE TABLE `sexo` (
 --
 
 INSERT INTO `sexo` (`id`, `nombre`) VALUES
-(1, 'Masculino'),
-(2, 'Femenino'),
-(3, 'Prefiero no decirlo');
+                                        (1, 'Masculino'),
+                                        (2, 'Femenino'),
+                                        (3, 'Prefiero no decirlo');
 
 -- --------------------------------------------------------
 
@@ -174,16 +199,16 @@ INSERT INTO `sexo` (`id`, `nombre`) VALUES
 --
 
 CREATE TABLE `usuario` (
-  `id` int(11) NOT NULL,
-  `mail` varchar(40) NOT NULL,
-  `password` varchar(65) NOT NULL,
-  `nombreUsuario` varchar(20) NOT NULL,
-  `fechaNacimiento` date NOT NULL,
-  `nombreCompleto` varchar(30) NOT NULL,
-  `foto` varchar(50) NOT NULL,
-  `idSexo` int(11) NOT NULL,
-  `token_verificacion` varchar(100) DEFAULT NULL,
-  `cuenta_verificada` char(1) NOT NULL DEFAULT 'I'
+                           `id` int(11) NOT NULL,
+                           `mail` varchar(40) NOT NULL,
+                           `password` varchar(65) NOT NULL,
+                           `nombreUsuario` varchar(20) NOT NULL,
+                           `fechaNacimiento` date NOT NULL,
+                           `nombreCompleto` varchar(30) NOT NULL,
+                           `foto` varchar(50) NOT NULL,
+                           `idSexo` int(11) NOT NULL,
+                           `token_verificacion` varchar(100) DEFAULT NULL,
+                           `cuenta_verificada` char(1) NOT NULL DEFAULT 'I'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -191,7 +216,8 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `mail`, `password`, `nombreUsuario`, `fechaNacimiento`, `nombreCompleto`, `foto`, `idSexo`, `token_verificacion`, `cuenta_verificada`) VALUES
-(1, 'nicole@gmail.com', '$2y$10$jnbrS4Q2.ujK6a1VfSxrhujJfIzJfCYSiG1y.b6mpbtHfkdh8XMqW', 'Nicki', '2000-01-17', 'Nicole ', 'BCDJ2546.MOV', 1, NULL, 'A');
+                                                                                                                                                                        (1, 'nicole@gmail.com', '$2y$10$jnbrS4Q2.ujK6a1VfSxrhujJfIzJfCYSiG1y.b6mpbtHfkdh8XMqW', 'Nicki', '2000-01-17', 'Nicole ', 'BCDJ2546.MOV', 1, NULL, 'A'),
+                                                                                                                                                                        (2, 'leverattomariag@gmail.com', '$2y$10$MV2k9MWHGmG0FPcFrj/cyu7wqTpXwfXq.tg3vZ6cUHup6lc7qseE.', 'gabi', '2000-02-20', 'Maria Gabriela Leveratto', 'avatar.jpg', 3, NULL, 'A');
 
 --
 -- Índices para tablas volcadas
@@ -201,37 +227,37 @@ INSERT INTO `usuario` (`id`, `mail`, `password`, `nombreUsuario`, `fechaNacimien
 -- Indices de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  ADD PRIMARY KEY (`id`);
+    ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `partida`
 --
 ALTER TABLE `partida`
-  ADD PRIMARY KEY (`idPartida`);
+    ADD PRIMARY KEY (`idPartida`);
 
 --
 -- Indices de la tabla `pregunta`
 --
 ALTER TABLE `pregunta`
-  ADD PRIMARY KEY (`idPregunta`);
+    ADD PRIMARY KEY (`idPregunta`);
 
 --
 -- Indices de la tabla `respuesta`
 --
 ALTER TABLE `respuesta`
-  ADD PRIMARY KEY (`idRespuesta`);
+    ADD PRIMARY KEY (`idRespuesta`);
 
 --
 -- Indices de la tabla `sexo`
 --
 ALTER TABLE `sexo`
-  ADD PRIMARY KEY (`id`);
+    ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id`),
+    ADD PRIMARY KEY (`id`),
   ADD KEY `Sexo_Usuario_FK` (`idSexo`);
 
 --
@@ -242,37 +268,37 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `partida`
 --
 ALTER TABLE `partida`
-  MODIFY `idPartida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+    MODIFY `idPartida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `pregunta`
 --
 ALTER TABLE `pregunta`
-  MODIFY `idPregunta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+    MODIFY `idPregunta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `respuesta`
 --
 ALTER TABLE `respuesta`
-  MODIFY `idRespuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+    MODIFY `idRespuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `sexo`
 --
 ALTER TABLE `sexo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas
@@ -282,7 +308,7 @@ ALTER TABLE `usuario`
 -- Filtros para la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD CONSTRAINT `Sexo_Usuario_FK` FOREIGN KEY (`idSexo`) REFERENCES `sexo` (`id`);
+    ADD CONSTRAINT `Sexo_Usuario_FK` FOREIGN KEY (`idSexo`) REFERENCES `sexo` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

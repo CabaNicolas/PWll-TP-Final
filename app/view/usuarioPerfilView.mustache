@@ -1,6 +1,8 @@
 <main class="contenido-main-usuarioPerfil">
-<a href="/usuario/showRankingUsuarios"><input class="volver" type="button" value="Volver"></a>
-<link rel="stylesheet" href="/public/styles.css">
+    <form action="/usuario/showRankingUsuarios" method="POST">
+        <input type="hidden" name="nombreUsuario" value="{{nombreUsuario}}">
+        <input class="volver" type="submit" value="Volver">
+    </form>
 
 <div class="perfil-usuario">
     <div class="datos-usuario1">

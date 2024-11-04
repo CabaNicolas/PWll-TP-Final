@@ -18,7 +18,8 @@
                 <button class="boton-lobby boton-nueva-partida" type="submit">Nueva partida</button>
             </form>
             <form  action="/usuario/showRankingUsuarios" method="post" enctype="multipart/form-data" >
-                <button class="boton-lobby">Ranking y partidas</button> <br>
+                <input type="hidden" name="nombreUsuario" value="{{nombreUsuario}}">
+                <button class="boton-lobby" type="submit">Ranking y partidas</button> <br>
             </form>
         </div>
 

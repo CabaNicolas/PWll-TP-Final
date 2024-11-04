@@ -267,11 +267,14 @@ class UsuarioController
 
 
     public function showRankingUsuarios() {
-        if($_SESSION['mail']){
-            $data['mail'] = $_SESSION['mail'];
-        }
+
         $data['mail'] = $_SESSION['mail'];
+
+        $nombreUsuario = isset($_POST['nombreUsuario']) ? $_POST['nombreUsuario'] : null;
+
         $data['ranking'] = $this->model->obtenerRankingUsuarios();
+        $data['partidas'] = $this->model->verPartidasPorUsuario($nombreUsuario);
+
         $this->presenter->show('rankingUsuarios', $data);
     }
 
