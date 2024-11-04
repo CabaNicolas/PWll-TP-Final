@@ -52,11 +52,5 @@ class PartidaController
         Redirecter::redirect('/usuario/showLobby');
     }
 
-    private function mostrarResultado($esCorrecta){
-        $data['preguntasYRespuestas'] = $this->model->getPreguntaPorId($_SESSION['idPregunta'], $_SESSION['idPartida']);
-        $data['mail'] = $_SESSION['mail'];
-
-        $this->presenter->show('partida', $data);
-    }
 
 }
