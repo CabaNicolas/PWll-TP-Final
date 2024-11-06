@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
             clearInterval(cuentaRegresiva);
             tiempoSpan.innerText = "¡Perdiste por tiempo!";
             setTimeout(() => {
-                window.location.href = "/partida/cerrarPartida";
+                window.location.href = "/partida/preguntaInvalidada";
             }, 500);
 
         }
