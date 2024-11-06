@@ -12,6 +12,7 @@ include_once('controller/PartidaController.php');
 
 include_once('model/UsuarioModel.php');
 include_once('model/PartidaModel.php');
+include_once('model/PreguntaModel.php');
 
 include_once('vendor/mustache/src/Mustache/Autoloader.php');
 
@@ -26,11 +27,9 @@ class Configuration
     public function getUsuarioController(){
         return new UsuarioController($this->getUsuarioModel(), $this->getPresenter(), $this->getFileEmailSender());
     }
-    public function getFileEmailSender(){
-        return new FileEmailSender();
-    }
+
     public function getPartidaController(){
-        return new PartidaController($this->getPartidaModel(), $this->getPresenter());
+        return new PartidaController($this->getPartidaModel(), $this->getPreguntaModel(), $this->getPresenter());
     }
 
     private function getUsuarioModel()
@@ -40,6 +39,14 @@ class Configuration
     private function getPartidaModel()
     {
         return new PartidaModel($this->getDatabase());
+    }
+
+    private function getPreguntaModel(){
+        return new PreguntaModel($this->getDatabase());
+    }
+
+    public function getFileEmailSender(){
+        return new FileEmailSender();
     }
 
     private function getMiddleware()
