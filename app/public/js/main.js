@@ -26,3 +26,23 @@ document.querySelectorAll('.form-lista input[type="radio"]').forEach(radio => {
     });
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+    let tiempoRestante = parseInt(document.getElementById('tiempo-restante').innerText);
+    let tiempoSpan = document.getElementById('tiempo');
+
+    const cuentaRegresiva = setInterval(() => {
+        tiempoRestante--;
+        document.getElementById('tiempo-restante').innerText = tiempoRestante;
+
+        if (tiempoRestante <= 0) {
+            clearInterval(cuentaRegresiva);
+            tiempoSpan.innerText = "¡Perdiste por tiempo!";
+            setTimeout(() => {
+                window.location.href = "/partida/cerrarPartida";
+            }, 500);
+
+        }
+    }, 1000);
+});
+
+
