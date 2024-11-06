@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-11-2024 a las 15:37:18
+-- Tiempo de generación: 06-11-2024 a las 21:30:21
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -28,9 +28,9 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `categoria` (
-                             `id` int(11) NOT NULL,
-                             `nombre` varchar(20) NOT NULL,
-                             `color` varchar(15) DEFAULT NULL
+  `id` int(11) NOT NULL,
+  `nombre` varchar(20) NOT NULL,
+  `color` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -38,8 +38,11 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`id`, `nombre`, `color`) VALUES
-                                                      (1, 'Ciencia', '#1E86ACFF'),
-                                                      (2, 'Geografia', '#8FBF8FFF');
+(1, 'Ciencia', '#1E86ACFF'),
+(2, 'Geografia', '#8FBF8FFF'),
+(3, 'Historia', '#FF5733'),
+(4, 'Deportes', '#33FF57'),
+(5, 'Arte', '#5733FF');
 
 -- --------------------------------------------------------
 
@@ -48,53 +51,13 @@ INSERT INTO `categoria` (`id`, `nombre`, `color`) VALUES
 --
 
 CREATE TABLE `partida` (
-                           `idPartida` int(11) NOT NULL,
-                           `idUsuario` int(11) DEFAULT NULL,
-                           `fecha` date DEFAULT NULL,
-                           `puntaje` int(11) DEFAULT 0,
-                           `preguntaActual` int(11) NOT NULL
+  `idPartida` int(11) NOT NULL,
+  `idUsuario` int(11) DEFAULT NULL,
+  `fecha` date DEFAULT NULL,
+  `puntaje` int(11) DEFAULT 0,
+  `preguntaActual` int(11) NOT NULL DEFAULT 0,
+  `partidaFinalizada` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `partida`
---
-
-INSERT INTO `partida` (`idPartida`, `idUsuario`, `fecha`, `puntaje`, `preguntaActual`) VALUES
-                                                                                           (1, 1, '2024-10-31', 14, 0),
-                                                                                           (2, 1, '2024-10-31', 30, 0),
-                                                                                           (3, 1, '2024-10-31', 16, 0),
-                                                                                           (4, 1, '2024-10-31', 0, 0),
-                                                                                           (5, 1, '2024-10-31', 7, 0),
-                                                                                           (6, 1, '2024-10-31', 0, 0),
-                                                                                           (7, 1, '2024-10-31', 4, 0),
-                                                                                           (8, 1, '2024-10-31', 5, 0),
-                                                                                           (9, 1, '2024-10-31', 8, 0),
-                                                                                           (10, 1, '2024-10-31', 4, 0),
-                                                                                           (11, 1, '2024-10-31', 3, 0),
-                                                                                           (12, 1, '2024-10-31', 0, 0),
-                                                                                           (13, 1, '2024-10-31', 17, 0),
-                                                                                           (14, 1, '2024-10-31', 5, 0),
-                                                                                           (15, 1, '2024-11-02', 0, 0),
-                                                                                           (16, 1, '2024-11-02', 1, 1),
-                                                                                           (17, 1, '2024-11-02', 0, 1),
-                                                                                           (18, 2, '2024-11-03', 3, 1),
-                                                                                           (19, 2, '2024-11-03', 4, 2),
-                                                                                           (20, 2, '2024-11-04', 2, 1),
-                                                                                           (21, 2, '2024-11-04', 5, 1),
-                                                                                           (22, 2, '2024-11-04', 1, 2),
-                                                                                           (23, 2, '2024-11-04', 1, 1),
-                                                                                           (24, 2, '2024-11-04', 1, 2),
-                                                                                           (25, 2, '2024-11-04', 0, 2),
-                                                                                           (26, 2, '2024-11-04', 0, 2),
-                                                                                           (27, 2, '2024-11-04', 0, 2),
-                                                                                           (28, 2, '2024-11-04', 0, 2),
-                                                                                           (29, 2, '2024-11-04', 0, 2),
-                                                                                           (30, 3, '2024-11-04', 0, 2),
-                                                                                           (31, 3, '2024-11-04', 0, 2),
-                                                                                           (32, 3, '2024-11-04', 0, 2),
-                                                                                           (33, 3, '2024-11-04', 0, 2),
-                                                                                           (34, 3, '2024-11-04', 2, 1),
-                                                                                           (35, 3, '2024-11-04', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -103,11 +66,11 @@ INSERT INTO `partida` (`idPartida`, `idUsuario`, `fecha`, `puntaje`, `preguntaAc
 --
 
 CREATE TABLE `pregunta` (
-                            `idPregunta` int(11) NOT NULL,
-                            `descripcion` varchar(255) DEFAULT NULL,
-                            `categoria` int(11) NOT NULL,
-                            `correcto` int(11) NOT NULL DEFAULT 0,
-                            `incorrecto` int(11) NOT NULL DEFAULT 0
+  `idPregunta` int(11) NOT NULL,
+  `descripcion` varchar(255) DEFAULT NULL,
+  `categoria` int(11) NOT NULL,
+  `correcto` int(11) NOT NULL DEFAULT 0,
+  `incorrecto` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -115,8 +78,18 @@ CREATE TABLE `pregunta` (
 --
 
 INSERT INTO `pregunta` (`idPregunta`, `descripcion`, `categoria`, `correcto`, `incorrecto`) VALUES
-                                                                                                (1, '¿Cuál es el planeta más grande del sistema solar?', 1, 145, 15),
-                                                                                                (2, '¿Cuál es el río más largo del mundo?', 2, 22, 11);
+(1, '¿Cuál es el planeta más grande del sistema solar?', 1, 0, 0),
+(2, '¿Cuál es el río más largo del mundo?', 2, 0, 0),
+(3, '¿Cuál es el planeta más cercano al Sol?', 1, 0, 0),
+(4, '¿Qué gas es necesario para la respiración humana?', 1, 0, 0),
+(5, '¿Cuál es la capital de Japón?', 2, 0, 0),
+(6, '¿En qué continente se encuentra Egipto?', 2, 0, 0),
+(7, '¿Quién fue el primer presidente de los Estados Unidos?', 3, 0, 0),
+(8, '¿En qué año comenzó la Segunda Guerra Mundial?', 3, 0, 0),
+(9, '¿Cuántos jugadores tiene un equipo de fútbol en el campo?', 4, 0, 0),
+(10, '¿En qué deporte se utiliza una pelota de 3 agujeros?', 4, 0, 0),
+(11, '¿Quién pintó la Mona Lisa?', 5, 0, 0),
+(12, '¿A qué movimiento artístico pertenece el cuadro \"La noche estrellada\"?', 5, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -125,25 +98,9 @@ INSERT INTO `pregunta` (`idPregunta`, `descripcion`, `categoria`, `correcto`, `i
 --
 
 CREATE TABLE `responde` (
-                            `idUsuario` int(11) NOT NULL,
-                            `idPregunta` int(11) NOT NULL
+  `idUsuario` int(11) NOT NULL,
+  `idPregunta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `responde`
---
-
-INSERT INTO `responde` (`idUsuario`, `idPregunta`) VALUES
-                                                       (1, 2),
-                                                       (1, 1),
-                                                       (1, 1),
-                                                       (2, 2),
-                                                       (2, 2),
-                                                       (2, 2),
-                                                       (2, 2),
-                                                       (2, 2),
-                                                       (3, 1),
-                                                       (3, 1);
 
 -- --------------------------------------------------------
 
@@ -152,10 +109,10 @@ INSERT INTO `responde` (`idUsuario`, `idPregunta`) VALUES
 --
 
 CREATE TABLE `respuesta` (
-                             `idRespuesta` int(11) NOT NULL,
-                             `idPregunta` int(11) DEFAULT NULL,
-                             `textoRespuesta` varchar(255) DEFAULT NULL,
-                             `esCorrecta` tinyint(1) DEFAULT NULL
+  `idRespuesta` int(11) NOT NULL,
+  `idPregunta` int(11) DEFAULT NULL,
+  `textoRespuesta` varchar(255) DEFAULT NULL,
+  `esCorrecta` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -163,14 +120,54 @@ CREATE TABLE `respuesta` (
 --
 
 INSERT INTO `respuesta` (`idRespuesta`, `idPregunta`, `textoRespuesta`, `esCorrecta`) VALUES
-                                                                                          (1, 1, 'Marte', 0),
-                                                                                          (2, 1, 'Tierra', 0),
-                                                                                          (3, 1, 'Júpiter', 1),
-                                                                                          (4, 1, 'Venus', 0),
-                                                                                          (5, 2, 'Amazonas', 0),
-                                                                                          (6, 2, 'Nilo', 1),
-                                                                                          (7, 2, 'Yangtsé', 0),
-                                                                                          (8, 2, 'Misisipi', 0);
+(1, 1, 'Marte', 0),
+(2, 1, 'Tierra', 0),
+(3, 1, 'Júpiter', 1),
+(4, 1, 'Venus', 0),
+(5, 2, 'Amazonas', 0),
+(6, 2, 'Nilo', 1),
+(7, 2, 'Yangtsé', 0),
+(8, 2, 'Misisipi', 0),
+(9, 3, 'Mercurio', 1),
+(10, 3, 'Venus', 0),
+(11, 3, 'Tierra', 0),
+(12, 3, 'Marte', 0),
+(13, 4, 'Oxígeno', 1),
+(14, 4, 'Hidrógeno', 0),
+(15, 4, 'Dióxido de carbono', 0),
+(16, 4, 'Metano', 0),
+(17, 5, 'Tokio', 1),
+(18, 5, 'Osaka', 0),
+(19, 5, 'Kioto', 0),
+(20, 5, 'Nara', 0),
+(21, 6, 'África', 1),
+(22, 6, 'Asia', 0),
+(23, 6, 'América', 0),
+(24, 6, 'Europa', 0),
+(25, 7, 'George Washington', 1),
+(26, 7, 'Abraham Lincoln', 0),
+(27, 7, 'John Adams', 0),
+(28, 7, 'Thomas Jefferson', 0),
+(29, 8, '1939', 1),
+(30, 8, '1914', 0),
+(31, 8, '1945', 0),
+(32, 8, '1929', 0),
+(33, 9, '11', 1),
+(34, 9, '10', 0),
+(35, 9, '12', 0),
+(36, 9, '9', 0),
+(37, 10, 'Boliche', 1),
+(38, 10, 'Golf', 0),
+(39, 10, 'Baloncesto', 0),
+(40, 10, 'Hockey', 0),
+(41, 11, 'Leonardo da Vinci', 1),
+(42, 11, 'Pablo Picasso', 0),
+(43, 11, 'Vincent van Gogh', 0),
+(44, 11, 'Claude Monet', 0),
+(45, 12, 'Postimpresionismo', 1),
+(46, 12, 'Renacimiento', 0),
+(47, 12, 'Barroco', 0),
+(48, 12, 'Cubismo', 0);
 
 -- --------------------------------------------------------
 
@@ -179,8 +176,8 @@ INSERT INTO `respuesta` (`idRespuesta`, `idPregunta`, `textoRespuesta`, `esCorre
 --
 
 CREATE TABLE `sexo` (
-                        `id` int(11) NOT NULL,
-                        `nombre` varchar(20) NOT NULL
+  `id` int(11) NOT NULL,
+  `nombre` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -188,9 +185,9 @@ CREATE TABLE `sexo` (
 --
 
 INSERT INTO `sexo` (`id`, `nombre`) VALUES
-                                        (1, 'Masculino'),
-                                        (2, 'Femenino'),
-                                        (3, 'Prefiero no decirlo');
+(1, 'Masculino'),
+(2, 'Femenino'),
+(3, 'Prefiero no decirlo');
 
 -- --------------------------------------------------------
 
@@ -199,16 +196,16 @@ INSERT INTO `sexo` (`id`, `nombre`) VALUES
 --
 
 CREATE TABLE `usuario` (
-                           `id` int(11) NOT NULL,
-                           `mail` varchar(40) NOT NULL,
-                           `password` varchar(65) NOT NULL,
-                           `nombreUsuario` varchar(20) NOT NULL,
-                           `fechaNacimiento` date NOT NULL,
-                           `nombreCompleto` varchar(30) NOT NULL,
-                           `foto` varchar(50) NOT NULL,
-                           `idSexo` int(11) NOT NULL,
-                           `token_verificacion` varchar(100) DEFAULT NULL,
-                           `cuenta_verificada` char(1) NOT NULL DEFAULT 'I'
+  `id` int(11) NOT NULL,
+  `mail` varchar(40) NOT NULL,
+  `password` varchar(65) NOT NULL,
+  `nombreUsuario` varchar(20) NOT NULL,
+  `fechaNacimiento` date NOT NULL,
+  `nombreCompleto` varchar(30) NOT NULL,
+  `foto` varchar(50) NOT NULL,
+  `idSexo` int(11) NOT NULL,
+  `token_verificacion` varchar(100) DEFAULT NULL,
+  `cuenta_verificada` char(1) NOT NULL DEFAULT 'I'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -216,8 +213,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `mail`, `password`, `nombreUsuario`, `fechaNacimiento`, `nombreCompleto`, `foto`, `idSexo`, `token_verificacion`, `cuenta_verificada`) VALUES
-                                                                                                                                                                        (1, 'nicole@gmail.com', '$2y$10$jnbrS4Q2.ujK6a1VfSxrhujJfIzJfCYSiG1y.b6mpbtHfkdh8XMqW', 'Nicki', '2000-01-17', 'Nicole ', 'BCDJ2546.MOV', 1, NULL, 'A'),
-                                                                                                                                                                        (2, 'leverattomariag@gmail.com', '$2y$10$MV2k9MWHGmG0FPcFrj/cyu7wqTpXwfXq.tg3vZ6cUHup6lc7qseE.', 'gabi', '2000-02-20', 'Maria Gabriela Leveratto', 'avatar.jpg', 3, NULL, 'A');
+(8, 'nico@caba.com', '$2y$10$a6xiV/zP6M162QNYLMNhz.zaWbcw/MxnfqMMueYsBcNCBm8C7mJwq', 'BigPaik', '1997-11-27', 'Nicolas Caba', 'Galactus.webp', 1, NULL, 'A');
 
 --
 -- Índices para tablas volcadas
@@ -227,37 +223,37 @@ INSERT INTO `usuario` (`id`, `mail`, `password`, `nombreUsuario`, `fechaNacimien
 -- Indices de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-    ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `partida`
 --
 ALTER TABLE `partida`
-    ADD PRIMARY KEY (`idPartida`);
+  ADD PRIMARY KEY (`idPartida`);
 
 --
 -- Indices de la tabla `pregunta`
 --
 ALTER TABLE `pregunta`
-    ADD PRIMARY KEY (`idPregunta`);
+  ADD PRIMARY KEY (`idPregunta`);
 
 --
 -- Indices de la tabla `respuesta`
 --
 ALTER TABLE `respuesta`
-    ADD PRIMARY KEY (`idRespuesta`);
+  ADD PRIMARY KEY (`idRespuesta`);
 
 --
 -- Indices de la tabla `sexo`
 --
 ALTER TABLE `sexo`
-    ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-    ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`id`),
   ADD KEY `Sexo_Usuario_FK` (`idSexo`);
 
 --
@@ -268,37 +264,37 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `partida`
 --
 ALTER TABLE `partida`
-    MODIFY `idPartida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `idPartida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT de la tabla `pregunta`
 --
 ALTER TABLE `pregunta`
-    MODIFY `idPregunta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idPregunta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `respuesta`
 --
 ALTER TABLE `respuesta`
-    MODIFY `idRespuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idRespuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT de la tabla `sexo`
 --
 ALTER TABLE `sexo`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
@@ -308,7 +304,7 @@ ALTER TABLE `usuario`
 -- Filtros para la tabla `usuario`
 --
 ALTER TABLE `usuario`
-    ADD CONSTRAINT `Sexo_Usuario_FK` FOREIGN KEY (`idSexo`) REFERENCES `sexo` (`id`);
+  ADD CONSTRAINT `Sexo_Usuario_FK` FOREIGN KEY (`idSexo`) REFERENCES `sexo` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
