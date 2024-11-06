@@ -9,38 +9,6 @@ class PartidaModel
         $this->database = $database;
     }
 
-    public function showPreguntaRandom($idUsuario, $idPartida) {
-        $this->verificarQueElUsuarioContestoTodasLasPreguntas($idUsuario);
-
-        $subconsulta = "(SELECT 1 FROM responde r WHERE r.idUsuario = " . $idUsuario . " AND r.idPregunta = p.idPregunta)";
-
-        $sqlPregunta = "SELECT p.idPregunta, p.descripcion, c.nombre AS categoria, c.color
-        FROM Pregunta p
-        JOIN categoria c ON p.categoria = c.id
-        WHERE NOT EXISTS" . $subconsulta . "
-        ORDER BY RAND()
-        LIMIT 1";
-        $resultPregunta = $this->database->query($sqlPregunta);
-
-        $pregunta = $resultPregunta[0];
-
-        $this->registrarPreguntaActual($pregunta['idPregunta'], $idPartida);
-
-        $sqlRespuestas = "SELECT idRespuesta, textoRespuesta FROM Respuesta WHERE idPregunta = " . $pregunta['idPregunta'];
-        $resultRespuestas = $this->database->query($sqlRespuestas);
-
-        //Agrupar las respuestas bajo sus preguntas respectivas
-        $pregunta['respuestas'] = [];
-        foreach ($resultRespuestas as $row) {
-            $pregunta['respuestas'][] = [
-                'idRespuesta' => $row['idRespuesta'],
-                'textoRespuesta' => $row['textoRespuesta']
-            ];
-        }
-
-        return $pregunta;
-    }
-
     public function crearPartida($idUsuario) {
         $sql = "INSERT INTO partida (idUsuario, fecha) VALUES (" . $idUsuario . " , NOW())";
         $this->database->add($sql);
@@ -48,94 +16,24 @@ class PartidaModel
         return $idPartida;
     }
 
+    public function verificarSiElUsuarioTienePartidaAbierta($idUsuario) {
+        $sql = "SELECT idPartida, preguntaActual FROM partida WHERE idUsuario = " . $idUsuario . " AND partidaFinalizada = 0 AND preguntaActual > 0 ORDER BY idPartida DESC LIMIT 1";
+        $result = $this->database->query($sql);
+        return $result;
+    }
+
+    public function registrarPreguntaActual($idPregunta, $idPartida) {
+        $sql = "UPDATE partida SET preguntaActual = " . $idPregunta . " WHERE idPartida = " . $idPartida;
+        $this->database->add($sql);
+    }
+
     public function sumarPuntaje($idPartida) {
         $sql = "UPDATE partida SET puntaje = puntaje + 1 WHERE idPartida = " . $idPartida;
         $this->database->add($sql);
     }
 
-
-    public function validarRespuesta($idRespuestaSeleccionada, $idPartida, $idPregunta, $idUsuario) {
-        $sql = "SELECT esCorrecta 
-            FROM Respuesta 
-            WHERE idRespuesta = " . $idRespuestaSeleccionada;
-
-
-        $respuesta = $this->database->query($sql);
-        $correcta = $respuesta[0]['esCorrecta'] == 1;
-
-        if($correcta) {
-            $this->sumarPuntaje($idPartida);
-        }
-
-        $this->registrarResultadoDePregunta($idPregunta, $correcta);
-        $this->registrarRespuesta($idPregunta, $idUsuario);
-
-        return $correcta;
-    }
-
-    public function registrarResultadoDePregunta($idPregunta, $esCorrecta) {
-        if($esCorrecta) {
-            $sql = "UPDATE pregunta SET correcto = correcto + 1 WHERE idPregunta = " . $idPregunta;
-            $this->database->add($sql);
-        }else{
-            $sql = "UPDATE pregunta SET incorrecto = incorrecto + 1 WHERE idPregunta = " . $idPregunta;
-            $this->database->add($sql);
-        }
-    }
-
-    private function registrarRespuesta($idPregunta, $idUsuario){
-        $sql = "INSERT INTO responde (idPregunta, idUsuario) VALUES (" . $idPregunta . ", " . $idUsuario . ")";
-        $this->database->add($sql);
-    }
-
-    private function verificarQueElUsuarioContestoTodasLasPreguntas($idUsuario){
-        $sql = "SELECT COUNT(*) AS cantidad
-            FROM pregunta
-            WHERE idPregunta NOT IN (SELECT idPregunta
-                FROM responde
-                WHERE idUsuario = " . $idUsuario . ")";
-        $resultado = $this->database->query($sql);
-        $contestoTodo = $resultado[0]['cantidad'] == 0;
-
-        if($contestoTodo){
-            $sql = "DELETE FROM responde WHERE idUsuario = " . $idUsuario;
-            $this->database->add($sql);
-        }
-    }
-
-    public function getPreguntaPorId($idPregunta, $idPartida) {
-        $sqlPregunta = "SELECT p.idPregunta, p.descripcion, c.nombre AS categoria, c.color
-        FROM Pregunta p
-        JOIN categoria c ON p.categoria = c.id
-        WHERE p.idPregunta = " . $idPregunta;
-        $resultPregunta = $this->database->query($sqlPregunta);
-
-        $pregunta = $resultPregunta[0];
-
-        $this->registrarPreguntaActual($pregunta['idPregunta'], $idPartida);
-
-        $sqlRespuestas = "SELECT idRespuesta, textoRespuesta FROM Respuesta WHERE idPregunta = " . $pregunta['idPregunta'];
-        $resultRespuestas = $this->database->query($sqlRespuestas);
-
-        $pregunta['respuestas'] = [];
-        foreach ($resultRespuestas as $row) {
-            $pregunta['respuestas'][] = [
-                'idRespuesta' => $row['idRespuesta'],
-                'textoRespuesta' => $row['textoRespuesta']
-            ];
-        }
-
-        return $pregunta;
-    }
-
-
-    private function registrarPreguntaActual($idPregunta, $idPartida) {
-        $sql = "UPDATE partida SET preguntaActual = " . $idPregunta . " WHERE idPartida = " . $idPartida;
-        $this->database->add($sql);
-    }
-
     public function verificarQueElUsuarioContestoLaUltimaPreguntaAsignada($idPartida, $idUsuario) {
-        $ultimaPreguntaAsignada = $this->obtenerUltimaPreguntaAsignada($idPartida);
+        $ultimaPreguntaAsignada = $this->obtenerUltimaPreguntaAsignada($idUsuario);
         $sql = "SELECT 1
             FROM responde
             WHERE idPregunta = " . $ultimaPreguntaAsignada . " AND idUsuario = " . $idUsuario;
@@ -143,12 +41,17 @@ class PartidaModel
         return sizeof($result) > 0;
     }
 
-    private function obtenerUltimaPreguntaAsignada($idPartida){
+    private function obtenerUltimaPreguntaAsignada($idUsuario){
         $sql = "SELECT preguntaActual
         FROM partida
-        WHERE idPartida = " . $idPartida;
+        WHERE idUsuario = " . $idUsuario . " ORDER BY idPartida DESC LIMIT 1";
         $result = $this->database->query($sql);
         return $result[0]['preguntaActual'];
+    }
+
+    public function cerrarPartida($idPartida) {
+        $sql = "UPDATE partida SET partidaFinalizada = 1 WHERE idPartida = " . $idPartida;
+        $this->database->add($sql);
     }
 }
 
