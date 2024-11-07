@@ -68,7 +68,7 @@ class PartidaController
         Redirecter::redirect('/usuario/showLobby');
     }
 
-    public function preguntaInvalidada(){
+    public function preguntaInvalidadaPorExpiracionDeTiempo(){
         $idPregunta = $_SESSION['idPregunta'];
         $idUsuario = $_SESSION['id'];
         $this->preguntaModel->registrarRespuesta($idPregunta, $idUsuario);
@@ -91,7 +91,7 @@ class PartidaController
     }
 
     private function tiempoMaximo(){
-        return 30;
+        return 10;
     }
 
     private function sumarPuntosSiLaRespuestaEsCorrecta($esCorrecta, $idPartida){
