@@ -55,13 +55,15 @@ class UsuarioController
     }
     public function showLobby()
     {
-        if (isset($_SESSION['mail'])) {
-            $data['nombreUsuario'] = $_SESSION['username'];
-            $data['mail'] = $_SESSION['mail'];
-            $idUsuario = $_SESSION['id'];
-            $data['puntajeMaximo'] = $this->model->puntajeMaximoDeUsuario($idUsuario);
-
+        $data['nombreUsuario'] = $_SESSION['username'];
+        $data['mail'] = $_SESSION['mail'];
+        $idUsuario = $_SESSION['id'];
+        $data['puntajeMaximo'] = $this->model->puntajeMaximoDeUsuario($idUsuario);
+        if(isset($_SESSION['mensajeExito'])){
+            $data['mensajeExito'] = $_SESSION['mensajeExito'];
+            unset($_SESSION['mensajeExito']);
         }
+
         $this->presenter->show('lobby', $data);
     }
     public function registrarUsuario() {
@@ -269,9 +271,6 @@ class UsuarioController
     public function showRankingUsuarios() {
 
         $data['mail'] = $_SESSION['mail'];
-
-       //$nombreUsuario = isset($_POST['nombreUsuario']) ? $_POST['nombreUsuario'] : null;
-
         $nombreUsuario = $_SESSION['username'];
 
         $data['ranking'] = $this->model->obtenerRankingUsuarios();
