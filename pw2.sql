@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-11-2024 a las 21:30:21
+-- Tiempo de generación: 09-11-2024 a las 18:16:10
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -59,6 +59,8 @@ CREATE TABLE `partida` (
   `partidaFinalizada` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
+
 -- --------------------------------------------------------
 
 --
@@ -80,16 +82,28 @@ CREATE TABLE `pregunta` (
 INSERT INTO `pregunta` (`idPregunta`, `descripcion`, `categoria`, `correcto`, `incorrecto`) VALUES
 (1, '¿Cuál es el planeta más grande del sistema solar?', 1, 0, 0),
 (2, '¿Cuál es el río más largo del mundo?', 2, 0, 0),
-(3, '¿Cuál es el planeta más cercano al Sol?', 1, 0, 0),
-(4, '¿Qué gas es necesario para la respiración humana?', 1, 0, 0),
+(3, '¿Cuál es el planeta más cercano al Sol?', 1, 2, 0),
+(4, '¿Qué gas es necesario para la respiración humana?', 1, 0, 1),
 (5, '¿Cuál es la capital de Japón?', 2, 0, 0),
-(6, '¿En qué continente se encuentra Egipto?', 2, 0, 0),
-(7, '¿Quién fue el primer presidente de los Estados Unidos?', 3, 0, 0),
+(6, '¿En qué continente se encuentra Egipto?', 2, 0, 1),
+(7, '¿Quién fue el primer presidente de los Estados Unidos?', 3, 0, 1),
 (8, '¿En qué año comenzó la Segunda Guerra Mundial?', 3, 0, 0),
 (9, '¿Cuántos jugadores tiene un equipo de fútbol en el campo?', 4, 0, 0),
 (10, '¿En qué deporte se utiliza una pelota de 3 agujeros?', 4, 0, 0),
-(11, '¿Quién pintó la Mona Lisa?', 5, 0, 0),
-(12, '¿A qué movimiento artístico pertenece el cuadro \"La noche estrellada\"?', 5, 0, 0);
+(11, '¿Quién pintó la Mona Lisa?', 5, 1, 0),
+(12, '¿A qué movimiento artístico pertenece el cuadro \"La noche estrellada\"?', 5, 2, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pregunta_sugerida`
+--
+
+CREATE TABLE `pregunta_sugerida` (
+  `id` int(11) NOT NULL,
+  `descripcion` varchar(255) NOT NULL,
+  `categoria` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -101,6 +115,7 @@ CREATE TABLE `responde` (
   `idUsuario` int(11) NOT NULL,
   `idPregunta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 -- --------------------------------------------------------
 
@@ -172,6 +187,19 @@ INSERT INTO `respuesta` (`idRespuesta`, `idPregunta`, `textoRespuesta`, `esCorre
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `respuesta_sugerida`
+--
+
+CREATE TABLE `respuesta_sugerida` (
+  `id` int(11) NOT NULL,
+  `idPreguntaSugerida` int(11) NOT NULL,
+  `textoRespuesta` varchar(255) NOT NULL,
+  `esCorrecta` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `sexo`
 --
 
@@ -238,10 +266,22 @@ ALTER TABLE `pregunta`
   ADD PRIMARY KEY (`idPregunta`);
 
 --
+-- Indices de la tabla `pregunta_sugerida`
+--
+ALTER TABLE `pregunta_sugerida`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `respuesta`
 --
 ALTER TABLE `respuesta`
   ADD PRIMARY KEY (`idRespuesta`);
+
+--
+-- Indices de la tabla `respuesta_sugerida`
+--
+ALTER TABLE `respuesta_sugerida`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `sexo`
@@ -276,13 +316,25 @@ ALTER TABLE `partida`
 -- AUTO_INCREMENT de la tabla `pregunta`
 --
 ALTER TABLE `pregunta`
-  MODIFY `idPregunta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idPregunta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT de la tabla `pregunta_sugerida`
+--
+ALTER TABLE `pregunta_sugerida`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT de la tabla `respuesta`
 --
 ALTER TABLE `respuesta`
   MODIFY `idRespuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+
+--
+-- AUTO_INCREMENT de la tabla `respuesta_sugerida`
+--
+ALTER TABLE `respuesta_sugerida`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT de la tabla `sexo`
