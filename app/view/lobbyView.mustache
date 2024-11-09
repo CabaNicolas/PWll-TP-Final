@@ -3,7 +3,9 @@
 {{#nombreUsuario}}
      <h2 class="bienvenida-lobby">Bienvenido/a {{nombreUsuario}}!</h2>
 {{/nombreUsuario}}
-
+{{#mensajeExito}}
+    <p class="exito">{{.}}</p>
+{{/mensajeExito}}
     <div class="botones-lobby">
         <div class="botones-lobby-child1">
 
@@ -23,8 +25,8 @@
             </form>
         </div>
 
-        <div class="botones-lobby-child3">
+        <a href="/pregunta/showCrear" class="botones-lobby-child3">
         <button class="boton-lobby">Crear pregunta</button>
-        </div>
+        </a>
     </div>
 </main>

@@ -9,6 +9,7 @@ include_once('helper/Redirecter.php');
 
 include_once('controller/UsuarioController.php');
 include_once('controller/PartidaController.php');
+include_once('controller/PreguntaController.php');
 
 include_once('model/UsuarioModel.php');
 include_once('model/PartidaModel.php');
@@ -30,6 +31,10 @@ class Configuration
 
     public function getPartidaController(){
         return new PartidaController($this->getPartidaModel(), $this->getPreguntaModel(), $this->getPresenter());
+    }
+
+    public function getPreguntaController(){
+        return new PreguntaController($this->getPreguntaModel(), $this->getPresenter());
     }
 
     private function getUsuarioModel()

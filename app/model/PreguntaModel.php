@@ -51,6 +51,17 @@ class PreguntaModel{
         $this->database->add($sql);
     }
 
+    public function obtenerCategorias(){
+        $sql = "SELECT id, nombre FROM categoria";
+        $result = $this->database->query($sql);
+        return $result;
+    }
+
+    public function crearPregunta($consigna, $categoria, $respuestaCorrecta, $respuestas){
+        $idPreguntaSugerida = $this->insertarRegistroEnTablaPreguntaSugerida($consigna, $categoria);
+        $this->insertarRegistrosEnTablaRespuestaSugerida($respuestas, $idPreguntaSugerida, $respuestaCorrecta);
+    }
+
     private function getPreguntaRandomQueTodaviaNoFueRespondidaPorElUsuario($idUsuario){
         $subconsulta = "(SELECT 1 FROM responde r WHERE r.idUsuario = " . $idUsuario . " AND r.idPregunta = p.idPregunta)";
 
@@ -121,6 +132,20 @@ class PreguntaModel{
     private function resetearElHistorialDePreguntasContestadasPorElUsuario($contestoTodo, $idUsuario){
         if ($contestoTodo) {
             $sql = "DELETE FROM responde WHERE idUsuario = " . $idUsuario;
+            $this->database->add($sql);
+        }
+    }
+
+    private function insertarRegistroEnTablaPreguntaSugerida($consigna, $categoria){
+        $sql = "INSERT INTO pregunta_sugerida (descripcion, categoria) VALUES ('" . $consigna . "', " . $categoria . ")";
+        $this->database->add($sql);
+        return $this->database->lastInsertId();
+    }
+
+    public function insertarRegistrosEnTablaRespuestaSugerida($respuestas, $idPreguntaSugerida, $respuestaCorrecta){
+        foreach ($respuestas as $index => $respuesta) {
+            $correcta = $index == $respuestaCorrecta ? 1 : 0;
+            $sql = "INSERT INTO respuesta_sugerida (idPreguntaSugerida, textoRespuesta, esCorrecta) VALUES (" . $idPreguntaSugerida . ", '" . $respuesta . "', " . $correcta . ")";
             $this->database->add($sql);
         }
     }

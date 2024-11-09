@@ -1,0 +1,40 @@
+<form action="/pregunta/crearPregunta" method="POST" class="form-crear-pregunta">
+    <label for="consigna">Consigna:<span>*</span></label>
+    <input type="text" name="consigna" id="consigna" required>
+
+    <label for="categoria">Categoria:<span>*</span></label>
+    <select name="categoria" id="categoria" required>
+        <option value="" disabled selected>Selecciona una categoria</option>
+        {{#categorias}}
+            <option value="{{id}}">{{nombre}}</option>
+        {{/categorias}}
+    </select>
+
+    <label for="respuesta1">Respuesta 1:<span>*</span></label>
+    <div class="respuesta-container">
+        <input type="text" name="respuesta1" id="respuesta1" required>
+        <input type="radio" name="correcta" value="0" required>
+    </div>
+
+    <label for="respuesta2">Respuesta 2:<span>*</span></label>
+    <div class="respuesta-container">
+        <input type="text" name="respuesta2" id="respuesta2" required>
+        <input type="radio" name="correcta" value="1">
+    </div>
+
+    <label for="respuesta3">Respuesta 3:<span>*</span></label>
+    <div class="respuesta-container">
+        <input type="text" name="respuesta3" id="respuesta3" required>
+        <input type="radio" name="correcta" value="2">
+    </div>
+
+    <label for="respuesta4">Respuesta 4:<span>*</span></label>
+    <div class="respuesta-container">
+        <input type="text" name="respuesta4" id="respuesta4" required>
+        <input type="radio" name="correcta" value="3">
+    </div>
+    {{#contexto}}
+        <p class="error">{{.}}</p>
+    {{/contexto}}
+    <input type="submit" value="Crear pregunta">
+</form>
