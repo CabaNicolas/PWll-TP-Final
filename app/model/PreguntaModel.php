@@ -124,4 +124,10 @@ class PreguntaModel{
             $this->database->add($sql);
         }
     }
+
+    public function reportarPregunta($idPregunta, $idUsuario, $motivo) {
+        $sql = "INSERT INTO reportes_preguntas (idPregunta, idUsuario, motivo) VALUES (" . $idPregunta . ", " . $idUsuario . ", '" . $motivo ."')";
+        $this->database->add($sql);
+    }
+
 }
