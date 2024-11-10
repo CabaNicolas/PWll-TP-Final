@@ -93,7 +93,7 @@ class PreguntaController{
 
         $this->model->reportarPregunta($idPregunta, $idUsuario, $motivo);
 
-        Redirecter::redirect('/partida/preguntaInvalidada');
+        Redirecter::redirect('/partida/preguntaInvalidadaPorExpiracionDeTiempo');
     }
 
 
