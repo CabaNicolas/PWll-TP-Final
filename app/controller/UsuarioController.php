@@ -35,6 +35,10 @@ class UsuarioController
             unset($_SESSION['mensaje_verificacion']);
         }
 
+        if(isset($_SESSION['mail'])){
+            $this->logout();
+        }
+
         // Mostrar la vista de login con los datos
         $this->presenter->show('login', $data);
     }
@@ -128,17 +132,21 @@ class UsuarioController
             Redirecter::redirect('/usuario/showLogin');
         }
 
+        $_SESSION['rol'] = $this->model->obtenerRol($id);
+
+        if($_SESSION['rol'] == 'admin' || $_SESSION['rol'] == 'editor'){
+            $this->setearLaSessionDelUsuario($mail, $id);
+            $this->redirigirUsuario();
+        }
+
         if($resultado['exito'] && $this->model->estadoDeCuenta($id) == 'A'){
-            $_SESSION['mail'] = $mail;
-            $_SESSION['id'] = $id;
-            $_SESSION['username'] = $this->model->obtenerNombreUsuario($mail);
+            $this->setearLaSessionDelUsuario($mail, $id);
             Redirecter::redirect('/usuario/showLobby');
         }
         else{
             $_SESSION['error_message'] = 'Valide su cuenta para poder iniciar sesión';
             Redirecter::redirect('/usuario/showLogin');
         }
-        exit();
     }
 
     public function logout()
@@ -293,5 +301,19 @@ class UsuarioController
     public function showVistaEditor()
     {
         $this->presenter->show('vistaEditor');
+    }
+
+    private function setearLaSessionDelUsuario($mail, $id){
+        $_SESSION['mail'] = $mail;
+        $_SESSION['id'] = $id;
+        $_SESSION['username'] = $this->model->obtenerNombreUsuario($mail);
+    }
+
+    private function redirigirUsuario(){
+        if($_SESSION['rol'] == 'admin'){
+            //Redirigir a la vista de admin
+        }else{
+            Redirecter::redirect("/usuario/showVistaEditor");
+        }
     }
 }

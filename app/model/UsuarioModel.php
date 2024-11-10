@@ -423,8 +423,12 @@ class UsuarioModel
         }
 
         return $partidas;
+    }
 
-
+    public function obtenerRol($id){
+        $sql = "SELECT nombre FROM rol WHERE id = (SELECT rol_fk FROM usuario WHERE id = $id)";
+        $rol = $this->database->query($sql);
+        return $rol[0]['nombre'];
     }
 
 }

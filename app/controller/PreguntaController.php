@@ -56,7 +56,6 @@ class PreguntaController{
             $mensaje = "Debe completar todos los campos con (*)";
             return $mensaje;
         }
-
     }
 
     public function showPreguntasSugeridas(){
@@ -75,7 +74,7 @@ class PreguntaController{
         $idPreguntaSugerida = $_POST['idPreguntaSugerida'];
         $this->model->aprobarPreguntaSugerida($idPreguntaSugerida);
 
-        header("Location: /pregunta/showPreguntasSugeridas");
+        Redirecter::redirect("/pregunta/showPreguntasSugeridas");
     }
 
     public function rechazarPreguntaSugerida()
@@ -83,7 +82,7 @@ class PreguntaController{
         $idPreguntaSugerida = $_POST['idPreguntaSugerida'];
         $this->model->rechazarPreguntaSugerida($idPreguntaSugerida);
 
-        header("Location: /pregunta/showPreguntasSugeridas");
+        Redirecter::redirect("/pregunta/showPreguntasSugeridas");
     }
 
     public function guardarReporte(){

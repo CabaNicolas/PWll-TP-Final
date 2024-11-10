@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-11-2024 a las 21:17:56
+-- Tiempo de generación: 10-11-2024 a las 22:46:55
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.1.25
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -81,17 +81,17 @@ CREATE TABLE `pregunta` (
 INSERT INTO `pregunta` (`idPregunta`, `descripcion`, `categoria`, `correcto`, `incorrecto`) VALUES
 (1, '¿Cuál es el planeta más grande del sistema solar?', 1, 2, 0),
 (2, '¿Cuál es el río más largo del mundo?', 2, 2, 0),
-(3, '¿Cuál es el planeta más cercano al Sol?', 1, 2, 2),
+(3, '¿Cuál es el planeta más cercano al Sol?', 1, 2, 3),
 (4, '¿Qué gas es necesario para la respiración humana?', 1, 1, 1),
-(5, '¿Cuál es la capital de Japón?', 2, 2, 0),
-(6, '¿En qué continente se encuentra Egipto?', 2, 2, 1),
-(7, '¿Quién fue el primer presidente de los Estados Unidos?', 3, 1, 1),
-(8, '¿En qué año comenzó la Segunda Guerra Mundial?', 3, 0, 0),
+(5, '¿Cuál es la capital de Japón?', 2, 2, 1),
+(6, '¿En qué continente se encuentra Egipto?', 2, 3, 1),
+(7, '¿Quién fue el primer presidente de los Estados Unidos?', 3, 2, 1),
+(8, '¿En qué año comenzó la Segunda Guerra Mundial?', 3, 1, 0),
 (9, '¿Cuántos jugadores tiene un equipo de fútbol en el campo?', 4, 1, 0),
 (10, '¿En qué deporte se utiliza una pelota de 3 agujeros?', 4, 1, 1),
 (11, '¿Quién pintó la Mona Lisa?', 5, 3, 0),
 (12, '¿A qué movimiento artístico pertenece el cuadro \"La noche estrellada\"?', 5, 2, 2),
-(27, 'En que parte se encuentra el obelisco', 2, 1, 1);
+(27, 'En que parte se encuentra el obelisco', 2, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -106,14 +106,6 @@ CREATE TABLE `pregunta_sugerida` (
   `estado` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `pregunta_sugerida`
---
-
-INSERT INTO `pregunta_sugerida` (`id`, `descripcion`, `categoria`, `estado`) VALUES
-(5, 'En que parte se encuentra el obelisco', 2, 'aprobada'),
-(15, '¿Donde queda el Aconcagua?', 2, 'pendiente'),
-(16, 'que ciudad es conocida como \"la feliz\"', 3, 'rechazada');
 
 -- --------------------------------------------------------
 
@@ -128,7 +120,6 @@ CREATE TABLE `reportes_preguntas` (
   `motivo` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-
 -- --------------------------------------------------------
 
 --
@@ -139,6 +130,13 @@ CREATE TABLE `responde` (
   `idUsuario` int(11) NOT NULL,
   `idPregunta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `respuesta`
+--
 
 CREATE TABLE `respuesta` (
   `idRespuesta` int(11) NOT NULL,
@@ -200,10 +198,6 @@ INSERT INTO `respuesta` (`idRespuesta`, `idPregunta`, `textoRespuesta`, `esCorre
 (46, 12, 'Renacimiento', 0),
 (47, 12, 'Barroco', 0),
 (48, 12, 'Cubismo', 0),
-(49, 26, 'sf', 0),
-(50, 26, 'sf', 0),
-(51, 26, 'dsf', 1),
-(52, 26, 'dsf', 0),
 (53, 27, 'CABA', 1),
 (54, 27, 'Neuquen', 0),
 (55, 27, 'Rio Negro', 0),
@@ -222,6 +216,27 @@ CREATE TABLE `respuesta_sugerida` (
   `esCorrecta` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `rol`
+--
+
+CREATE TABLE `rol` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `rol`
+--
+
+INSERT INTO `rol` (`id`, `nombre`) VALUES
+(1, 'admin'),
+(2, 'editor'),
+(3, 'normal');
+
+-- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `sexo`
@@ -257,16 +272,17 @@ CREATE TABLE `usuario` (
   `foto` varchar(50) NOT NULL,
   `idSexo` int(11) NOT NULL,
   `token_verificacion` varchar(100) DEFAULT NULL,
-  `cuenta_verificada` char(1) NOT NULL DEFAULT 'I'
+  `cuenta_verificada` char(1) NOT NULL DEFAULT 'I',
+  `rol_fk` int(11) NOT NULL DEFAULT 3
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id`, `mail`, `password`, `nombreUsuario`, `fechaNacimiento`, `nombreCompleto`, `foto`, `idSexo`, `token_verificacion`, `cuenta_verificada`) VALUES
-(8, 'nico@caba.com', '$2y$10$a6xiV/zP6M162QNYLMNhz.zaWbcw/MxnfqMMueYsBcNCBm8C7mJwq', 'BigPaik', '1997-11-27', 'Nicolas Caba', 'Galactus.webp', 1, NULL, 'A'),
-(9, 'nadia@gmail.com', '$2y$10$K42yPSwoNqHkuHfkZ591ReMlG9L1.YRdFV.paZ3.4AclCgtnXZ6yC', 'Nadi', '2000-08-09', 'Nadia Spinelli', 'avatar.jpg', 2, NULL, 'A');
+INSERT INTO `usuario` (`id`, `mail`, `password`, `nombreUsuario`, `fechaNacimiento`, `nombreCompleto`, `foto`, `idSexo`, `token_verificacion`, `cuenta_verificada`, `rol_fk`) VALUES
+(1, 'nico@caba.com', '$2y$10$a6xiV/zP6M162QNYLMNhz.zaWbcw/MxnfqMMueYsBcNCBm8C7mJwq', 'BigPaik', '1997-11-27', 'Nicolas Caba', 'Galactus.webp', 1, NULL, 'A', 2),
+(2, 'nadia@gmail.com', '$2y$10$K42yPSwoNqHkuHfkZ591ReMlG9L1.YRdFV.paZ3.4AclCgtnXZ6yC', 'Nadi', '2000-08-09', 'Nadia Spinelli', 'avatar.jpg', 2, NULL, 'A', 0);
 
 --
 -- Índices para tablas volcadas
@@ -315,6 +331,12 @@ ALTER TABLE `respuesta_sugerida`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `rol`
+--
+ALTER TABLE `rol`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `sexo`
 --
 ALTER TABLE `sexo`
@@ -347,7 +369,7 @@ ALTER TABLE `partida`
 -- AUTO_INCREMENT de la tabla `pregunta`
 --
 ALTER TABLE `pregunta`
-  MODIFY `idPregunta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `idPregunta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `pregunta_sugerida`
@@ -365,13 +387,19 @@ ALTER TABLE `reportes_preguntas`
 -- AUTO_INCREMENT de la tabla `respuesta`
 --
 ALTER TABLE `respuesta`
-  MODIFY `idRespuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `idRespuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT de la tabla `respuesta_sugerida`
 --
 ALTER TABLE `respuesta_sugerida`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+--
+-- AUTO_INCREMENT de la tabla `rol`
+--
+ALTER TABLE `rol`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `sexo`
