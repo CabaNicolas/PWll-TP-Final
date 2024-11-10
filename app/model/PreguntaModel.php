@@ -145,7 +145,7 @@ class PreguntaModel{
 
     public function insertarRegistrosEnTablaRespuestaSugerida($respuestas, $idPreguntaSugerida, $respuestaCorrecta){
         foreach ($respuestas as $index => $respuesta) {
-            $correcta = $index == $respuestaCorrecta ? 1 : 0;
+            $correcta = $index == $respuestaCorrecta - 1 ? 1 : 0;
             $sql = "INSERT INTO respuesta_sugerida (idPreguntaSugerida, textoRespuesta, esCorrecta) VALUES (" . $idPreguntaSugerida . ", '" . $respuesta . "', " . $correcta . ")";
             $this->database->add($sql);
         }
