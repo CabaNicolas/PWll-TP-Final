@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-11-2024 a las 17:13:31
+-- Tiempo de generación: 10-11-2024 a las 19:28:00
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -69,7 +69,21 @@ INSERT INTO `partida` (`idPartida`, `idUsuario`, `fecha`, `puntaje`, `preguntaAc
 (3, 9, '2024-11-09', 0, 0, 1),
 (4, 9, '2024-11-10', 4, 25, 1),
 (5, 9, '2024-11-10', 1, 7, 0),
-(6, 9, '2024-11-10', 1, 0, 1);
+(6, 9, '2024-11-10', 1, 0, 1),
+(7, 9, '2024-11-10', 0, 8, 0),
+(8, 9, '2024-11-10', 0, 0, 0),
+(9, 9, '2024-11-10', 0, 0, 1),
+(10, 9, '2024-11-10', 1, 12, 1),
+(11, 9, '2024-11-10', 2, 27, 1),
+(12, 9, '2024-11-10', 0, 3, 0),
+(13, 9, '2024-11-10', 0, 0, 0),
+(14, 9, '2024-11-10', 0, 0, 1),
+(15, 9, '2024-11-10', 0, 3, 1),
+(16, 9, '2024-11-10', 0, 12, 1),
+(17, 9, '2024-11-10', 7, 10, 1),
+(18, 9, '2024-11-10', 0, 7, 0),
+(19, 9, '2024-11-10', 0, 0, 0),
+(20, 9, '2024-11-10', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -90,21 +104,19 @@ CREATE TABLE `pregunta` (
 --
 
 INSERT INTO `pregunta` (`idPregunta`, `descripcion`, `categoria`, `correcto`, `incorrecto`) VALUES
-(1, '¿Cuál es el planeta más grande del sistema solar?', 1, 1, 0),
-(2, '¿Cuál es el río más largo del mundo?', 2, 0, 0),
-(3, '¿Cuál es el planeta más cercano al Sol?', 1, 2, 0),
-(4, '¿Qué gas es necesario para la respiración humana?', 1, 0, 1),
-(5, '¿Cuál es la capital de Japón?', 2, 1, 0),
-(6, '¿En qué continente se encuentra Egipto?', 2, 0, 1),
+(1, '¿Cuál es el planeta más grande del sistema solar?', 1, 2, 0),
+(2, '¿Cuál es el río más largo del mundo?', 2, 2, 0),
+(3, '¿Cuál es el planeta más cercano al Sol?', 1, 2, 2),
+(4, '¿Qué gas es necesario para la respiración humana?', 1, 1, 1),
+(5, '¿Cuál es la capital de Japón?', 2, 2, 0),
+(6, '¿En qué continente se encuentra Egipto?', 2, 2, 1),
 (7, '¿Quién fue el primer presidente de los Estados Unidos?', 3, 1, 1),
 (8, '¿En qué año comenzó la Segunda Guerra Mundial?', 3, 0, 0),
-(9, '¿Cuántos jugadores tiene un equipo de fútbol en el campo?', 4, 0, 0),
-(10, '¿En qué deporte se utiliza una pelota de 3 agujeros?', 4, 1, 0),
-(11, '¿Quién pintó la Mona Lisa?', 5, 2, 0),
-(12, '¿A qué movimiento artístico pertenece el cuadro \"La noche estrellada\"?', 5, 2, 0),
-(25, 'Hola como estas', 2, 0, 0),
-(26, 'holissssssss', 1, 1, 0),
-(27, 'En que parte se encuentra el obelisco', 2, 0, 0);
+(9, '¿Cuántos jugadores tiene un equipo de fútbol en el campo?', 4, 1, 0),
+(10, '¿En qué deporte se utiliza una pelota de 3 agujeros?', 4, 1, 1),
+(11, '¿Quién pintó la Mona Lisa?', 5, 3, 0),
+(12, '¿A qué movimiento artístico pertenece el cuadro \"La noche estrellada\"?', 5, 2, 2),
+(27, 'En que parte se encuentra el obelisco', 2, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -144,15 +156,16 @@ CREATE TABLE `responde` (
 --
 
 INSERT INTO `responde` (`idUsuario`, `idPregunta`) VALUES
+(9, 3),
+(9, 12),
+(9, 5),
+(9, 11),
 (9, 9),
 (9, 1),
-(9, 10),
-(9, 11),
-(9, 5),
-(9, 25),
-(9, 26),
-(9, 7),
-(9, 7);
+(9, 27),
+(9, 6),
+(9, 2),
+(9, 10);
 
 -- --------------------------------------------------------
 
@@ -422,7 +435,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `partida`
 --
 ALTER TABLE `partida`
-  MODIFY `idPartida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idPartida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `pregunta`
