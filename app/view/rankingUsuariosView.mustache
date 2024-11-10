@@ -15,6 +15,9 @@
             </form>
             <p class="ranking-puntaje">{{puntajeMaximo}} puntos</p>
         {{/ranking}}
+        {{^ranking}}
+            <p>Aún no hay ranking disponible</p>
+        {{/ranking}}
     </div>
 </div>
 
@@ -25,6 +28,9 @@
         <ul>
             {{#partidas}}
                 <li>Partida {{indice}} - Puntaje {{puntaje}}</li><br>
+            {{/partidas}}
+            {{^partidas}}
+                <p>Aún no hay partidas disponibles</p>
             {{/partidas}}
         </ul>
     </div>

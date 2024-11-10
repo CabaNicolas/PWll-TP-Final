@@ -137,7 +137,8 @@ class PreguntaModel{
     }
 
     private function insertarRegistroEnTablaPreguntaSugerida($consigna, $categoria){
-        $sql = "INSERT INTO pregunta_sugerida (descripcion, categoria) VALUES ('" . $consigna . "', " . $categoria . ")";
+        $sql = "INSERT INTO pregunta_sugerida (descripcion, categoria, estado) 
+            VALUES ('" . $consigna . "', " . $categoria . ", 'pendiente')";
         $this->database->add($sql);
         return $this->database->lastInsertId();
     }
@@ -149,4 +150,77 @@ class PreguntaModel{
             $this->database->add($sql);
         }
     }
+
+    public function getPreguntasSugeridas()
+    {
+        $sqlPreguntas = "SELECT id, descripcion, categoria FROM Pregunta_sugerida WHERE estado = 'pendiente'";
+        $resultPreguntas = $this->database->query($sqlPreguntas);
+
+
+        $preguntasConRespuestas = [];
+
+
+        foreach ($resultPreguntas as $pregunta) {
+
+            $sqlRespuestas = "SELECT textoRespuesta, esCorrecta FROM Respuesta_sugerida WHERE idPreguntaSugerida = " . $pregunta['id'];
+            $respuestas = $this->database->query($sqlRespuestas);
+
+            $pregunta['respuestas'] = $respuestas;
+
+
+            $preguntasConRespuestas[] = $pregunta;
+        }
+
+        return $preguntasConRespuestas;
+    }
+
+    public function aprobarPreguntaSugerida($idPreguntaSugerida)
+    {
+        $sqlPregunta = "SELECT descripcion, categoria FROM Pregunta_sugerida WHERE id = " . $idPreguntaSugerida;
+        $resultPregunta = $this->database->query($sqlPregunta);
+        $preguntaSugerida = is_array($resultPregunta) ? $resultPregunta[0] : $resultPregunta->fetch_assoc();
+
+        if ($preguntaSugerida) {
+            //Insertar la pregunta en la tabla Pregunta
+            $sqlInsertPregunta = "INSERT INTO Pregunta (descripcion, categoria) VALUES ('" .
+                $preguntaSugerida['descripcion'] . "', '" .
+                $preguntaSugerida['categoria'] . "')";
+            $this->database->add($sqlInsertPregunta);
+
+            //Obtener el ID de la pregunta recién insertada
+            $idPregunta = $this->database->lastInsertId();
+
+            //Obtener las respuestas asociadas de "respuesta_sugerida"
+            $sqlRespuestas = "SELECT textoRespuesta, esCorrecta FROM respuesta_sugerida WHERE idPreguntaSugerida = " . $idPreguntaSugerida;
+            $respuestasSugeridas = $this->database->query($sqlRespuestas);
+
+            //Insertar cada respuesta en la tabla `Respuesta` con el nuevo `idPregunta`
+            foreach ($respuestasSugeridas as $respuesta) {
+                $sqlInsertRespuesta = "INSERT INTO respuesta (idPregunta, textoRespuesta, esCorrecta) VALUES (" .
+                    $idPregunta . ", '" .
+                    $respuesta['textoRespuesta'] . "', " .
+                    $respuesta['esCorrecta'] . ")";
+                $this->database->add($sqlInsertRespuesta);
+            }
+
+
+            //Actualizar el estado de la pregunta sugerida a "aprobada"
+            $sqlUpdate = "UPDATE Pregunta_sugerida SET estado = 'aprobada' WHERE id = " . $idPreguntaSugerida;
+            $this->database->add($sqlUpdate);
+        }
+    }
+    public function rechazarPreguntaSugerida($idPreguntaSugerida)
+    {
+        $sqlPregunta = "SELECT descripcion, categoria FROM Pregunta_sugerida WHERE id = " . $idPreguntaSugerida;
+        $resultPregunta = $this->database->query($sqlPregunta);
+        $preguntaSugerida = is_array($resultPregunta) ? $resultPregunta[0] : $resultPregunta->fetch_assoc();
+
+        if ($preguntaSugerida) {
+            //Cambiar estado a "Rechazada". No la eliminamos porque luego necesitamos los datos de esta tabla
+
+            $sqlUpdate = "UPDATE Pregunta_sugerida SET estado = 'rechazada' WHERE id = " . $idPreguntaSugerida;
+            $this->database->add($sqlUpdate);
+        }
+    }
+
 }

@@ -290,4 +290,8 @@ class UsuarioController
         $this->presenter->show('usuarioPerfil', $data);
     }
 
+    public function showVistaEditor()
+    {
+        $this->presenter->show('vistaEditor');
+    }
 }

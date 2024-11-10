@@ -1,0 +1,51 @@
+<h1 class="titulo-sugeridas">Preguntas Sugeridas</h1><br>
+
+<div class="contenedor-preguntas-sugeridas">
+    {{#preguntasSugeridas}}
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Pregunta</th>
+            <th>Categoría</th>
+            <th>Respuestas</th>
+            <th>Acción</th>
+        </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+
+                <td>{{descripcion}}</td>
+                <td>{{categoria}}</td>
+
+                <td>
+                    <ul>
+                        {{#respuestas}}
+                            <li>
+                                {{textoRespuesta}}
+                                {{#esCorrecta}}<strong>(Correcta)</strong>{{/esCorrecta}}
+                            </li>
+                        {{/respuestas}}
+                    </ul>
+                </td>
+                <td>
+                    <form method="post" action="/pregunta/aprobarPreguntaSugerida">
+                        <input type="hidden" name="idPreguntaSugerida" value="{{id}}">
+                        <button class="aprobar">Aprobar</button>
+                    </form>
+
+                    <form method="post" action="/pregunta/rechazarPreguntaSugerida">
+                        <input type="hidden" name="idPreguntaSugerida" value="{{id}}">
+                        <button class="rechazar">Rechazar</button>
+                    </form>
+
+                </td>
+            </tr>
+        {{/preguntasSugeridas}}
+        {{^preguntasSugeridas}}
+            <p>Aún no hay preguntas sugeridas</p>
+            {{/preguntasSugeridas}}
+        </tbody>
+    </table>
+
+</div>

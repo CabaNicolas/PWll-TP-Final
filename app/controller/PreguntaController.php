@@ -29,6 +29,8 @@ class PreguntaController{
         $data['error'] = $this->validarCampos($consigna, $categoria, $respuestaCorrecta, $respuestas);
 
         if (!empty($data['error'])) {
+            $data['categorias'] = $this->model->obtenerCategorias();
+
             $this->presenter->show('crearPregunta', $data);
             return;
         }
@@ -36,6 +38,7 @@ class PreguntaController{
         $this->model->crearPregunta($consigna, $categoria, $respuestaCorrecta, $respuestas);
         $_SESSION['mensajeExito'] = "Pregunta creada con exito";
         Redirecter::redirect('/usuario/showLobby');
+
         
     }
 
@@ -44,6 +47,34 @@ class PreguntaController{
             $mensaje = "Debe completar todos los campos con (*)";
             return $mensaje;
         }
+
+    }
+
+    public function showPreguntasSugeridas(){
+
+        $data['preguntasSugeridas'] = $this->model->getPreguntasSugeridas();
+        $this->presenter->show('preguntasSugeridas', $data);
+
+    }
+    public function showPreguntasReportadas(){
+
+        $this->presenter->show('preguntasReportadas');
+    }
+
+    public function aprobarPreguntaSugerida()
+    {
+        $idPreguntaSugerida = $_POST['idPreguntaSugerida'];
+        $this->model->aprobarPreguntaSugerida($idPreguntaSugerida);
+
+        header("Location: /pregunta/showPreguntasSugeridas");
+    }
+
+    public function rechazarPreguntaSugerida()
+    {
+        $idPreguntaSugerida = $_POST['idPreguntaSugerida'];
+        $this->model->rechazarPreguntaSugerida($idPreguntaSugerida);
+
+        header("Location: /pregunta/showPreguntasSugeridas");
     }
 
 }
