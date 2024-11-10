@@ -14,6 +14,15 @@ class PreguntaController{
         $this->presenter->show('crearPregunta', $data);
     }
 
+    public function showReporte(){
+        $idPregunta = $_SESSION['idPregunta'];
+
+        $data = [
+            'idPregunta' => $idPregunta
+        ];
+        $this->presenter->show('reportarPregunta', $data);
+    }
+
     public function crearPregunta()
     {
         $consigna = $_POST['consigna'] ?? null;
@@ -76,5 +85,16 @@ class PreguntaController{
 
         header("Location: /pregunta/showPreguntasSugeridas");
     }
+
+    public function guardarReporte(){
+        $idPregunta = $_POST['idPregunta'];
+        $motivo = $_POST['motivo'];
+        $idUsuario = $_SESSION['id'];
+
+        $this->model->reportarPregunta($idPregunta, $idUsuario, $motivo);
+
+        Redirecter::redirect('/partida/preguntaInvalidadaPorExpiracionDeTiempo');
+    }
+
 
 }

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-11-2024 a las 19:28:00
+-- Tiempo de generación: 10-11-2024 a las 21:17:56
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Versión de PHP: 8.1.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -59,31 +59,6 @@ CREATE TABLE `partida` (
   `partidaFinalizada` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `partida`
---
-
-INSERT INTO `partida` (`idPartida`, `idUsuario`, `fecha`, `puntaje`, `preguntaActual`, `partidaFinalizada`) VALUES
-(1, 9, '2024-11-09', 0, 9, 0),
-(2, 9, '2024-11-09', 0, 0, 0),
-(3, 9, '2024-11-09', 0, 0, 1),
-(4, 9, '2024-11-10', 4, 25, 1),
-(5, 9, '2024-11-10', 1, 7, 0),
-(6, 9, '2024-11-10', 1, 0, 1),
-(7, 9, '2024-11-10', 0, 8, 0),
-(8, 9, '2024-11-10', 0, 0, 0),
-(9, 9, '2024-11-10', 0, 0, 1),
-(10, 9, '2024-11-10', 1, 12, 1),
-(11, 9, '2024-11-10', 2, 27, 1),
-(12, 9, '2024-11-10', 0, 3, 0),
-(13, 9, '2024-11-10', 0, 0, 0),
-(14, 9, '2024-11-10', 0, 0, 1),
-(15, 9, '2024-11-10', 0, 3, 1),
-(16, 9, '2024-11-10', 0, 12, 1),
-(17, 9, '2024-11-10', 7, 10, 1),
-(18, 9, '2024-11-10', 0, 7, 0),
-(19, 9, '2024-11-10', 0, 0, 0),
-(20, 9, '2024-11-10', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -143,6 +118,20 @@ INSERT INTO `pregunta_sugerida` (`id`, `descripcion`, `categoria`, `estado`) VAL
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `reportes_preguntas`
+--
+
+CREATE TABLE `reportes_preguntas` (
+  `idReporte` int(11) NOT NULL,
+  `idPregunta` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `motivo` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `responde`
 --
 
@@ -150,28 +139,6 @@ CREATE TABLE `responde` (
   `idUsuario` int(11) NOT NULL,
   `idPregunta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `responde`
---
-
-INSERT INTO `responde` (`idUsuario`, `idPregunta`) VALUES
-(9, 3),
-(9, 12),
-(9, 5),
-(9, 11),
-(9, 9),
-(9, 1),
-(9, 27),
-(9, 6),
-(9, 2),
-(9, 10);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `respuesta`
---
 
 CREATE TABLE `respuesta` (
   `idRespuesta` int(11) NOT NULL,
@@ -255,73 +222,6 @@ CREATE TABLE `respuesta_sugerida` (
   `esCorrecta` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `respuesta_sugerida`
---
-
-INSERT INTO `respuesta_sugerida` (`id`, `idPreguntaSugerida`, `textoRespuesta`, `esCorrecta`) VALUES
-(5, 2, 'Hola', 0),
-(6, 2, 'Hola2', 0),
-(7, 2, 'Hola3', 0),
-(8, 2, 'Hola4', 1),
-(9, 3, 'sd', 0),
-(10, 3, 'sd', 0),
-(11, 3, 'sd', 0),
-(12, 3, 'sd', 1),
-(13, 4, 'sf', 0),
-(14, 4, 'sf', 0),
-(15, 4, 'dsf', 1),
-(16, 4, 'dsf', 0),
-(17, 5, 'CABA', 1),
-(18, 5, 'Neuquen', 0),
-(19, 5, 'Rio Negro', 0),
-(20, 5, 'Formosa', 0),
-(21, 6, 'df', 1),
-(22, 6, 'dsf', 0),
-(23, 6, 'sd', 0),
-(24, 6, 'df', 0),
-(25, 7, '3', 0),
-(26, 7, '3', 1),
-(27, 7, '3', 0),
-(28, 7, '3', 0),
-(29, 8, '3', 0),
-(30, 8, '3', 1),
-(31, 8, '3', 0),
-(32, 8, '3', 0),
-(33, 9, 'as', 0),
-(34, 9, 'as', 0),
-(35, 9, 'as', 1),
-(36, 9, 'as', 0),
-(37, 10, 'as', 0),
-(38, 10, 'as', 0),
-(39, 10, 'as', 0),
-(40, 10, 'as', 1),
-(41, 11, 'as', 0),
-(42, 11, 'as', 1),
-(43, 11, 'as', 0),
-(44, 11, 'as', 0),
-(45, 12, 'CABA', 0),
-(46, 12, 'Neuquen', 1),
-(47, 12, 'Rio Negro', 0),
-(48, 12, 'Formosa', 0),
-(49, 13, 'asd', 0),
-(50, 13, 'asd', 1),
-(51, 13, 'as', 0),
-(52, 13, 'as', 0),
-(53, 14, 'CABA', 0),
-(54, 14, 'sas', 0),
-(55, 14, 'as', 1),
-(56, 14, 'sa', 0),
-(57, 15, 'Jujuy', 0),
-(58, 15, 'Buenos Aires', 0),
-(59, 15, 'Mendoza', 0),
-(60, 15, 'Neuquen', 1),
-(61, 16, 'san clemente', 0),
-(62, 16, 'san bernardo', 1),
-(63, 16, 'santa teresita', 0),
-(64, 16, 'las toninas', 0);
-
--- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `sexo`
@@ -397,6 +297,12 @@ ALTER TABLE `pregunta_sugerida`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `reportes_preguntas`
+--
+ALTER TABLE `reportes_preguntas`
+  ADD PRIMARY KEY (`idReporte`);
+
+--
 -- Indices de la tabla `respuesta`
 --
 ALTER TABLE `respuesta`
@@ -435,7 +341,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `partida`
 --
 ALTER TABLE `partida`
-  MODIFY `idPartida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `idPartida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT de la tabla `pregunta`
@@ -447,7 +353,13 @@ ALTER TABLE `pregunta`
 -- AUTO_INCREMENT de la tabla `pregunta_sugerida`
 --
 ALTER TABLE `pregunta_sugerida`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+--
+-- AUTO_INCREMENT de la tabla `reportes_preguntas`
+--
+ALTER TABLE `reportes_preguntas`
+  MODIFY `idReporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT de la tabla `respuesta`
@@ -459,7 +371,7 @@ ALTER TABLE `respuesta`
 -- AUTO_INCREMENT de la tabla `respuesta_sugerida`
 --
 ALTER TABLE `respuesta_sugerida`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT de la tabla `sexo`
@@ -471,7 +383,7 @@ ALTER TABLE `sexo`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
