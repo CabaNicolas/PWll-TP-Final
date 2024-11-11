@@ -59,12 +59,13 @@ class PreguntaController{
     }
 
     public function showPreguntasSugeridas(){
-
+        $data['mail'] = $_SESSION['mail'];
         $data['preguntasSugeridas'] = $this->model->getPreguntasSugeridas();
         $this->presenter->show('preguntasSugeridas', $data);
 
     }
     public function showPreguntasReportadas(){
+        $data['mail'] = $_SESSION['mail'];
         $data['preguntasReportadas'] = $this->model->getPreguntasReportadas();
         $this->presenter->show('preguntasReportadas', $data);
     }
