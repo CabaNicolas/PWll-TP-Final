@@ -304,7 +304,8 @@ class UsuarioController
 
     public function showVistaEditor()
     {
-        $this->presenter->show('vistaEditor');
+        $data['mail'] = $_SESSION['mail'];
+        $this->presenter->show('vistaEditor', $data);
     }
 
     private function setearLaSessionDelUsuario($mail, $id){
