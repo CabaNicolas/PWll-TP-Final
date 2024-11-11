@@ -248,7 +248,24 @@ class PreguntaModel{
 
     public function getPreguntasReportadas()
     {
-        $sqlPreguntas = "SELECT idReporte, idPregunta, idUsuario, motivo FROM reportes_preguntas WHERE estado = 'pendiente'";
+        $sqlPreguntas = "
+            SELECT 
+                rp.idReporte,
+                rp.idPregunta,
+                rp.idUsuario,
+                u.nombreUsuario AS nombreUsuario,
+                p.descripcion AS textoPregunta,
+                rp.motivo 
+            FROM 
+                reportes_preguntas rp
+            JOIN 
+                usuario u ON rp.idUsuario = u.id
+            JOIN 
+                pregunta p ON rp.idPregunta = p.idPregunta
+            WHERE 
+                rp.estado = 'pendiente'
+        ";
+
         $resultPreguntas = $this->database->query($sqlPreguntas);
 
 
@@ -285,6 +302,7 @@ class PreguntaModel{
 
         return $pregunta;
     }
+
 
 
 
