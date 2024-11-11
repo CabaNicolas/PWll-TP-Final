@@ -33,6 +33,10 @@ class AutenticacionMiddleware{
             'pregunta/showPreguntasSugeridas',
             'pregunta/showPreguntasReportadas',
             'pregunta/aprobarPreguntaSugerida',
+            'pregunta/rechazarPreguntaSugerida',
+            'pregunta/showModificarPreguntaReportada',
+            'pregunta/rechazarPreguntaReportada',
+
         ],
         'admin' => [
             'usuario/showAdministrador',

@@ -931,6 +931,120 @@ a {
 }
 
 /*****************/
+/*ESTILOS PREGUNTAS SUGERIDAS*/
+/*****************/
+.contenedor-preguntas-sugeridas .aprobar{
+    background-color: #30e330;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.contenedor-preguntas-sugeridas .aprobar:hover{
+    background-color: #1f8c1f;
+
+}
+.contenedor-preguntas-sugeridas .rechazar{
+    background-color: #f14545;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.contenedor-preguntas-sugeridas .rechazar:hover{
+    background-color: #c13939;
+
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-color: #111111;
+    margin-bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.37);
+}
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+th{
+    font-size: 20px;
+    text-align: center;
+}
+
+ul {
+    padding: 10px;
+}
+li {
+    padding: 5px 0;
+}
+
+/*****************/
+/*ESTILOS PREGUNTAS REPORTADAS*/
+/*****************/
+
+.contenedor-preguntas-reportadas .modificar{
+    background-color: #ecec2b;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.contenedor-preguntas-reportadas .modificar:hover{
+    background-color: #bfbf44;
+
+}
+.contenedor-preguntas-reportadas .rechazar{
+    background-color: #f14545;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.contenedor-preguntas-reportadas .rechazar:hover{
+    background-color: #c13939;
+
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-color: #111111;
+    margin-bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.37);
+}
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+th{
+    font-size: 20px;
+    text-align: center;
+}
+
+
+
+/*****************/
 /*ESTILOS FOOTER*/
 /*****************/
 

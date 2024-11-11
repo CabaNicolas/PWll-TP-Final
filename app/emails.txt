@@ -1,3 +1,44 @@
 **Indicaciones de uso**
 Copiar el enlase desde "localhost (...) hasta el ultimo digito del token"
 y pegue en el navegador.--->>
+
+To: nadia@gmail.com
+Subject: Validación de cuenta
+Message:
+Hola! Hacé click en el siguiente enlace para validar tu cuenta: <a href='http://localhost/usuario/validarCuenta?id=1&token=dacd0e1b66'>Click aquí</a>
+
+To: ailen@gmail.com
+Subject: Validación de cuenta
+Message:
+Hola! Hacé click en el siguiente enlace para validar tu cuenta: <a href='http://localhost/usuario/validarCuenta?id=2&token=40a95758a4'>Click aquí</a>
+
+To: nadia.belen98@gmail.com
+Subject: Validación de cuenta
+Message:
+Hola! Hacé click en el siguiente enlace para validar tu cuenta: <a href='http://localhost/usuario/validarCuenta?id=9&token=4bc0ee5a13'>Click aquí</a>
+
+To: nadia@gmail.com
+Subject: Validación de cuenta
+Message:
+Hola! Hacé click en el siguiente enlace para validar tu cuenta: <a href='http://localhost/usuario/validarCuenta?id=9&token=72eb4ee5de'>Click aquí</a>
+
+To: editor@gmail.com
+Subject: Validación de cuenta
+Message:
+Hola! Hacé click en el siguiente enlace para validar tu cuenta: <a href='http://localhost/usuario/validarCuenta?id=3&token=246d3ee558'>Click aquí</a>
+
+To: editor@gmail.com
+Subject: Validación de cuenta
+Message:
+Hola! Hacé click en el siguiente enlace para validar tu cuenta: <a href='http://localhost/usuario/validarCuenta?id=5&token=e34e733ee5'>Click aquí</a>
+
+To: editor@gmail.com
+Subject: Validación de cuenta
+Message:
+Hola! Hacé click en el siguiente enlace para validar tu cuenta: <a href='http://localhost/usuario/validarCuenta?id=5&token=f09a5d66c3'>Click aquí</a>
+
+To: editor@gmail.com
+Subject: Validación de cuenta
+Message:
+Hola! Hacé click en el siguiente enlace para validar tu cuenta: <a href='http://localhost/usuario/validarCuenta?id=5&token=18d897ff18'>Click aquí</a>
+

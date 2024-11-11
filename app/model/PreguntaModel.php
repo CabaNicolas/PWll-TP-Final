@@ -224,8 +224,9 @@ class PreguntaModel{
     }
 
     public function reportarPregunta($idPregunta, $idUsuario, $motivo) {
-        $sql = "INSERT INTO reportes_preguntas (idPregunta, idUsuario, motivo) VALUES (" . $idPregunta . ", " . $idUsuario . ", '" . $motivo ."')";
+        $sql = "INSERT INTO reportes_preguntas (idPregunta, idUsuario, motivo, estado) VALUES (" . $idPregunta . ", " . $idUsuario . ", '" . $motivo ."' , 'pendiente')";
         $this->database->add($sql);
+
     }
 
     public function obtenerCantidadPreguntasActivas()
@@ -244,5 +245,65 @@ class PreguntaModel{
 
         return $this->database->query($sql);
     }
+
+    public function getPreguntasReportadas()
+    {
+        $sqlPreguntas = "
+            SELECT 
+                rp.idReporte,
+                rp.idPregunta,
+                rp.idUsuario,
+                u.nombreUsuario AS nombreUsuario,
+                p.descripcion AS textoPregunta,
+                rp.motivo 
+            FROM 
+                reportes_preguntas rp
+            JOIN 
+                usuario u ON rp.idUsuario = u.id
+            JOIN 
+                pregunta p ON rp.idPregunta = p.idPregunta
+            WHERE 
+                rp.estado = 'pendiente'
+        ";
+
+        $resultPreguntas = $this->database->query($sqlPreguntas);
+
+
+        return $resultPreguntas;
+    }
+
+    public function rechazarPreguntaReportada($idReporte)
+    {
+        $sqlPregunta = "SELECT idPregunta, idUsuario, motivo FROM reportes_preguntas WHERE idReporte = " . $idReporte;
+        $resultPregunta = $this->database->query($sqlPregunta);
+
+        $preguntaReportada = is_array($resultPregunta) ? $resultPregunta[0] : $resultPregunta->fetch_assoc();
+
+        if ($preguntaReportada) {
+            $sqlUpdate = "UPDATE reportes_preguntas SET estado = 'rechazada' WHERE idReporte = " . $idReporte;
+            $this->database->add($sqlUpdate);
+        }
+    }
+
+    public function obtenerPreguntaReportada($idReporte)
+    {
+        $sqlPregunta = "SELECT p.idPregunta, p.descripcion, p.categoria 
+                    FROM reportes_preguntas r
+                    JOIN pregunta p ON r.idPregunta = p.idPregunta
+                    WHERE r.idReporte = " . $idReporte;
+
+        $resultPregunta = $this->database->query($sqlPregunta);
+        $pregunta = is_array($resultPregunta) ? $resultPregunta[0] : $resultPregunta->fetch_assoc();
+
+        $sqlRespuestas = "SELECT textoRespuesta, esCorrecta 
+                      FROM respuesta 
+                      WHERE idPregunta = " . $pregunta['idPregunta'];
+        $pregunta['respuestas'] = $this->database->query($sqlRespuestas);
+
+        return $pregunta;
+    }
+
+
+
 
 }

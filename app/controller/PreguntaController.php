@@ -65,8 +65,8 @@ class PreguntaController{
 
     }
     public function showPreguntasReportadas(){
-
-        $this->presenter->show('preguntasReportadas');
+        $data['preguntasReportadas'] = $this->model->getPreguntasReportadas();
+        $this->presenter->show('preguntasReportadas', $data);
     }
 
     public function aprobarPreguntaSugerida()
@@ -94,6 +94,31 @@ class PreguntaController{
 
         Redirecter::redirect('/partida/preguntaInvalidadaPorExpiracionDeTiempo');
     }
+
+    public function showModificarPreguntaReportada()
+    {
+        $idReporte = $_POST['idReporte'];
+
+        if ($idReporte) {
+            $pregunta = $this->model->obtenerPreguntaReportada($idReporte);
+
+
+            $data['pregunta'] = $pregunta;
+            $data['categorias'] = $this->model->obtenerCategorias();
+
+
+            $this->presenter->show('modificarPreguntaReportada', $data);
+        }
+    }
+
+    public function rechazarPreguntaReportada()
+    {
+        $idReporte = $_POST['idReporte'];
+        $this->model->rechazarPreguntaReportada($idReporte);
+
+        Redirecter::redirect("/pregunta/showPreguntasReportadas");
+    }
+
 
 
 }
