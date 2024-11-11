@@ -1,13 +1,42 @@
-<h1 class="titulo-reportadas">Preguntas Reportadas</h1>
+<h1 class="titulo-reportadas">Preguntas Reportadas</h1><br>
 
 <div class="contenedor-preguntas-reportadas">
     {{#preguntasReportadas}}
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Pregunta</th>
+            <th>Usuario</th>
+            <th>Motivo</th>
+            <th>Acción</th>
+        </tr>
+        </thead>
+    <tbody>
 
-        {{/preguntasReportadas}}
+    <tr>
 
+        <td>{{idPregunta}}</td>
+        <td>{{idUsuario}}</td>
+        <td>{{motivo}}</td>
+        <td>
+            <form method="post" action="/pregunta/showModificarPreguntaReportada">
+                <input type="hidden" name="idReporte" value="{{idReporte}}">
+                <button class="modificar">Modificar</button>
+            </form>
 
-    {{^preguntasReportadas}}
-            <p>Aún no hay preguntas reportadas</p>
+            <form method="post" action="/pregunta/rechazarPreguntaReportada">
+                <input type="hidden" name="idReporte" value="{{idReporte}}">
+                <button class="rechazar">Rechazar</button>
+            </form>
+
+        </td>
+    </tr>
     {{/preguntasReportadas}}
+    {{^preguntasReportadas}}
+    <p>Aún no hay preguntas reportadas</p>
+    {{/preguntasReportadas}}
+</tbody>
+</table>
 
 </div>
+<a href="/usuario/showVistaEditor"><input class="volver" type="button" value="Volver"></a>

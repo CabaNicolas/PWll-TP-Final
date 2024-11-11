@@ -1,0 +1,24 @@
+<form action="/pregunta/modificarPreguntaReportada" method="POST" class="form-modificar-pregunta-reportada">
+    <input type="hidden" name="idPregunta" value="{{pregunta.idPregunta}}">
+
+    <label for="consigna">Consigna:<span>*</span></label>
+    <input type="text" name="consigna" id="consigna" value="{{pregunta.descripcion}}" required>
+
+    <label for="categoria">Categoria:<span>*</span></label>
+    <select name="categoria" id="categoria" required>
+        <option value="" disabled>Selecciona una categoria</option>
+        {{#categorias}}
+            <option value="{{id}}" {{#selected}}{{pregunta.categoria}}{{/selected}}>{{nombre}}</option>
+        {{/categorias}}
+    </select>
+
+    {{#pregunta.respuestas}}
+        <label for="respuesta{{@index}}">Respuesta {{@index}}:<span>*</span></label>
+        <div class="respuesta-container">
+            <input type="text" name="respuesta{{@index}}" id="respuesta{{@index}}" value="{{textoRespuesta}}" required>
+            <input type="radio" name="correcta" value="{{@index}}" {{#esCorrecta}}checked{{/esCorrecta}}>
+        </div>
+    {{/pregunta.respuestas}}
+
+    <input type="submit" value="Modificar pregunta">
+</form>
