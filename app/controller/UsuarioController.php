@@ -322,6 +322,8 @@ class UsuarioController
     }
 
     public function showAdministrador(){
+        $data['mail'] = $_SESSION['mail'];
+        $data['username'] = $_SESSION['username'];
 
         $data['cantidadJugadores'] = $this->model->obtenerCantidadJugadores()[0]['cantidadJugadores'];
         $data['cantidadPartidas'] = $this->partidaModel->obtenerCantidadPartidasJugadas()[0]['cantidadPartidas'];
