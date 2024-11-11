@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-11-2024 a las 16:49:54
+-- Tiempo de generación: 11-11-2024 a las 18:16:00
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -75,7 +75,8 @@ INSERT INTO `partida` (`idPartida`, `idUsuario`, `fecha`, `puntaje`, `preguntaAc
 (9, 3, '2024-11-10', 0, 7, 1),
 (10, 3, '2024-11-10', 2, 11, 1),
 (11, 2, '2024-11-11', 1, 1, 1),
-(12, 2, '2024-11-11', 0, 27, 1);
+(12, 2, '2024-11-11', 0, 27, 1),
+(13, 2, '2024-11-11', 1, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -106,10 +107,11 @@ INSERT INTO `pregunta` (`idPregunta`, `descripcion`, `categoria`, `correcto`, `i
 (7, '¿Quién fue el primer presidente de los Estados Unidos?', 3, 4, 1, 'activa'),
 (8, '¿En qué año comenzó la Segunda Guerra Mundial?', 3, 4, 0, 'activa'),
 (9, '¿Cuántos jugadores tiene un equipo de fútbol en el campo?', 4, 4, 0, 'activa'),
-(10, '¿En qué deporte se utiliza una pelota de 3 agujeros?', 4, 2, 3, 'activa'),
+(10, '¿En qué deporte se utiliza una pelota de 3 agujeros?', 4, 3, 3, 'activa'),
 (11, '¿Quién pintó la Mona Lisa?', 5, 6, 0, 'activa'),
 (12, '¿A qué movimiento artístico pertenece el cuadro \"La noche estrellada\"?', 5, 3, 3, 'activa'),
-(27, 'En que parte se encuentra el obelisco', 2, 5, 1, 'activa');
+(27, 'En que parte se encuentra el obelisco?', 1, 5, 1, 'activa'),
+(29, 'Cual es la capital de Cordoba?', 2, 0, 0, 'activa');
 
 -- --------------------------------------------------------
 
@@ -129,7 +131,8 @@ CREATE TABLE `pregunta_sugerida` (
 --
 
 INSERT INTO `pregunta_sugerida` (`id`, `descripcion`, `categoria`, `estado`) VALUES
-(1, '¿De que color era el caballo blanco de San Martin al curzar la cordillera?', 3, 'pendiente');
+(1, '¿De que color era el caballo blanco de San Martin al curzar la cordillera?', 3, 'pendiente'),
+(2, 'Cual es la capital de Cordoba?', 2, 'aprobada');
 
 -- --------------------------------------------------------
 
@@ -151,7 +154,8 @@ CREATE TABLE `reportes_preguntas` (
 
 INSERT INTO `reportes_preguntas` (`idReporte`, `idPregunta`, `idUsuario`, `motivo`, `estado`) VALUES
 (3, 1, 2, 'La descripcion esta mal', 'rechazada'),
-(4, 27, 2, 'La descripcion esta mal escrita', 'pendiente');
+(4, 27, 2, 'La descripcion esta mal escrita', 'rechazada'),
+(5, 5, 2, 'La respuesta correcta es Osaka', 'pendiente');
 
 -- --------------------------------------------------------
 
@@ -181,7 +185,9 @@ INSERT INTO `responde` (`idUsuario`, `idPregunta`) VALUES
 (3, 11),
 (2, 11),
 (2, 1),
-(2, 27);
+(2, 27),
+(2, 10),
+(2, 5);
 
 -- --------------------------------------------------------
 
@@ -252,7 +258,11 @@ INSERT INTO `respuesta` (`idRespuesta`, `idPregunta`, `textoRespuesta`, `esCorre
 (53, 27, 'CABA', 1),
 (54, 27, 'Neuquen', 0),
 (55, 27, 'Rio Negro', 0),
-(56, 27, 'Formosa', 0);
+(56, 27, 'Formosa', 0),
+(61, 29, 'La Plata', 0),
+(62, 29, 'Corrientes', 0),
+(63, 29, 'Resistencia', 0),
+(64, 29, 'Cordoba', 1);
 
 -- --------------------------------------------------------
 
@@ -275,7 +285,11 @@ INSERT INTO `respuesta_sugerida` (`id`, `idPreguntaSugerida`, `textoRespuesta`, 
 (1, 1, 'Gris', 0),
 (2, 1, 'Negro', 0),
 (3, 1, 'Blanco', 1),
-(4, 1, 'Marón', 0);
+(4, 1, 'Marón', 0),
+(5, 2, 'La Plata', 0),
+(6, 2, 'Corrientes', 0),
+(7, 2, 'Resistencia', 0),
+(8, 2, 'Cordoba', 1);
 
 -- --------------------------------------------------------
 
@@ -427,37 +441,37 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `partida`
 --
 ALTER TABLE `partida`
-  MODIFY `idPartida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idPartida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `pregunta`
 --
 ALTER TABLE `pregunta`
-  MODIFY `idPregunta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `idPregunta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de la tabla `pregunta_sugerida`
 --
 ALTER TABLE `pregunta_sugerida`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `reportes_preguntas`
 --
 ALTER TABLE `reportes_preguntas`
-  MODIFY `idReporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idReporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `respuesta`
 --
 ALTER TABLE `respuesta`
-  MODIFY `idRespuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `idRespuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT de la tabla `respuesta_sugerida`
 --
 ALTER TABLE `respuesta_sugerida`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
