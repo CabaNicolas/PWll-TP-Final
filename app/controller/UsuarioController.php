@@ -6,10 +6,14 @@ class UsuarioController
     private $model;
     private $presenter;
     private $fileEmailSender;
+    private $partidaModel;
+    private $preguntaModel;
 
-    public function __construct($model, $presenter, $fileEmailSender)
+    public function __construct($model, $partidaModel, $preguntaModel, $presenter, $fileEmailSender)
     {
         $this->model = $model;
+        $this->partidaModel = $partidaModel;
+        $this->preguntaModel = $preguntaModel;
         $this->presenter = $presenter;
         $this->fileEmailSender = $fileEmailSender;
     }
@@ -311,9 +315,19 @@ class UsuarioController
 
     private function redirigirUsuario(){
         if($_SESSION['rol'] == 'admin'){
-            //Redirigir a la vista de admin
+            Redirecter::redirect("/usuario/showAdministrador");
         }else{
             Redirecter::redirect("/usuario/showVistaEditor");
         }
+    }
+
+    public function showAdministrador(){
+
+        $data['cantidadJugadores'] = $this->model->obtenerCantidadJugadores()[0]['cantidadJugadores'];
+        $data['cantidadPartidas'] = $this->partidaModel->obtenerCantidadPartidasJugadas()[0]['cantidadPartidas'];
+        $data['cantidadPreguntasActivas'] = $this->preguntaModel->obtenerCantidadPreguntasActivas()[0]['cantidadPreguntas'];
+        $data['cantidadPreguntasCreadas'] = $this->preguntaModel->obtenerCantidadPreguntasCreadas()[0]['cantidadPreguntas'];
+
+        $this->presenter->show('administrador', $data);
     }
 }

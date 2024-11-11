@@ -35,7 +35,7 @@ class AutenticacionMiddleware{
             'pregunta/aprobarPreguntaSugerida',
         ],
         'admin' => [
-            '',
+            'usuario/showAdministrador',
         ]
     ];
     public function procesarSolicitud($controller, $methodName, $controllerName)

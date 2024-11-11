@@ -26,7 +26,7 @@ class Configuration
 
 
     public function getUsuarioController(){
-        return new UsuarioController($this->getUsuarioModel(), $this->getPresenter(), $this->getFileEmailSender());
+        return new UsuarioController($this->getUsuarioModel(), $this->getPartidaModel(), $this->getPreguntaModel(), $this->getPresenter(), $this->getFileEmailSender());
     }
 
     public function getPartidaController(){

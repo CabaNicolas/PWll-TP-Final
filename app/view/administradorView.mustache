@@ -1,0 +1,32 @@
+<main class="contenido-main-usuarioAdmin">
+    {{#nombreUsuario}}
+        <h2 class="bienvenida-admin">Bienvenido/a Admin {{nombreUsuario}}!</h2>
+    {{/nombreUsuario}}
+
+    <table class="tabla-estadisticas">
+        <thead>
+        <tr>
+            <th>Estadística</th>
+            <th>Cantidad</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Cantidad de Jugadores</td>
+            <td>{{cantidadJugadores}}</td>
+        </tr>
+        <tr>
+            <td>Cantidad de Partidas Jugadas</td>
+            <td>{{cantidadPartidas}}</td>
+        </tr>
+        <tr>
+            <td>Cantidad de Preguntas Activas</td>
+            <td>{{cantidadPreguntasActivas}}</td>
+        </tr>
+        <tr>
+            <td>Cantidad de Preguntas Creadas</td>
+            <td>{{cantidadPreguntasCreadas}}</td>
+        </tr>
+        </tbody>
+    </table>
+</main>

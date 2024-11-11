@@ -223,10 +223,26 @@ class PreguntaModel{
         }
     }
 
-
     public function reportarPregunta($idPregunta, $idUsuario, $motivo) {
         $sql = "INSERT INTO reportes_preguntas (idPregunta, idUsuario, motivo) VALUES (" . $idPregunta . ", " . $idUsuario . ", '" . $motivo ."')";
         $this->database->add($sql);
+    }
+
+    public function obtenerCantidadPreguntasActivas()
+    {
+        $sql = "SELECT count(idPregunta) as cantidadPreguntas
+             FROM pregunta
+             WHERE estado LIKE 'activa'";
+
+        return $this->database->query($sql);
+    }
+
+    public function obtenerCantidadPreguntasCreadas()
+    {
+        $sql = "SELECT count(idPregunta) as cantidadPreguntas
+             FROM pregunta";
+
+        return $this->database->query($sql);
     }
 
 }

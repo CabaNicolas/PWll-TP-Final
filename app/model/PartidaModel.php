@@ -53,5 +53,12 @@ class PartidaModel
         $sql = "UPDATE partida SET partidaFinalizada = 1 WHERE idPartida = " . $idPartida;
         $this->database->add($sql);
     }
+
+    public function obtenerCantidadPartidasJugadas(){
+        $sql = "SELECT count(idPartida) as cantidadPartidas
+            FROM partida";
+
+        return $this->database->query($sql);
+    }
 }
 
