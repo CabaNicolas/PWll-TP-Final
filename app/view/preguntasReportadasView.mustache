@@ -19,9 +19,9 @@
         <td>{{nombreUsuario}}</td>
         <td>{{motivo}}</td>
         <td>
-            <form method="post" action="/pregunta/showModificarPreguntaReportada">
+            <form method="post" action="/pregunta/aprobarPreguntaReportada">
                 <input type="hidden" name="idReporte" value="{{idReporte}}">
-                <button class="modificar">Modificar</button>
+                <button class="aprobar">Aprobar</button>
             </form>
 
             <form method="post" action="/pregunta/rechazarPreguntaReportada">

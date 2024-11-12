@@ -96,20 +96,13 @@ class PreguntaController{
         Redirecter::redirect('/partida/preguntaInvalidadaPorExpiracionDeTiempo');
     }
 
-    public function showModificarPreguntaReportada()
+
+    public function aprobarPreguntaReportada()
     {
         $idReporte = $_POST['idReporte'];
+        $this->model->aprobarPreguntaReportada($idReporte);
 
-        if ($idReporte) {
-            $pregunta = $this->model->obtenerPreguntaReportada($idReporte);
-
-
-            $data['pregunta'] = $pregunta;
-            $data['categorias'] = $this->model->obtenerCategorias();
-
-
-            $this->presenter->show('modificarPreguntaReportada', $data);
-        }
+        Redirecter::redirect("/pregunta/showPreguntasReportadas");
     }
 
     public function rechazarPreguntaReportada()

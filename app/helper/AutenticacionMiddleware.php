@@ -34,7 +34,7 @@ class AutenticacionMiddleware{
             'pregunta/showPreguntasReportadas',
             'pregunta/aprobarPreguntaSugerida',
             'pregunta/rechazarPreguntaSugerida',
-            'pregunta/showModificarPreguntaReportada',
+            'pregunta/aprobarPreguntaReportada',
             'pregunta/rechazarPreguntaReportada',
 
         ],

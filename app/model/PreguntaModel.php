@@ -285,23 +285,33 @@ class PreguntaModel{
         }
     }
 
-    public function obtenerPreguntaReportada($idReporte)
+    public function aprobarPreguntaReportada($idReporte)
     {
-        $sqlPregunta = "SELECT p.idPregunta, p.descripcion, p.categoria 
-                    FROM reportes_preguntas r
-                    JOIN pregunta p ON r.idPregunta = p.idPregunta
-                    WHERE r.idReporte = " . $idReporte;
-
+        $sqlPregunta = "SELECT idPregunta FROM reportes_preguntas WHERE idReporte = " . $idReporte;
         $resultPregunta = $this->database->query($sqlPregunta);
-        $pregunta = is_array($resultPregunta) ? $resultPregunta[0] : $resultPregunta->fetch_assoc();
+        $preguntaReportada = is_array($resultPregunta) ? $resultPregunta[0] : $resultPregunta->fetch_assoc();
 
-        $sqlRespuestas = "SELECT textoRespuesta, esCorrecta 
-                      FROM respuesta 
-                      WHERE idPregunta = " . $pregunta['idPregunta'];
-        $pregunta['respuestas'] = $this->database->query($sqlRespuestas);
+        if ($preguntaReportada) {
+            $idPregunta = $preguntaReportada['idPregunta'];
 
-        return $pregunta;
+
+            $sqlDeleteRespuestas = "DELETE FROM respuesta WHERE idPregunta = " . $idPregunta;
+            $this->database->add($sqlDeleteRespuestas);
+
+
+            $sqlDeletePregunta = "DELETE FROM pregunta WHERE idPregunta = " . $idPregunta;
+            $this->database->add($sqlDeletePregunta);
+
+
+            $sqlUpdate = "UPDATE reportes_preguntas SET estado = 'aprobada' WHERE idReporte = " . $idReporte;
+            $this->database->add($sqlUpdate);
+        }
     }
+
+
+
+
+
 
 
 

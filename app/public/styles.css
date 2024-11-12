@@ -937,6 +937,7 @@ a {
     background-color: #30e330;
     color: white;
     border: none;
+    border-radius: 10px;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
@@ -953,6 +954,7 @@ a {
     background-color: #f14545;
     color: white;
     border: none;
+    border-radius: 10px;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
@@ -993,10 +995,11 @@ li {
 /*ESTILOS PREGUNTAS REPORTADAS*/
 /*****************/
 
-.contenedor-preguntas-reportadas .modificar{
-    background-color: #ecec2b;
+.contenedor-preguntas-reportadas .aprobar{
+    background-color: #30e330;
     color: white;
     border: none;
+    border-radius: 10px;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
@@ -1005,14 +1008,15 @@ li {
     margin: 4px 2px;
     cursor: pointer;
 }
-.contenedor-preguntas-reportadas .modificar:hover{
-    background-color: #bfbf44;
+.contenedor-preguntas-reportadas .aprobar:hover{
+    background-color: #1f8c1f;
 
 }
 .contenedor-preguntas-reportadas .rechazar{
     background-color: #f14545;
     color: white;
     border: none;
+    border-radius: 10px;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
