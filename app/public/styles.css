@@ -923,16 +923,14 @@ a {
     background-color: white;
 }
 
-.titulo-sugeridas{
-    color: white;
-}
-.titulo-reportadas{
-    color: white;
-}
 
 /*****************/
 /*ESTILOS PREGUNTAS SUGERIDAS*/
 /*****************/
+
+.titulo-sugeridas{
+    color: white;
+}
 .contenedor-preguntas-sugeridas .aprobar{
     background-color: #30e330;
     color: white;
@@ -995,6 +993,9 @@ li {
 /*ESTILOS PREGUNTAS REPORTADAS*/
 /*****************/
 
+.titulo-reportadas{
+    color: white;
+}
 .contenedor-preguntas-reportadas .aprobar{
     background-color: #30e330;
     color: white;
