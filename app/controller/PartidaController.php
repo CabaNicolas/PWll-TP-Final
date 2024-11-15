@@ -3,11 +3,13 @@
 class PartidaController
 {
 
-    private $model;
+    private $partidaModel;
     private $presenter;
     private $preguntaModel;
-    public function __construct($partidaModel, $preguntaModel, $presenter)
+    private $usuarioModel;
+    public function __construct($usuarioModel, $partidaModel, $preguntaModel, $presenter)
     {
+        $this->usuarioModel = $usuarioModel;
         $this->partidaModel = $partidaModel;
         $this->presenter = $presenter;
         $this->preguntaModel = $preguntaModel;
@@ -34,10 +36,11 @@ class PartidaController
         if(!empty($partidaAbierta) && !$preguntaActualRespondida){
             $data['preguntasYRespuestas'] = $this->preguntaModel->showPreguntaPorId($partidaAbierta[0]['preguntaActual'], $partidaAbierta[0]['idPartida']);
         }else{
-            $data['preguntasYRespuestas'] = $this->preguntaModel->showPreguntaRandom($idUsuario, $idPartida);
+            $dificultadUsuario = $this->usuarioModel->obtenerDificultadUsuario($idUsuario);
+            $data['preguntasYRespuestas'] = $this->preguntaModel->showPreguntaRandom($idUsuario, $dificultadUsuario);
             $this->partidaModel->registrarPreguntaActual($data['preguntasYRespuestas']['idPregunta'], $idPartida);
+            $this->usuarioModel->aumentarLaCantidadDePreguntasMostradas($idUsuario);
         }
-
         $_SESSION['idPregunta'] = $data['preguntasYRespuestas']['idPregunta'];
 
         $data['mail'] = $_SESSION['mail'];
@@ -54,6 +57,10 @@ class PartidaController
         $esCorrecta = $this->preguntaModel->validarRespuesta($idRespuestaSeleccionada, $idPregunta, $idUsuario);
 
         $this->sumarPuntosSiLaRespuestaEsCorrecta($esCorrecta, $idPartida);
+
+        if($esCorrecta){
+            $this->usuarioModel->aumentarLaCantidadDeRespuestasCorrectas($idUsuario);
+        }
 
         unset($_SESSION['tiempo_inicio']);
 

@@ -437,4 +437,38 @@ class UsuarioModel
 
         return $this->database->query($sql);
     }
+
+    public function aumentarLaCantidadDePreguntasMostradas($id){
+        $sql = "UPDATE usuario SET preguntasEntregadas = preguntasEntregadas + 1 WHERE id = $id";
+        $this->database->add($sql);
+    }
+
+    public function aumentarLaCantidadDeRespuestasCorrectas($id){
+        $sql = "UPDATE usuario SET respuestasCorrectas = respuestasCorrectas + 1 WHERE id = $id";
+        $this->database->add($sql);
+    }
+
+    public function obtenerDificultadUsuario($id){
+        $sql = "SELECT (respuestasCorrectas / preguntasEntregadas) * 100 as dificultad
+            FROM usuario
+            WHERE preguntasEntregadas >= 10 AND id = $id";
+        $dificultad = $this->database->query($sql);
+
+        $dificultad = $this->calcularDificultad($dificultad);
+
+        return $dificultad;
+    }
+
+    public function calcularDificultad($dificultad){
+        $dificultad = isset($dificultad[0]['dificultad']) ? $dificultad[0]['dificultad'] : "Principiante";
+
+        if ($dificultad != null && $dificultad >= 0 && $dificultad <= 30) {
+            $dificultad = 'Facil';
+        } else if ($dificultad != null && $dificultad > 30 && $dificultad <= 70) {
+            $dificultad = 'Media';
+        } else if ($dificultad != null && $dificultad > 70 && $dificultad <= 100) {
+            $dificultad = 'Dificil';
+        }
+        return $dificultad;
+    }
 }

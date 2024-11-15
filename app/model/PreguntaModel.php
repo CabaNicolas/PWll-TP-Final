@@ -7,10 +7,10 @@ class PreguntaModel{
         $this->database = $database;
     }
 
-    public function showPreguntaRandom($idUsuario) {
+    public function showPreguntaRandom($idUsuario, $dificultadUsuario) {
         $this->verificarQueElUsuarioContestoTodasLasPreguntas($idUsuario);
 
-        $pregunta = $this->getPreguntaRandomQueTodaviaNoFueRespondidaPorElUsuario($idUsuario);
+        $pregunta = $this->getPreguntaRandomQueTodaviaNoFueRespondidaPorElUsuario($idUsuario, $dificultadUsuario);
 
         $pregunta = $this->getRespuestas($pregunta);
 
@@ -62,18 +62,20 @@ class PreguntaModel{
         $this->insertarRegistrosEnTablaRespuestaSugerida($respuestas, $idPreguntaSugerida, $respuestaCorrecta);
     }
 
-    private function getPreguntaRandomQueTodaviaNoFueRespondidaPorElUsuario($idUsuario){
+    private function getPreguntaRandomQueTodaviaNoFueRespondidaPorElUsuario($idUsuario, $dificultadUsuario) {
         $subconsulta = "(SELECT 1 FROM responde r WHERE r.idUsuario = " . $idUsuario . " AND r.idPregunta = p.idPregunta)";
+        $dificultadPregunta = "(SELECT (correcto / (correcto + incorrecto)) * 100 FROM Pregunta p2 WHERE p2.idPregunta = p.idPregunta AND (correcto + incorrecto) >= 5)";
 
-        $sqlPregunta = "SELECT p.idPregunta, p.descripcion, c.nombre AS categoria, c.color
+        $sqlPregunta = "SELECT p.idPregunta, p.descripcion, c.nombre AS categoria, c.color, COALESCE($dificultadPregunta, 50) AS dificultad
         FROM Pregunta p
         JOIN categoria c ON p.categoria = c.id
         WHERE NOT EXISTS" . $subconsulta . "
-        ORDER BY RAND()
-        LIMIT 1";
+        ORDER BY RAND()";
         $resultPregunta = $this->database->query($sqlPregunta);
 
-        return $resultPregunta[0];
+        $resultPregunta = $this->emparejarDificultad($dificultadUsuario, $resultPregunta);
+
+        return $resultPregunta;
     }
 
     private function getRespuestas($pregunta){
@@ -95,15 +97,25 @@ class PreguntaModel{
         return $pregunta;
     }
 
-    private function getPreguntaPorId($idPregunta)
-    {
-        $sqlPregunta = "SELECT p.idPregunta, p.descripcion, c.nombre AS categoria, c.color
+    private function getPreguntaPorId($idPregunta){
+        $dificultadPregunta = "(SELECT (correcto / (correcto + incorrecto)) * 100 FROM Pregunta p2 WHERE p2.idPregunta = p.idPregunta AND (correcto + incorrecto) >= 5)";
+
+        $sqlPregunta = "SELECT p.idPregunta, p.descripcion, c.nombre AS categoria, c.color, COALESCE($dificultadPregunta, 50) AS dificultad
         FROM Pregunta p
         JOIN categoria c ON p.categoria = c.id
         WHERE p.idPregunta = " . $idPregunta;
         $resultPregunta = $this->database->query($sqlPregunta);
-
         $pregunta = $resultPregunta[0];
+
+        if($pregunta['dificultad'] >= 0 && $pregunta['dificultad'] <= 30){
+            $pregunta['dificultad'] = 'Dificil';
+        }else if($pregunta['dificultad'] >= 70 && $pregunta['dificultad'] <= 100){
+            $pregunta['dificultad'] = 'Facil';
+        }else{
+            $pregunta['dificultad'] = 'Media';
+        }
+
+
         return $pregunta;
     }
 
@@ -308,12 +320,37 @@ class PreguntaModel{
         }
     }
 
+    private function emparejarDificultad($dificultadUsuario, $preguntas) {
+        $rangos = [
+            "Facil" => [70, 100],
+            "Media" => [31, 69],
+            "Dificil" => [0, 30]
+        ];
 
 
+        $prioridades = [
+            "Facil" => ["Facil", "Media", "Dificil"],
+            "Media" => ["Media", "Facil", "Dificil"],
+            "Dificil" => ["Dificil", "Media", "Facil"]
+        ];
 
+        if($dificultadUsuario == "Principiante"){
+            $preguntas[0]['dificultad'] = "Principiante";
+            return $preguntas[0];
+        }
 
-
-
+        $nivelesBusqueda = $prioridades[$dificultadUsuario];
+        foreach ($nivelesBusqueda as $nivel) {
+            $rango = $rangos[$nivel];
+            foreach ($preguntas as $pregunta) {
+                $dificultad = $pregunta['dificultad'];
+                if ($dificultad >= $rango[0] && $dificultad <= $rango[1]) {
+                    $pregunta['dificultad'] = $nivel;
+                    return $pregunta;
+                }
+            }
+        }
+    }
 
 
 }

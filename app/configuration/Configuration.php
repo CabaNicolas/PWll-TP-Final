@@ -30,7 +30,7 @@ class Configuration
     }
 
     public function getPartidaController(){
-        return new PartidaController($this->getPartidaModel(), $this->getPreguntaModel(), $this->getPresenter());
+        return new PartidaController($this->getUsuarioModel(), $this->getPartidaModel(), $this->getPreguntaModel(), $this->getPresenter());
     }
 
     public function getPreguntaController(){
