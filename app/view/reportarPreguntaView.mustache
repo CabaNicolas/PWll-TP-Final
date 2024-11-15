@@ -1,9 +1,9 @@
 
-<h2>Reportar Pregunta</h2>
+<h2 class="tituloReportarPregunta">Reportar Pregunta</h2>
 
-<form action="/pregunta/guardarReporte" method="post">
+<form class="formReportarPregunta" action="/pregunta/guardarReporte" method="post">
     <input type="hidden" name="idPregunta" value="{{idPregunta}}">
-    <label for="motivo">Motivo del reporte:</label>
-    <textarea name="motivo" id="motivo" value="motivo" required></textarea>
-    <button type="submit">Enviar Reporte</button>
+    <label class="motivoDeReporte" for="motivo">Motivo del reporte:</label>
+    <textarea class="espacioMotivoReporte" name="motivo" id="motivo" value="motivo" required></textarea>
+    <button class="botonEnviarReporte" type="submit">Enviar Reporte</button>
 </form>

@@ -30,4 +30,15 @@
 
 <a href="/usuario/showEditarPerfil"><input class="editarperfilboton" type="button" value="Editar Perfil"></a>
 
+  <div class="resumen-partidas-perfil">
+            <h3 class="h3-titulo-patidasJugadas">Partidas jugadas</h3><br>
+                <ul>
+                {{#partidas}}
+                    <li class="partidasPerfil">Partida {{indice}} - Puntaje {{puntaje}}</li><br>
+                {{/partidas}}
+                </ul>
+
+                </div>
+
+
 

@@ -312,6 +312,8 @@
     border: none;
     font-weight: bold;
     color: #f8f0d2;
+    height: calc(5em);
+    width: calc(6em);
 }
 .boton-lobby:hover{
     font-weight: bold;
@@ -320,7 +322,7 @@
 }
 
 .botones-lobby-child3 {
-    margin-left: 43.5%
+    margin-left: 45%;
 }
 
 .botones-lobby-child2{
@@ -359,6 +361,16 @@
 .boton-perfil{
     margin-right: 5.5%;
 }
+
+.boton-nueva-partida{
+   margin-right: calc(8em);
+}
+
+.resumen-partidas{
+    font-family: 'Rubik', sans-serif;
+    text-align: center;
+}
+
 
 /****************/
 /*ESTILOS PERFIL*/
@@ -595,6 +607,20 @@ a {
     background-position: calc(100% - 5px);
 }
 
+.botonReportarPregunta{
+    background-color: #6a43a3;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 80%;
+}
+
+.botonReportarPregunta :hover {
+    background-color: #503b75;
+}
 
 
 /*****************/
@@ -930,7 +956,18 @@ a {
 
 .titulo-sugeridas{
     color: white;
+    font-size: 2em;
+    font-weight: bold;
+    color: white;
 }
+
+.preguntaRespuesta-sugerida{
+    font-size: 1.6em;
+    font-weight: bold;
+    color: black;
+}
+
+
 .contenedor-preguntas-sugeridas .aprobar{
     background-color: #30e330;
     color: white;
@@ -944,6 +981,17 @@ a {
     margin: 4px 2px;
     cursor: pointer;
 }
+
+.aprobar{
+   width: calc(95%);
+    height: calc(95%);
+}
+
+.rechazar{
+    width: calc(95%);
+    height: calc(95%);
+}
+
 .contenedor-preguntas-sugeridas .aprobar:hover{
     background-color: #1f8c1f;
 
@@ -989,9 +1037,9 @@ li {
     padding: 5px 0;
 }
 
-/*****************/
+/******************************/
 /*ESTILOS PREGUNTAS REPORTADAS*/
-/*****************/
+/*****************************/
 
 .titulo-reportadas{
     color: white;
@@ -1043,11 +1091,94 @@ th, td {
     text-align: left;
 }
 th{
-    font-size: 20px;
+    font-size: 60em;
+    text-align: center;
+
+}
+
+/****************************/
+/*ESTILOS REPORTAR PREGUNTA*/
+/***************************/
+.tituloReportarPregunta{
+    font-size: 1.8em;
+    font-weight: bold;
+    color: white;
+}
+
+.formReportarPregunta{
+    font-family: 'Arial', sans-serif;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: calc(40em);
+    height: calc(20em);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.motivoDeReporte{
+    font-size: 1.3em;
+    font-weight: bold;
+    color: black;
+}
+
+.espacioMotivoReporte{
+    width: calc(394px);
+    height: calc(136px);
+    font-size: calc(1em);
+}
+
+.botonEnviarReporte {
+    background-color: #6a43a3;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 40%;
+}
+
+.botonEnviarReporte :hover {
+    background-color: #503b75;
+}
+
+/******************************/
+/*ESTILOS ADMINISTRADOR*/
+/*****************************/
+.bienvenida-admin{
     text-align: center;
 }
 
+.titulos-administrador{
+    font-size: 1.8em;
+    font-weight: bold;
+    color: black;
+}
 
+.subtitulos-administrador{
+    font-size: 1.5em;
+    font-weight: bold;
+    color: black;
+}
+
+.cantidad-administrador{
+    font-size: 1.5em;
+    font-weight: bold;
+    color: black;
+    padding-left: calc(2em);
+}
+
+.tabla-estadisticas{
+    margin-top: calc(3em);
+    border-radius: 8px;
+    width: calc(40em);
+    height: calc(15em);
+}
 
 /*****************/
 /*ESTILOS FOOTER*/
