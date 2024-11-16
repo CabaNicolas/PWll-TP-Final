@@ -79,7 +79,7 @@ class PreguntaModel{
     }
 
     private function getRespuestas($pregunta){
-        $sqlRespuestas = "SELECT idRespuesta, textoRespuesta FROM Respuesta WHERE idPregunta = " . $pregunta['idPregunta'];
+        $sqlRespuestas = "SELECT idRespuesta, textoRespuesta FROM Respuesta WHERE idPregunta = " . $pregunta['idPregunta'] . " ORDER BY RAND()";
         $resultRespuestas = $this->database->query($sqlRespuestas);
 
         $pregunta = $this->getArrayDeLaPreguntaConSusRespuestas($pregunta, $resultRespuestas);
