@@ -303,6 +303,8 @@ class UsuarioController
         $data['perfil'] = $this->model->verPerfilUsuario($nombreUsuario);
         $data['partidas'] = $this->model->verPartidasPorUsuario($nombreUsuario);
 
+        $data['qrUrl'] = "/PWll-TP-Final/app/public/qr_generator.php?nombreUsuario=" . urlencode($nombreUsuario);
+
         $this->presenter->show('usuarioPerfil', $data);
     }
 
