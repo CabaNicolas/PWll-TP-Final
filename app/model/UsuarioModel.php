@@ -60,7 +60,7 @@ class UsuarioModel
 
     }
 
-    public function guardarUsuario($username, $mail, $password, $name, $date, $sex, $foto)
+    public function guardarUsuario($username, $mail, $password, $name, $date, $sex, $foto, $lat, $long)
     {
         $nombreFoto = "";
         if(isset($foto)){
@@ -77,7 +77,7 @@ class UsuarioModel
 
         if(!$existe) {
             $idSexo = "(SELECT id FROM sexo WHERE nombre LIKE '%" . $sex . "%')";
-            $sql = "INSERT INTO usuario (mail, nombreUsuario, password, fechaNacimiento, nombreCompleto, foto, idSexo) VALUES ('" . $mail . "','" . $username . "','" . $password . "','" . $date . "','" . $name . "','" . $nombreFoto . "'," . $idSexo . ");";
+            $sql = "INSERT INTO usuario (mail, nombreUsuario, password, fechaNacimiento, nombreCompleto, foto, idSexo, latitud, longitud) VALUES ('" . $mail . "','" . $username . "','" . $password . "','" . $date . "','" . $name . "','" . $nombreFoto . "'," . $idSexo . "," . $lat . "," . $long . ");";
             $this->database->add($sql);
             $resultado =[
                 "exito" => true,

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-11-2024 a las 22:09:08
+-- Tiempo de generación: 16-11-2024 a las 17:37:04
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -79,19 +79,19 @@ CREATE TABLE `pregunta` (
 --
 
 INSERT INTO `pregunta` (`idPregunta`, `descripcion`, `categoria`, `correcto`, `incorrecto`) VALUES
-(1, '¿Cuál es el planeta más grande del sistema solar?', 1, 6, 0),
-(2, '¿Cuál es el río más largo del mundo?', 2, 2, 3),
-(3, '¿Cuál es el planeta más cercano al Sol?', 1, 7, 5),
-(4, '¿Qué gas es necesario para la respiración humana?', 1, 8, 5),
-(5, '¿Cuál es la capital de Japón?', 2, 11, 3),
-(6, '¿En qué continente se encuentra Egipto?', 2, 12, 3),
-(7, '¿Quién fue el primer presidente de los Estados Unidos?', 3, 10, 2),
-(8, '¿En qué año comenzó la Segunda Guerra Mundial?', 3, 9, 2),
+(1, '¿Cuál es el planeta más grande del sistema solar?', 1, 7, 0),
+(2, '¿Cuál es el río más largo del mundo?', 2, 3, 3),
+(3, '¿Cuál es el planeta más cercano al Sol?', 1, 9, 5),
+(4, '¿Qué gas es necesario para la respiración humana?', 1, 8, 7),
+(5, '¿Cuál es la capital de Japón?', 2, 12, 3),
+(6, '¿En qué continente se encuentra Egipto?', 2, 13, 3),
+(7, '¿Quién fue el primer presidente de los Estados Unidos?', 3, 11, 2),
+(8, '¿En qué año comenzó la Segunda Guerra Mundial?', 3, 9, 3),
 (9, '¿Cuántos jugadores tiene un equipo de fútbol en el campo?', 4, 11, 1),
-(10, '¿En qué deporte se utiliza una pelota de 3 agujeros?', 4, 11, 45),
-(11, '¿Quién pintó la Mona Lisa?', 5, 15, 50),
+(10, '¿En qué deporte se utiliza una pelota de 3 agujeros?', 4, 12, 45),
+(11, '¿Quién pintó la Mona Lisa?', 5, 16, 50),
 (12, '¿A qué movimiento artístico pertenece el cuadro \"La noche estrellada\"?', 5, 11, 47),
-(27, 'En que parte se encuentra el obelisco', 2, 7, 49);
+(27, 'En que parte se encuentra el obelisco', 2, 7, 50);
 
 -- --------------------------------------------------------
 
@@ -289,6 +289,8 @@ CREATE TABLE `usuario` (
   `fechaNacimiento` date NOT NULL,
   `nombreCompleto` varchar(30) NOT NULL,
   `foto` varchar(50) NOT NULL,
+  `latitud` decimal(10,8) NOT NULL,
+  `longitud` decimal(10,8) NOT NULL,
   `idSexo` int(11) NOT NULL,
   `token_verificacion` varchar(100) DEFAULT NULL,
   `cuenta_verificada` char(1) NOT NULL DEFAULT 'I',
@@ -301,12 +303,12 @@ CREATE TABLE `usuario` (
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id`, `mail`, `password`, `nombreUsuario`, `fechaNacimiento`, `nombreCompleto`, `foto`, `idSexo`, `token_verificacion`, `cuenta_verificada`, `rol_fk`, `preguntasEntregadas`, `respuestasCorrectas`) VALUES
-(1, 'nico@caba.com', '$2y$10$a6xiV/zP6M162QNYLMNhz.zaWbcw/MxnfqMMueYsBcNCBm8C7mJwq', 'BigPaik', '1997-11-27', 'Nicolas Caba', 'Galactus.webp', 1, NULL, 'A', 3, 4, 2),
-(2, 'nadia@gmail.com', '$2y$10$K42yPSwoNqHkuHfkZ591ReMlG9L1.YRdFV.paZ3.4AclCgtnXZ6yC', 'Nadi', '2000-08-09', 'Nadia Spinelli', 'avatar.jpg', 2, NULL, 'A', 3, 0, 0),
-(3, 'leverattomariag@gmail.com', '$2y$10$yTJFgcwQRz.QEjEX7WmIAO0sPEfy/AaTOBFT4Z1s5r8b92a7g9/wy', 'gabi', '2000-02-20', 'Maria Gabriela Leveratto', 'avatar.jpg', 1, NULL, 'A', 3, 0, 0),
-(4, 'admin@preguntones.com', '$2y$10$/MlVhHRMNPUmOv7YhIwarOjE./iist0xGU1JbRr3eC/hqEv9iCY.q', '111111', '2000-02-20', 'Admin', 'avatar.jpg', 3, NULL, 'A', 1, 0, 0),
-(5, 'editor@gmail.com', '$2y$10$BGjKYi2Wr.Wi.mutabU0HuyjjjIeqzWMC1R2n6g.TfxqVz1VVo3U.', 'Editor', '2000-02-20', 'Editor', 'avatar.jpg', 3, NULL, 'A', 2, 0, 0);
+INSERT INTO `usuario` (`id`, `mail`, `password`, `nombreUsuario`, `fechaNacimiento`, `nombreCompleto`, `foto`, `latitud`, `longitud`, `idSexo`, `token_verificacion`, `cuenta_verificada`, `rol_fk`, `preguntasEntregadas`, `respuestasCorrectas`) VALUES
+(1, 'nico@caba.com', '$2y$10$a6xiV/zP6M162QNYLMNhz.zaWbcw/MxnfqMMueYsBcNCBm8C7mJwq', 'BigPaik', '1997-11-27', 'Nicolas Caba', 'Galactus.webp', 0.00000000, 0.00000000, 1, NULL, 'A', 3, 19, 11),
+(2, 'nadia@gmail.com', '$2y$10$K42yPSwoNqHkuHfkZ591ReMlG9L1.YRdFV.paZ3.4AclCgtnXZ6yC', 'Nadi', '2000-08-09', 'Nadia Spinelli', 'avatar.jpg', 0.00000000, 0.00000000, 2, NULL, 'A', 3, 0, 0),
+(3, 'leverattomariag@gmail.com', '$2y$10$yTJFgcwQRz.QEjEX7WmIAO0sPEfy/AaTOBFT4Z1s5r8b92a7g9/wy', 'gabi', '2000-02-20', 'Maria Gabriela Leveratto', 'avatar.jpg', 0.00000000, 0.00000000, 1, NULL, 'A', 3, 0, 0),
+(4, 'admin@preguntones.com', '$2y$10$/MlVhHRMNPUmOv7YhIwarOjE./iist0xGU1JbRr3eC/hqEv9iCY.q', '111111', '2000-02-20', 'Admin', 'avatar.jpg', 0.00000000, 0.00000000, 3, NULL, 'A', 1, 0, 0),
+(5, 'editor@gmail.com', '$2y$10$BGjKYi2Wr.Wi.mutabU0HuyjjjIeqzWMC1R2n6g.TfxqVz1VVo3U.', 'Editor', '2000-02-20', 'Editor', 'avatar.jpg', 0.00000000, 0.00000000, 3, NULL, 'A', 2, 0, 0);
 
 --
 -- Índices para tablas volcadas

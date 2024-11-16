@@ -86,6 +86,8 @@ class UsuarioController
             $date = $_POST['date'];
             $sex = $_POST['sex'];
             $foto = $_FILES['foto'];
+            $lat = $_POST['lat'];
+            $long = $_POST['long'];
 
             $errores = $this->model->validarDatosRegistro($username, $mail, $password, $password2, $name, $date, $sex, $foto);
 
@@ -95,7 +97,7 @@ class UsuarioController
                 Redirecter::redirect('/usuario/showRegistro');
             }
 
-            $resultado = $this->model->guardarUsuario($username, $mail, $password, $name, $date, $sex, $foto);
+            $resultado = $this->model->guardarUsuario($username, $mail, $password, $name, $date, $sex, $foto, $lat, $long);
 
             if ($resultado['exito']) {
                 $token = $this->model->crearToken();

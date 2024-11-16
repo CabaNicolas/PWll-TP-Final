@@ -1,18 +1,25 @@
-function initMap() {
-    const map = new google.maps.Map(document.getElementById('map'), {
-        center: { lat: -34.397, lng: 150.644 },
-        zoom: 8
+document.addEventListener('DOMContentLoaded', function () {
+    const map = L.map('map').setView([-34.6037345, -58.3841453], 10);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    let marker = L.marker([-34.6037345, -58.3841453], { draggable: true }).addTo(map);
+
+    const actualizarCamposCoordenadas = (lat, lng) => {
+        document.getElementById('lat').value = lat.toFixed(8); // Máxima precisión
+        document.getElementById('long').value = lng.toFixed(8);
+    };
+
+    marker.on('dragend', function (event) {
+        const position = event.target.getLatLng();
+        actualizarCamposCoordenadas(position.lat, position.lng);
     });
 
-    google.maps.event.addListener(map, 'click', function(event) {
-        const geocoder = new google.maps.Geocoder();
-        geocoder.geocode({ location: event.latLng }, function(results, status) {
-            if (status === 'OK') {
-                const pais = results[0].address_components[3].long_name;
-                const ciudad = results[0].address_components[2].long_name;
-                document.getElementById('pais').value = pais;
-                document.getElementById('ciudad').value = ciudad;
-            }
-        });
+    map.on('click', function (e) {
+        const position = e.latlng;
+        marker.setLatLng(position);
+        actualizarCamposCoordenadas(position.lat, position.lng);
     });
-}
+});
