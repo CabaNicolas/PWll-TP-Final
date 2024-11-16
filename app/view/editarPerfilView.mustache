@@ -63,6 +63,11 @@
             {{/sexInvalido}}
         {{/error_messages}}
 
+        <label for="map" class="label-map etiqueta-label"><span>*</span>Ubicación:</label>
+        <div class="mapa-perfil" id="map" class="mapa"  data-lat="{{latitud}}" data-long="{{longitud}}"></div>
+        <input type="hidden" id="lat" name="lat">
+        <input type="hidden" id="long" name="long">
+
         <label class="label-editar-perfil" for="foto">Foto de Perfil:</label>
         <img class="img-editar-perfil" src="/public/images/{{foto}}" alt="Foto de Perfil" style="max-width: 100px; max-height: 100px;"/> <!-- Mostrar la foto actual -->
         <input class="input-editar-perfil" type="file" id="foto" name="foto">

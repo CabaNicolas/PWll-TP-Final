@@ -210,6 +210,8 @@ class UsuarioController
         $foto = $_FILES['foto'];
         $mailActual = $_SESSION['mail'];
         $usernameActual = $_SESSION['username'];
+        $lat = $_POST['lat'];
+        $long = $_POST['long'];
 
         $errores = $this->model->validarEditarPerfil($username, $mail, $password, $password2, $name, $date, $sex, $foto, $usernameActual, $mailActual);
 
@@ -218,7 +220,7 @@ class UsuarioController
            // $_SESSION['cambios'] = $resultado['mensaje'];
             Redirecter::redirect('/usuario/showEditarPerfil');
         } else {
-            $resultado = $this->model->actualizarDatosPerfil($username, $mail, $name, $date, $sex, $foto, $password,$mailActual);
+            $resultado = $this->model->actualizarDatosPerfil($username, $mail, $name, $date, $sex, $foto, $password,$mailActual, $lat, $long);
             if ($resultado['exito']) {
                 $_SESSION['mail'] = $mail;
                 $_SESSION['username'] = $username;

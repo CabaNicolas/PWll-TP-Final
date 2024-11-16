@@ -1,11 +1,15 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const map = L.map('map').setView([-34.6037345, -58.3841453], 10);
+    const mapContainer = document.getElementById('map');
+    const lat = parseFloat(mapContainer.dataset.lat);
+    const long = parseFloat(mapContainer.dataset.long);
+
+    const map = L.map('map').setView([lat, long], 10);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    let marker = L.marker([-34.6037345, -58.3841453], { draggable: true }).addTo(map);
+    let marker = L.marker([lat, long], { draggable: true }).addTo(map);
 
     const actualizarCamposCoordenadas = (lat, lng) => {
         document.getElementById('lat').value = lat.toFixed(8); // Máxima precisión

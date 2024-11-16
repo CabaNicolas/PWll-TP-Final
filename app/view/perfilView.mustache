@@ -23,9 +23,9 @@
     <p> Nombre de Usuario: {{nombreUsuario}} </p>
     <p> Mail: {{mail}} </p>
     <p> Fecha de Nacimiento: {{fechaNacimiento}} </p>
-
+    <label for="map" class="label-map etiqueta-label"><span>*</span>Ubicación:</label>
+    <div class="mapa-perfil" id="map" class="mapa"  data-lat="{{latitud}}" data-long="{{longitud}}"></div>
 </div>
-
 {{/usuario}}
 
 <a href="/usuario/showEditarPerfil"><input class="editarperfilboton" type="button" value="Editar Perfil"></a>

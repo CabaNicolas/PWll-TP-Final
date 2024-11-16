@@ -13,7 +13,7 @@
             <img class="img-foto-usuarioPerfil" alt="Imagen perfil" src="/public/images/{{foto}}">
             <p class="puntaje-perfil">Puntaje maximo alcanzado: {{puntajeMaximo}}</p>
 
-        {{/perfil}}
+
     </div>
 
     <div class="datos-usuario2">
@@ -22,10 +22,10 @@
         </div>
 
         <div class="mapa-usuarioPerfil">
-            <div class="mapa-perfil"><p>MAPA</p></div>
+            <div class="mapa-perfil" id="map" class="mapa"  data-lat="{{latitud}}" data-long="{{longitud}}"></div>
         </div>
     </div>
-
+    {{/perfil}}
     <div class="datos-usuario3">
         <div class="du-contenedor">
             {{#perfil}}

@@ -163,7 +163,7 @@ class UsuarioModel
         return $usuario;
     }
 
-    public function actualizarDatosPerfil($nombreUsuario, $mail, $nombreCompleto, $fechaNacimiento, $sexo, $foto, $password, $mailActual) {
+    public function actualizarDatosPerfil($nombreUsuario, $mail, $nombreCompleto, $fechaNacimiento, $sexo, $foto, $password, $mailActual, $lat, $long) {
 
         $sqlImagenActual = "SELECT foto FROM USUARIO WHERE mail = '" . $mailActual . "'";
         $imagenActual = $this->database->query($sqlImagenActual);
@@ -176,7 +176,9 @@ class UsuarioModel
         mail = '" . $mail . "', 
         nombreCompleto = '" . $nombreCompleto . "',
         fechaNacimiento = '" . $fechaNacimiento . "', 
-        idSexo = (SELECT id FROM sexo WHERE nombre LIKE '%" . $sexo . "%')";
+        idSexo = (SELECT id FROM sexo WHERE nombre LIKE '%" . $sexo . "%'),
+        latitud = " . $lat . ",
+        longitud = " . $long . " ";
 
 
         $nuevoNombreImagen = $this->manejarImagen($foto, $nombreImagenActual);
@@ -397,7 +399,7 @@ class UsuarioModel
 
 
     public function verPerfilUsuario($nombreUsuario) {
-        $sql = "SELECT nombreUsuario, mail, foto, nombreCompleto, fechaNacimiento, MAX(puntaje) as puntajeMaximo
+        $sql = "SELECT nombreUsuario, mail, foto, nombreCompleto, fechaNacimiento, MAX(puntaje) as puntajeMaximo, latitud, longitud
             FROM usuario 
             JOIN partida ON usuario.id = partida.idUsuario 
             WHERE nombreUsuario = '$nombreUsuario'";
