@@ -244,8 +244,7 @@ class PreguntaModel{
     public function obtenerCantidadPreguntasActivas()
     {
         $sql = "SELECT count(idPregunta) as cantidadPreguntas
-             FROM pregunta
-             WHERE estado LIKE 'activa'";
+             FROM pregunta";
 
         return $this->database->query($sql);
     }

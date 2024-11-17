@@ -435,7 +435,8 @@ class UsuarioModel
 
     public function obtenerCantidadJugadores(){
         $sql = "SELECT count(id) as cantidadJugadores
-            FROM usuario";
+            FROM usuario
+            WHERE rol_fk =3";
 
         return $this->database->query($sql);
     }
