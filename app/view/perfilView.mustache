@@ -2,43 +2,49 @@
 <link rel="stylesheet" href="/public/styles.css">
 
 
+<link rel="stylesheet" href="/public/styles.css">
 
+
+<link rel="stylesheet" href="/public/styles.css">
 
 <div class="botonesPerfil">
-<a href="/usuario/showLobby"><input class="volver" type="button" value="Volver"></a>
+    <a href="/usuario/showLobby"><input class="volver" type="button" value="Volver"></a>
 </div>
 
 {{#usuario}}
-<div class="h2-perfil">
-    <h2 class="nombreUsuario-perfil">{{nombreUsuario}}</h2>
+    <main class="contenido-main-usuarioPerfil">
+        <div class="perfil-usuario">
+            <div class="datos-usuario1">
+                <h2 class="nombre-usuarioPerfil-h2">{{nombreUsuario}}</h2>
+                <br>
+                <img class="img-foto-usuarioPerfil" alt="Imagen perfil" src="/public/images/{{foto}}">
+            </div>
 
-</div>
 
-<div class="datosPerfil">
-    {{#cambios}}
-        <p class="txt-cambio-perfil"> {{cambios}} </p>
-    {{/cambios}}
-    <img class="img-perfil" src="/public/images/{{foto}}" alt="Imagen perfil"/><br>
-    <p> Nombre Completo: {{nombreCompleto}} </p>
-    <p> Nombre de Usuario: {{nombreUsuario}} </p>
-    <p> Mail: {{mail}} </p>
-    <p> Fecha de Nacimiento: {{fechaNacimiento}} </p>
-    <label for="map" class="label-map etiqueta-label"><span>*</span>Ubicación:</label>
-    <div class="mapa-perfil" id="map" class="mapa"  data-lat="{{latitud}}" data-long="{{longitud}}"></div>
-</div>
+
+            <div class="datos-usuario3">
+                <div class="du-contenedor">
+                    <p class="texto-dato-perfil">Nombre Completo: {{nombreCompleto}}</p>
+                    <p class="texto-dato-perfil">Mail: {{mail}}</p>
+                    <p class="texto-dato-perfil">Fecha de Nacimiento: {{fechaNacimiento}}</p>
+                </div>
+                <div class="resumen-partidas">
+                    <h3 class="h3-titulo-patidasJugadas">Partidas jugadas</h3><br>
+                    <ul>
+                        {{#partidas}}
+                            <li class="partidasPerfil">Partida {{indice}} - Puntaje {{puntaje}}</li><br>
+                        {{/partidas}}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="datos-usuario2">
+                <div class="mapa-usuarioPerfil">
+                    <div class="mapa-perfil" id="map" data-lat="{{latitud}}" data-long="{{longitud}}"></div>
+                </div>
+            </div>
+        </div>
+    </main>
 {{/usuario}}
 
 <a href="/usuario/showEditarPerfil"><input class="editarperfilboton" type="button" value="Editar Perfil"></a>
-
-  <div class="resumen-partidas-perfil">
-            <h3 class="h3-titulo-patidasJugadas">Partidas jugadas</h3><br>
-                <ul>
-                {{#partidas}}
-                    <li class="partidasPerfil">Partida {{indice}} - Puntaje {{puntaje}}</li><br>
-                {{/partidas}}
-                </ul>
-
-                </div>
-
-
-

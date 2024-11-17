@@ -169,7 +169,10 @@ class UsuarioController
 
         $data['usuario'] = $this->model->mostrarDatosUsuario($_SESSION['mail']);
         $data['mail'] = $_SESSION['mail'];
-        if(isset($_SESSION['cambios'])){
+
+        $data['partidas'] = $this->model->verPartidasPorUsuario($_SESSION['username']);
+
+        if (isset($_SESSION['cambios'])) {
             $data['cambios'] = $_SESSION['cambios'];
             unset($_SESSION['cambios']);
         }

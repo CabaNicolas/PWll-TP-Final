@@ -485,7 +485,7 @@ a {
     display: flex;
     flex-direction: column;
     font-family: 'Arial', sans-serif;
-    background-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.37);
     padding: 40px;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -858,13 +858,27 @@ a {
     background: #555;
 }
 
+.partidasPerfil{
+    color: #ffffff;
+}
+
 /*****************/
 /*ESTILOS CREAR PREGUNTA*/
 /*****************/
+
+.crearPegunta-titulo{
+    font-size: 32px;
+    font-weight: bold;
+    color: #ffffff;
+    text-align: center;
+    margin: 50px 0 20px;
+    font-family: 'Arial', sans-serif;
+}
+
 .form-crear-pregunta {
     display: flex;
     flex-direction: column;
-    background-color: #111;
+    background-color: rgba(0, 0, 0, 0.76);
     color: #eee;
     padding: 20px;
     border-radius: 8px;
