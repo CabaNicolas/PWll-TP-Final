@@ -1,18 +1,21 @@
 
-<h2 class="crearPegunta-titulo"> Crear Pegunta </h2>
+<h2 class="crearPegunta-titulo"> Crear Pregunta </h2>
 <form action="/pregunta/crearPregunta" method="POST" class="form-crear-pregunta">
 
 
-    <label for="consigna">Consigna:<span>*</span></label>
+    <label for="consigna">Consigna: <br> <label> Escriba una pregunta clara y precisa para que los jugadores puedan comprenderla fácilmente. </label> <span>*</span></label>
     <input type="text" name="consigna" id="consigna" required>
 
-    <label for="categoria">Categoria:<span>*</span></label>
+    <label for="categoria">Categoria: <br> <label> Seleccione la categoría que mejor describa la temática de su pregunta </label> <span>*</span></label>
     <select name="categoria" id="categoria" required>
         <option value="" disabled selected>Selecciona una categoria</option>
         {{#categorias}}
             <option value="{{id}}">{{nombre}}</option>
         {{/categorias}}
     </select>
+<br>
+<label> Complete las opciones de respuesta:</label>
+<label>Proporcione las cuatro opciones de respuesta, asegúrese de que cada opción sea única y relevante para la pregunta planteada y seleccione la correcta. </label>
 
     <label for="respuesta1">Respuesta 1:<span>*</span></label>
     <div class="respuesta-container">
