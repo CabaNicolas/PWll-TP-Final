@@ -337,6 +337,7 @@ class UsuarioController
         $data['cantidadPartidas'] = $this->partidaModel->obtenerCantidadPartidasJugadas()[0]['cantidadPartidas'];
         $data['cantidadPreguntasActivas'] = $this->preguntaModel->obtenerCantidadPreguntasActivas()[0]['cantidadPreguntas'];
         $data['cantidadPreguntasCreadas'] = $this->preguntaModel->obtenerCantidadPreguntasCreadas()[0]['cantidadPreguntas'];
+        $data['cantidadPreguntasCorrectasPorUsuario'] = $this->model->obtenerPreguntasCorrectasPorUsuario()[0]['cantidadPreguntasCorrectas'];
 
         $this->presenter->show('administrador', $data);
     }

@@ -474,4 +474,15 @@ class UsuarioModel
         }
         return $dificultad;
     }
+
+    public function obtenerPreguntasCorrectasPorUsuario(){
+        $sql = "SELECT ROUND(AVG(porcentaje), 2) AS cantidadPreguntasCorrectas
+                FROM (
+                    SELECT (respuestasCorrectas / preguntasEntregadas) * 100 AS porcentaje
+                    FROM usuario
+                    WHERE preguntasEntregadas >= 10
+                ) AS porcentajes;";
+
+        return $this->database->query($sql);
+    }
 }
