@@ -6,6 +6,7 @@ include_once("helper/MustachePresenter.php");
 include_once('helper/FileEmailSender.php');
 include_once('helper/AutenticacionMiddleware.php');
 include_once('helper/Redirecter.php');
+include_once('helper/QR.php');
 
 include_once('controller/UsuarioController.php');
 include_once('controller/PartidaController.php');

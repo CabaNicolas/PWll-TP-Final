@@ -299,11 +299,15 @@ class UsuarioController
 
     public function showPerfilUsuario() {
 
-        $nombreUsuario = isset($_POST['nombreUsuario']) ? $_POST['nombreUsuario'] : null;
+        $nombreUsuario = isset($_GET['usuario']) ? $_GET['usuario'] : null;
         $data['mail'] = $_SESSION['mail'];
 
         $data['perfil'] = $this->model->verPerfilUsuario($nombreUsuario);
         $data['partidas'] = $this->model->verPartidasPorUsuario($nombreUsuario);
+
+        $enlacePerfil = "http://localhost/usuario/showPerfilUsuario?usuario=" . $nombreUsuario;
+        $nombreArchivoQR = QR::generarQr($enlacePerfil);
+        $data['qr_url'] = '/public/qr_codes/' . $nombreArchivoQR;
 
         $this->presenter->show('usuarioPerfil', $data);
     }

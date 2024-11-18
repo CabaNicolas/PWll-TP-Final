@@ -7,12 +7,12 @@
     <div class="ranking-contenedor">
         <img src="/public/images/estrellas.png" style="width: 160px" alt="Imagen estrella">
         {{#ranking}}
-            <form action="/usuario/showPerfilUsuario" method="POST" class="ranking-form">
+            <div class="ranking-form">
 
                 <p class="ranking-posicion">{{posicion}}</p>
                 <input type="hidden" name="nombreUsuario" value="{{nombreUsuario}}">
-                <button type="submit" class="ranking-nombre-usuario">{{nombreUsuario}}</button>
-            </form>
+                <a href="/usuario/showPerfilUsuario?usuario={{nombreUsuario}}" class="ranking-nombre-usuario">{{nombreUsuario}}</a>
+            </div>
             <p class="ranking-puntaje">{{puntajeMaximo}} puntos</p>
         {{/ranking}}
         {{^ranking}}
