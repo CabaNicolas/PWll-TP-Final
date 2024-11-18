@@ -220,7 +220,6 @@ class UsuarioController
 
         if(!empty($errores)){
             $_SESSION['error_messages'] = $errores;
-           // $_SESSION['cambios'] = $resultado['mensaje'];
             Redirecter::redirect('/usuario/showEditarPerfil');
         } else {
             $resultado = $this->model->actualizarDatosPerfil($username, $mail, $name, $date, $sex, $foto, $password,$mailActual, $lat, $long);

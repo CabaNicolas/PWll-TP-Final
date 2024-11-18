@@ -251,8 +251,8 @@ class PreguntaModel{
 
     public function obtenerCantidadPreguntasCreadas()
     {
-        $sql = "SELECT count(idPregunta) as cantidadPreguntas
-             FROM pregunta";
+        $sql = "SELECT count(id) as cantidadPreguntas
+             FROM pregunta_sugerida WHERE estado = 'aprobada'";
 
         return $this->database->query($sql);
     }
