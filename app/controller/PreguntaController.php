@@ -92,7 +92,7 @@ class PreguntaController{
         $idUsuario = $_SESSION['id'];
 
         $this->model->reportarPregunta($idPregunta, $idUsuario, $motivo);
-
+        $_SESSION['mensajeExito'] = "Pregunta reportada con exito";
         Redirecter::redirect('/partida/preguntaInvalidadaPorExpiracionDeTiempo');
     }
 
