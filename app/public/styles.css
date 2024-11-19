@@ -1191,13 +1191,18 @@ th{
     font-weight: bold;
     color: black;
     padding-left: calc(2em);
+    text-align: center;
 }
 
 .tabla-estadisticas{
     margin-top: calc(3em);
-    border-radius: 8px;
     width: calc(40em);
     height: calc(15em);
+    border: solid 1px black;
+
+}
+.tabla-estadisticas tr, td, th{
+    border: solid 1px black;
 }
 
 /*****************/

@@ -339,9 +339,22 @@ class UsuarioController
 
         $data['cantidadJugadores'] = $this->model->obtenerCantidadJugadores()[0]['cantidadJugadores'];
         $data['cantidadPartidas'] = $this->partidaModel->obtenerCantidadPartidasJugadas()[0]['cantidadPartidas'];
+        $data['cantidadPreguntasCorrectas'] = $this->model->obtenerPreguntasCorrectasPorUsuario()[0]['cantidadPreguntasCorrectas'];
+
         $data['cantidadPreguntasActivas'] = $this->preguntaModel->obtenerCantidadPreguntasActivas()[0]['cantidadPreguntas'];
-        $data['cantidadPreguntasCreadas'] = $this->preguntaModel->obtenerCantidadPreguntasCreadas()[0]['cantidadPreguntas'];
-        $data['cantidadPreguntasCorrectasPorUsuario'] = $this->model->obtenerPreguntasCorrectasPorUsuario()[0]['cantidadPreguntasCorrectas'];
+        $data['cantidadPreguntasSugeridas'] = $this->preguntaModel->obtenerCantidadPreguntasSugeridas()[0]['cantidadPreguntas'];
+        $data['cantidadPreguntasReportadas'] = $this->preguntaModel->obtenerCantidadPreguntasReportadas()[0]['cantidadPreguntas'];
+
+        $data['cantidadSugeridasAprobadas'] = $this->preguntaModel->obtenerCantidadSugeridasAprobadas()[0]['cantidadPreguntas'];
+        $data['cantidadSugeridasRechazadas'] = $this->preguntaModel->obtenerCantidadSugeridasRechazadas()[0]['cantidadPreguntas'];
+        $data['cantidadSugeridasPendientes'] = $this->preguntaModel->obtenerCantidadSugeridasPendientes()[0]['cantidadPreguntas'];
+
+        $data['cantidadReportadasAprobadas'] = $this->preguntaModel->obtenerCantidadReportadasAprobadas()[0]['cantidadPreguntas'];
+        $data['cantidadReportadasRechazadas'] = $this->preguntaModel->obtenerCantidadReportadasRechazadas()[0]['cantidadPreguntas'];
+        $data['cantidadReportadasPendientes'] = $this->preguntaModel->obtenerCantidadReportadasPendientes()[0]['cantidadPreguntas'];
+
+        $data['cantidadUsuariosPorSexo'] = $this->model->obtenerCantidadUsuariosPorSexo();
+
 
         $this->presenter->show('administrador', $data);
     }

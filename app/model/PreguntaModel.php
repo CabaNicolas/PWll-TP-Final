@@ -249,10 +249,59 @@ class PreguntaModel{
         return $this->database->query($sql);
     }
 
-    public function obtenerCantidadPreguntasCreadas()
+    public function obtenerCantidadPreguntasSugeridas()
+    {
+        $sql = "SELECT count(id) as cantidadPreguntas
+             FROM pregunta_sugerida";
+
+        return $this->database->query($sql);
+    }
+    public function obtenerCantidadPreguntasReportadas()
+    {
+        $sql = "SELECT count(idReporte) as cantidadPreguntas
+             FROM reportes_preguntas";
+
+        return $this->database->query($sql);
+    }
+    public function obtenerCantidadSugeridasAprobadas()
     {
         $sql = "SELECT count(id) as cantidadPreguntas
              FROM pregunta_sugerida WHERE estado = 'aprobada'";
+
+        return $this->database->query($sql);
+    }
+    public function obtenerCantidadSugeridasRechazadas()
+    {
+        $sql = "SELECT count(id) as cantidadPreguntas
+             FROM pregunta_sugerida WHERE estado = 'rechazada'";
+
+        return $this->database->query($sql);
+    }
+    public function obtenerCantidadSugeridasPendientes()
+    {
+        $sql = "SELECT count(id) as cantidadPreguntas
+             FROM pregunta_sugerida WHERE estado = 'pendiente'";
+
+        return $this->database->query($sql);
+    }
+    public function obtenerCantidadReportadasAprobadas()
+    {
+        $sql = "SELECT count(idReporte) as cantidadPreguntas
+             FROM reportes_preguntas WHERE estado = 'aprobada'";
+
+        return $this->database->query($sql);
+    }
+    public function obtenerCantidadReportadasRechazadas()
+    {
+        $sql = "SELECT count(idReporte) as cantidadPreguntas
+             FROM reportes_preguntas WHERE estado = 'rechazada'";
+
+        return $this->database->query($sql);
+    }
+    public function obtenerCantidadReportadasPendientes()
+    {
+        $sql = "SELECT count(idReporte) as cantidadPreguntas
+             FROM reportes_preguntas WHERE estado = 'pendiente'";
 
         return $this->database->query($sql);
     }

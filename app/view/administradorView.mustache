@@ -20,17 +20,97 @@
             <td class="cantidad-administrador">{{cantidadPartidas}}</td>
         </tr>
         <tr>
-            <td class="subtitulos-administrador">Cantidad de Preguntas Activas</td>
-            <td class="cantidad-administrador">{{cantidadPreguntasActivas}}</td>
-        </tr>
-        <tr>
-            <td class="subtitulos-administrador">Cantidad de Preguntas Creadas</td>
-            <td class="cantidad-administrador">{{cantidadPreguntasCreadas}}</td>
-        </tr>
-        <tr>
-            <td class="subtitulos-administrador">Cantidad de Respuestas Correctas por Usuario</td>
-            <td class="cantidad-administrador">{{cantidadPreguntasCorrectasPorUsuario}}%</td>
+            <td class="subtitulos-administrador" >Cantidad de Respuestas Correctas</td>
+            <td class="cantidad-administrador">{{cantidadPreguntasCorrectas}} %</td>
         </tr>
         </tbody>
     </table>
+
+    <table class="tabla-estadisticas">
+        <thead>
+        <tr>
+            <th class="titulos-administrador">Preguntas </th>
+            <th class="titulos-administrador">Cantidad</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="subtitulos-administrador">Activas</td>
+            <td class="cantidad-administrador">{{cantidadPreguntasActivas}}</td>
+        </tr>
+        <tr>
+            <td class="subtitulos-administrador">Sugeridas</td>
+            <td class="cantidad-administrador">{{cantidadPreguntasSugeridas}}</td>
+        </tr>
+        <tr>
+            <td class="subtitulos-administrador">Reportadas</td>
+            <td class="cantidad-administrador">{{cantidadPreguntasReportadas}}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table class="tabla-estadisticas">
+        <thead>
+        <tr>
+            <th class="titulos-administrador">Preguntas Sugeridas</th>
+            <th class="titulos-administrador">Cantidad</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="subtitulos-administrador">Aprobadas</td>
+            <td class="cantidad-administrador">{{cantidadSugeridasAprobadas}}</td>
+        </tr>
+        <tr>
+            <td class="subtitulos-administrador">Rechazadas</td>
+            <td class="cantidad-administrador">{{cantidadSugeridasRechazadas}}</td>
+        </tr>
+        <tr>
+            <td class="subtitulos-administrador">Pendientes</td>
+            <td class="cantidad-administrador">{{cantidadSugeridasPendientes}}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table class="tabla-estadisticas">
+        <thead>
+        <tr>
+            <th class="titulos-administrador">Preguntas Reportadas</th>
+            <th class="titulos-administrador">Cantidad</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="subtitulos-administrador">Aprobadas</td>
+            <td class="cantidad-administrador">{{cantidadReportadasAprobadas}}</td>
+        </tr>
+        <tr>
+            <td class="subtitulos-administrador">Rechazadas</td>
+            <td class="cantidad-administrador">{{cantidadReportadasRechazadas}}</td>
+        </tr>
+        <tr>
+            <td class="subtitulos-administrador">Pendientes</td>
+            <td class="cantidad-administrador">{{cantidadReportadasPendientes}}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table class="tabla-estadisticas">
+        <thead>
+        <tr>
+            <th class="titulos-administrador">Cantidad de Usuarios por Sexo</th>
+            <th class="titulos-administrador">Cantidad</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#cantidadUsuariosPorSexo}}
+            <tr>
+                <td class="subtitulos-administrador">{{sexo}}</td>
+                <td class="cantidad-administrador">{{cantidad}}</td>
+            </tr>
+        {{/cantidadUsuariosPorSexo}}
+        </tbody>
+    </table>
+    
+
 </main>

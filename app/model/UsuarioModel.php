@@ -485,4 +485,16 @@ class UsuarioModel
 
         return $this->database->query($sql);
     }
+
+    public function obtenerCantidadUsuariosPorSexo() {
+        $sql = "SELECT sexo.nombre AS sexo, COUNT(usuario.id) AS cantidad
+            FROM sexo
+            LEFT JOIN usuario ON usuario.idSexo = sexo.id AND usuario.rol_fk = 3
+            GROUP BY sexo.nombre";
+
+        return $this->database->query($sql);
+    }
+
+
+
 }
