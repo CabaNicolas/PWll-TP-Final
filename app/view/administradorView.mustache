@@ -20,7 +20,7 @@
             <td class="cantidad-administrador">{{cantidadPartidas}}</td>
         </tr>
         <tr>
-            <td class="subtitulos-administrador" >Cantidad de Respuestas Correctas</td>
+            <td class="subtitulos-administrador" >Respuestas Correctas por Usuario</td>
             <td class="cantidad-administrador">{{cantidadPreguntasCorrectas}} %</td>
         </tr>
         </tbody>
@@ -111,6 +111,10 @@
         {{/cantidadUsuariosPorSexo}}
         </tbody>
     </table>
-    
+    <img src="{{graficoJuego}}" alt="Estadísticas del Juego">
+    <img src="{{graficoPreguntasGenerales}}" alt="Distribución de Preguntas">
+    <img src="{{graficoPreguntasSugeridas}}" alt="Preguntas Sugeridas">
+    <img src="{{graficoPreguntasReportadas}}" alt="Preguntas Reportadas">
+
 
 </main>

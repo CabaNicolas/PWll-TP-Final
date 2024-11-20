@@ -337,25 +337,94 @@ class UsuarioController
         $data['mail'] = $_SESSION['mail'];
         $data['username'] = $_SESSION['username'];
 
-        $data['cantidadJugadores'] = $this->model->obtenerCantidadJugadores()[0]['cantidadJugadores'];
-        $data['cantidadPartidas'] = $this->partidaModel->obtenerCantidadPartidasJugadas()[0]['cantidadPartidas'];
-        $data['cantidadPreguntasCorrectas'] = $this->model->obtenerPreguntasCorrectasPorUsuario()[0]['cantidadPreguntasCorrectas'];
+        $data = $this->estadisticasDeJuego($data);
 
-        $data['cantidadPreguntasActivas'] = $this->preguntaModel->obtenerCantidadPreguntasActivas()[0]['cantidadPreguntas'];
-        $data['cantidadPreguntasSugeridas'] = $this->preguntaModel->obtenerCantidadPreguntasSugeridas()[0]['cantidadPreguntas'];
-        $data['cantidadPreguntasReportadas'] = $this->preguntaModel->obtenerCantidadPreguntasReportadas()[0]['cantidadPreguntas'];
+        $data = $this->estadisticasDePreguntasGenerales($data);
 
-        $data['cantidadSugeridasAprobadas'] = $this->preguntaModel->obtenerCantidadSugeridasAprobadas()[0]['cantidadPreguntas'];
-        $data['cantidadSugeridasRechazadas'] = $this->preguntaModel->obtenerCantidadSugeridasRechazadas()[0]['cantidadPreguntas'];
-        $data['cantidadSugeridasPendientes'] = $this->preguntaModel->obtenerCantidadSugeridasPendientes()[0]['cantidadPreguntas'];
+        $data = $this->estadisticasDePreguntasSugeridas($data);
 
-        $data['cantidadReportadasAprobadas'] = $this->preguntaModel->obtenerCantidadReportadasAprobadas()[0]['cantidadPreguntas'];
-        $data['cantidadReportadasRechazadas'] = $this->preguntaModel->obtenerCantidadReportadasRechazadas()[0]['cantidadPreguntas'];
-        $data['cantidadReportadasPendientes'] = $this->preguntaModel->obtenerCantidadReportadasPendientes()[0]['cantidadPreguntas'];
+        $data = $this->estadisticasDePreguntasReportadas($data);
 
         $data['cantidadUsuariosPorSexo'] = $this->model->obtenerCantidadUsuariosPorSexo();
 
 
         $this->presenter->show('administrador', $data);
+    }
+
+    public function estadisticasDeJuego($data)
+    {
+        $data['cantidadJugadores'] = $this->model->obtenerCantidadJugadores()[0]['cantidadJugadores'];
+        $data['cantidadPartidas'] = $this->partidaModel->obtenerCantidadPartidasJugadas()[0]['cantidadPartidas'];
+        $data['cantidadPreguntasCorrectas'] = $this->model->obtenerPreguntasCorrectasPorUsuario()[0]['cantidadPreguntasCorrectas'];
+
+        $datosGrafico = [
+            'etiquetas' => ['Jugadores', 'Partidas', 'Preguntas Correctas (%)'],
+            'valores' => [$data['cantidadJugadores'], $data['cantidadPartidas'], $data['cantidadPreguntasCorrectas']],
+            'tituloDelGrafico' => 'Estadisticas del juego',
+            'tituloDeX' => 'Juego',
+            'tituloDeY' => 'Cantidades',
+        ];
+
+        $data['graficoJuego'] = GraphHelper::generarBarplot($datosGrafico);
+
+        return $data;
+    }
+
+
+    public function estadisticasDePreguntasGenerales($data)
+    {
+        $data['cantidadPreguntasActivas'] = $this->preguntaModel->obtenerCantidadPreguntasActivas()[0]['cantidadPreguntas'];
+        $data['cantidadPreguntasSugeridas'] = $this->preguntaModel->obtenerCantidadPreguntasSugeridas()[0]['cantidadPreguntas'];
+        $data['cantidadPreguntasReportadas'] = $this->preguntaModel->obtenerCantidadPreguntasReportadas()[0]['cantidadPreguntas'];
+
+        $datosGrafico = [
+            'etiquetas' => ['Preguntas Activas', 'Preguntas Sugeridas', 'Preguntas Reportadas'],
+            'valores' => [$data['cantidadPreguntasActivas'], $data['cantidadPreguntasSugeridas'], $data['cantidadPreguntasReportadas']],
+            'tituloDelGrafico' => 'Estadisticas de preguntas generales',
+            'tituloDeX' => 'Preguntas',
+            'tituloDeY' => 'Cantidades',
+        ];
+
+        $data['graficoPreguntasGenerales'] = GraphHelper::generarBarplot($datosGrafico);
+
+        return $data;
+    }
+
+    public function estadisticasDePreguntasSugeridas($data)
+    {
+        $data['cantidadSugeridasAprobadas'] = $this->preguntaModel->obtenerCantidadSugeridasAprobadas()[0]['cantidadPreguntas'];
+        $data['cantidadSugeridasRechazadas'] = $this->preguntaModel->obtenerCantidadSugeridasRechazadas()[0]['cantidadPreguntas'];
+        $data['cantidadSugeridasPendientes'] = $this->preguntaModel->obtenerCantidadSugeridasPendientes()[0]['cantidadPreguntas'];
+
+        $datosGrafico = [
+            'etiquetas' => ['Aprobadas', 'Rechazadas', 'Pendientes'],
+            'valores' => [$data['cantidadSugeridasAprobadas'], $data['cantidadSugeridasRechazadas'], $data['cantidadSugeridasPendientes']],
+            'tituloDelGrafico' => 'Preguntas Sugeridas',
+        ];
+
+        $data['graficoPreguntasSugeridas'] = GraphHelper::generarPieplot($datosGrafico);
+
+        return $data;
+    }
+
+    /**
+     * @param $data
+     * @return mixed
+     */
+    public function estadisticasDePreguntasReportadas($data)
+    {
+        $data['cantidadReportadasAprobadas'] = $this->preguntaModel->obtenerCantidadReportadasAprobadas()[0]['cantidadPreguntas'];
+        $data['cantidadReportadasRechazadas'] = $this->preguntaModel->obtenerCantidadReportadasRechazadas()[0]['cantidadPreguntas'];
+        $data['cantidadReportadasPendientes'] = $this->preguntaModel->obtenerCantidadReportadasPendientes()[0]['cantidadPreguntas'];
+
+        $datosGrafico = [
+            'etiquetas' => ['Aprobadas', 'Rechazadas', 'Pendientes'],
+            'valores' => [$data['cantidadReportadasAprobadas'], $data['cantidadReportadasRechazadas'], $data['cantidadReportadasPendientes']],
+            'tituloDelGrafico' => 'Preguntas Reportadas',
+        ];
+
+        $data['graficoPreguntasReportadas'] = GraphHelper::generarPieplot($datosGrafico);
+
+        return $data;
     }
 }
