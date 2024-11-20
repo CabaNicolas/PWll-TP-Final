@@ -111,10 +111,18 @@
         {{/cantidadUsuariosPorSexo}}
         </tbody>
     </table>
-    <img src="{{graficoJuego}}" alt="Estadísticas del Juego">
-    <img src="{{graficoPreguntasGenerales}}" alt="Distribución de Preguntas">
-    <img src="{{graficoPreguntasSugeridas}}" alt="Preguntas Sugeridas">
-    <img src="{{graficoPreguntasReportadas}}" alt="Preguntas Reportadas">
+    <img class="graficos" src="{{graficoJuego}}" alt="Estadísticas del Juego">
+    <img class="graficos" src="{{graficoPreguntasGenerales}}" alt="Distribución de Preguntas">
+    <img class="graficos" src="{{graficoPreguntasSugeridas}}" alt="Preguntas Sugeridas">
+    <img class="graficos" src="{{graficoPreguntasReportadas}}" alt="Preguntas Reportadas">
+
+    <form id="pdfForm" action="/usuario/generarEstadisticasPDF" method="post">
+        <input type="hidden" name="html" id="htmlInput">
+        <button id="generarPDF">Generar PDF de Estadísticas</button>
+    </form>
+
+
+
 
 
 </main>

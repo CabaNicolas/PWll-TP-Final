@@ -8,6 +8,7 @@ include_once('helper/AutenticacionMiddleware.php');
 include_once('helper/Redirecter.php');
 include_once('helper/QR.php');
 include_once('helper/GraphHelper.php');
+include_once('helper/PDFHelper.php');
 
 include_once('controller/UsuarioController.php');
 include_once('controller/PartidaController.php');

@@ -407,10 +407,6 @@ class UsuarioController
         return $data;
     }
 
-    /**
-     * @param $data
-     * @return mixed
-     */
     public function estadisticasDePreguntasReportadas($data)
     {
         $data['cantidadReportadasAprobadas'] = $this->preguntaModel->obtenerCantidadReportadasAprobadas()[0]['cantidadPreguntas'];
@@ -426,5 +422,32 @@ class UsuarioController
         $data['graficoPreguntasReportadas'] = GraphHelper::generarPieplot($datosGrafico);
 
         return $data;
+    }
+
+    public function generarEstadisticasPDF(){
+        $html = isset($_POST['html']) ? $_POST['html'] : '';
+
+        $styles = " <style> 
+                        .tabla-estadisticas { 
+                            width: 100%; 
+                            border-collapse: collapse; 
+                        } 
+                        .tabla-estadisticas th, 
+                        .tabla-estadisticas td { 
+                            border: 1px solid #000; 
+                            padding: 8px; 
+                            text-align: left; 
+                        } 
+                        .tabla-estadisticas th { 
+                            background-color: #f2f2f2; 
+                        } 
+                    </style> ";
+        $baseURL = 'http://localhost/';
+        $html = str_replace('src="/public/graficos/', 'src="' . $baseURL . 'public/graficos/', $html);
+        $html = $styles . $html;
+
+        PDFHelper::generarPDF($html);
+
+        Redirecter::redirect("/usuario/showAdministrador");
     }
 }

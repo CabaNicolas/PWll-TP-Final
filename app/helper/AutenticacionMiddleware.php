@@ -40,6 +40,7 @@ class AutenticacionMiddleware{
         ],
         'admin' => [
             'usuario/showAdministrador',
+            'usuario/generarEstadisticasPDF'
         ]
     ];
     public function procesarSolicitud($controller, $methodName, $controllerName)

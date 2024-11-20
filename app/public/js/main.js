@@ -45,4 +45,21 @@ document.addEventListener('DOMContentLoaded', function () {
     }, 1000);
 });
 
+document.getElementById('generarPDF').onclick = function() {
+    let tablas = document.querySelectorAll('.tabla-estadisticas');
+    let htmlContent = '';
+
+    tablas.forEach(function(tabla) {
+        htmlContent += tabla.outerHTML;
+    });
+
+    let imagenes = document.querySelectorAll('.graficos');
+
+    imagenes.forEach(function(img) {
+        htmlContent += img.outerHTML;
+    });
+
+    document.getElementById('htmlInput').value = htmlContent;
+    document.getElementById('pdfForm').submit();
+};
 
