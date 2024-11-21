@@ -193,20 +193,18 @@ class PreguntaModel{
         $preguntaSugerida = is_array($resultPregunta) ? $resultPregunta[0] : $resultPregunta->fetch_assoc();
 
         if ($preguntaSugerida) {
-            //Insertar la pregunta en la tabla Pregunta
+
             $sqlInsertPregunta = "INSERT INTO Pregunta (descripcion, categoria) VALUES ('" .
                 $preguntaSugerida['descripcion'] . "', '" .
                 $preguntaSugerida['categoria'] . "')";
             $this->database->add($sqlInsertPregunta);
 
-            //Obtener el ID de la pregunta recién insertada
             $idPregunta = $this->database->lastInsertId();
 
-            //Obtener las respuestas asociadas de "respuesta_sugerida"
+
             $sqlRespuestas = "SELECT textoRespuesta, esCorrecta FROM respuesta_sugerida WHERE idPreguntaSugerida = " . $idPreguntaSugerida;
             $respuestasSugeridas = $this->database->query($sqlRespuestas);
 
-            //Insertar cada respuesta en la tabla `Respuesta` con el nuevo `idPregunta`
             foreach ($respuestasSugeridas as $respuesta) {
                 $sqlInsertRespuesta = "INSERT INTO respuesta (idPregunta, textoRespuesta, esCorrecta) VALUES (" .
                     $idPregunta . ", '" .
@@ -216,7 +214,6 @@ class PreguntaModel{
             }
 
 
-            //Actualizar el estado de la pregunta sugerida a "aprobada"
             $sqlUpdate = "UPDATE Pregunta_sugerida SET estado = 'aprobada' WHERE id = " . $idPreguntaSugerida;
             $this->database->add($sqlUpdate);
         }
@@ -228,7 +225,6 @@ class PreguntaModel{
         $preguntaSugerida = is_array($resultPregunta) ? $resultPregunta[0] : $resultPregunta->fetch_assoc();
 
         if ($preguntaSugerida) {
-            //Cambiar estado a "Rechazada". No la eliminamos porque luego necesitamos los datos de esta tabla
 
             $sqlUpdate = "UPDATE Pregunta_sugerida SET estado = 'rechazada' WHERE id = " . $idPreguntaSugerida;
             $this->database->add($sqlUpdate);

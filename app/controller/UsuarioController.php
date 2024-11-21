@@ -27,7 +27,6 @@ class UsuarioController
             unset($_SESSION['registro_exitoso']);
         }
 
-        //Pasar el mensaje de error si está en la sesión
         if (isset($_SESSION['error_message'])) {
             $data['error_message'] = $_SESSION['error_message'];
             // Eliminar el mensaje de la sesión para futuras visitas
@@ -43,7 +42,6 @@ class UsuarioController
             $this->logout();
         }
 
-        // Mostrar la vista de login con los datos
         $this->presenter->show('login', $data);
     }
 
@@ -157,10 +155,8 @@ class UsuarioController
 
     public function logout()
     {
-        //Destruir la sesión
         session_destroy();
 
-        //Redirigir al login después de cerrar la sesión
         Redirecter::redirect('/usuario/showLogin');
     }
 

@@ -418,7 +418,6 @@ class UsuarioModel
 
         $partidas = $this->database->query($sql);
 
-        //Agrego un indice a cada partida
         $index = 1;
         foreach ($partidas as &$partida) {
             $partida['indice'] = $index++;
