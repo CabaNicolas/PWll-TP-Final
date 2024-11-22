@@ -1,16 +1,13 @@
-
-
 <div class="vista-editor">
     {{#username}}
         <h2 class="bienvenida-editor">Bienvenido/a {{username}}!</h2>
     {{/username}}
     <br>
     <form action="/pregunta/showPreguntasSugeridas" method="POST" class="form-editor">
-        <button>Ver preguntas sugeridas</button>
+        <button class="boton-editor">Ver preguntas sugeridas</button>
     </form>
     <br><br>
-
     <form action="/pregunta/showPreguntasReportadas" method="POST" class="form-editor">
-        <button>Ver preguntas reportadas</button>
+        <button class="boton-editor">Ver preguntas reportadas</button>
     </form>
 </div>

@@ -718,6 +718,25 @@ a {
     margin-bottom: 15px;
 }
 
+
+.ranking-contenedor::-webkit-scrollbar {
+    width: 16px;
+}
+
+.ranking-contenedor::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 12px;
+}
+
+.ranking-contenedor::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 12px;
+}
+
+.ranking-contenedor::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
 /*****************/
 /*ESTILOS PERFIL USUARIOS*/
 /*****************/
@@ -970,171 +989,232 @@ a {
 /*ESTILOS VISTA EDITOR*/
 /*****************/
 
-.vista-editor button{
-    padding: 2vh;
-    background-color: rgba(255, 255, 255, 0.37);
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    border: none;
+.vista-editor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    margin: 0 auto;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 450px;
+    text-align: center;
+}
+
+.bienvenida-editor {
+    font-size: 2rem;
     font-weight: bold;
     color: #f8f0d2;
+    margin-bottom: 2rem;
+    font-family: 'Arial', sans-serif;
 }
 
+.form-editor {
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
 
-.vista-editor button:hover{
+.boton-editor {
+    display: inline-block;
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.2rem;
     font-weight: bold;
-    color:  #503b75;
-    background-color: white;
+    color: #503b75;
+    background-color: rgba(255, 255, 255, 0.67);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 }
 
+.boton-editor:hover {
+    color: white;
+    background-color: #503b75;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    transform: translateY(-2px);
+}
 
 /*****************/
 /*ESTILOS PREGUNTAS SUGERIDAS*/
 /*****************/
 
-.titulo-sugeridas{
-    color: white;
+.titulo-sugeridas {
     font-size: 2em;
+    color: white;
+    text-align: center;
+    margin: 1em 0;
+}
+
+.contenedor-preguntas-sugeridas {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.13);
+    border-radius: 8px;
+    width: 90%;
+    max-width: 900px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.contenedor-preguntas-sugeridas .aprobar,
+.contenedor-preguntas-sugeridas .rechazar {
+    padding: 8px 5px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
     font-weight: bold;
     color: white;
+    cursor: pointer;
+    width: 100%;
+    margin: 5px 0;
+    transition: background-color 0.3s ease;
 }
 
-.preguntaRespuesta-sugerida{
-    font-size: 1.6em;
-    font-weight: bold;
-    color: black;
-}
-
-
-.contenedor-preguntas-sugeridas .aprobar{
+.contenedor-preguntas-sugeridas .aprobar {
     background-color: #30e330;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
 }
 
-.aprobar{
-   width: calc(95%);
-    height: calc(95%);
-}
-
-.rechazar{
-    width: calc(95%);
-    height: calc(95%);
-}
-
-.contenedor-preguntas-sugeridas .aprobar:hover{
+.contenedor-preguntas-sugeridas .aprobar:hover {
     background-color: #1f8c1f;
-
 }
-.contenedor-preguntas-sugeridas .rechazar{
+
+.contenedor-preguntas-sugeridas .rechazar {
     background-color: #f14545;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
 }
-.contenedor-preguntas-sugeridas .rechazar:hover{
-    background-color: #c13939;
 
+.contenedor-preguntas-sugeridas .rechazar:hover {
+    background-color: #c13939;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    border-color: #111111;
     margin-bottom: 20px;
     background-color: rgba(255, 255, 255, 0.37);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
+
 th, td {
-    padding: 10px;
+    padding: 10px 15px;
     text-align: left;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
-th{
-    font-size: 20px;
+
+th {
+    font-size: 1.2em;
+    color: #333;
+    background-color: #f5f5f5;
     text-align: center;
 }
 
-ul {
-    padding: 10px;
+td {
+    font-size: 1em;
+    color: #111;
 }
+
+tr:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
 li {
     padding: 5px 0;
+    font-size: 0.9em;
+    color: #000000;
 }
+
 
 /******************************/
 /*ESTILOS PREGUNTAS REPORTADAS*/
 /*****************************/
 
-.titulo-reportadas{
+.titulo-reportadas {
+    font-size: 2em;
     color: white;
+    text-align: center;
+    margin: 1em 0;
 }
-.contenedor-preguntas-reportadas .aprobar{
+
+.contenedor-preguntas-reportadas {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.13);
+    border-radius: 8px;
+    width: 90%;
+    max-width: 900px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.contenedor-preguntas-reportadas .aprobar,
+.contenedor-preguntas-reportadas .rechazar {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    width: 100%;
+    margin: 5px 0;
+    transition: background-color 0.3s ease;
+}
+
+.contenedor-preguntas-reportadas .aprobar {
     background-color: #30e330;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
 }
-.contenedor-preguntas-reportadas .aprobar:hover{
+
+.contenedor-preguntas-reportadas .aprobar:hover {
     background-color: #1f8c1f;
-
 }
-.contenedor-preguntas-reportadas .rechazar{
+
+.contenedor-preguntas-reportadas .rechazar {
     background-color: #f14545;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
 }
-.contenedor-preguntas-reportadas .rechazar:hover{
-    background-color: #c13939;
 
+.contenedor-preguntas-reportadas .rechazar:hover {
+    background-color: #c13939;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    border-color: #111111;
     margin-bottom: 20px;
     background-color: rgba(255, 255, 255, 0.37);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
+
 th, td {
-    padding: 10px;
+    padding: 10px 15px;
     text-align: left;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
-th{
-    font-size: 60em;
+
+th {
+    font-size: 1.2em;
+    color: #333;
+    background-color: #f5f5f5;
     text-align: center;
-
 }
 
+td {
+    font-size: 1em;
+    color: #111;
+}
+
+tr:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
 /****************************/
 /*ESTILOS REPORTAR PREGUNTA*/
 /***************************/
