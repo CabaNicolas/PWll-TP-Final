@@ -356,9 +356,11 @@ class UsuarioController
             $data['cantidadJugadores'] = $this->model->obtenerCantidadJugadores()[0]['cantidadJugadores'];
         }
 
+        $data['cantidadPartidas'] = $this->partidaModel->obtenerCantidadPartidasPorFecha($filtroDeFecha)[0]['cantidadPartidas'];
 
-        $data['cantidadPartidas'] = $this->partidaModel->obtenerCantidadPartidasJugadas()[0]['cantidadPartidas'];
-        $data['cantidadPreguntasCorrectas'] = $this->model->obtenerPreguntasCorrectasPorUsuario()[0]['cantidadPreguntasCorrectas'];
+        $data['cantidadPreguntasCorrectas'] = $this->model->obtenerPreguntasCorrectasPorUsuarioPorFecha($filtroDeFecha)[0]['cantidadPreguntasCorrectas'];
+
+
 
         $datosGrafico = [
             'etiquetas' => ['Jugadores', 'Partidas', 'Preguntas Correctas (%)'],
@@ -373,16 +375,27 @@ class UsuarioController
         return $data;
     }
 
-    public function estadisticasDePreguntasGenerales($data)
-    {
+    public function estadisticasDePreguntasGenerales($data, $filtroDeFecha = '')
+    {if ($filtroDeFecha != '') {
+        $filtroDeFecha = $this->obtenerFechaInicio($filtroDeFecha);
+
+        $data['cantidadPreguntasActivas'] = $this->preguntaModel->obtenerCantidadPreguntasActivasPorFecha($filtroDeFecha)[0]['cantidadPreguntas'];
+        $data['cantidadPreguntasSugeridas'] = $this->preguntaModel->obtenerCantidadPreguntasSugeridasPorFecha($filtroDeFecha)[0]['cantidadPreguntas'];
+        $data['cantidadPreguntasReportadas'] = $this->preguntaModel->obtenerCantidadPreguntasReportadasPorFecha($filtroDeFecha)[0]['cantidadPreguntas'];
+    } else {
         $data['cantidadPreguntasActivas'] = $this->preguntaModel->obtenerCantidadPreguntasActivas()[0]['cantidadPreguntas'];
         $data['cantidadPreguntasSugeridas'] = $this->preguntaModel->obtenerCantidadPreguntasSugeridas()[0]['cantidadPreguntas'];
         $data['cantidadPreguntasReportadas'] = $this->preguntaModel->obtenerCantidadPreguntasReportadas()[0]['cantidadPreguntas'];
+    }
 
         $datosGrafico = [
             'etiquetas' => ['Preguntas Activas', 'Preguntas Sugeridas', 'Preguntas Reportadas'],
-            'valores' => [$data['cantidadPreguntasActivas'], $data['cantidadPreguntasSugeridas'], $data['cantidadPreguntasReportadas']],
-            'tituloDelGrafico' => 'Estadisticas de preguntas generales',
+            'valores' => [
+                $data['cantidadPreguntasActivas'],
+                $data['cantidadPreguntasSugeridas'],
+                $data['cantidadPreguntasReportadas']
+            ],
+            'tituloDelGrafico' => 'Estadísticas de preguntas generales',
             'tituloDeX' => 'Preguntas',
             'tituloDeY' => 'Cantidades',
         ];

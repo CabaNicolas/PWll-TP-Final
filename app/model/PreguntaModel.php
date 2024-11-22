@@ -245,6 +245,19 @@ class PreguntaModel{
         return $this->database->query($sql);
     }
 
+    ////
+    public function obtenerCantidadPreguntasActivasPorFecha($fecha)
+    {
+        $sql = "SELECT count(idPregunta) as cantidadPreguntas
+            FROM pregunta
+            WHERE estado = 'activa' AND fechaCreacion >= :fecha";
+
+        $stmt = $this->database->prepare($sql);
+        $stmt->bindParam(':fecha', $fecha, PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+    }
     public function obtenerCantidadPreguntasSugeridas()
     {
         $sql = "SELECT count(id) as cantidadPreguntas
@@ -252,6 +265,21 @@ class PreguntaModel{
 
         return $this->database->query($sql);
     }
+
+////
+    public function obtenerCantidadPreguntasSugeridasPorFecha($fecha)
+    {
+        $sql = "SELECT count(id) as cantidadPreguntas
+            FROM pregunta_sugerida
+            WHERE estado = 'sugerida' AND fechaSugerida >= :fecha";
+
+        $stmt = $this->database->prepare($sql);
+        $stmt->bindParam(':fecha', $fecha, PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+    }
+
     public function obtenerCantidadPreguntasReportadas()
     {
         $sql = "SELECT count(idReporte) as cantidadPreguntas
@@ -259,6 +287,21 @@ class PreguntaModel{
 
         return $this->database->query($sql);
     }
+
+////
+    public function obtenerCantidadPreguntasReportadasPorFecha($fecha)
+    {
+        $sql = "SELECT count(idReporte) as cantidadPreguntas
+            FROM reportes_preguntas
+            WHERE estado = 'reportada' AND fechaReporte >= :fecha";
+
+        $stmt = $this->database->prepare($sql);
+        $stmt->bindParam(':fecha', $fecha, PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+    }
+
     public function obtenerCantidadSugeridasAprobadas()
     {
         $sql = "SELECT count(id) as cantidadPreguntas
