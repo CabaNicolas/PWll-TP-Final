@@ -18,14 +18,11 @@ class Router
     public function route($controllerName, $methodName)
     {
         $controller = $this->getControllerFrom($controllerName);
-        if ($this->middleware) {
-            $array = $this->middleware->procesarSolicitud($controller, $methodName, $controllerName);
-            $controller = $array[0];
-            $methodName = $array[1];
-            $this->executeMethodFromController($controller, $methodName);
-        } else {
-            $this->executeMethodFromController($controller, $methodName);
-        }
+
+        $array = $this->middleware->procesarSolicitud($controller, $methodName, $controllerName);
+        $controller = $array[0];
+        $methodName = $array[1];
+        $this->executeMethodFromController($controller, $methodName);
     }
 
     private function getControllerFrom($module)
