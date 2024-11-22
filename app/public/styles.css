@@ -786,7 +786,26 @@ a {
 .mapa-usuarioPerfil {
     flex: 1;
 }
-.QR-perfil, .mapa-perfil{
+
+.QR-perfil {
+    width: 20em;
+    height: 15em;
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.QR-perfil img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.mapa-perfil{
     width: 20em;
     height: 15em;
     background-color: rgba(255, 255, 255, 0.37);
