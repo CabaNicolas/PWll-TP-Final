@@ -441,6 +441,14 @@ class UsuarioModel
         return $this->database->query($sql);
     }
 
+    public function obtenerCantidadJugadoresPorFecha($fecha){
+        $sql = "SELECT count(id) as cantidadJugadores
+            FROM usuario
+            WHERE rol_fk =3 AND fechaRegistro >= '$fecha'";
+
+        return $this->database->query($sql);
+    }
+
     public function aumentarLaCantidadDePreguntasMostradas($id){
         $sql = "UPDATE usuario SET preguntasEntregadas = preguntasEntregadas + 1 WHERE id = $id";
         $this->database->add($sql);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-11-2024 a las 17:37:04
+-- Tiempo de generación: 22-11-2024 a las 02:09:56
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -59,6 +59,24 @@ CREATE TABLE `partida` (
   `partidaFinalizada` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `partida`
+--
+
+INSERT INTO `partida` (`idPartida`, `idUsuario`, `fecha`, `puntaje`, `preguntaActual`, `partidaFinalizada`) VALUES
+(1, 1, '2024-11-16', 0, 9, 1),
+(2, 1, '2024-11-16', 0, 12, 1),
+(3, 1, '2024-11-16', 2, 27, 1),
+(4, 1, '2024-11-16', 1, 4, 1),
+(5, 1, '2024-11-16', 3, 8, 1),
+(6, 1, '2024-11-16', 3, 4, 1),
+(7, 9, '2024-11-16', 0, 11, 1),
+(8, 1, '2024-11-19', 1, 7, 1),
+(9, 1, '2024-11-19', 0, 5, 1),
+(10, 1, '2024-11-19', 0, 6, 1),
+(11, 1, '2024-11-21', 1, 1, 1),
+(12, 1, '2024-11-21', 0, 9, 1),
+(13, 1, '2024-11-21', 0, 27, 1);
 
 -- --------------------------------------------------------
 
@@ -79,17 +97,17 @@ CREATE TABLE `pregunta` (
 --
 
 INSERT INTO `pregunta` (`idPregunta`, `descripcion`, `categoria`, `correcto`, `incorrecto`) VALUES
-(1, '¿Cuál es el planeta más grande del sistema solar?', 1, 7, 0),
-(2, '¿Cuál es el río más largo del mundo?', 2, 3, 3),
+(1, '¿Cuál es el planeta más grande del sistema solar?', 1, 7, 1),
+(2, '¿Cuál es el río más largo del mundo?', 2, 4, 3),
 (3, '¿Cuál es el planeta más cercano al Sol?', 1, 9, 5),
 (4, '¿Qué gas es necesario para la respiración humana?', 1, 8, 7),
-(5, '¿Cuál es la capital de Japón?', 2, 12, 3),
+(5, '¿Cuál es la capital de Japón?', 2, 12, 4),
 (6, '¿En qué continente se encuentra Egipto?', 2, 13, 3),
-(7, '¿Quién fue el primer presidente de los Estados Unidos?', 3, 11, 2),
-(8, '¿En qué año comenzó la Segunda Guerra Mundial?', 3, 9, 3),
+(7, '¿Quién fue el primer presidente de los Estados Unidos?', 3, 11, 3),
+(8, '¿En qué año comenzó la Segunda Guerra Mundial?', 3, 10, 3),
 (9, '¿Cuántos jugadores tiene un equipo de fútbol en el campo?', 4, 11, 1),
 (10, '¿En qué deporte se utiliza una pelota de 3 agujeros?', 4, 12, 45),
-(11, '¿Quién pintó la Mona Lisa?', 5, 16, 50),
+(11, '¿Quién pintó la Mona Lisa?', 5, 16, 51),
 (12, '¿A qué movimiento artístico pertenece el cuadro \"La noche estrellada\"?', 5, 11, 47),
 (27, 'En que parte se encuentra el obelisco', 2, 7, 50);
 
@@ -146,6 +164,7 @@ CREATE TABLE `responde` (
   `idUsuario` int(11) NOT NULL,
   `idPregunta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 -- --------------------------------------------------------
 
@@ -296,19 +315,22 @@ CREATE TABLE `usuario` (
   `cuenta_verificada` char(1) NOT NULL DEFAULT 'I',
   `rol_fk` int(11) NOT NULL DEFAULT 3,
   `preguntasEntregadas` int(11) NOT NULL DEFAULT 0,
-  `respuestasCorrectas` int(11) NOT NULL DEFAULT 0
+  `respuestasCorrectas` int(11) NOT NULL DEFAULT 0,
+  `fechaRegistro` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id`, `mail`, `password`, `nombreUsuario`, `fechaNacimiento`, `nombreCompleto`, `foto`, `latitud`, `longitud`, `idSexo`, `token_verificacion`, `cuenta_verificada`, `rol_fk`, `preguntasEntregadas`, `respuestasCorrectas`) VALUES
-(1, 'nico@caba.com', '$2y$10$a6xiV/zP6M162QNYLMNhz.zaWbcw/MxnfqMMueYsBcNCBm8C7mJwq', 'BigPaik', '1997-11-27', 'Nicolas Caba', 'Galactus.webp', 0.00000000, 0.00000000, 1, NULL, 'A', 3, 19, 11),
-(2, 'nadia@gmail.com', '$2y$10$K42yPSwoNqHkuHfkZ591ReMlG9L1.YRdFV.paZ3.4AclCgtnXZ6yC', 'Nadi', '2000-08-09', 'Nadia Spinelli', 'avatar.jpg', 0.00000000, 0.00000000, 2, NULL, 'A', 3, 0, 0),
-(3, 'leverattomariag@gmail.com', '$2y$10$yTJFgcwQRz.QEjEX7WmIAO0sPEfy/AaTOBFT4Z1s5r8b92a7g9/wy', 'gabi', '2000-02-20', 'Maria Gabriela Leveratto', 'avatar.jpg', 0.00000000, 0.00000000, 1, NULL, 'A', 3, 0, 0),
-(4, 'admin@preguntones.com', '$2y$10$/MlVhHRMNPUmOv7YhIwarOjE./iist0xGU1JbRr3eC/hqEv9iCY.q', '111111', '2000-02-20', 'Admin', 'avatar.jpg', 0.00000000, 0.00000000, 3, NULL, 'A', 1, 0, 0),
-(5, 'editor@gmail.com', '$2y$10$BGjKYi2Wr.Wi.mutabU0HuyjjjIeqzWMC1R2n6g.TfxqVz1VVo3U.', 'Editor', '2000-02-20', 'Editor', 'avatar.jpg', 0.00000000, 0.00000000, 3, NULL, 'A', 2, 0, 0);
+INSERT INTO `usuario` (`id`, `mail`, `password`, `nombreUsuario`, `fechaNacimiento`, `nombreCompleto`, `foto`, `latitud`, `longitud`, `idSexo`, `token_verificacion`, `cuenta_verificada`, `rol_fk`, `preguntasEntregadas`, `respuestasCorrectas`, `fechaRegistro`) VALUES
+(1, 'nico@caba.com', '$2y$10$a6xiV/zP6M162QNYLMNhz.zaWbcw/MxnfqMMueYsBcNCBm8C7mJwq', 'BigPaik', '1997-11-27', 'Nicolas Caba', 'Galactus.webp', -34.64103666, -58.56549740, 1, NULL, 'A', 1, 27, 13, '2024-11-18'),
+(2, 'nadia@gmail.com', '$2y$10$K42yPSwoNqHkuHfkZ591ReMlG9L1.YRdFV.paZ3.4AclCgtnXZ6yC', 'Nadi', '2000-08-09', 'Nadia Spinelli', 'avatar.jpg', 0.00000000, 0.00000000, 2, NULL, 'A', 3, 20, 20, '2022-11-18'),
+(3, 'leverattomariag@gmail.com', '$2y$10$yTJFgcwQRz.QEjEX7WmIAO0sPEfy/AaTOBFT4Z1s5r8b92a7g9/wy', 'gabi', '2000-02-20', 'Maria Gabriela Leveratto', 'avatar.jpg', 0.00000000, 0.00000000, 1, NULL, 'A', 3, 0, 0, '2024-01-01'),
+(4, 'admin@preguntones.com', '$2y$10$/MlVhHRMNPUmOv7YhIwarOjE./iist0xGU1JbRr3eC/hqEv9iCY.q', '111111', '2000-02-20', 'Admin', 'avatar.jpg', 0.00000000, 0.00000000, 3, NULL, 'A', 1, 0, 0, '2024-11-18'),
+(5, 'editor@gmail.com', '$2y$10$BGjKYi2Wr.Wi.mutabU0HuyjjjIeqzWMC1R2n6g.TfxqVz1VVo3U.', 'Editor', '2000-02-20', 'Editor', 'avatar.jpg', 0.00000000, 0.00000000, 3, NULL, 'A', 2, 0, 0, '2024-11-18'),
+(9, 'test@map.com', '$2y$10$cjBB/uqDvpL.XQZLdAksJeTomN04.q26DdAoyINVWJ3q9CcX.pUxC', 'TestMap', '2222-02-22', 'Nicolas Caba', '', -34.65126507, -58.62204909, 1, NULL, 'A', 3, 1, 0, '2024-10-25'),
+(10, 'usuario@1.com', '$2y$10$jFmjaE7C.pgS9pMwfZhEW.bKQhFFgbl5yJFVRr/z17w6NboHg7pJW', 'usuario1', '2222-02-22', 'Usuario1', '', -34.64881393, -58.43817466, 1, '821011171b', 'I', 3, 0, 0, '2024-11-20');
 
 --
 -- Índices para tablas volcadas
@@ -389,7 +411,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `partida`
 --
 ALTER TABLE `partida`
-  MODIFY `idPartida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `idPartida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `pregunta`
@@ -407,7 +429,7 @@ ALTER TABLE `pregunta_sugerida`
 -- AUTO_INCREMENT de la tabla `reportes_preguntas`
 --
 ALTER TABLE `reportes_preguntas`
-  MODIFY `idReporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idReporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `respuesta`
@@ -437,7 +459,7 @@ ALTER TABLE `sexo`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Restricciones para tablas volcadas

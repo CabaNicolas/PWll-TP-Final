@@ -3,126 +3,143 @@
         <h2 class="bienvenida-admin">Bienvenido/a Admin {{username}}!</h2>
     {{/username}}
 
-    <table class="tabla-estadisticas">
-        <thead>
-        <tr>
-            <th class="titulos-administrador">Estadística</th>
-            <th class="titulos-administrador">Cantidad</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td class="subtitulos-administrador">Cantidad de Jugadores</td>
-            <td class="cantidad-administrador">{{cantidadJugadores}}</td>
-        </tr>
-        <tr>
-            <td class="subtitulos-administrador" >Cantidad de Partidas Jugadas</td>
-            <td class="cantidad-administrador">{{cantidadPartidas}}</td>
-        </tr>
-        <tr>
-            <td class="subtitulos-administrador" >Respuestas Correctas por Usuario</td>
-            <td class="cantidad-administrador">{{cantidadPreguntasCorrectas}} %</td>
-        </tr>
-        </tbody>
-    </table>
-
-    <table class="tabla-estadisticas">
-        <thead>
-        <tr>
-            <th class="titulos-administrador">Preguntas </th>
-            <th class="titulos-administrador">Cantidad</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td class="subtitulos-administrador">Activas</td>
-            <td class="cantidad-administrador">{{cantidadPreguntasActivas}}</td>
-        </tr>
-        <tr>
-            <td class="subtitulos-administrador">Sugeridas</td>
-            <td class="cantidad-administrador">{{cantidadPreguntasSugeridas}}</td>
-        </tr>
-        <tr>
-            <td class="subtitulos-administrador">Reportadas</td>
-            <td class="cantidad-administrador">{{cantidadPreguntasReportadas}}</td>
-        </tr>
-        </tbody>
-    </table>
-
-    <table class="tabla-estadisticas">
-        <thead>
-        <tr>
-            <th class="titulos-administrador">Preguntas Sugeridas</th>
-            <th class="titulos-administrador">Cantidad</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td class="subtitulos-administrador">Aprobadas</td>
-            <td class="cantidad-administrador">{{cantidadSugeridasAprobadas}}</td>
-        </tr>
-        <tr>
-            <td class="subtitulos-administrador">Rechazadas</td>
-            <td class="cantidad-administrador">{{cantidadSugeridasRechazadas}}</td>
-        </tr>
-        <tr>
-            <td class="subtitulos-administrador">Pendientes</td>
-            <td class="cantidad-administrador">{{cantidadSugeridasPendientes}}</td>
-        </tr>
-        </tbody>
-    </table>
-
-    <table class="tabla-estadisticas">
-        <thead>
-        <tr>
-            <th class="titulos-administrador">Preguntas Reportadas</th>
-            <th class="titulos-administrador">Cantidad</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td class="subtitulos-administrador">Aprobadas</td>
-            <td class="cantidad-administrador">{{cantidadReportadasAprobadas}}</td>
-        </tr>
-        <tr>
-            <td class="subtitulos-administrador">Rechazadas</td>
-            <td class="cantidad-administrador">{{cantidadReportadasRechazadas}}</td>
-        </tr>
-        <tr>
-            <td class="subtitulos-administrador">Pendientes</td>
-            <td class="cantidad-administrador">{{cantidadReportadasPendientes}}</td>
-        </tr>
-        </tbody>
-    </table>
-
-    <table class="tabla-estadisticas">
-        <thead>
-        <tr>
-            <th class="titulos-administrador">Cantidad de Usuarios por Sexo</th>
-            <th class="titulos-administrador">Cantidad</th>
-        </tr>
-        </thead>
-        <tbody>
-        {{#cantidadUsuariosPorSexo}}
-            <tr>
-                <td class="subtitulos-administrador">{{sexo}}</td>
-                <td class="cantidad-administrador">{{cantidad}}</td>
-            </tr>
-        {{/cantidadUsuariosPorSexo}}
-        </tbody>
-    </table>
-    <img class="graficos" src="{{graficoJuego}}" alt="Estadísticas del Juego">
-    <img class="graficos" src="{{graficoPreguntasGenerales}}" alt="Distribución de Preguntas">
-    <img class="graficos" src="{{graficoPreguntasSugeridas}}" alt="Preguntas Sugeridas">
-    <img class="graficos" src="{{graficoPreguntasReportadas}}" alt="Preguntas Reportadas">
+    <div class="filtrosEstadisticas">
+        <a class="filtrosPorFecha" href="/usuario/showAdministrador?fecha=ultimo_año">Ultimo año</a>
+        <a class="filtrosPorFecha" href="/usuario/showAdministrador?fecha=ultimo_mes">Ultimo mes</a>
+        <a class="filtrosPorFecha" href="/usuario/showAdministrador?fecha=ultima_semana">Ultima semana</a>
+        <a class="filtrosPorFecha" href="/usuario/showAdministrador">Historico</a>
+    </div>
 
     <form id="pdfForm" action="/usuario/generarEstadisticasPDF" method="post">
         <input type="hidden" name="html" id="htmlInput">
-        <button id="generarPDF">Generar PDF de Estadísticas</button>
+        <button id="generarPDF" class="filtrosPorFecha" >Generar PDF de Estadísticas</button>
     </form>
 
+    <div class="tablaYGrafico">
+        <table class="tabla-estadisticas">
+            <thead>
+            <tr>
+                <th class="titulos-administrador">Estadística</th>
+                <th class="titulos-administrador">Cantidad</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="subtitulos-administrador">Cantidad de Jugadores</td>
+                <td class="cantidad-administrador">{{cantidadJugadores}}</td>
+            </tr>
+            <tr>
+                <td class="subtitulos-administrador" >Cantidad de Partidas Jugadas</td>
+                <td class="cantidad-administrador">{{cantidadPartidas}}</td>
+            </tr>
+            <tr>
+                <td class="subtitulos-administrador" >Respuestas Correctas por Usuario</td>
+                <td class="cantidad-administrador">{{cantidadPreguntasCorrectas}} %</td>
+            </tr>
+            </tbody>
+        </table>
 
+        <img class="graficos" src="{{graficoJuego}}" alt="Estadísticas del Juego">
+    </div>
 
+    <div class="tablaYGrafico">
+        <table class="tabla-estadisticas">
+            <thead>
+            <tr>
+                <th class="titulos-administrador">Preguntas </th>
+                <th class="titulos-administrador">Cantidad</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="subtitulos-administrador">Activas</td>
+                <td class="cantidad-administrador">{{cantidadPreguntasActivas}}</td>
+            </tr>
+            <tr>
+                <td class="subtitulos-administrador">Sugeridas</td>
+                <td class="cantidad-administrador">{{cantidadPreguntasSugeridas}}</td>
+            </tr>
+            <tr>
+                <td class="subtitulos-administrador">Reportadas</td>
+                <td class="cantidad-administrador">{{cantidadPreguntasReportadas}}</td>
+            </tr>
+            </tbody>
+        </table>
 
+        <img class="graficos" src="{{graficoPreguntasGenerales}}" alt="Distribución de Preguntas">
+    </div>
+
+    <div class="tablaYGrafico">
+        <table class="tabla-estadisticas">
+            <thead>
+            <tr>
+                <th class="titulos-administrador">Preguntas Sugeridas</th>
+                <th class="titulos-administrador">Cantidad</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="subtitulos-administrador">Aprobadas</td>
+                <td class="cantidad-administrador">{{cantidadSugeridasAprobadas}}</td>
+            </tr>
+            <tr>
+                <td class="subtitulos-administrador">Rechazadas</td>
+                <td class="cantidad-administrador">{{cantidadSugeridasRechazadas}}</td>
+            </tr>
+            <tr>
+                <td class="subtitulos-administrador">Pendientes</td>
+                <td class="cantidad-administrador">{{cantidadSugeridasPendientes}}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <img class="graficos" src="{{graficoPreguntasSugeridas}}" alt="Preguntas Sugeridas">
+    </div>
+
+    <div class="tablaYGrafico">
+        <table class="tabla-estadisticas">
+            <thead>
+            <tr>
+                <th class="titulos-administrador">Preguntas Reportadas</th>
+                <th class="titulos-administrador">Cantidad</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="subtitulos-administrador">Aprobadas</td>
+                <td class="cantidad-administrador">{{cantidadReportadasAprobadas}}</td>
+            </tr>
+            <tr>
+                <td class="subtitulos-administrador">Rechazadas</td>
+                <td class="cantidad-administrador">{{cantidadReportadasRechazadas}}</td>
+            </tr>
+            <tr>
+                <td class="subtitulos-administrador">Pendientes</td>
+                <td class="cantidad-administrador">{{cantidadReportadasPendientes}}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <img class="graficos" src="{{graficoPreguntasReportadas}}" alt="Preguntas Reportadas">
+    </div>
+
+    <div class="tablaYGrafico">
+        <table class="tabla-estadisticas">
+            <thead>
+            <tr>
+                <th class="titulos-administrador">Cantidad de Usuarios por Sexo</th>
+                <th class="titulos-administrador">Cantidad</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#cantidadUsuariosPorSexo}}
+                <tr>
+                    <td class="subtitulos-administrador">{{sexo}}</td>
+                    <td class="cantidad-administrador">{{cantidad}}</td>
+                </tr>
+            {{/cantidadUsuariosPorSexo}}
+            </tbody>
+        </table>
+    </div>
 
 </main>

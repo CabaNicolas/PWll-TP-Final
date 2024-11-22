@@ -27,10 +27,8 @@ class UsuarioController
             unset($_SESSION['registro_exitoso']);
         }
 
-        //Pasar el mensaje de error si está en la sesión
         if (isset($_SESSION['error_message'])) {
             $data['error_message'] = $_SESSION['error_message'];
-            // Eliminar el mensaje de la sesión para futuras visitas
             unset($_SESSION['error_message']);
         }
 
@@ -43,7 +41,6 @@ class UsuarioController
             $this->logout();
         }
 
-        // Mostrar la vista de login con los datos
         $this->presenter->show('login', $data);
     }
 
@@ -75,7 +72,6 @@ class UsuarioController
         $this->presenter->show('lobby', $data);
     }
     public function registrarUsuario() {
-
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $mail = $_POST['mail'];
@@ -157,10 +153,8 @@ class UsuarioController
 
     public function logout()
     {
-        //Destruir la sesión
         session_destroy();
 
-        //Redirigir al login después de cerrar la sesión
         Redirecter::redirect('/usuario/showLogin');
     }
 
@@ -337,7 +331,9 @@ class UsuarioController
         $data['mail'] = $_SESSION['mail'];
         $data['username'] = $_SESSION['username'];
 
-        $data = $this->estadisticasDeJuego($data);
+        $filtroDeFecha = isset($_GET['fecha']) ? $_GET['fecha'] : '';
+
+        $data = $this->estadisticasDeJuego($data, $filtroDeFecha);
 
         $data = $this->estadisticasDePreguntasGenerales($data);
 
@@ -351,9 +347,16 @@ class UsuarioController
         $this->presenter->show('administrador', $data);
     }
 
-    public function estadisticasDeJuego($data)
-    {
-        $data['cantidadJugadores'] = $this->model->obtenerCantidadJugadores()[0]['cantidadJugadores'];
+    public function estadisticasDeJuego($data, $filtroDeFecha){
+
+        if($filtroDeFecha != ''){
+            $filtroDeFecha = $this->obtenerFechaInicio($filtroDeFecha);
+            $data['cantidadJugadores'] = $this->model->obtenerCantidadJugadoresPorFecha($filtroDeFecha)[0]['cantidadJugadores'];
+        }else{
+            $data['cantidadJugadores'] = $this->model->obtenerCantidadJugadores()[0]['cantidadJugadores'];
+        }
+
+
         $data['cantidadPartidas'] = $this->partidaModel->obtenerCantidadPartidasJugadas()[0]['cantidadPartidas'];
         $data['cantidadPreguntasCorrectas'] = $this->model->obtenerPreguntasCorrectasPorUsuario()[0]['cantidadPreguntasCorrectas'];
 
@@ -369,7 +372,6 @@ class UsuarioController
 
         return $data;
     }
-
 
     public function estadisticasDePreguntasGenerales($data)
     {
@@ -449,5 +451,20 @@ class UsuarioController
         PDFHelper::generarPDF($html);
 
         Redirecter::redirect("/usuario/showAdministrador");
+    }
+
+    private function obtenerFechaInicio($filtroDeFecha){
+        switch($filtroDeFecha){
+            case 'ultimo_mes':
+                return date('Y-m-d', strtotime('-1 month'));
+                break;
+            case 'ultimo_año':
+                return date('Y-m-d', strtotime('-1 year'));
+                break;
+            case 'ultima_semana':
+            default:
+                return date('Y-m-d', strtotime('-1 week'));
+                break;
+        }
     }
 }

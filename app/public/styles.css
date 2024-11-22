@@ -1205,6 +1205,59 @@ th{
     border: solid 1px black;
 }
 
+
+.filtrosPorFecha {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    color: #FFFFFF;
+    background-color: #333333;
+    border: 2px solid #FFFFFF;
+    border-radius: 5px;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.filtrosPorFecha:hover {
+    background-color: #FFFFFF;
+    color: #333333;
+}
+
+.filtrosEstadisticas {
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+.graficos {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 20px auto;
+    border: 2px solid #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.tablaYGrafico {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 20px 0;
+    gap: 20px;
+}
+
+
+#pdfForm {
+    text-align: center;
+    margin-top: 20px;
+}
+
+
 /*****************/
 /*ESTILOS FOOTER*/
 /*****************/
