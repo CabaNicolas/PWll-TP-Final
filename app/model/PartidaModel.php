@@ -37,14 +37,21 @@ class PartidaModel
         $this->database->add($sql);
     }
 
+    public function obtenerCantidadPartidasJugadas()
+    {
+        $sql = "SELECT count(idPartida) as cantidadPartidas
+            FROM partida";
+        return $this->database->query($sql);
+    }
+
     //
     public function obtenerCantidadPartidasPorFecha($fecha)
     {
         $sql = "SELECT COUNT(idPartida) AS cantidadPartidas
             FROM partida
-            WHERE fecha >= ?";
+            WHERE fecha >= '$fecha'";
 
-        return $this->database->query($sql, [$fecha]);
+        return $this->database->query($sql);
     }
 }
 

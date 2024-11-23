@@ -155,7 +155,11 @@ CREATE TABLE `reportes_preguntas` (
 --
 
 INSERT INTO `reportes_preguntas` (`idReporte`, `idPregunta`, `idUsuario`, `motivo`, `estado`, `fechaReporte`) VALUES
-(1, 9, 8, 'No me gusta el futbol', 'pendiente', '2024-11-16');
+(1, 9, 8, 'No me gusta el futbol', 'pendiente', '2024-11-16'),
+(5, 8, 8, 'me parece ofensivo', 'pendiente', '2020-11-16'),
+(6, 2, 8, 'me parece que esta mal', 'pendiente', '2024-09-16');
+
+
 
 -- --------------------------------------------------------
 

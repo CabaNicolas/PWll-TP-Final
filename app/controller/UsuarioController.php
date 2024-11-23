@@ -350,14 +350,15 @@ class UsuarioController
         if($filtroDeFecha != ''){
             $filtroDeFecha = $this->obtenerFechaInicio($filtroDeFecha);
             $data['cantidadJugadores'] = $this->model->obtenerCantidadJugadoresPorFecha($filtroDeFecha)[0]['cantidadJugadores'];
+            $data['cantidadPartidas'] = $this->partidaModel->obtenerCantidadPartidasPorFecha($filtroDeFecha)[0]['cantidadPartidas'];
+            $data['cantidadPreguntasCorrectas'] = $this->model->obtenerPreguntasCorrectasPorUsuarioPorFecha($filtroDeFecha)[0]['cantidadPreguntasCorrectas'];
+
         }else{
             $data['cantidadJugadores'] = $this->model->obtenerCantidadJugadores()[0]['cantidadJugadores'];
+            $data['cantidadPartidas'] = $this->partidaModel->obtenerCantidadPartidasJugadas()[0]['cantidadPartidas'];
+            $data['cantidadPreguntasCorrectas'] = $this->model->obtenerPreguntasCorrectasPorUsuario()[0]['cantidadPreguntasCorrectas'];
+
         }
-
-        $data['cantidadPartidas'] = $this->partidaModel->obtenerCantidadPartidasPorFecha($filtroDeFecha)[0]['cantidadPartidas'];
-
-        $data['cantidadPreguntasCorrectas'] = $this->model->obtenerPreguntasCorrectasPorUsuarioPorFecha($filtroDeFecha)[0]['cantidadPreguntasCorrectas'];
-
 
 
         $datosGrafico = [
