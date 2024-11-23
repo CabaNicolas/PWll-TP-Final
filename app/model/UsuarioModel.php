@@ -537,4 +537,34 @@ class UsuarioModel
         return $this->database->query($sql);
     }
 
+    public function obtenerCantidadUsuariosPorEdad() {
+        $sql = "SELECT 
+                CASE 
+                    WHEN TIMESTAMPDIFF(YEAR, usuario.fechaNacimiento, CURDATE()) < 18 THEN 'Menores'
+                    WHEN TIMESTAMPDIFF(YEAR, usuario.fechaNacimiento, CURDATE()) BETWEEN 18 AND 64 THEN 'Adultos'
+                    ELSE 'Jubilados'
+                END AS grupoEdad,
+                COUNT(usuario.id) AS cantidad
+            FROM usuario
+            WHERE usuario.rol_fk = 3
+            GROUP BY grupoEdad";
+
+        return $this->database->query($sql);
+    }
+
+    public function obtenerCantidadUsuariosPorEdadPorFecha($fecha) {
+        $sql = "SELECT 
+                CASE 
+                    WHEN TIMESTAMPDIFF(YEAR, usuario.fechaNacimiento, CURDATE()) < 18 THEN 'Menores'
+                    WHEN TIMESTAMPDIFF(YEAR, usuario.fechaNacimiento, CURDATE()) BETWEEN 18 AND 64 THEN 'Adultos'
+                    ELSE 'Jubilados'
+                END AS grupoEdad,
+                COUNT(usuario.id) AS cantidad
+            FROM usuario
+            WHERE usuario.rol_fk = 3 AND usuario.fechaRegistro >= '$fecha'
+            GROUP BY grupoEdad";
+
+        return $this->database->query($sql);
+    }
+
 }
