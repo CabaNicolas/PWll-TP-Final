@@ -1269,37 +1269,44 @@ tr:hover {
 /******************************/
 /*ESTILOS ADMINISTRADOR*/
 /*****************************/
-.bienvenida-admin{
+.bienvenida-admin {
     text-align: center;
-}
-
-.titulos-administrador{
     font-size: 1.8em;
     font-weight: bold;
-    color: black;
+    color: #000000;
+    margin-bottom: 40px;
 }
 
-.subtitulos-administrador{
-    font-size: 1.5em;
-    font-weight: bold;
+.titulos-administrador {
+    font-size: 1.2em;
     color: black;
+    font-family: Arial, sans-serif;
 }
 
-.cantidad-administrador{
-    font-size: 1.5em;
+.subtitulos-administrador {
+    font-size: 1em;
+    color: black;
+    font-family: Arial, sans-serif;
+}
+
+.cantidad-administrador {
+    font-size: 1.1em;
     font-weight: bold;
     color: black;
     padding-left: calc(2em);
     text-align: center;
+    font-family: Arial, sans-serif;
 }
 
 .tabla-estadisticas{
     margin-top: calc(3em);
-    width: calc(40em);
-    height: calc(15em);
+    width: calc(28em);
+    height: calc(12em);
     border: solid 1px black;
 
 }
+
+
 .tabla-estadisticas tr, td, th{
     border: solid 1px black;
 }
@@ -1309,21 +1316,27 @@ tr:hover {
     display: inline-block;
     padding: 10px 20px;
     margin: 10px;
-    color: #FFFFFF;
-    background-color: #333333;
-    border: 2px solid #FFFFFF;
+    color: #503b75;
+    background-color: rgba(255, 255, 255, 0.67);
+    border: solid 1px rgba(255, 255, 255, 0.55);
     border-radius: 5px;
     text-decoration: none;
     font-family: Arial, sans-serif;
     font-size: 16px;
     text-align: center;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    font-weight: bold;
+    transition: all 0.2s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 }
 
+
 .filtrosPorFecha:hover {
-    background-color: #FFFFFF;
-    color: #333333;
+    color: white;
+    background-color: #503b75;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    transform: translateY(-1px);
 }
+
 
 .filtrosEstadisticas {
     text-align: center;
@@ -1333,7 +1346,7 @@ tr:hover {
 
 .graficos {
     display: block;
-    max-width: 100%;
+    width: 35%;
     height: auto;
     margin: 20px auto;
     border: 2px solid #FFFFFF;
