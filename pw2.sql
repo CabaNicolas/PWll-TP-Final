@@ -89,27 +89,28 @@ CREATE TABLE `pregunta` (
   `descripcion` varchar(255) DEFAULT NULL,
   `categoria` int(11) NOT NULL,
   `correcto` int(11) NOT NULL DEFAULT 0,
-  `incorrecto` int(11) NOT NULL DEFAULT 0
+  `incorrecto` int(11) NOT NULL DEFAULT 0,
+  `fechaCreacion` DATE DEFAULT CURRENT_DATE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `pregunta`
 --
 
-INSERT INTO `pregunta` (`idPregunta`, `descripcion`, `categoria`, `correcto`, `incorrecto`) VALUES
-(1, '¿Cuál es el planeta más grande del sistema solar?', 1, 7, 1),
-(2, '¿Cuál es el río más largo del mundo?', 2, 4, 3),
-(3, '¿Cuál es el planeta más cercano al Sol?', 1, 9, 5),
-(4, '¿Qué gas es necesario para la respiración humana?', 1, 8, 7),
-(5, '¿Cuál es la capital de Japón?', 2, 12, 4),
-(6, '¿En qué continente se encuentra Egipto?', 2, 13, 3),
-(7, '¿Quién fue el primer presidente de los Estados Unidos?', 3, 11, 3),
-(8, '¿En qué año comenzó la Segunda Guerra Mundial?', 3, 10, 3),
-(9, '¿Cuántos jugadores tiene un equipo de fútbol en el campo?', 4, 11, 1),
-(10, '¿En qué deporte se utiliza una pelota de 3 agujeros?', 4, 12, 45),
-(11, '¿Quién pintó la Mona Lisa?', 5, 16, 51),
-(12, '¿A qué movimiento artístico pertenece el cuadro \"La noche estrellada\"?', 5, 11, 47),
-(27, 'En que parte se encuentra el obelisco', 2, 7, 50);
+INSERT INTO `pregunta` (`idPregunta`, `descripcion`, `categoria`, `correcto`, `incorrecto`, `fechaCreacion` ) VALUES
+(1, '¿Cuál es el planeta más grande del sistema solar?', 1, 7, 1, '2024-11-16'),
+(2, '¿Cuál es el río más largo del mundo?', 2, 4, 3, '2024-09-16'),
+(3, '¿Cuál es el planeta más cercano al Sol?', 1, 9, 5, '2020-11-16'),
+(4, '¿Qué gas es necesario para la respiración humana?', 1, 8, 7, '2020-11-16'),
+(5, '¿Cuál es la capital de Japón?', 2, 12, 4, '2023-11-16'),
+(6, '¿En qué continente se encuentra Egipto?', 2, 13, 3, '2024-11-23'),
+(7, '¿Quién fue el primer presidente de los Estados Unidos?', 3, 11, 3, '2024-11-23'),
+(8, '¿En qué año comenzó la Segunda Guerra Mundial?', 3, 10, 3, '2024-11-16'),
+(9, '¿Cuántos jugadores tiene un equipo de fútbol en el campo?', 4, 11, 1, '2024-11-16'),
+(10, '¿En qué deporte se utiliza una pelota de 3 agujeros?', 4, 12, 45, '2024-11-16'),
+(11, '¿Quién pintó la Mona Lisa?', 5, 16, 51, '2024-11-16'),
+(12, '¿A qué movimiento artístico pertenece el cuadro \"La noche estrellada\"?', 5, 11, 47, '2024-11-16'),
+(27, 'En que parte se encuentra el obelisco', 2, 7, 50, '2024-11-16');
 
 -- --------------------------------------------------------
 
@@ -121,17 +122,18 @@ CREATE TABLE `pregunta_sugerida` (
   `id` int(11) NOT NULL,
   `descripcion` varchar(255) NOT NULL,
   `categoria` int(11) NOT NULL,
-  `estado` text NOT NULL
+  `estado` text NOT NULL,
+  `fechaSugerida` DATE DEFAULT CURRENT_DATE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `pregunta_sugerida`
 --
 
-INSERT INTO `pregunta_sugerida` (`id`, `descripcion`, `categoria`, `estado`) VALUES
-(5, 'En que parte se encuentra el obelisco', 2, 'aprobada'),
-(15, '¿Donde queda el Aconcagua?', 2, 'pendiente'),
-(16, 'que ciudad es conocida como \"la feliz\"', 3, 'rechazada');
+INSERT INTO `pregunta_sugerida` (`id`, `descripcion`, `categoria`, `estado`, `fechaSugerida`) VALUES
+(5, 'En que parte se encuentra el obelisco', 2, 'aprobada', '2020-11-16'),
+(15, '¿Donde queda el Aconcagua?', 2, 'pendiente', '2024-11-16'),
+(16, 'que ciudad es conocida como \"la feliz\"', 3, 'rechazada', '2024-11-22');
 
 -- --------------------------------------------------------
 
@@ -144,15 +146,16 @@ CREATE TABLE `reportes_preguntas` (
   `idPregunta` int(11) NOT NULL,
   `idUsuario` int(11) NOT NULL,
   `motivo` text NOT NULL,
-  `estado` varchar(20) NOT NULL
+  `estado` varchar(20) NOT NULL,
+  `fechaReporte` DATE DEFAULT CURRENT_DATE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `reportes_preguntas`
 --
 
-INSERT INTO `reportes_preguntas` (`idReporte`, `idPregunta`, `idUsuario`, `motivo`, `estado`) VALUES
-(1, 9, 8, 'No me gusta el futbol', 'pendiente');
+INSERT INTO `reportes_preguntas` (`idReporte`, `idPregunta`, `idUsuario`, `motivo`, `estado`, `fechaReporte`) VALUES
+(1, 9, 8, 'No me gusta el futbol', 'pendiente', '2024-11-16');
 
 -- --------------------------------------------------------
 
@@ -473,9 +476,6 @@ ALTER TABLE `usuario`
 COMMIT;
 
 
-ALTER TABLE pregunta ADD COLUMN fechaCreacion DATE DEFAULT CURRENT_DATE;
-ALTER TABLE pregunta_sugerida ADD COLUMN fechaSugerida DATE DEFAULT CURRENT_DATE;
-ALTER TABLE reportes_preguntas ADD COLUMN fechaReporte DATE DEFAULT CURRENT_DATE;
 
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
