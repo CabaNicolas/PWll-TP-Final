@@ -140,9 +140,27 @@
             {{/cantidadUsuariosPorSexo}}
             </tbody>
         </table>
-        <div id="graficoUsuariosPorSexo">
             <img class="graficos" src="{{graficoUsuariosPorSexo}}" alt="Gráfico de usuarios por sexo">
-        </div>
+    </div>
+
+    <div class="tablaYGrafico">
+        <table class="tabla-estadisticas">
+            <thead>
+            <tr>
+                <th class="titulos-administrador">Cantidad de Usuarios por Edad</th>
+                <th class="titulos-administrador">Cantidad</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#cantidadUsuariosPorEdad}}
+                <tr>
+                    <td class="subtitulos-administrador">{{grupoEdad}}</td>
+                    <td class="cantidad-administrador">{{cantidad}}</td>
+                </tr>
+            {{/cantidadUsuariosPorEdad}}
+            </tbody>
+        </table>
+        <img class="graficos" src="{{graficoUsuariosPorEdad}}" alt="Gráfico de usuarios por sexo">
     </div>
 
 </main>

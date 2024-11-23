@@ -339,7 +339,7 @@ class UsuarioController
         $data = $this->estadisticasDePreguntasSugeridas($data, $filtroDeFecha);
         $data = $this->estadisticasDePreguntasReportadas($data, $filtroDeFecha);
         $data = $this->estadisticasDeUsuariosPorSexo($data, $filtroDeFecha);
-
+        $data = $this->estadisticasDeUsuariosPorEdad($data, $filtroDeFecha);
 
 
         $this->presenter->show('administrador', $data);
@@ -350,14 +350,16 @@ class UsuarioController
         if($filtroDeFecha != ''){
             $filtroDeFecha = $this->obtenerFechaInicio($filtroDeFecha);
             $data['cantidadJugadores'] = $this->model->obtenerCantidadJugadoresPorFecha($filtroDeFecha)[0]['cantidadJugadores'];
+            $data['cantidadPartidas'] = $this->partidaModel->obtenerCantidadPartidasPorFecha($filtroDeFecha)[0]['cantidadPartidas'];
+            //$data['cantidadPreguntasCorrectas'] = $this->model->obtenerPreguntasCorrectasPorUsuarioPorFecha($filtroDeFecha)[0]['cantidadPreguntasCorrectas'];
+            $data['cantidadPreguntasCorrectas'] = $this->model->obtenerPreguntasCorrectasPorUsuario()[0]['cantidadPreguntasCorrectas'];
+
         }else{
             $data['cantidadJugadores'] = $this->model->obtenerCantidadJugadores()[0]['cantidadJugadores'];
+            $data['cantidadPartidas'] = $this->partidaModel->obtenerCantidadPartidasJugadas()[0]['cantidadPartidas'];
+            $data['cantidadPreguntasCorrectas'] = $this->model->obtenerPreguntasCorrectasPorUsuario()[0]['cantidadPreguntasCorrectas'];
+
         }
-
-        $data['cantidadPartidas'] = $this->partidaModel->obtenerCantidadPartidasPorFecha($filtroDeFecha)[0]['cantidadPartidas'];
-
-        $data['cantidadPreguntasCorrectas'] = $this->model->obtenerPreguntasCorrectasPorUsuarioPorFecha($filtroDeFecha)[0]['cantidadPreguntasCorrectas'];
-
 
 
         $datosGrafico = [
@@ -477,6 +479,26 @@ class UsuarioController
 
         return $data;
     }
+
+    public function estadisticasDeUsuariosPorEdad($data, $filtroDeFecha = '') {
+        if (!empty($filtroDeFecha)) {
+            $fechaInicio = $this->obtenerFechaInicio($filtroDeFecha);
+            $data['cantidadUsuariosPorEdad'] = $this->model->obtenerCantidadUsuariosPorEdadPorFecha($fechaInicio);
+        } else {
+            $data['cantidadUsuariosPorEdad'] = $this->model->obtenerCantidadUsuariosPorEdad();
+        }
+
+        $datosGrafico = [
+            'etiquetas' => array_column($data['cantidadUsuariosPorEdad'], 'grupoEdad'),
+            'valores' => array_column($data['cantidadUsuariosPorEdad'], 'cantidad'),
+            'tituloDelGrafico' => 'Cantidad de Usuarios por Grupo de Edad',
+        ];
+
+        $data['graficoUsuariosPorEdad'] = GraphHelper::generarPieplot($datosGrafico);
+
+        return $data;
+    }
+
 
     public function generarEstadisticasPDF(){
         $html = isset($_POST['html']) ? $_POST['html'] : '';

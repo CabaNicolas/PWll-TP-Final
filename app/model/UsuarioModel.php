@@ -454,8 +454,18 @@ class UsuarioModel
     public function obtenerCantidadPartidasPorFecha($fecha) {
         $sql = "SELECT COUNT(idPartida) AS cantidadPartidas 
             FROM partida 
-            WHERE fecha >= ?";
-        return $this->database->query($sql, [$fecha]);
+            WHERE fecha >= '$fecha'";
+        return $this->database->query($sql);
+    }
+
+    public function obtenerPreguntasCorrectasPorUsuario(){
+        $sql = "SELECT ROUND(AVG(porcentaje), 2) AS cantidadPreguntasCorrectas
+                FROM (
+                    SELECT (respuestasCorrectas / preguntasEntregadas) * 100 AS porcentaje
+                    FROM usuario
+                    WHERE preguntasEntregadas >= 10
+                ) AS porcentajes;";
+        return $this->database->query($sql);
     }
 
     public function obtenerPreguntasCorrectasPorUsuarioPorFecha($fecha) {
@@ -464,10 +474,10 @@ class UsuarioModel
                 SELECT (respuestasCorrectas / preguntasEntregadas) * 100 AS porcentaje
                 FROM usuario
                 WHERE preguntasEntregadas >= 10 
-                  AND fechaRegistro >= ?
+                  AND fechaRegistro >= '$fecha'
             ) AS porcentajes;";
 
-        return $this->database->query($sql, [$fecha]);
+        return $this->database->query($sql);
     }
 
 
@@ -515,16 +525,46 @@ class UsuarioModel
         return $this->database->query($sql);
     }
 
-    public function obtenerCantidadUsuariosPorSexoPorFecha($fechaInicio)
+    public function obtenerCantidadUsuariosPorSexoPorFecha($fecha)
     {
         $sql = "SELECT sexo.nombre AS sexo, COUNT(usuario.id) AS cantidad
             FROM sexo
             LEFT JOIN usuario ON usuario.idSexo = sexo.id 
                 AND usuario.rol_fk = 3 
-                AND usuario.fechaRegistro >= ?
+                AND usuario.fechaRegistro >= '$fecha'
             GROUP BY sexo.nombre";
 
-        return $this->database->query($sql, [$fechaInicio]);
+        return $this->database->query($sql);
+    }
+
+    public function obtenerCantidadUsuariosPorEdad() {
+        $sql = "SELECT 
+                CASE 
+                    WHEN TIMESTAMPDIFF(YEAR, usuario.fechaNacimiento, CURDATE()) < 18 THEN 'Menores'
+                    WHEN TIMESTAMPDIFF(YEAR, usuario.fechaNacimiento, CURDATE()) BETWEEN 18 AND 64 THEN 'Adultos'
+                    ELSE 'Jubilados'
+                END AS grupoEdad,
+                COUNT(usuario.id) AS cantidad
+            FROM usuario
+            WHERE usuario.rol_fk = 3
+            GROUP BY grupoEdad";
+
+        return $this->database->query($sql);
+    }
+
+    public function obtenerCantidadUsuariosPorEdadPorFecha($fecha) {
+        $sql = "SELECT 
+                CASE 
+                    WHEN TIMESTAMPDIFF(YEAR, usuario.fechaNacimiento, CURDATE()) < 18 THEN 'Menores'
+                    WHEN TIMESTAMPDIFF(YEAR, usuario.fechaNacimiento, CURDATE()) BETWEEN 18 AND 64 THEN 'Adultos'
+                    ELSE 'Jubilados'
+                END AS grupoEdad,
+                COUNT(usuario.id) AS cantidad
+            FROM usuario
+            WHERE usuario.rol_fk = 3 AND usuario.fechaRegistro >= '$fecha'
+            GROUP BY grupoEdad";
+
+        return $this->database->query($sql);
     }
 
 }

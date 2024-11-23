@@ -155,7 +155,11 @@ CREATE TABLE `reportes_preguntas` (
 --
 
 INSERT INTO `reportes_preguntas` (`idReporte`, `idPregunta`, `idUsuario`, `motivo`, `estado`, `fechaReporte`) VALUES
-(1, 9, 8, 'No me gusta el futbol', 'pendiente', '2024-11-16');
+(1, 9, 8, 'No me gusta el futbol', 'pendiente', '2024-11-16'),
+(5, 8, 8, 'me parece ofensivo', 'pendiente', '2020-11-16'),
+(6, 2, 8, 'me parece que esta mal', 'pendiente', '2024-09-16');
+
+
 
 -- --------------------------------------------------------
 
@@ -333,7 +337,10 @@ INSERT INTO `usuario` (`id`, `mail`, `password`, `nombreUsuario`, `fechaNacimien
 (4, 'admin@preguntones.com', '$2y$10$/MlVhHRMNPUmOv7YhIwarOjE./iist0xGU1JbRr3eC/hqEv9iCY.q', '111111', '2000-02-20', 'Admin', 'avatar.jpg', 0.00000000, 0.00000000, 3, NULL, 'A', 1, 0, 0, '2024-11-18'),
 (5, 'editor@gmail.com', '$2y$10$BGjKYi2Wr.Wi.mutabU0HuyjjjIeqzWMC1R2n6g.TfxqVz1VVo3U.', 'Editor', '2000-02-20', 'Editor', 'avatar.jpg', 0.00000000, 0.00000000, 3, NULL, 'A', 2, 0, 0, '2024-11-18'),
 (9, 'test@map.com', '$2y$10$cjBB/uqDvpL.XQZLdAksJeTomN04.q26DdAoyINVWJ3q9CcX.pUxC', 'TestMap', '2222-02-22', 'Nicolas Caba', '', -34.65126507, -58.62204909, 1, NULL, 'A', 3, 1, 0, '2024-10-25'),
-(10, 'usuario@1.com', '$2y$10$jFmjaE7C.pgS9pMwfZhEW.bKQhFFgbl5yJFVRr/z17w6NboHg7pJW', 'usuario1', '2222-02-22', 'Usuario1', '', -34.64881393, -58.43817466, 1, '821011171b', 'I', 3, 0, 0, '2024-11-20');
+(10, 'usuario@1.com', '$2y$10$jFmjaE7C.pgS9pMwfZhEW.bKQhFFgbl5yJFVRr/z17w6NboHg7pJW', 'usuario1', '2222-02-22', 'Usuario1', '', -34.64881393, -58.43817466, 1, '821011171b', 'I', 3, 0, 0, '2024-11-20'),
+(11, 'sofia@gmail.com', '$2y$10$UtPPY0znr8o9ll80RHNVduEQQHasHVP2K3OBejPg.a19zYwKYZ3ty', 'sofi', '2004-10-09', 'Sofia', '', 42.01658300, 1.80710867, 1, NULL, 'A', 3, 0, 0, '2024-11-23'),
+(12, 'usuario2@gmail.com', '$2y$10$3wiUdOgGLeWHlmwQHbqCpOcc3qOOP2OVPaKpEMSFHXRY5lFDRz9Eu', 'Usuario2', '1900-10-09', 'Usuario2', '', 42.01658300, 1.80710867, 1, NULL, 'A', 3, 0, 0, '2024-11-23');
+
 
 --
 -- Índices para tablas volcadas
