@@ -440,6 +440,8 @@ class UsuarioModel
         return $this->database->query($sql);
     }
 
+
+    //1er grafico
     public function obtenerCantidadJugadoresPorFecha($fecha){
         $sql = "SELECT count(id) as cantidadJugadores
             FROM usuario
@@ -447,6 +449,27 @@ class UsuarioModel
 
         return $this->database->query($sql);
     }
+
+////
+    public function obtenerCantidadPartidasPorFecha($fecha) {
+        $sql = "SELECT COUNT(idPartida) AS cantidadPartidas 
+            FROM partida 
+            WHERE fecha >= ?";
+        return $this->database->query($sql, [$fecha]);
+    }
+
+    public function obtenerPreguntasCorrectasPorUsuarioPorFecha($fecha) {
+        $sql = "SELECT ROUND(AVG(porcentaje), 2) AS cantidadPreguntasCorrectas
+            FROM (
+                SELECT (respuestasCorrectas / preguntasEntregadas) * 100 AS porcentaje
+                FROM usuario
+                WHERE preguntasEntregadas >= 10 
+                  AND fechaRegistro >= ?
+            ) AS porcentajes;";
+
+        return $this->database->query($sql, [$fecha]);
+    }
+
 
     public function aumentarLaCantidadDePreguntasMostradas($id){
         $sql = "UPDATE usuario SET preguntasEntregadas = preguntasEntregadas + 1 WHERE id = $id";
@@ -482,18 +505,8 @@ class UsuarioModel
         return $dificultad;
     }
 
-    public function obtenerPreguntasCorrectasPorUsuario(){
-        $sql = "SELECT ROUND(AVG(porcentaje), 2) AS cantidadPreguntasCorrectas
-                FROM (
-                    SELECT (respuestasCorrectas / preguntasEntregadas) * 100 AS porcentaje
-                    FROM usuario
-                    WHERE preguntasEntregadas >= 10
-                ) AS porcentajes;";
-
-        return $this->database->query($sql);
-    }
-
-    public function obtenerCantidadUsuariosPorSexo() {
+    public function obtenerCantidadUsuariosPorSexo()
+    {
         $sql = "SELECT sexo.nombre AS sexo, COUNT(usuario.id) AS cantidad
             FROM sexo
             LEFT JOIN usuario ON usuario.idSexo = sexo.id AND usuario.rol_fk = 3
@@ -502,6 +515,16 @@ class UsuarioModel
         return $this->database->query($sql);
     }
 
+    public function obtenerCantidadUsuariosPorSexoPorFecha($fechaInicio)
+    {
+        $sql = "SELECT sexo.nombre AS sexo, COUNT(usuario.id) AS cantidad
+            FROM sexo
+            LEFT JOIN usuario ON usuario.idSexo = sexo.id 
+                AND usuario.rol_fk = 3 
+                AND usuario.fechaRegistro >= ?
+            GROUP BY sexo.nombre";
 
+        return $this->database->query($sql, [$fechaInicio]);
+    }
 
 }

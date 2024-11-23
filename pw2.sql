@@ -64,19 +64,19 @@ CREATE TABLE `partida` (
 --
 
 INSERT INTO `partida` (`idPartida`, `idUsuario`, `fecha`, `puntaje`, `preguntaActual`, `partidaFinalizada`) VALUES
-(1, 1, '2024-11-16', 0, 9, 1),
-(2, 1, '2024-11-16', 0, 12, 1),
+(1, 1, '2024-11-01', 0, 9, 1),
+(2, 1, '2024-10-16', 0, 12, 1),
 (3, 1, '2024-11-16', 2, 27, 1),
-(4, 1, '2024-11-16', 1, 4, 1),
+(4, 1, '2024-05-16', 1, 4, 1),
 (5, 1, '2024-11-16', 3, 8, 1),
-(6, 1, '2024-11-16', 3, 4, 1),
-(7, 9, '2024-11-16', 0, 11, 1),
-(8, 1, '2024-11-19', 1, 7, 1),
+(6, 1, '2023-11-16', 3, 4, 1),
+(7, 9, '2023-11-16', 0, 11, 1),
+(8, 1, '2023-11-19', 1, 7, 1),
 (9, 1, '2024-11-19', 0, 5, 1),
 (10, 1, '2024-11-19', 0, 6, 1),
 (11, 1, '2024-11-21', 1, 1, 1),
 (12, 1, '2024-11-21', 0, 9, 1),
-(13, 1, '2024-11-21', 0, 27, 1);
+(13, 1, '2024-09-21', 0, 27, 1);
 
 -- --------------------------------------------------------
 
@@ -471,6 +471,12 @@ ALTER TABLE `usuario`
 ALTER TABLE `usuario`
   ADD CONSTRAINT `Sexo_Usuario_FK` FOREIGN KEY (`idSexo`) REFERENCES `sexo` (`id`);
 COMMIT;
+
+
+ALTER TABLE pregunta ADD COLUMN fechaCreacion DATE DEFAULT CURRENT_DATE;
+ALTER TABLE pregunta_sugerida ADD COLUMN fechaSugerida DATE DEFAULT CURRENT_DATE;
+ALTER TABLE reportes_preguntas ADD COLUMN fechaReporte DATE DEFAULT CURRENT_DATE;
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -245,6 +245,15 @@ class PreguntaModel{
         return $this->database->query($sql);
     }
 
+    ////
+    public function obtenerCantidadPreguntasActivasPorFecha($fecha)
+    {
+        $sql = "SELECT count(idPregunta) as cantidadPreguntas
+        FROM pregunta
+        WHERE fechaCreacion >= ?";
+
+        return $this->database->query($sql, [$fecha]);
+    }
     public function obtenerCantidadPreguntasSugeridas()
     {
         $sql = "SELECT count(id) as cantidadPreguntas
@@ -252,6 +261,17 @@ class PreguntaModel{
 
         return $this->database->query($sql);
     }
+
+////
+    public function obtenerCantidadPreguntasSugeridasPorFecha($fecha)
+    {
+        $sql = "SELECT count(id) as cantidadPreguntas
+            FROM pregunta_sugerida
+            WHERE fechaSugerida >= ?";
+
+        return $this->database->query($sql, [$fecha]);
+    }
+
     public function obtenerCantidadPreguntasReportadas()
     {
         $sql = "SELECT count(idReporte) as cantidadPreguntas
@@ -259,6 +279,19 @@ class PreguntaModel{
 
         return $this->database->query($sql);
     }
+
+////
+    public function obtenerCantidadPreguntasReportadasPorFecha($fecha)
+    {
+        $sql = "SELECT count(idReporte) as cantidadPreguntas
+            FROM reportes_preguntas
+            WHERE fechaReporte >= ?";
+
+        return $this->database->query($sql, [$fecha]);
+    }
+
+
+
     public function obtenerCantidadSugeridasAprobadas()
     {
         $sql = "SELECT count(id) as cantidadPreguntas
@@ -280,6 +313,33 @@ class PreguntaModel{
 
         return $this->database->query($sql);
     }
+
+
+    public function obtenerCantidadSugeridasAprobadasPorFecha($fecha)
+    {
+        $sql = "SELECT COUNT(id) AS cantidadPreguntas
+            FROM pregunta_sugerida
+            WHERE estado = 'aprobada' AND fechaSugerida >= ?";
+        return $this->database->query($sql, [$fecha]);
+    }
+
+    public function obtenerCantidadSugeridasRechazadasPorFecha($fecha)
+    {
+        $sql = "SELECT COUNT(id) AS cantidadPreguntas
+            FROM pregunta_sugerida
+            WHERE estado = 'rechazada' AND fechaSugerida >= ?";
+        return $this->database->query($sql, [$fecha]);
+    }
+
+    public function obtenerCantidadSugeridasPendientesPorFecha($fecha)
+    {
+        $sql = "SELECT COUNT(id) AS cantidadPreguntas
+            FROM pregunta_sugerida
+            WHERE estado = 'pendiente' AND fechaSugerida >= ?";
+        return $this->database->query($sql, [$fecha]);
+    }
+
+
     public function obtenerCantidadReportadasAprobadas()
     {
         $sql = "SELECT count(idReporte) as cantidadPreguntas
@@ -300,6 +360,30 @@ class PreguntaModel{
              FROM reportes_preguntas WHERE estado = 'pendiente'";
 
         return $this->database->query($sql);
+    }
+
+    public function obtenerCantidadReportadasAprobadasPorFecha($fecha)
+    {
+        $sql = "SELECT COUNT(idReporte) AS cantidadPreguntas
+            FROM reportes_preguntas
+            WHERE estado = 'aprobada' AND fechaReporte >= ?";
+        return $this->database->query($sql, [$fecha]);
+    }
+
+    public function obtenerCantidadReportadasRechazadasPorFecha($fecha)
+    {
+        $sql = "SELECT COUNT(idReporte) AS cantidadPreguntas
+            FROM reportes_preguntas
+            WHERE estado = 'rechazada' AND fechaReporte >= ?";
+        return $this->database->query($sql, [$fecha]);
+    }
+
+    public function obtenerCantidadReportadasPendientesPorFecha($fecha)
+    {
+        $sql = "SELECT COUNT(idReporte) AS cantidadPreguntas
+            FROM reportes_preguntas
+            WHERE estado = 'pendiente' AND fechaReporte >= ?";
+        return $this->database->query($sql, [$fecha]);
     }
 
     public function getPreguntasReportadas()

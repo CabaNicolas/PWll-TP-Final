@@ -335,13 +335,11 @@ class UsuarioController
 
         $data = $this->estadisticasDeJuego($data, $filtroDeFecha);
 
-        $data = $this->estadisticasDePreguntasGenerales($data);
+        $data = $this->estadisticasDePreguntasGenerales($data, $filtroDeFecha);
+        $data = $this->estadisticasDePreguntasSugeridas($data, $filtroDeFecha);
+        $data = $this->estadisticasDePreguntasReportadas($data, $filtroDeFecha);
+        $data = $this->estadisticasDeUsuariosPorSexo($data, $filtroDeFecha);
 
-        $data = $this->estadisticasDePreguntasSugeridas($data);
-
-        $data = $this->estadisticasDePreguntasReportadas($data);
-
-        $data['cantidadUsuariosPorSexo'] = $this->model->obtenerCantidadUsuariosPorSexo();
 
 
         $this->presenter->show('administrador', $data);
@@ -356,9 +354,11 @@ class UsuarioController
             $data['cantidadJugadores'] = $this->model->obtenerCantidadJugadores()[0]['cantidadJugadores'];
         }
 
+        $data['cantidadPartidas'] = $this->partidaModel->obtenerCantidadPartidasPorFecha($filtroDeFecha)[0]['cantidadPartidas'];
 
-        $data['cantidadPartidas'] = $this->partidaModel->obtenerCantidadPartidasJugadas()[0]['cantidadPartidas'];
-        $data['cantidadPreguntasCorrectas'] = $this->model->obtenerPreguntasCorrectasPorUsuario()[0]['cantidadPreguntasCorrectas'];
+        $data['cantidadPreguntasCorrectas'] = $this->model->obtenerPreguntasCorrectasPorUsuarioPorFecha($filtroDeFecha)[0]['cantidadPreguntasCorrectas'];
+
+
 
         $datosGrafico = [
             'etiquetas' => ['Jugadores', 'Partidas', 'Preguntas Correctas (%)'],
@@ -373,16 +373,27 @@ class UsuarioController
         return $data;
     }
 
-    public function estadisticasDePreguntasGenerales($data)
-    {
+    public function estadisticasDePreguntasGenerales($data, $filtroDeFecha = '')
+    {if ($filtroDeFecha != '') {
+        $filtroDeFecha = $this->obtenerFechaInicio($filtroDeFecha);
+
+        $data['cantidadPreguntasActivas'] = $this->preguntaModel->obtenerCantidadPreguntasActivasPorFecha($filtroDeFecha)[0]['cantidadPreguntas'];
+        $data['cantidadPreguntasSugeridas'] = $this->preguntaModel->obtenerCantidadPreguntasSugeridasPorFecha($filtroDeFecha)[0]['cantidadPreguntas'];
+        $data['cantidadPreguntasReportadas'] = $this->preguntaModel->obtenerCantidadPreguntasReportadasPorFecha($filtroDeFecha)[0]['cantidadPreguntas'];
+    } else {
         $data['cantidadPreguntasActivas'] = $this->preguntaModel->obtenerCantidadPreguntasActivas()[0]['cantidadPreguntas'];
         $data['cantidadPreguntasSugeridas'] = $this->preguntaModel->obtenerCantidadPreguntasSugeridas()[0]['cantidadPreguntas'];
         $data['cantidadPreguntasReportadas'] = $this->preguntaModel->obtenerCantidadPreguntasReportadas()[0]['cantidadPreguntas'];
+    }
 
         $datosGrafico = [
             'etiquetas' => ['Preguntas Activas', 'Preguntas Sugeridas', 'Preguntas Reportadas'],
-            'valores' => [$data['cantidadPreguntasActivas'], $data['cantidadPreguntasSugeridas'], $data['cantidadPreguntasReportadas']],
-            'tituloDelGrafico' => 'Estadisticas de preguntas generales',
+            'valores' => [
+                $data['cantidadPreguntasActivas'],
+                $data['cantidadPreguntasSugeridas'],
+                $data['cantidadPreguntasReportadas']
+            ],
+            'tituloDelGrafico' => 'Estadísticas de preguntas generales',
             'tituloDeX' => 'Preguntas',
             'tituloDeY' => 'Cantidades',
         ];
@@ -392,15 +403,26 @@ class UsuarioController
         return $data;
     }
 
-    public function estadisticasDePreguntasSugeridas($data)
+    public function estadisticasDePreguntasSugeridas($data, $filtroDeFecha = '')
     {
-        $data['cantidadSugeridasAprobadas'] = $this->preguntaModel->obtenerCantidadSugeridasAprobadas()[0]['cantidadPreguntas'];
-        $data['cantidadSugeridasRechazadas'] = $this->preguntaModel->obtenerCantidadSugeridasRechazadas()[0]['cantidadPreguntas'];
-        $data['cantidadSugeridasPendientes'] = $this->preguntaModel->obtenerCantidadSugeridasPendientes()[0]['cantidadPreguntas'];
+        if ($filtroDeFecha != '') {
+            $filtroDeFecha = $this->obtenerFechaInicio($filtroDeFecha);
+            $data['cantidadSugeridasAprobadas'] = $this->preguntaModel->obtenerCantidadSugeridasAprobadasPorFecha($filtroDeFecha)[0]['cantidadPreguntas'];
+            $data['cantidadSugeridasRechazadas'] = $this->preguntaModel->obtenerCantidadSugeridasRechazadasPorFecha($filtroDeFecha)[0]['cantidadPreguntas'];
+            $data['cantidadSugeridasPendientes'] = $this->preguntaModel->obtenerCantidadSugeridasPendientesPorFecha($filtroDeFecha)[0]['cantidadPreguntas'];
+        } else {
+            $data['cantidadSugeridasAprobadas'] = $this->preguntaModel->obtenerCantidadSugeridasAprobadas()[0]['cantidadPreguntas'];
+            $data['cantidadSugeridasRechazadas'] = $this->preguntaModel->obtenerCantidadSugeridasRechazadas()[0]['cantidadPreguntas'];
+            $data['cantidadSugeridasPendientes'] = $this->preguntaModel->obtenerCantidadSugeridasPendientes()[0]['cantidadPreguntas'];
+        }
 
         $datosGrafico = [
             'etiquetas' => ['Aprobadas', 'Rechazadas', 'Pendientes'],
-            'valores' => [$data['cantidadSugeridasAprobadas'], $data['cantidadSugeridasRechazadas'], $data['cantidadSugeridasPendientes']],
+            'valores' => [
+                $data['cantidadSugeridasAprobadas'],
+                $data['cantidadSugeridasRechazadas'],
+                $data['cantidadSugeridasPendientes']
+            ],
             'tituloDelGrafico' => 'Preguntas Sugeridas',
         ];
 
@@ -408,20 +430,50 @@ class UsuarioController
 
         return $data;
     }
-
-    public function estadisticasDePreguntasReportadas($data)
+    public function estadisticasDePreguntasReportadas($data, $filtroDeFecha = '')
     {
-        $data['cantidadReportadasAprobadas'] = $this->preguntaModel->obtenerCantidadReportadasAprobadas()[0]['cantidadPreguntas'];
-        $data['cantidadReportadasRechazadas'] = $this->preguntaModel->obtenerCantidadReportadasRechazadas()[0]['cantidadPreguntas'];
-        $data['cantidadReportadasPendientes'] = $this->preguntaModel->obtenerCantidadReportadasPendientes()[0]['cantidadPreguntas'];
+        if ($filtroDeFecha != '') {
+            $filtroDeFecha = $this->obtenerFechaInicio($filtroDeFecha);
+            $data['cantidadReportadasAprobadas'] = $this->preguntaModel->obtenerCantidadReportadasAprobadasPorFecha($filtroDeFecha)[0]['cantidadPreguntas'];
+            $data['cantidadReportadasRechazadas'] = $this->preguntaModel->obtenerCantidadReportadasRechazadasPorFecha($filtroDeFecha)[0]['cantidadPreguntas'];
+            $data['cantidadReportadasPendientes'] = $this->preguntaModel->obtenerCantidadReportadasPendientesPorFecha($filtroDeFecha)[0]['cantidadPreguntas'];
+        } else {
+            $data['cantidadReportadasAprobadas'] = $this->preguntaModel->obtenerCantidadReportadasAprobadas()[0]['cantidadPreguntas'];
+            $data['cantidadReportadasRechazadas'] = $this->preguntaModel->obtenerCantidadReportadasRechazadas()[0]['cantidadPreguntas'];
+            $data['cantidadReportadasPendientes'] = $this->preguntaModel->obtenerCantidadReportadasPendientes()[0]['cantidadPreguntas'];
+        }
 
         $datosGrafico = [
             'etiquetas' => ['Aprobadas', 'Rechazadas', 'Pendientes'],
-            'valores' => [$data['cantidadReportadasAprobadas'], $data['cantidadReportadasRechazadas'], $data['cantidadReportadasPendientes']],
+            'valores' => [
+                $data['cantidadReportadasAprobadas'],
+                $data['cantidadReportadasRechazadas'],
+                $data['cantidadReportadasPendientes']
+            ],
             'tituloDelGrafico' => 'Preguntas Reportadas',
         ];
 
         $data['graficoPreguntasReportadas'] = GraphHelper::generarPieplot($datosGrafico);
+
+        return $data;
+    }
+
+    public function estadisticasDeUsuariosPorSexo($data, $filtroDeFecha = '')
+    {
+        if ($filtroDeFecha != '') {
+            $filtroDeFecha = $this->obtenerFechaInicio($filtroDeFecha);
+            $data['cantidadUsuariosPorSexo'] = $this->model->obtenerCantidadUsuariosPorSexoPorFecha($filtroDeFecha);
+        } else {
+            $data['cantidadUsuariosPorSexo'] = $this->model->obtenerCantidadUsuariosPorSexo();
+        }
+
+        $datosGrafico = [
+            'etiquetas' => array_column($data['cantidadUsuariosPorSexo'], 'sexo'),
+            'valores' => array_column($data['cantidadUsuariosPorSexo'], 'cantidad'),
+            'tituloDelGrafico' => 'Usuarios por Sexo',
+        ];
+
+        $data['graficoUsuariosPorSexo'] = GraphHelper::generarPieplot($datosGrafico);
 
         return $data;
     }
