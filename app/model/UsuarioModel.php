@@ -63,7 +63,7 @@ class UsuarioModel
     public function guardarUsuario($username, $mail, $password, $name, $date, $sex, $foto, $lat, $long)
     {
         $nombreFoto = "";
-        if(isset($foto)){
+        if (isset($foto) && !empty($foto['name'])) {
             $nombreFoto = $foto['name'];
             $archivoTemporal = $foto['tmp_name'];
 
@@ -72,22 +72,38 @@ class UsuarioModel
             move_uploaded_file($archivoTemporal, $dirFoto);
         }
 
+
+        $lat = !empty($lat) ? $lat : 'NULL';
+        $long = !empty($long) ? $long : 'NULL';
+
         $existe = $this->verificarExistenciaDeUsuario($username, $mail);
         $password = password_hash($password, PASSWORD_BCRYPT);
 
-        if(!$existe) {
+        if (!$existe) {
             $idSexo = "(SELECT id FROM sexo WHERE nombre LIKE '%" . $sex . "%')";
-            $sql = "INSERT INTO usuario (mail, nombreUsuario, password, fechaNacimiento, nombreCompleto, foto, idSexo, latitud, longitud) VALUES ('" . $mail . "','" . $username . "','" . $password . "','" . $date . "','" . $name . "','" . $nombreFoto . "'," . $idSexo . "," . $lat . "," . $long . ");";
+            $sql = "INSERT INTO usuario (mail, nombreUsuario, password, fechaNacimiento, nombreCompleto, foto, idSexo, latitud, longitud) 
+                VALUES (
+                    '" . $mail . "',
+                    '" . $username . "',
+                    '" . $password . "',
+                    '" . $date . "',
+                    '" . $name . "',
+                    '" . $nombreFoto . "',
+                    " . $idSexo . ",
+                    " . $lat . ",
+                    " . $long . "
+                );";
             $this->database->add($sql);
-            $resultado =[
+
+            $resultado = [
                 "exito" => true,
                 "mensaje" => "Usuario registrado correctamente"
             ];
-        } else{
-          $resultado = [
-              "exito" => false,
-              "mensaje" => "El usuario ya existe"
-          ];
+        } else {
+            $resultado = [
+                "exito" => false,
+                "mensaje" => "El usuario ya existe"
+            ];
         }
 
         return $resultado;
