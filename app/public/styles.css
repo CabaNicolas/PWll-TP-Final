@@ -594,10 +594,10 @@ a {
     box-shadow: 0 0 10px 3px rgba(239, 169, 215, 0.18);
 }
 
-.h2-perfil .nombreUsuario-perfil{
+.datos-usuario1 h2.nombre-usuarioPerfil-h2 {
     font-size: 40px;
     font-weight: bold;
-    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    background: linear-gradient(45deg, #e838a9, #e60f0f, #f35c25, yellow);
     background-size: 500%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -605,7 +605,7 @@ a {
     padding: 1%;
 }
 
-.h2-perfil .nombreUsuario-perfil:hover{
+.datos-usuario1 h2.nombre-usuarioPerfil-h2:hover{
     background-position: 100%;
 }
 
@@ -914,7 +914,7 @@ a {
 .nombre-usuarioPerfil-h2{
     font-size: 35px;
     font-weight: bold;
-    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    background: linear-gradient(45deg, #dd2099, #e60f0f, #ea5024, yellow);
     background-size: 500%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -1157,11 +1157,15 @@ a {
 }
 
 .bienvenida-editor {
-    font-size: 2rem;
+    font-size: 2.4rem;
     font-weight: bold;
-    color: #ffffff;
-    margin-bottom: 2rem;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Poppins', Arial, sans-serif;
+    letter-spacing: 1px;
+    text-align: center;
+    margin-bottom: 3rem;
+    background: linear-gradient(10deg, #f84222, hotpink);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .form-editor {
@@ -1438,12 +1442,18 @@ tr:hover {
 /*ESTILOS ADMINISTRADOR*/
 /*****************************/
 .bienvenida-admin {
-    text-align: center;
-    font-size: 1.8em;
+    font-size: 2.2rem;
     font-weight: bold;
-    color: #000000;
-    margin-bottom: 40px;
+    font-family: 'Poppins', Arial, sans-serif;
+    letter-spacing: 1px;
+    text-align: center;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    background: linear-gradient(10deg, #f84222, hotpink);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
+
 
 .titulos-administrador {
     font-size: 1.2em;
@@ -1549,4 +1559,5 @@ tr:hover {
     text-align: center;
     margin-top: 5vh;
     margin-bottom: 5vh;
+    color: rgba(255, 255, 255, 0.73);
 }
