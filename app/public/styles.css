@@ -279,22 +279,29 @@
     flex-direction: column;
     height: 100vh;
     margin: 0;
-    background: linear-gradient(270deg, #6a0dad, #8a2be2, #4b0082, #00bfff, #1e90ff, #ff00ff);
+    background: linear-gradient(270deg,
+    #4b006e,
+    #5a2d7f,
+    #885898,
+    #711fb3
+    );
     background-size: 1500% 1500%;
     animation: animateBackground 20s ease infinite;
 }
 
 @keyframes animateBackground {
-           0% {
-               background-position: 0% 50%;
-           }
-           50% {
-               background-position: 100% 50%;
-           }
-           100% {
-               background-position: 0% 50%;
-           }
-       }
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
 
 .contenido-main-lobby{
     display: flex;
@@ -305,32 +312,142 @@
 }
 .boton-lobby{
     padding: 2vh;
-    background-color: rgba(255, 255, 255, 0.37);
-    border-radius: 8px;
     font-size: 16px;
-    cursor: pointer;
-    border: none;
     font-weight: bold;
-    color: #f8f0d2;
     height: calc(5em);
     width: calc(6em);
+    color: #503b75;
+    background-color: rgba(255, 255, 255, 0.67);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 }
-.boton-lobby:hover{
+
+.boton-lobby:hover {
+    color: white;
+    background-color: #503b75;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    transform: translateY(-2px);
+}
+
+.boton-tarjeta{
+    padding: 2vh;
+    font-size: 16px;
     font-weight: bold;
-    color:  #503b75;
-    background-color: white;
+    height: calc(4em);
+    width: calc(10em);
+    color: #503b75;
+    background-color: rgba(255, 255, 255, 0.67);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+.boton-tarjeta:hover {
+    color: white;
+    background-color: #503b75;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    transform: translateY(-2px);
+}
+
+.imagen-ranking{
+    width: 90px;
+    margin-left: 20%;
+}
+
+.imagen-pregunta{
+    width: 150px;
+    margin-left: 10%;
+    margin-top: 10px;
+}
+
+.imagen-cerebro{
+    width: 150px;
+    margin-top: 120%;
+    margin-left: -12%;
+}
+
+.cerebro{
+    z-index: -1;
+}
+
+
+.boton-perfil{
+    padding: 2vh;
+    font-size: 16px;
+    font-weight: bold;
+    height: calc(2.5em);
+    width: calc(6em);
+    color: #503b75;
+    background-color: rgba(255, 255, 255, 0.67);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.div-botonP{
+    margin-left: 87%;
+}
+
+.boton-jugar{
+    background: linear-gradient(90deg, #f85f22, #cd151b);
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 12px;
+    padding: 15px 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+}
+
+.boton-jugar:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.8);
+}
+
+.boton-jugar:active {
+    transform: scale(0.95);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+
+}
+
+.boton-nueva-partida{
+    margin-left: calc(37%);
+    margin-top: calc(-10%);
+    margin-bottom: calc(15%);
+}
+
+.boton-perfil:hover {
+    color: white;
+    background-color: #503b75;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    transform: translateY(-2px);
 }
 
 .botones-lobby-child3 {
-    margin-left: 45%;
+    margin-left: 7%;
+
+}
+
+.botones-lobby-child1{
+    margin-top: calc(-15%);
+    margin-bottom: calc(20%);
 }
 
 .botones-lobby-child2{
-    display: flex;
-    flex-direction: row;
     gap: 50vh;
-    margin-top: 8vh;
+    margin-top: 10vh;
     margin-bottom: 8vh;
+    margin-left: calc(-35%);
 }
 
 .boton-puntaje{
@@ -358,18 +475,24 @@
     background-color: white;
 }
 
-.boton-perfil{
-    margin-right: 5.5%;
-}
-
-.boton-nueva-partida{
-   margin-right: calc(8em);
-}
 
 .resumen-partidas{
     font-family: 'Rubik', sans-serif;
     text-align: center;
 }
+
+.tarjetas-lobby{
+    display: flex;
+    justify-content: space-around;
+    gap: 50%;
+    margin-top: calc(-40%);
+}
+
+
+.ranking{
+    margin-right: calc(70%);
+}
+
 
 
 /****************/

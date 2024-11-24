@@ -1,33 +1,45 @@
+ <form action="/usuario/showPerfil" class="div-botonP" method="POST" >
+                {{#nombreUsuario}}
+                <button class="boton-perfil" type="submit">{{nombreUsuario}}</button>
+                {{/nombreUsuario}}
+            </form>
 
 <main class="contenido-main-lobby">
-{{#nombreUsuario}}
-     <h2 class="bienvenida-lobby">Bienvenido/a {{nombreUsuario}}!</h2>
-{{/nombreUsuario}}
 {{#mensajeExito}}
     <p class="exito" style="color:green;">{{.}}</p>
 {{/mensajeExito}}
     <div class="botones-lobby">
         <div class="botones-lobby-child1">
 
-            <p class="boton-puntaje"><img class="img-estrella" src="/public/images/estrella.png" alt="Imagen estrella">Puntaje Máximo: {{puntajeMaximo}}</p>
+            <p class="boton-puntaje"><img class="img-estrella" src="/public/images/estrella.png" alt="Imagen estrella">Mi Puntaje Máximo: {{puntajeMaximo}}</p>
         </div>
+ <form action="/partida/crearPartida" method="POST" class="boton-nueva-partida">
+                <button class="boton-jugar"  type="submit">¡JUGAR!</button>
+            </form>
 
+
+   <div class="tarjetas-lobby">
         <div class="botones-lobby-child2">
-            <form action="/usuario/showPerfil" method="POST" class="boton-perfil">
-                <button class="boton-lobby" type="submit">Perfil</button>
-            </form>
-            <form action="/partida/crearPartida" method="POST" class="boton-nueva-partida">
-                <button class="boton-lobby" boton-nueva-partida" type="submit">Nueva partida</button>
-            </form>
-            <form  action="/usuario/showRankingUsuarios" method="post" enctype="multipart/form-data" >
+            <img src="/public/images/ranking.png" class="imagen-ranking">
+            <form  action="/usuario/showRankingUsuarios" method="post" enctype="multipart/form-data" class="ranking" >
                 <input type="hidden" name="nombreUsuario" value="{{nombreUsuario}}">
-                <button class="boton-lobby" type="submit">Ranking y partidas</button> <br>
+                <button class="boton-tarjeta" type="submit">Ranking y partidas</button> <br>
             </form>
         </div>
 
+       <div class="cerebro">
+           <img src="/public/images/cerebro.png" class="imagen-cerebro">
+       </div>
+
+       <div>
+           <img src="/public/images/preguntas.png" class="imagen-pregunta">
         <a href="/pregunta/showCrear" class="botones-lobby-child3">
-        <button class="boton-lobby">Sugerir pregunta</button>
+            <button class="boton-tarjeta">Sugerir pregunta</button>
         </a>
+       </div>
+
+    <div>
+
 
     </div>
 </main>
