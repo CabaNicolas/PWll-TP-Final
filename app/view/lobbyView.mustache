@@ -1,45 +1,45 @@
- <form action="/usuario/showPerfil" class="div-botonP" method="POST" >
-                {{#nombreUsuario}}
-                <button class="boton-perfil" type="submit">{{nombreUsuario}}</button>
-                {{/nombreUsuario}}
-            </form>
+<form action="/usuario/showPerfil" class="div-botonP" method="POST">
+    {{#nombreUsuario}}
+        <button class="boton-perfil" type="submit">{{nombreUsuario}}</button>
+    {{/nombreUsuario}}
+</form>
 
 <main class="contenido-main-lobby">
-{{#mensajeExito}}
-    <p class="exito" style="color:green;">{{.}}</p>
-{{/mensajeExito}}
+    {{#mensajeExito}}
+        <p class="exito" style="color:green;">{{.}}</p>
+    {{/mensajeExito}}
+
     <div class="botones-lobby">
         <div class="botones-lobby-child1">
-
-            <p class="boton-puntaje"><img class="img-estrella" src="/public/images/estrella.png" alt="Imagen estrella">Mi Puntaje Máximo: {{puntajeMaximo}}</p>
-        </div>
- <form action="/partida/crearPartida" method="POST" class="boton-nueva-partida">
-                <button class="boton-jugar"  type="submit">¡JUGAR!</button>
-            </form>
-
-
-   <div class="tarjetas-lobby">
-        <div class="botones-lobby-child2">
-            <img src="/public/images/ranking.png" class="imagen-ranking">
-            <form  action="/usuario/showRankingUsuarios" method="post" enctype="multipart/form-data" class="ranking" >
-                <input type="hidden" name="nombreUsuario" value="{{nombreUsuario}}">
-                <button class="boton-tarjeta" type="submit">Ranking y partidas</button> <br>
-            </form>
+            <p class="boton-puntaje">
+                <img class="img-estrella" src="/public/images/estrella.png" alt="Imagen estrella">
+                Mi Puntaje Máximo: {{puntajeMaximo}}
+            </p>
         </div>
 
-       <div class="cerebro">
-           <img src="/public/images/cerebro.png" class="imagen-cerebro">
-       </div>
+        <form action="/partida/crearPartida" method="POST" class="boton-nueva-partida">
+            <button class="boton-jugar" type="submit">¡JUGAR!</button>
+        </form>
 
-       <div>
-           <img src="/public/images/preguntas.png" class="imagen-pregunta">
-        <a href="/pregunta/showCrear" class="botones-lobby-child3">
-            <button class="boton-tarjeta">Sugerir pregunta</button>
-        </a>
-       </div>
+        <div class="tarjetas-lobby">
+            <div class="botones-lobby-child2">
+                <img src="/public/images/ranking.png" class="imagen-ranking">
+                <form action="/usuario/showRankingUsuarios" method="post" enctype="multipart/form-data" class="ranking">
+                    <input type="hidden" name="nombreUsuario" value="{{nombreUsuario}}">
+                    <button class="boton-tarjeta" type="submit">Ranking y partidas</button><br>
+                </form>
+            </div>
 
-    <div>
+            <div class="cerebro">
+                <img src="/public/images/cerebro.png" class="imagen-cerebro">
+            </div>
 
-
+            <div>
+                <img src="/public/images/preguntas.png" class="imagen-pregunta">
+                <a href="/pregunta/showCrear" class="botones-lobby-child3">
+                    <button class="boton-tarjeta">Sugerir pregunta</button>
+                </a>
+            </div>
+        </div>
     </div>
 </main>
