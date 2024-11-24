@@ -387,27 +387,31 @@
 
 .boton-perfil{
     padding: 2vh;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: bold;
-    height: calc(2.5em);
-    width: calc(6em);
-    color: #503b75;
-    background-color: rgba(255, 255, 255, 0.67);
+    height: calc(2.4em);
+    width: calc(8.5em);
+    background-color: hotpink;
+    color: white;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+
 }
 
 .boton-perfil:hover {
-    color: #503b75;
-    background-color: #ffffff;
-    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.25);
+    background-color: #f84222;
+    color: white;
+    transform: scale(1.05);
+    text-decoration: none;
+    box-shadow: 0 0 10px 3px rgba(239, 169, 215, 0.14);
 }
 
 .div-botonP{
-    margin-left: 87%;
+    margin-left: 87.5%;
+    margin-top: -2%;
 }
 
 .boton-jugar{
@@ -483,6 +487,14 @@
 .boton-puntaje:hover {
     color:  #503b75;
     background-color: white;
+}
+.boton-perfil .img-icono-perfil{
+    width: 25px;
+    vertical-align: -5px;
+    margin-right: 5px;
+    margin-left: -10px;
+    margin-top: -15px;
+
 }
 
 
