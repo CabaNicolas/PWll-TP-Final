@@ -4,10 +4,10 @@
 
 
     <label for="consigna">Consigna: <br> <label> Escriba una pregunta clara y precisa para que los jugadores puedan comprenderla fácilmente. </label> <span>*</span></label>
-    <input type="text" name="consigna" id="consigna" required>
+    <input type="text" name="consigna" id="consigna" >
 
     <label for="categoria">Categoria: <br> <label> Seleccione la categoría que mejor describa la temática de su pregunta </label> <span>*</span></label>
-    <select name="categoria" id="categoria" required>
+    <select name="categoria" id="categoria" >
         <option value="" disabled selected>Selecciona una categoria</option>
         {{#categorias}}
             <option value="{{id}}">{{nombre}}</option>
@@ -19,29 +19,29 @@
 
     <label for="respuesta1">Respuesta 1:<span>*</span></label>
     <div class="respuesta-container">
-        <input type="text" name="respuesta1" id="respuesta1" required>
-        <input type="radio" name="correcta" value="1" required>
+        <input type="text" name="respuesta1" id="respuesta1" >
+        <input type="radio" name="correcta" value="1" >
     </div>
 
     <label for="respuesta2">Respuesta 2:<span>*</span></label>
     <div class="respuesta-container">
-        <input type="text" name="respuesta2" id="respuesta2" required>
+        <input type="text" name="respuesta2" id="respuesta2">
         <input type="radio" name="correcta" value="2">
     </div>
 
     <label for="respuesta3">Respuesta 3:<span>*</span></label>
     <div class="respuesta-container">
-        <input type="text" name="respuesta3" id="respuesta3" required>
+        <input type="text" name="respuesta3" id="respuesta3" >
         <input type="radio" name="correcta" value="3">
     </div>
 
     <label for="respuesta4">Respuesta 4:<span>*</span></label>
     <div class="respuesta-container">
-        <input type="text" name="respuesta4" id="respuesta4" required>
+        <input type="text" name="respuesta4" id="respuesta4" >
         <input type="radio" name="correcta" value="4">
     </div>
-    {{#contexto}}
+    {{#error}}
         <p class="error">{{.}}</p>
-    {{/contexto}}
+    {{/error}}
     <input type="submit" value="Crear pregunta">
 </form>
