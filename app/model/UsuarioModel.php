@@ -172,13 +172,15 @@ class UsuarioModel
         $nombreImagenActual = !empty($imagenActual) ? $imagenActual[0]['foto'] : null;
 
         $sql = "UPDATE usuario 
-        SET nombreUsuario = '" . $nombreUsuario . "',
-        mail = '" . $mail . "', 
-        nombreCompleto = '" . $nombreCompleto . "',
-        fechaNacimiento = '" . $fechaNacimiento . "', 
-        idSexo = (SELECT id FROM sexo WHERE nombre LIKE '%" . $sexo . "%'),
-        latitud = " . $lat . ",
-        longitud = " . $long . " ";
+            SET nombreUsuario = '" . $nombreUsuario . "',
+            mail = '" . $mail . "', 
+            nombreCompleto = '" . $nombreCompleto . "',
+            fechaNacimiento = '" . $fechaNacimiento . "', 
+            idSexo = (SELECT id FROM sexo WHERE nombre LIKE '%" . $sexo . "%')";
+
+        if (!empty($lat) && !empty($long)) {
+            $sql .= ", latitud = " . $lat . ", longitud = " . $long;
+        }
 
 
         $nuevoNombreImagen = $this->manejarImagen($foto, $nombreImagenActual);
