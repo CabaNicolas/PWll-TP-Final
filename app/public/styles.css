@@ -640,7 +640,13 @@ a {
     text-align: center;
     justify-content: center;
 }
-
+.exito-editar-perfil{
+    color: white;
+    background-color: #64a377;
+    font-family: 'Arial', sans-serif;
+    padding: 0.2em;
+    border-radius: 0.5em;
+}
 .datos-contenedor .guardarCambios{
     background-color: hotpink;
     color: white;
