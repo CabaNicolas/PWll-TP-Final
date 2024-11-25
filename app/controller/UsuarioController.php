@@ -506,7 +506,8 @@ class UsuarioController
         $styles = " <style> 
                         .tabla-estadisticas { 
                             width: 100%; 
-                            border-collapse: collapse; 
+                            border-collapse: collapse;
+                            margin-bottom: 1.5em; 
                         } 
                         .tabla-estadisticas th, 
                         .tabla-estadisticas td { 
