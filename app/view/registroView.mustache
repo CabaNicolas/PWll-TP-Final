@@ -3,6 +3,10 @@
 
 <h2 class="titulo-crear-cuenta">Crear Cuenta</h2>
 
+    {{#registro_fallido}}
+    <p class="error">{{registro_fallido}}</p>
+    {{/registro_fallido}}
+
 <form id="form-registro" action="/usuario/registrarUsuario" enctype="multipart/form-data" method="post">
 
     <label for="name" class="label-nombre etiqueta-label"><span>*</span>Nombre completo:</label>

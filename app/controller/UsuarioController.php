@@ -56,6 +56,12 @@ class UsuarioController
             $data['datosTemporalesDeRegistro'] = $_SESSION['datosTemporalesDeRegistro'];
             unset($_SESSION['datosTemporalesDeRegistro']);
         }
+
+        if(isset($_SESSION['registro_fallido'])){
+            $data['registro_fallido'] = $_SESSION['registro_fallido'];
+            unset($_SESSION['registro_fallido']);
+        }
+
         $this->presenter->show('registro', $data);
     }
     public function showLobby()
