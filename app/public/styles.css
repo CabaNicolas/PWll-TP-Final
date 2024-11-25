@@ -1267,11 +1267,11 @@ a {
 }
 
 .contenedor-preguntas-sugeridas .aprobar {
-    background-color: #30e330;
+    background-color: green;
 }
 
 .contenedor-preguntas-sugeridas .aprobar:hover {
-    background-color: #1f8c1f;
+    background-color: darkgreen;
 }
 
 .contenedor-preguntas-sugeridas .rechazar {
@@ -1365,11 +1365,11 @@ li {
 }
 
 .contenedor-preguntas-reportadas .aprobar {
-    background-color: #30e330;
+    background-color: green;
 }
 
 .contenedor-preguntas-reportadas .aprobar:hover {
-    background-color: #1f8c1f;
+    background-color: darkgreen;
 }
 
 .contenedor-preguntas-reportadas .rechazar {
