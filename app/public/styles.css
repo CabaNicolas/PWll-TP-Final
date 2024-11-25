@@ -1588,4 +1588,6 @@ tr:hover {
     margin-top: 5vh;
     margin-bottom: 5vh;
     color: rgba(255, 255, 255, 0.73);
+    font-family: 'Arial', sans-serif;
+    font-weight: bolder;
 }
