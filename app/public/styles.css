@@ -720,6 +720,28 @@ a {
     flex-direction: column;
     justify-content: center;
 }
+#tiempo {
+    color: whitesmoke;
+    background-color: #764191;
+    font-family: 'Arial', sans-serif;
+    padding: 0.2em;
+    border-radius: 0.5em;
+}
+#tiempo-restante{
+    color:yellow;
+    font-weight: bold;
+}
+#dificultad{
+    color: whitesmoke;
+    background-color: #764191;
+    font-family: 'Arial', sans-serif;
+    padding: 0.2em;
+    border-radius: 0.5em;
+    display: inline-block;
+    margin-left: 0;
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+}
 
 .form-lista label{
     display: block;

@@ -2,8 +2,8 @@
 {{#preguntasYRespuestas}}
 <div class="contenedor-partida"  style="background-color: {{color}};">
     <form method="post" action="/partida/validarRespuesta" class="partida-form" >
-    <span id="tiempo">Tiempo restante: <span id="tiempo-restante">{{tiempo_restante}}</span> segundos</span>
-            <p>Dificultad: {{dificultad}}</p>
+    <span id="tiempo">Tiempo restante: <span id="tiempo-restante">{{tiempo_restante}}</span> segundos</span><br>
+            <p id="dificultad">Dificultad: {{dificultad}}</p>
             <h3 style="background-color: {{color}};">{{descripcion}} | Categoría: {{categoria}}</h3>
             <br>
             <ol style="list-style-type: upper-alpha; ">
